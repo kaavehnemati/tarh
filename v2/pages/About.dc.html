@@ -50,7 +50,7 @@
 
 <div data-ab2-root="1" data-v2-shell="1" dir="{{ dir }}" style="color:var(--ink);min-height:100svh;overflow-x:clip">
 
-  <dc-import name="../components/HeaderNav" dir="{{ dir }}" upper="{{ upper }}" brand="{{ brand }}" nav="{{ nav }}" drawer-links="{{ nav }}" href-home="{{ hrefHome }}" lang="{{ lang }}" on-set-en="{{ setEn }}" on-set-fa="{{ setFa }}" menu-id="ab" hint-size="100%,64px"></dc-import>
+  <dc-import name="../components/HeaderNav" dir="{{ dir }}" upper="{{ upper }}" brand="{{ brand }}" nav="{{ nav }}" drawer-links="{{ nav }}" href-home="{{ hrefHome }}" lang="{{ lang }}" on-set-en="{{ setEn }}" on-set-fa="{{ setFa }}" menu-id="ab" theme="canvas" hint-size="100%,64px"></dc-import>
 
   <section data-screen-label="01 Opening" data-ambient-zone="full" style="padding:var(--space-section-lg) var(--grid-margin) var(--space-section)">
     <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter);align-items:end">
@@ -325,8 +325,9 @@ class Component extends DCLogic {
       dir: fa ? "rtl" : "ltr", upper: fa ? "none" : "uppercase", startAlign: fa ? "right" : "left",
       brand: fa ? "طرح و آفرینش" : "Tarh & Afarinesh",
       nav: [["Projects","پروژه‌ها","Projects.dc.html"],["Expertise","تخصص‌ها","Expertise.dc.html"],
-            ["Awards","جوایز","Awards.dc.html"],["Contact","تماس","Contact.dc.html"]]
-        .map(n => ({ label: fa ? n[1] : n[0], href: n[2] + hsh, on: "0" })),
+        ["Awards","جوایز","Awards.dc.html"],["About","درباره ما",""],["Journal","مجله","Journal.dc.html"],
+        ["Contact","تماس","Contact.dc.html"]]
+        .map(n => ({ label: fa ? n[1] : n[0], href: n[2] ? n[2] + hsh : "#", on: n[2] ? "0" : "1" })),
       hrefHome: "Homepage.dc.html" + hsh, hrefAwards: "Awards.dc.html" + hsh, hrefContact: "Contact.dc.html" + hsh,
       lang: st.lang,
       setEn: () => this.setLang("en"), setFa: () => this.setLang("fa"),
