@@ -22,9 +22,9 @@ set. `v2/runtime/bidi.js` and `v2/runtime/reveal.js` remain V2's own live
 copies. `docs/REGRESSION_BASELINE.md`'s SHA-256 anchors for these three files
 are updated accordingly. NOTE: `V1_BASELINE.json` still lists a `bidi.js`
 entry from 2026-09-24 (added there under `sharedModules`, despite being
-unloaded); this pass left `V1_BASELINE.json` untouched by design (it remains
-required by `PAGE_MIGRATION_CHECKLIST.md`), so that one entry is now stale
-and should be dropped the next time `V1_BASELINE.json` is regenerated.
+unloaded); this pass left `V1_BASELINE.json` untouched by design, so that
+one entry is now stale and should be dropped the next time
+`V1_BASELINE.json` is regenerated.
 
 **V2 PRESENTATION = `/v2` / active.** Every V2 page (`v2/pages/*.dc.html`) loads
 its typography, spacing, grid, motion, surface, responsive breakpoints, ambient
@@ -131,8 +131,10 @@ reachable from V2 navigation at all now.
 **Migration is complete.** All seven pages (Contact, Awards, About, Journal,
 Projects, Expertise, Homepage) are built on the independent V2 foundation
 (`v2/design-system`, `v2/runtime`, `v2/components`) — see `v2/V2_ARCHITECTURE.md`.
-`PAGE_MIGRATION_CHECKLIST.md`'s order table reflects this. `V2_PAGE_BLUEPRINT.md`'s
-DEPENDENCIES process remains the template for any future new V2 page.
+The per-page migration blueprints and the migration checklist have been
+removed (cleanup pass 4, 27 September 2026) now that every page they tracked
+is built and stable — see §8. `V2_PAGE_BLUEPRINT.md`'s DEPENDENCIES process
+remains the template for any future new V2 page.
 
 ## 7. Cleanup pass 3 — V1 relocation + V2 independence (27 September 2026)
 
@@ -149,3 +151,25 @@ page's four blocking bugs (§4; `docs/HOMEPAGE_FUNCTIONAL_PARITY_AUDIT.md`,
 reference) was fixed to match. Full before/after verification (hash checks
 on every untouched file, reference greps) is recorded in the corresponding
 commit messages.
+
+Separately (same day): `assets/` was made format-consistent — every photo
+under it is now `.webp` (it was a mix of `.jpg`/`.png`/`.webp` before);
+`awards-data.js`, `about-data.js`, and `v2/pages/Contact.dc.html` were
+updated to match. Git history was also reset to a single fresh commit at the
+user's request, to drop the large superseded binaries (pre-pruning
+`uploads/`, pre-WebP images) that earlier commits had retained.
+
+## 8. Cleanup pass 4 — completed-migration docs removed (27 September 2026)
+
+`PAGE_MIGRATION_CHECKLIST.md` and the six per-page migration blueprints
+(`CONTACT_V2_BLUEPRINT.md`, `EXPERTISE_V2_BLUEPRINT.md`,
+`JOURNAL_DETAIL_V2_BLUEPRINT.md`, `JOURNAL_V2_BLUEPRINT.md`,
+`PROJECTS_V2_BLUEPRINT.md`, `PROJECT_DETAIL_V2_CASE_STUDY_BLUEPRINT.md`)
+were deleted outright, per explicit user decision, now that the migration
+they tracked is complete for all seven pages (§6). `V2_PAGE_BLUEPRINT.md`
+(the reusable planning template, not tied to any specific page) and every
+other design-system reference doc were kept. The two remaining live
+references to the deleted checklist (here, §1) and to
+`PROJECTS_V2_BLUEPRINT.md` (a code comment in `v2/pages/Projects.dc.html`)
+were updated; `docs/README.md`'s retained-specifications list was updated
+to match.

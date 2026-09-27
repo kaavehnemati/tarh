@@ -4,14 +4,7 @@ Start with [VERSION_STRATEGY.md](../VERSION_STRATEGY.md), [V2_ARCHITECTURE.md](.
 
 ## Retained rules and specifications
 
-These existing documents remain in their original locations. Page blueprints are retained conservatively as useful specifications; retention does not certify every historical statement as current.
-- [CONTACT_V2_BLUEPRINT.md](../CONTACT_V2_BLUEPRINT.md)
-- [EXPERTISE_V2_BLUEPRINT.md](../EXPERTISE_V2_BLUEPRINT.md)
-- [JOURNAL_DETAIL_V2_BLUEPRINT.md](../JOURNAL_DETAIL_V2_BLUEPRINT.md)
-- [JOURNAL_V2_BLUEPRINT.md](../JOURNAL_V2_BLUEPRINT.md) (relocated from `v2/JOURNAL_BLUEPRINT.md` for naming consistency with its siblings; content unchanged)
-- [PAGE_MIGRATION_CHECKLIST.md](../PAGE_MIGRATION_CHECKLIST.md)
-- [PROJECT_DETAIL_V2_CASE_STUDY_BLUEPRINT.md](../PROJECT_DETAIL_V2_CASE_STUDY_BLUEPRINT.md)
-- [PROJECTS_V2_BLUEPRINT.md](../PROJECTS_V2_BLUEPRINT.md)
+These existing documents remain in their original locations; retention does not certify every historical statement as current. The per-page migration blueprints and `PAGE_MIGRATION_CHECKLIST.md` were deleted in cleanup pass 4 (27 September 2026, see `VERSION_STRATEGY.md` §8) now that the migration they tracked is complete for all seven pages.
 - [RTL_LTR_GUIDE_V2.md](../RTL_LTR_GUIDE_V2.md)
 - [V2_DESIGN_CONTRACT.md](../V2_DESIGN_CONTRACT.md)
 - [V2_MIGRATION_PRINCIPLES.md](../V2_MIGRATION_PRINCIPLES.md)
@@ -21,7 +14,7 @@ These existing documents remain in their original locations. Page blueprints are
 
 ## V2 directory documentation
 
-Directory guidance is current as of cleanup pass 3 (v2/README.md's migration-status prose and v2/components/README.md's HeaderNav usage list, both previously dated, were corrected against actual source in pass 2; pass 3 further updated v2/README.md and v2/V2_ARCHITECTURE.md to record that V2 now has zero dependency, presentation or navigational, on V1). `v2/JOURNAL_BLUEPRINT.md` was relocated to root `JOURNAL_V2_BLUEPRINT.md` (see the retained-specifications list above) for naming consistency with its sibling per-page blueprints.
+Directory guidance is current as of cleanup pass 3 (v2/README.md's migration-status prose and v2/components/README.md's HeaderNav usage list, both previously dated, were corrected against actual source in pass 2; pass 3 further updated v2/README.md and v2/V2_ARCHITECTURE.md to record that V2 now has zero dependency, presentation or navigational, on V1). `v2/JOURNAL_BLUEPRINT.md` was relocated to root `JOURNAL_V2_BLUEPRINT.md` in pass 3, then deleted in pass 4 along with the other per-page migration blueprints (see above).
 - [v2/assets/README.md](../v2/assets/README.md)
 - [v2/components/README.md](../v2/components/README.md)
 - [v2/design-system/README.md](../v2/design-system/README.md)

@@ -701,7 +701,7 @@ class Component extends DCLogic {
          block (context/strategy/experience/material/technical/drawing) — none of the current
          records set one, so every project today still falls back to the positional
          Strategy(first)/Experience(rest) split; the capability exists for when a content
-         editor supplies it, per PROJECTS_V2_BLUEPRINT.md. Never inferred from block text. */
+         editor supplies it. Never inferred from block text. */
       const ROLE_OK = ["context","strategy","experience","material","technical"];
       const blocks = (P.story(cur.id, { lang: st.lang }) || []).map((b, i) => {
         const m0 = b.media[0] || {};
