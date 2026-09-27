@@ -481,6 +481,29 @@ class Component extends DCLogic {
   teardownDetail(){
     if(this.stopTrack){ this.stopTrack(); this.stopTrack = null; }
     if(this.state.chapterKey || this.state.chapterVisible) this.setState({ chapterKey:"", chapterVisible:false, chapterN:0 });
+    if(this._relMh){ this._relMh.destroy(); this._relMh = null; }
+  }
+  /* Related Expertise preview — same shared media-handoff crossfade as the Register,
+     scoped to the detail page's own preview stage */
+  ensureRelMh(){
+    if(this._relMh) return;
+    const el = document.querySelector("[data-ep2-relimg]");
+    if(el && window.TA_MEDIA_HANDOFF) this._relMh = window.TA_MEDIA_HANDOFF.mount(el, { intensity:"medium" });
+  }
+  showRelatedPreview(rec){
+    this.ensureRelMh();
+    if(!this._relMh || !rec) return;
+    const pr = rec.presentation, src = pr && (pr.heroImage || pr.registerImage);
+    if(!src) return;
+    this._relMh.show({ src: V1 + src, pos:"50% 50%", size:"cover", repeat:"no-repeat", index: 0 });
+  }
+  syncRelPreview(){
+    const EX = window.TA_EXPERTISE;
+    if(!EX || this.state.slug == null) return;
+    const relRecs = EX.related(this.state.slug) || [];
+    const slug = this.state.relHover || (relRecs[0] && relRecs[0].slug);
+    if(slug == null) return;
+    this.showRelatedPreview(EX.bySlug(slug));
   }
   /* the Register's active discipline follows scroll position when the visitor is not
      actively hovering/focusing a row — restores the V1 behavior of "scroll advances the
