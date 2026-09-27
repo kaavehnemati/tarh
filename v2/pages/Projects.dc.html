@@ -751,8 +751,8 @@ class Component extends DCLogic {
       addInfo(fa ? "سال" : "Year", cur.years || cur.year, "text-number");
       addInfo(fa ? "کارفرما" : "Client", pick(cur.client), "");
       addInfo(fa ? "برنامه" : "Programme", pick(cur.programme), "");
-      addInfo(fa ? "زیربنا" : "Built Area", cur.builtArea, "text-number");
-      addInfo(fa ? "مساحت سایت" : "Site Area", cur.siteArea, "text-number");
+      addInfo(fa ? "زیربنا" : "Built Area", pick(cur.builtArea), "text-number");
+      addInfo(fa ? "مساحت سایت" : "Site Area", pick(cur.siteArea), "text-number");
       addInfo(fa ? "وضعیت" : "Status", pick(cur.statusLabel) || cur.status, "");
       const relIds = (cur.relatedProjects && cur.relatedProjects.length) ? cur.relatedProjects
         : all.filter(p => p.id !== cur.id && (p.expertise || []).some(e => (cur.expertise || []).indexOf(e) >= 0)).slice(0, 2).map(p => p.id);
