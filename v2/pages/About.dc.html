@@ -25,6 +25,7 @@
 <script src="../runtime/scroll-coordinator.js"></script>
 <script src="../runtime/ambient.js"></script>
 <script src="../runtime/reveal.js"></script>
+<script src="../runtime/page-transition.js"></script>
 <script src="../runtime/ui-strings.js"></script>
 <script src="../runtime/motif.js"></script>
 <script src="../runtime/section-tracker.js"></script>
@@ -52,7 +53,7 @@
 
   <dc-import name="../components/HeaderNav" dir="{{ dir }}" upper="{{ upper }}" brand="{{ brand }}" nav="{{ nav }}" drawer-links="{{ nav }}" href-home="{{ hrefHome }}" lang="{{ lang }}" on-set-en="{{ setEn }}" on-set-fa="{{ setFa }}" menu-id="ab" theme="canvas" hint-size="100%,64px"></dc-import>
 
-  <section data-screen-label="01 Opening" data-ambient-zone="full" style="padding:var(--space-section-lg) var(--grid-margin) var(--space-section)">
+  <section data-screen-label="01 Opening" data-v2-hero="1" data-ambient-zone="full" style="padding:var(--space-section-lg) var(--grid-margin) var(--space-section)">
     <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter);align-items:end">
       <div style="grid-column:var(--span-wide)">
         <div data-v2-in="1" style="display:flex;align-items:center;gap:var(--space-3);font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45)">
@@ -67,14 +68,12 @@
     </div>
   </section>
 
-  <!-- full-bleed: breaks out of the section's grid-margin so the photograph reads as a wide
-       editorial feature rather than a framed box floating inside the page padding. -->
-  <section data-screen-label="01b Studio media" data-ambient-zone="off" style="padding:0">
-    <div data-ab2-studiomedia="1" data-reveal="media" style="position:relative;aspect-ratio:1600 / 712;width:100vw;margin-inline-start:calc(50% - 50vw);overflow:hidden;background:var(--surface-0)">
+  <section data-screen-label="01b Studio media" data-ambient-zone="off" style="padding:0 var(--grid-margin)">
+    <div data-ab2-studiomedia="1" data-reveal="media" style="position:relative;aspect-ratio:1600 / 712;overflow:hidden;background:var(--surface-0)">
       <div data-ab2-studioimg="1" data-reveal-img="1" style="position:absolute;inset:0;background-image:{{ studioBg.backgroundImage }};background-size:{{ studioBg.backgroundSize }};background-position:{{ studioBg.backgroundPosition }};background-repeat:{{ studioBg.backgroundRepeat }}"></div>
       <div data-reveal-mask="1"></div>
     </div>
-    <div style="display:flex;justify-content:space-between;gap:var(--space-4);margin:var(--rel-image-caption) var(--grid-margin) 0;padding-bottom:var(--space-section);font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--ink-60)">
+    <div style="display:flex;justify-content:space-between;gap:var(--space-4);margin:var(--rel-image-caption) 0 0;padding-bottom:var(--space-section);font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--ink-60)">
       <span>{{ studioCaption }}</span>
       <span class="text-number">{{ studioYear }}</span>
     </div>

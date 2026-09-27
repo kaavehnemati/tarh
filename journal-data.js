@@ -27,11 +27,6 @@
     studio:["Tarh & Afarinesh","طرح و آفرینش"], guest:["Guest author","نویسنده مهمان"]
   };
 
-  /* media: src null until real photography arrives; plate is the placeholder fallback */
-  var m = function (plate, ratio, pos) {
-    return { src:null, plate:plate, ratio:ratio || "16/9", objectPosition:pos || "50% 50%", crop:"cover" };
-  };
-
   var E = [
     { id:"research-courtyard-climate-infrastructure", slug:"courtyard-as-climate-infrastructure",
       type:"research", featured:true, sortOrder:20260927, date:"2026-09-26",
@@ -166,7 +161,7 @@
       } },
 
     { id:"journal-01-sbid-2015", slug:"tarh-afarinesh-sbid-international-design-awards-2015",
-      type:"news", sortOrder:202700, date:"2015",
+      type:"news", sortOrder:20260928, date:"2015",
       en:"Tarh & Afarinesh at the SBID International Design Awards 2015",
       fa:"طرح و آفرینش در جوایز بین‌المللی طراحی SBID 2015",
       excerptEn:"Tarh & Afarinesh was recognised at the SBID International Design Awards 2015 in connection with Best Hotel Design, reflecting the studio's continuing engagement with hospitality architecture and interior design.",
@@ -211,7 +206,8 @@
       excerptEn:"Placeholder excerpt for the featured article. Written at a realistic length so the archive's editorial hierarchy can be judged with genuine copy.",
       excerptFa:"چکیده جایگزین برای مقاله شاخص. با طولی واقعی نوشته شده تا سلسله‌مراتب تحریری آرشیو با متن حقیقی سنجیده شود.",
       author:"p1", roleEn:"[ROLE]", roleFa:"[سمت]",
-      hero:m(0, "16/9"), heroTheme:"light", projectId:"project-001", exp:["architecture","urban-design"], rich:true,
+      hero:{ src:"assets/journal/research-courtyard/research-courtyard-section.webp", ratio:"16/9", objectPosition:"50% 50%", crop:"cover" },
+      heroTheme:"light", projectId:"project-001", exp:["architecture","urban-design"], rich:true,
       body:[
         { type:"paragraph",
           en:"First placeholder paragraph. Its length is chosen so the reading measure and leading of long-form English copy can be judged at a genuine density rather than with filler.",
@@ -236,160 +232,26 @@
           fa:"بند پایانی جایگزین: چگونه این یافته‌ها به تصمیم‌های طراحی بازمی‌گردند." }
       ],
       media:{
-        wide:{ media:m(2, "16/9"), captionEn:"[CAPTION]", captionFa:"[شرح تصویر]", creditEn:"[CREDIT]", creditFa:"[عکاس]" },
-        pair:{ a:m(1, "3/4"), b:m(3, "1/1"), captionEn:"[CAPTION]", captionFa:"[شرح تصویر]" }
+        wide:{ media:{ src:"assets/journal/research-courtyard/research-courtyard-time-study.webp", ratio:"16/9" }, captionEn:"[CAPTION]", captionFa:"[شرح تصویر]", creditEn:"[CREDIT]", creditFa:"[عکاس]" },
+        pair:{ a:{ src:"assets/journal/research-courtyard/research-courtyard-axon.webp", ratio:"3/4" }, b:{ src:"assets/journal/research-courtyard/research-courtyard-principles.webp", ratio:"1/1" }, captionEn:"[CAPTION]", captionFa:"[شرح تصویر]" }
       },
-      video:{ src:null, poster:m(0, "16/9"), duration:"[DURATION]", captionEn:"[CAPTION]", captionFa:"[شرح]", transcript:null } },
+      video:{ src:null, poster:{ src:"assets/journal/research-courtyard/research-courtyard-hero.webp", ratio:"16/9" }, duration:"[DURATION]", captionEn:"[CAPTION]", captionFa:"[شرح]", transcript:null } },
 
-    { id:"research-01", slug:"research-01", type:"research", sortOrder:202698, date:"[DATE] · [YEAR]",
-      en:"Shade, mass and the cost of cooling",
-      fa:"سایه، جرم و هزینه سرمایش",
-      excerptEn:"Placeholder abstract for an internal environmental study.",
-      excerptFa:"چکیده جایگزین برای یک مطالعه محیطی داخلی.",
-      author:"p3", hero:m(2, "4/5"), exp:["sustainable-design"], projectId:"project-008", rich:true,
-      media:{ wide:{ media:m(1, "16/9"), captionEn:"[CAPTION]", captionFa:"[شرح تصویر]", creditEn:"[CREDIT]", creditFa:"[عکاس]" } },
-      /* single audio validation entry — the module renders only where this exists */
-      audio:{ src:null, titleEn:"Studio conversation 01", titleFa:"گفت‌وگوی استودیو ۰۱", duration:"[DURATION]", transcript:null } },
-
-    { id:"news-01", slug:"news-01", type:"news", sortOrder:202697, date:"[DATE] · [YEAR]",
-      en:"Studio note 01",
-      fa:"یادداشت استودیو ۰۱",
-      excerptEn:"Short placeholder announcement, deliberately brief.",
-      excerptFa:"اعلان کوتاه جایگزین، به‌عمد مختصر.",
-      author:"studio", hero:null, exp:[] },
-
-    { id:"update-01", slug:"update-01", type:"update", sortOrder:202696, date:"[DATE] · [YEAR]",
-      en:"Construction reaches [placeholder stage]",
-      fa:"ساخت به [مرحله جایگزین] رسید",
-      excerptEn:"Placeholder site report from the current construction stage.",
-      excerptFa:"گزارش جایگزین از مرحله کنونی ساخت.",
-      author:"p2", hero:m(1, "3/2"), projectId:"project-001", exp:["architecture"], short:true },
-
-    { id:"paper-01", slug:"paper-01", type:"paper", sortOrder:202595, date:"[DATE] · [YEAR]",
-      en:"Modular assembly in mid-rise housing: a working paper with a deliberately long title for layout stress testing",
-      fa:"سیستم‌های ماژولار در مسکن میان‌مرتبه: گزارشی کاری با عنوانی به‌عمد بلند برای سنجش چیدمان صفحه",
-      excerptEn:"Placeholder abstract. Method, sample and findings are prototype content only.",
-      excerptFa:"چکیده جایگزین. روش، نمونه و یافته‌ها تنها محتوای آزمایشی هستند.",
-      author:"p3", coAuthor:"guest", hero:m(3, "3/4"), exp:["engineering","sustainable-design"], paper:true,
-      doc:{ kindEn:"Document", kindFa:"سند", topicEn:"Architecture and environment", topicFa:"معماری و محیط", file:null } },
-
-    { id:"book-01", slug:"book-01", type:"book", sortOrder:202594, date:"[DATE] · [YEAR]",
-      en:"Publication 01",
-      fa:"انتشارات ۰۱",
-      excerptEn:"Placeholder publication description.",
-      excerptFa:"توضیح جایگزین انتشارات.",
-      author:"studio", hero:m(0, "3/4"), book:true, exp:["architecture"],
-      doc:{ kindEn:"Cover", kindFa:"جلد", publisher:"[PUBLISHER]", file:null } },
-
-    { id:"article-02", slug:"article-02", type:"article", sortOrder:202593, date:"[DATE] · [YEAR]",
-      en:"What a drawing cannot say",
-      fa:"آنچه نقشه نمی‌تواند بگوید",
-      excerptEn:"Placeholder excerpt on the limits of representation in practice.",
-      excerptFa:"چکیده جایگزین درباره مرزهای بازنمایی در عمل حرفه‌ای.",
-      author:"p1", hero:m(2, "16/10"), exp:["architecture"] },
-
-    { id:"news-02", slug:"news-02", type:"news", sortOrder:202592, date:"[DATE] · [YEAR]",
-      en:"Studio note 02",
-      fa:"یادداشت استودیو ۰۲",
-      excerptEn:"Short placeholder note.", excerptFa:"یادداشت کوتاه جایگزین.",
-      author:"studio", hero:null, exp:[] },
-
-    { id:"research-02", slug:"research-02", type:"research", sortOrder:202591, date:"[DATE] · [YEAR]",
-      en:"Reclaimed brick: three sample walls",
-      fa:"آجر بازیافتی: سه دیوار نمونه",
-      excerptEn:"Placeholder summary of a material investigation.",
-      excerptFa:"خلاصه جایگزین یک بررسی مصالح.",
-      author:"p2", hero:m(1, "4/3"), exp:["sustainable-design"], projectId:"project-005" },
-
-    { id:"update-02", slug:"update-02", type:"update", sortOrder:202590, date:"[DATE] · [YEAR]",
-      en:"First phase handed over",
-      fa:"فاز نخست تحویل شد",
-      excerptEn:"Placeholder handover report.", excerptFa:"گزارش جایگزین تحویل.",
-      author:"p2", hero:m(3, "16/9"), projectId:"project-005", exp:["urban-design"], short:true },
-
-    { id:"article-03", slug:"article-03", type:"article", sortOrder:202589, date:"[DATE] · [YEAR]",
-      en:"Density is not a number",
-      fa:"تراکم یک عدد نیست",
-      excerptEn:"Placeholder excerpt questioning how density is measured and argued.",
-      excerptFa:"چکیده جایگزین در نقد شیوه سنجش و استدلالِ تراکم.",
-      author:"guest", hero:m(0, "3/2"), exp:["urban-design"], projectId:"project-005" },
-
-    { id:"paper-02", slug:"paper-02", type:"paper", sortOrder:202488, date:"[DATE] · [YEAR]",
-      en:"Structural grids and the plan that follows",
-      fa:"شبکه سازه و پلانی که از آن می‌آید",
-      excerptEn:"Placeholder abstract for a structural working paper.",
-      excerptFa:"چکیده جایگزین برای گزارشی سازه‌ای.",
-      author:"p3", hero:m(2, "3/4"), exp:["engineering"], paper:true },
-
-    { id:"news-03", slug:"news-03", type:"news", sortOrder:202487, date:"[DATE] · [YEAR]",
-      en:"Studio note 03",
-      fa:"یادداشت استودیو ۰۳",
-      excerptEn:"Short placeholder note.", excerptFa:"یادداشت کوتاه جایگزین.",
-      author:"studio", hero:null, exp:[] },
-
-    { id:"research-03", slug:"research-03", type:"research", sortOrder:202486, date:"[DATE] · [YEAR]",
-      en:"Daylight in the mid-block condition",
-      fa:"نور روز در وضعیت میان‌بلوکی",
-      excerptEn:"Placeholder research summary.", excerptFa:"خلاصه جایگزین پژوهش.",
-      author:"p1", hero:m(1, "4/5"), exp:["architecture","sustainable-design"], projectId:"project-001" },
-
-    { id:"article-04", slug:"article-04", type:"article", sortOrder:202485, date:"[DATE] · [YEAR]",
-      en:"Interiors are where the building is actually used",
-      fa:"فضای داخلی، جایی که ساختمان زیسته می‌شود",
-      excerptEn:"Placeholder excerpt on the interior scale.",
-      excerptFa:"چکیده جایگزین درباره مقیاس داخلی.",
-      author:"p2", hero:m(3, "16/9"), exp:["interior-architecture"], projectId:"project-007" },
-
-    { id:"update-03", slug:"update-03", type:"update", sortOrder:202484, date:"[DATE] · [YEAR]",
-      en:"Facade mock-up on site",
-      fa:"نمونه اجرایی نما در کارگاه",
-      excerptEn:"Placeholder site note.", excerptFa:"یادداشت جایگزین کارگاه.",
-      author:"p2", hero:m(0, "3/2"), projectId:"project-005", exp:["architecture"], short:true },
-
-    { id:"book-02", slug:"book-02", type:"book", sortOrder:202483, date:"[DATE] · [YEAR]",
-      en:"Publication 02",
-      fa:"انتشارات ۰۲",
-      excerptEn:"Placeholder publication description.", excerptFa:"توضیح جایگزین انتشارات.",
-      author:"studio", hero:m(2, "3/4"), book:true, exp:["urban-design"] },
-
-    { id:"article-05", slug:"article-05", type:"article", sortOrder:202382, date:"[DATE] · [YEAR]",
-      en:"Notes on working with the city",
-      fa:"یادداشت‌هایی بر کار کردن با شهر",
-      excerptEn:"Placeholder excerpt.", excerptFa:"چکیده جایگزین.",
-      author:"p1", hero:m(1, "16/10"), exp:["urban-design"] },
-
-    { id:"news-04", slug:"news-04", type:"news", sortOrder:202381, date:"[DATE] · [YEAR]",
-      en:"Studio note 04",
-      fa:"یادداشت استودیو ۰۴",
-      excerptEn:"Short placeholder note.", excerptFa:"یادداشت کوتاه جایگزین.",
-      author:"studio", hero:null, exp:[] },
-
-    { id:"research-04", slug:"research-04", type:"research", sortOrder:202380, date:"[DATE] · [YEAR]",
-      en:"Prototype: a nine-square courtyard module",
-      fa:"نمونه اولیه: ماژول حیاط نه‌خانه",
-      excerptEn:"Placeholder research note on a built prototype.",
-      excerptFa:"یادداشت جایگزین پژوهش درباره یک نمونه ساخته‌شده.",
-      author:"p3", hero:m(3, "4/3"), exp:["architecture","engineering"] },
-
-    { id:"paper-03", slug:"paper-03", type:"paper", sortOrder:202279, date:"[DATE] · [YEAR]",
-      en:"Thermal comfort without mechanical cooling",
-      fa:"آسایش حرارتی بدون سرمایش مکانیکی",
-      excerptEn:"Placeholder abstract.", excerptFa:"چکیده جایگزین.",
-      author:"p3", hero:m(0, "3/4"), exp:["sustainable-design"], paper:true },
-
-    { id:"article-06", slug:"article-06", type:"article", sortOrder:202278, date:"[DATE] · [YEAR]",
-      en:"A line that leaves the grid",
-      fa:"خطی که از شبکه می‌گریزد",
-      excerptEn:"Placeholder excerpt on the diagonal in the studio's own geometry.",
-      excerptFa:"چکیده جایگزین درباره خط مورب در هندسه استودیو.",
-      author:"p1", hero:m(2, "16/9"), exp:["architecture"], projectId:"project-005" }
   ];
 
   var byId = function (id) { for (var i = 0; i < E.length; i++) if (E[i].id === id) return E[i]; return null; };
 
   /* one media resolver: real src when supplied, plate only as fallback.
-     Returns a renderable visual state — templates never branch on media kind. */
+     Returns a renderable visual state — templates never branch on media kind.
+     Delegates to window.TA_MEDIA so real src paths get window.TA_ASSET_BASE
+     applied, same as every other data module (projects-data.js etc). */
   var resolveMedia = function (media, ratioOverride, positionOverride) {
+    if (window.TA_MEDIA) {
+      var v = window.TA_MEDIA.resolve(media);
+      v.ratio = ratioOverride || v.ratio || "16/9";
+      if (positionOverride) v.backgroundPosition = positionOverride;
+      return v;
+    }
     var PLATES = [
       "repeating-linear-gradient(-45deg,#E8E8E4 0 18px,#E1E1DC 18px 36px)",
       "repeating-linear-gradient(-45deg,#DEDED8 0 18px,#D7D7D1 18px 36px)",

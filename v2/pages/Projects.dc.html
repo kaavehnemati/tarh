@@ -25,6 +25,7 @@
 <script src="../runtime/scroll-coordinator.js"></script>
 <script src="../runtime/ambient.js"></script>
 <script src="../runtime/reveal.js"></script>
+<script src="../runtime/page-transition.js"></script>
 <script src="../runtime/ui-strings.js"></script>
 <script src="../runtime/cursor.js"></script>
 <script src="../runtime/motif.js"></script>
@@ -49,7 +50,7 @@
 
   <sc-if value="{{ isArchive }}" hint-placeholder-val="{{ true }}">
 
-  <section data-screen-label="01 Opening" data-ambient-zone="full" style="position:relative;padding:var(--space-section-lg) var(--grid-margin) var(--space-section)">
+  <section data-screen-label="01 Opening" data-v2-hero="1" data-ambient-zone="full" style="position:relative;padding:var(--space-section-lg) var(--grid-margin) var(--space-section)">
     <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter);align-items:end">
       <div style="grid-column:var(--span-wide)">
         <div data-v2-in="1" style="display:flex;align-items:center;gap:var(--space-3);font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45)">

@@ -23,6 +23,7 @@
 <script src="../runtime/scroll-coordinator.js"></script>
 <script src="../runtime/ambient.js"></script>
 <script src="../runtime/reveal.js"></script>
+<script src="../runtime/page-transition.js"></script>
 <script src="../runtime/ui-strings.js"></script>
 <script src="../runtime/motif.js"></script>
 <script src="../runtime/cursor.js"></script>
@@ -39,7 +40,7 @@
 
   <dc-import name="../components/HeaderNav" upper="{{ upper }}" brand="{{ brand }}" nav="{{ nav }}" drawer-links="{{ drawerLinks }}" href-home="{{ hrefHome }}" lang="{{ lang }}" on-set-en="{{ setEn }}" on-set-fa="{{ setFa }}" menu-id="ct" hint-size="100%,64px"></dc-import>
 
-  <section data-screen-label="01 Opening" data-ambient-zone="full" style="position:relative;padding:var(--space-section-lg) var(--grid-margin) var(--space-section)">
+  <section data-screen-label="01 Opening" data-v2-hero="1" data-ambient-zone="full" style="position:relative;padding:var(--space-section-lg) var(--grid-margin) var(--space-section)">
     <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter);align-items:end">
       <div style="grid-column:var(--span-wide)">
         <div data-v2-in="1" style="display:flex;align-items:center;gap:var(--space-3);font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45)">
@@ -197,7 +198,7 @@
         <div style="grid-column:var(--span-body);display:grid;gap:var(--space-block)">
           <sc-for list="{{ offices }}" as="o" hint-placeholder-count="1">
             <div>
-              <div style="display:flex;align-items:baseline;gap:var(--space-4);border-top:1px solid var(--ink);padding-top:var(--space-3)">
+              <div style="display:grid;grid-template-columns:minmax(0,160px) minmax(0,1fr);gap:var(--space-5);align-items:baseline;border-top:1px solid var(--ink);padding-top:var(--space-3)">
                 <span style="font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45)">{{ o.label }}</span>
                 <span style="font-size:var(--t-hs);line-height:var(--t-hs-lh)">{{ o.city }}</span>
               </div>
@@ -241,18 +242,9 @@
         </p>
         <a href="#inquiry" onClick="{{ clearIntent }}" data-v2-cursor="select" style="margin-top:var(--space-5);display:inline-flex;align-items:baseline;gap:var(--space-4);font-size:var(--t-cta);letter-spacing:var(--t-cta-ls);text-transform:{{ upper }};min-height:var(--c-control-h)"><i style="width:var(--c-indicator-sm);height:var(--c-indicator-sm);background:var(--turq)"></i>{{ closingCta }}<span aria-hidden="true">↗</span></a>
       </div>
-      <div style="grid-column:var(--span-full);margin-top:var(--space-section);display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter);border-top:1px solid var(--ink);padding-top:var(--space-5)">
-        <div style="grid-column:var(--span-label);display:flex;flex-direction:column;gap:var(--space-2);font-size:var(--t-bs);line-height:1.7">
-          <a href="{{ hrefProjects }}">{{ navProjects }}</a>
-          <a href="{{ hrefExpertise }}">{{ navExpertise }}</a>
-          <a href="{{ hrefAwards }}">{{ navAwards }}</a>
-          <a href="{{ hrefAbout }}">{{ navAbout }}</a>
-          <a href="{{ hrefJournal }}">{{ navJournal }}</a>
-        </div>
-        <div style="grid-column:var(--span-body);display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--space-4);font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--ink-45);align-self:end">
-          <span>Tarh &amp; Afarinesh — طرح و آفرینش</span>
-          <span class="text-number">© {{ year }}</span>
-        </div>
+      <div style="grid-column:var(--span-full);margin-top:var(--space-section);display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--space-4);border-top:1px solid var(--rule);padding-top:var(--space-5);font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--ink-45)">
+        <span style="display:inline-flex;align-items:center;min-height:var(--c-control-h)">{{ eyebrow }}</span>
+        <span style="display:inline-flex;align-items:center;min-height:var(--c-control-h)">Tarh &amp; Afarinesh — طرح و آفرینش</span>
       </div>
     </div>
   </section>

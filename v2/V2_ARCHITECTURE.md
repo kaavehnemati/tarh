@@ -8,7 +8,7 @@ V2 page. Companion to `../V2_DESIGN_CONTRACT.md` (visual rules) and
 | Directory | Owns | A page may... |
 |---|---|---|
 | `v2/design-system/` | `tokens-v2.css` (palette, type, spacing, grid, motion, surface, bidi utilities, ambient CSS, grid motif, reveal states, grid surface, responsive menu) · `base-v2.css` (link/focus/selection resets + shared page-entry motion `[data-v2-rise]`/`[data-v2-in]`) · `responsive-v2.css` (breakpoint re-valuing of `--marg`/`--gap` + global safety) | `<link>` all three, in this order, before anything else. Never redeclare a token. |
-| `v2/runtime/` | `layout-mode.js` (viewport/pointer/motion state) · `bidi.js` (`TA_BIDI`) · `ambient.js` (`TA_AMBIENT`, the page-level field) · `reveal.js` (`TA_REVEAL`, progressive reveal) · `ui-strings.js` (`TA_UI_V2`, global chrome vocabulary) · `motif.js` (`TA_MOTIF`) · `cursor.js` (`TA_CURSOR`) · `scroll-coordinator.js` (`TA_SCROLL`) · `section-tracker.js` (`TA_SECTION_TRACKER`) · `media-handoff.js` (`TA_MEDIA_HANDOFF`, scroll-driven media continuity; only load if the page calls `.mount()`) | `<script src>` each; never inline an equivalent. |
+| `v2/runtime/` | `layout-mode.js` (viewport/pointer/motion state) · `bidi.js` (`TA_BIDI`) · `ambient.js` (`TA_AMBIENT`, the page-level field) · `reveal.js` (`TA_REVEAL`, progressive reveal) · `ui-strings.js` (`TA_UI_V2`, global chrome vocabulary) · `motif.js` (`TA_MOTIF`) · `cursor.js` (`TA_CURSOR`) · `scroll-coordinator.js` (`TA_SCROLL`) · `section-tracker.js` (`TA_SECTION_TRACKER`) · `media-handoff.js` (`TA_MEDIA_HANDOFF`, scroll-driven media continuity; only load if the page calls `.mount()`) · `page-transition.js` (`TA_PAGE_TX`, the cross-page curtain — load on every page) | `<script src>` each; never inline an equivalent. |
 | `v2/components/` | Shared child Design Components used by 2+ V2 pages | `<dc-import name="../components/X">`. A pattern used by exactly one page stays in that page. |
 | `v2/pages/` | The page DCs themselves | Import from the three trees above, plus the shared data/media files at the project root. |
 | `v2/assets/` | V2-only imagery (nothing V1 ever had) | Reference directly; never duplicate a root asset here. |
@@ -99,6 +99,7 @@ Every V2 page's `<helmet>`, in this order:
 <script src="../runtime/cursor.js"></script>          <!-- only if the page uses the contextual cursor -->
 <script src="../runtime/section-tracker.js"></script> <!-- only if the page uses shared scroll-active tracking; built on scroll-coordinator.js, so load it after -->
 <script src="../runtime/media-handoff.js"></script>   <!-- only if the page calls TA_MEDIA_HANDOFF.mount() -->
+<script src="../runtime/page-transition.js"></script> <!-- cross-page curtain; load on every page -->
 ```
 
 Tokens/styles first (nothing renders without them) → layout/bidi runtime →

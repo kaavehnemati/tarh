@@ -22,3 +22,39 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--turq-dk);outline-of
 [data-v2-rise]{animation:v2-rise var(--m-reveal) var(--e-editorial) 60ms both}
 [data-v2-in]{animation:v2-in var(--m-reveal) var(--e-editorial) both}
 @media (prefers-reduced-motion:reduce){[data-v2-rise],[data-v2-in]{animation:none !important}}
+
+/* -----------------------------------------------------------------------------
+   CROSS-PAGE CURTAIN — CONTINUITY between full-reload page navigations, driven by
+   page-transition.js (TA_PAGE_TX). Same MPA model as V1: no router, no View
+   Transitions API — the smoothness is a two-part curtain in the --e-page grammar.
+   Both halves are one canvas panel that wipes UPWARD, so leaving one page and
+   arriving at the next read as a single continuous rise.
+     data-pt-boot     set synchronously on <html> at load → arrival curtain covers
+                      from first paint, then wipes up and off (masks the boot flash)
+     data-pt-leaving  set on click of an internal link → departure curtain rises to
+                      cover before the hard navigation fires
+   Pure CSS: if page-transition.js never runs, neither attribute is set, no pseudo-
+   element exists, and content is fully visible — a progressive enhancement, exactly
+   like reveal.js's data-reveal-boot.
+   ----------------------------------------------------------------------------- */
+@keyframes pt-arrive{from{clip-path:inset(0 0 0 0)}to{clip-path:inset(0 0 100% 0)}}
+@keyframes pt-leave{from{clip-path:inset(100% 0 0 0)}to{clip-path:inset(0 0 0 0)}}
+html[data-pt-boot]::before,
+html[data-pt-leaving]::after{content:"";position:fixed;inset:0;z-index:200;background:var(--canvas);pointer-events:none}
+html[data-pt-boot]::before{animation:pt-arrive var(--m-page) var(--e-page) forwards}
+html[data-pt-leaving]::after{animation:pt-leave var(--m-reveal) var(--e-exit) forwards}
+@media (prefers-reduced-motion:reduce){html[data-pt-boot]::before,html[data-pt-leaving]::after{display:none}}
+
+/* -----------------------------------------------------------------------------
+   HERO FOOTPRINT — every page's archetype-A opening (About/Awards/Contact/
+   Journal/Projects/Expertise) resolves to the same box via data-v2-hero, so the
+   pages read as one system; the heading/intro copy inside is still free to vary
+   in length. Homepage keeps its own bespoke opening and does not use this.
+   ----------------------------------------------------------------------------- */
+[data-v2-hero]{min-height:var(--hero-min-h);display:flex;flex-direction:column}
+[data-v2-hero] > div{flex:1 1 auto}
+/* The per-page opening carries a large inline section padding (space-section-lg
+   top / space-section bottom); on tall viewports that padding — not min-height —
+   is what makes the hero read as overly tall. Tighten it here for every hero so
+   they all shrink together while keeping the shared footprint. */
+[data-v2-hero]{padding-top:var(--space-section)!important;padding-bottom:var(--space-block)!important}

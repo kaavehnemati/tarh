@@ -24,9 +24,11 @@
 <script src="../runtime/scroll-coordinator.js"></script>
 <script src="../runtime/ambient.js"></script>
 <script src="../runtime/reveal.js"></script>
+<script src="../runtime/page-transition.js"></script>
 <script src="../runtime/ui-strings.js"></script>
 <script src="../runtime/section-tracker.js"></script>
 <script src="../runtime/motif.js"></script>
+<script src="../runtime/cursor.js"></script>
 </helmet>
 
 <div data-jr2-root="1" data-v2-shell="1" dir="{{ dir }}" style="color:var(--ink);min-height:100svh;overflow-x:clip">
@@ -35,7 +37,7 @@
 
   <sc-if value="{{ isArchive }}" hint-placeholder-val="{{ true }}">
   <!-- 01 Opening -->
-  <section data-screen-label="01 Opening" data-ambient-zone="full" style="position:relative;padding:var(--space-section-lg) var(--grid-margin) var(--space-section)">
+  <section data-screen-label="01 Opening" data-v2-hero="1" data-ambient-zone="full" style="position:relative;padding:var(--space-section-lg) var(--grid-margin) var(--space-section)">
     <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter);align-items:end">
       <div style="grid-column:var(--span-wide)">
         <div data-v2-in="1" style="display:flex;align-items:center;gap:var(--space-3);font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45)">
@@ -48,31 +50,14 @@
     </div>
   </section>
 
-  <!-- 02 Featured story -->
-  <sc-if value="{{ hasFeatured }}" hint-placeholder-val="{{ true }}">
-    <section data-screen-label="02 Featured story" data-ambient-zone="off" style="padding:0 var(--grid-margin) var(--space-section-lg)">
-      <a href="{{ feat.href }}" style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter);border-top:1px solid var(--ink);padding-top:var(--space-5)">
-        <div style="grid-column:var(--span-wide);position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--surface-1);direction:ltr" data-reveal="media">
-          <div data-reveal-img="1" style="position:absolute;inset:0;background-image:{{ feat.bg }};background-size:{{ feat.size }};background-position:{{ feat.pos }};background-repeat:{{ feat.repeat }};transition:transform var(--m-slow) var(--e-cinematic)" style-hover="transform:scale(1.02)"></div>
-          <div data-reveal-mask="1"></div>
-        </div>
-        <div style="grid-column:var(--span-lead);align-self:end" data-reveal="content">
-          <div style="font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--turq-dk)" class="text-mixed"><sc-for list="{{ feat.metaParts }}" as="p" hint-placeholder-count="1"><span class="{{ p.cls }}">{{ p.t }}</span></sc-for></div>
-          <h2 style="margin:var(--space-tight) 0 0;font-size:var(--t-hl);line-height:var(--t-hl-lh);letter-spacing:var(--t-hl-ls);font-weight:var(--t-hl-w)">{{ feat.title }}</h2>
-          <p style="margin:var(--space-3) 0 0;font-size:var(--t-bm);line-height:var(--t-bm-lh);color:var(--ink-60);max-width:var(--measure)">{{ feat.excerpt }}</p>
-        </div>
-      </a>
-    </section>
-  </sc-if>
-
   <!-- 03 Archive -->
   <section data-screen-label="03 Archive" data-ambient-zone="soft" style="position:relative;padding:var(--space-section) var(--grid-margin) var(--space-section-lg)">
     <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--space-4) var(--space-6);border-bottom:1px solid var(--ink);padding-bottom:var(--space-4)">
       <h2 data-motif-wake="1" style="margin:0;display:flex;align-items:center;gap:var(--space-3);font-size:var(--t-hl);line-height:var(--t-hl-lh);letter-spacing:var(--t-hl-ls);font-weight:var(--t-hl-w);outline-offset:6px"><span data-grid-motif="interactive" data-motif-active="5" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>{{ archiveLabel }}<span class="text-number" style="font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);color:var(--ink-45);font-weight:400">{{ countLabel }}</span></h2>
-      <nav aria-label="{{ catNavLabel }}" style="display:flex;flex-wrap:wrap;align-items:center;gap:0 var(--space-6)">
-        <sc-for list="{{ cats }}" as="f" hint-placeholder-count="3">
-          <button type="button" onClick="{{ f.toggle }}" aria-pressed="{{ f.pressed }}" style="appearance:none;background:none;border:none;cursor:pointer;min-height:var(--c-control-h);padding:0;display:inline-flex;align-items:center;gap:var(--space-tight);font:inherit;font-size:var(--t-cta);letter-spacing:var(--t-cta-ls);text-transform:{{ upper }};color:inherit;opacity:{{ f.op }};transform:translateY({{ f.lift }});transition:opacity var(--m-fast) var(--e-smooth),transform var(--m-fast) var(--e-smooth)">
-            <i style="width:var(--c-indicator-sm);height:var(--c-indicator-sm);border:1px solid var(--turq);background:{{ f.fill }};transition:background var(--m-fast) var(--e-smooth)"></i>{{ f.label }}<span class="text-number" style="color:var(--ink-45)">{{ f.count }}</span>
+      <nav data-jr2-filters="1" aria-label="{{ catNavLabel }}" style="display:flex;flex-wrap:wrap;align-items:center;gap:0 var(--space-6)">
+        <sc-for list="{{ cats }}" as="f" hint-placeholder-count="7">
+          <button type="button" onClick="{{ f.toggle }}" aria-pressed="{{ f.pressed }}" style="appearance:none;background:none;border:none;cursor:pointer;min-height:var(--c-control-h);padding:0;display:inline-flex;align-items:center;gap:var(--space-tight);font:inherit;font-size:var(--t-cta);letter-spacing:var(--t-cta-ls);text-transform:{{ upper }};color:inherit;opacity:{{ f.op }};transform:translateY({{ f.lift }});transition:opacity var(--m-fast) var(--e-smooth),transform var(--m-fast) var(--e-smooth)" style-hover="opacity:1">
+            <i style="width:var(--c-indicator-sm);height:var(--c-indicator-sm);border:1px solid var(--turq);background:{{ f.fill }};transition:background var(--m-fast) var(--e-smooth)"></i>{{ f.label }}
           </button>
         </sc-for>
       </nav>
@@ -82,20 +67,24 @@
       <span style="font-size:var(--t-meta);color:var(--ink-45)"><span class="text-number">{{ shownLabel }}</span></span>
     </div>
 
-    <!-- mixed editorial rhythm, preserved from V1: varied spans by card.size, never a uniform grid -->
-    <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--space-block) var(--grid-gutter);margin-top:var(--space-4);opacity:{{ gridOp }};transform:translateY({{ gridShift }});transition:opacity var(--m-fast) var(--e-smooth),transform var(--m-fast) var(--e-smooth)">
+    <!-- V1's editorial field, ported as-is: a deliberate 12-slot rhythm, never a uniform grid -->
+    <div data-jr2-grid="1" style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:0 var(--grid-gutter);margin-top:var(--space-4);opacity:{{ gridOp }};transform:translateY({{ gridShift }});transition:opacity var(--m-fast) var(--e-smooth),transform var(--m-fast) var(--e-smooth)">
       <sc-for list="{{ cards }}" as="c" hint-placeholder-count="6">
-        <a href="{{ c.href }}" onClick="{{ c.open }}" style="grid-column:{{ c.span }};display:flex;flex-direction:column;gap:var(--space-3)">
+        <a href="{{ c.href }}" onClick="{{ c.open }}" data-v2-cursor="read" data-jr2-card="1" style="grid-column:{{ c.span }};margin-top:{{ c.mt }};border-top:{{ c.rule }};padding-top:{{ c.pt }};display:flex;flex-direction:column;gap:var(--space-3)">
           <sc-if value="{{ c.hasMedia }}" hint-placeholder-val="{{ true }}">
             <div style="position:relative;aspect-ratio:{{ c.ratio }};overflow:hidden;background:var(--surface-1);direction:ltr" data-reveal="media">
               <div data-reveal-img="1" style="position:absolute;inset:0;background-image:{{ c.bg }};background-size:{{ c.size }};background-position:{{ c.pos }};background-repeat:{{ c.repeat }};transition:transform var(--m-slow) var(--e-cinematic)" style-hover="transform:scale(1.02)"></div>
               <div data-reveal-mask="1"></div>
+              <i aria-hidden="true" style="position:absolute;top:var(--space-3);inset-inline-start:var(--space-3);width:var(--c-indicator-sm);height:var(--c-indicator-sm);background:var(--turq);transform:scale(0);transition:transform var(--m-fast) var(--e-smooth)" style-hover="transform:scale(1)"></i>
             </div>
           </sc-if>
           <div style="font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--turq-dk)" class="text-mixed"><sc-for list="{{ c.metaParts }}" as="p" hint-placeholder-count="1"><span class="{{ p.cls }}">{{ p.t }}</span></sc-for></div>
-          <div data-jr2-ctitle="1" style="font-size:{{ c.titleSize }};line-height:{{ c.titleLh }};letter-spacing:{{ c.titleLs }};font-weight:{{ c.titleW }}">{{ c.title }}</div>
+          <div data-jr2-ctitle="1" style="font-size:{{ c.titleSize }};line-height:{{ c.titleLh }};letter-spacing:{{ c.titleLs }};font-weight:{{ c.titleW }};transition:transform var(--m-fast) var(--e-smooth)" style-hover="transform:translateY(-2px)">{{ c.title }}</div>
           <sc-if value="{{ c.hasExcerpt }}" hint-placeholder-val="{{ false }}">
             <p style="margin:0;font-size:var(--t-bs);line-height:var(--t-bs-lh);color:var(--ink-60);max-width:var(--measure)">{{ c.excerpt }}</p>
+          </sc-if>
+          <sc-if value="{{ c.hasProject }}" hint-placeholder-val="{{ false }}">
+            <span style="display:inline-flex;align-items:center;gap:var(--space-tight);font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--ink-45)"><i style="width:var(--c-indicator-sm);height:var(--c-indicator-sm);background:var(--turq)"></i>{{ c.projectLabel }}</span>
           </sc-if>
         </a>
       </sc-for>
@@ -124,6 +113,13 @@
       </div>
     </div>
   </section>
+
+  <div data-jr2-prog="1" aria-hidden="true" style="position:fixed;top:50%;inset-inline-end:var(--space-3);transform:translateY(-50%);z-index:40;display:flex;flex-direction:column;align-items:center;gap:var(--space-3);pointer-events:none">
+    <span class="text-number" style="font-size:10px;letter-spacing:.06em;color:var(--ink-45)">{{ scrollPctLabel }}</span>
+    <span style="position:relative;width:1px;height:96px;background:var(--rule)">
+      <i style="position:absolute;top:0;inset-inline-start:-2.5px;width:6px;height:6px;background:var(--turq);transform:translateY({{ scrollPctPx }});transition:transform var(--m-fast) var(--e-smooth)"></i>
+    </span>
+  </div>
   </sc-if>
 
   <sc-if value="{{ isDetail }}" hint-placeholder-val="{{ false }}">
@@ -275,24 +271,34 @@
 <script type="text/x-dc" data-dc-script data-props="{&quot;startLang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;en&quot;,&quot;options&quot;:[&quot;en&quot;,&quot;fa&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Bilingual&quot;}}">
 const B = () => window.TA_BIDI;
 const parts = (s, l) => B() ? B().parts(s, l) : [{ t: String(s || ""), cls: "" }];
-/* card size → grid span + type scale, preserving V1's mixed rhythm (large/medium/text/portrait) */
-const SPANS = { large:"var(--span-wide)", medium:"span 6", text:"span 4", portrait:"span 4" };
+/* V1's editorial field, ported as-is: a deliberate 12-slot rhythm, reused in order rather
+   than tiled into a uniform grid (v1/Journal.dc.html FIELD, lines 422-435) */
+const FIELD = [
+  { col:"1 / span 7", mt:"0px", ratio:"16/9", excerpt:true },
+  { col:"9 / span 4", mt:"20px", ratio:null, excerpt:false },
+  { col:"1 / span 4", mt:"110px", ratio:"3/4", excerpt:false },
+  { col:"6 / span 6", mt:"150px", ratio:"16/10", excerpt:true },
+  { col:"2 / span 3", mt:"90px", ratio:null, excerpt:false, rule:true },
+  { col:"6 / span 3", mt:"90px", ratio:null, excerpt:false, rule:true },
+  { col:"10 / span 3", mt:"90px", ratio:null, excerpt:false, rule:true },
+  { col:"1 / span 5", mt:"110px", ratio:"4/3", excerpt:true },
+  { col:"7 / span 5", mt:"180px", ratio:"3/4", excerpt:false },
+  { col:"2 / span 6", mt:"120px", ratio:"16/9", excerpt:true },
+  { col:"9 / span 3", mt:"60px", ratio:"1/1", excerpt:false },
+  { col:"1 / span 4", mt:"110px", ratio:null, excerpt:false, rule:true }
+];
 const TITLE = {
-  large:  { size:"var(--t-hl)", lh:"var(--t-hl-lh)", ls:"var(--t-hl-ls)", w:"var(--t-hl-w)" },
-  medium: { size:"var(--t-hm)", lh:"var(--t-hm-lh)", ls:"var(--t-hm-ls)", w:"var(--t-hm-w)" },
-  text:   { size:"var(--t-hs)", lh:"var(--t-hs-lh)", ls:"var(--t-hs-ls)", w:"var(--t-hs-w)" },
-  portrait:{ size:"var(--t-hm)", lh:"var(--t-hm-lh)", ls:"var(--t-hm-ls)", w:"var(--t-hm-w)" }
+  small:   { size:"var(--t-hs)", lh:"var(--t-hs-lh)", ls:"var(--t-hs-ls)", w:"var(--t-hs-w)" },
+  default: { size:"var(--t-hm)", lh:"var(--t-hm-lh)", ls:"var(--t-hm-ls)", w:"var(--t-hm-w)" }
 };
 
-const PUBLIC = { news:"news", update:"news", article:"articles", book:"articles", research:"research", paper:"research" };
-const CATS = [["news","News","اخبار"],["articles","Articles","مقاله‌ها"],["research","Research","پژوهش"]];
 const scroller = () => (document.body.scrollHeight > document.body.clientHeight + 1 ? document.body : (document.scrollingElement || document.documentElement));
 const scrollToY = (y, smooth) => { const el = scroller(); if(el.scrollTo) el.scrollTo({ top:y, behavior: smooth ? "smooth" : "auto" }); else el.scrollTop = y; };
 const reduced = () => window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 class Component extends DCLogic {
-  state = { lang: "en", types:[], hover:null, filterOpen:false, article:null,
-           cat:null, gridOp:1, gridShift:"0px", activeSec:0, tocOpen:false, compact:false };
+  state = { lang: "en", hover:null, article:null,
+           type:"all", gridOp:1, gridShift:"0px", activeSec:0, tocOpen:false, compact:false, scrollPct:0 };
 
   /* one route contract: #article=<slug>&lang=fa — parsed robustly, order-free */
   parseHash(){
@@ -306,13 +312,13 @@ class Component extends DCLogic {
     const q = this.parseHash(), J = window.TA_JOURNAL;
     const e = J && q.article ? (J.bySlug(q.article) || J.byId(q.article)) : null;
     this.setState({ lang: (q.lang === "fa" || (!window.location.hash && this.props.startLang === "fa")) ? "fa" : "en",
-                    article: e ? e.slug : null, cat: CATS.some(c => c[0] === q.cat) ? q.cat : null });
+                    article: e ? e.slug : null, type: (window.TA_JOURNAL && window.TA_JOURNAL.types.some(t => t.id === q.type)) ? q.type : "all" });
     if(q.article && !e){ try{ window.history.replaceState(null, "", this.buildHash(null, q.lang === "fa" ? "fa" : "en") || window.location.pathname); }catch(err){} }
   }
-  buildHash(article, lang, cat){
+  buildHash(article, lang, type){
     const parts = [];
     if(article) parts.push("article=" + encodeURIComponent(article));
-    else if(cat) parts.push("cat=" + cat);
+    else if(type && type !== "all") parts.push("type=" + type);
     if(lang === "fa") parts.push("lang=fa");
     return parts.length ? "#" + parts.join("&") : "";
   }
@@ -324,6 +330,15 @@ class Component extends DCLogic {
     this.mq = window.matchMedia("(max-width:1023px)");
     this.onMq = () => this.setState({ compact: this.mq.matches });
     this.mq.addEventListener("change", this.onMq); this.onMq();
+    /* archive-only scroll-progress rail, driven by the shared V2 scroll coordinator
+       rather than a page-local listener */
+    if(window.TA_SCROLL){
+      this._stopProg = window.TA_SCROLL.subscribe(() => {
+        const el = scroller(); const max = el.scrollHeight - el.clientHeight;
+        const pct = max > 0 ? Math.min(1, Math.max(0, el.scrollTop / max)) : 0;
+        if(Math.abs(pct - this.state.scrollPct) > 0.002) this.setState({ scrollPct: pct });
+      });
+    }
   }
   componentDidUpdate(){
     if(this._tocFor !== this.state.article){ this._tocFor = this.state.article; this.wireToc(); }
@@ -348,27 +363,26 @@ class Component extends DCLogic {
     scrollToY(y, !reduced());
     this.setState({ activeSec:i, tocOpen:false });
   }
-  /* category change: current set resolves out, list updates, new set resolves in */
-  setCat(k){
-    const next = this.state.cat === k ? null : k;
+  /* type change (V1's single-select filter tabs): current set resolves out, list updates, new set resolves in */
+  setType(k){
     const apply = () => {
-      this.setState({ cat:next, gridOp:1, gridShift:"0px" });
-      try{ window.history.replaceState(null, "", this.buildHash(null, this.state.lang, next) || window.location.pathname); }catch(e){}
+      this.setState({ type:k, gridOp:1, gridShift:"0px" });
+      try{ window.history.replaceState(null, "", this.buildHash(null, this.state.lang, k) || window.location.pathname); }catch(e){}
     };
     if(reduced()){ apply(); return; }
     this.setState({ gridOp:0, gridShift:"6px" });
-    clearTimeout(this._catT); this._catT = setTimeout(apply, 200);
+    clearTimeout(this._typeT); this._typeT = setTimeout(apply, 200);
   }
-  componentWillUnmount(){ if(this._stopToc) this._stopToc(); if(this.mq) this.mq.removeEventListener("change", this.onMq); window.removeEventListener("hashchange", this.onHash); window.removeEventListener("popstate", this.onHash); }
+  componentWillUnmount(){ if(this._stopToc) this._stopToc(); if(this._stopProg) this._stopProg(); if(this.mq) this.mq.removeEventListener("change", this.onMq); window.removeEventListener("hashchange", this.onHash); window.removeEventListener("popstate", this.onHash); }
 
   /* language switch preserves the active article */
   setLang(l){
     this.setState({ lang:l });
-    try{ window.history.replaceState(null, "", this.buildHash(this.state.article, l, this.state.cat) || window.location.pathname); }catch(e){}
+    try{ window.history.replaceState(null, "", this.buildHash(this.state.article, l, this.state.type) || window.location.pathname); }catch(e){}
   }
   go(article, src){
     const fromArchive = article && !this.state.article;
-    if(fromArchive) this.archiveCtx = { y: scroller().scrollTop, cat: this.state.cat };
+    if(fromArchive) this.archiveCtx = { y: scroller().scrollTop, type: this.state.type };
     let clone = null, from = null, fsFrom = 0;
     const t = src && src.querySelector ? src.querySelector("[data-jr2-ctitle]") : null;
     if(fromArchive && t && !reduced()){
@@ -379,10 +393,10 @@ class Component extends DCLogic {
         margin:"0", zIndex:"60", pointerEvents:"none", color:"var(--ink)", transformOrigin: rtl ? "top right" : "top left" });
       document.querySelector("[data-jr2-root]").appendChild(clone);
     }
-    const cat = article ? this.state.cat : (this.archiveCtx ? this.archiveCtx.cat : this.state.cat);
-    const h = this.buildHash(article, this.state.lang, cat);
+    const type = article ? this.state.type : (this.archiveCtx ? this.archiveCtx.type : this.state.type);
+    const h = this.buildHash(article, this.state.lang, type);
     try{ window.history.pushState(null, "", h || window.location.pathname); }catch(e){}
-    this.setState({ article, cat, activeSec:0, tocOpen:false }, () => {
+    this.setState({ article, type, activeSec:0, tocOpen:false }, () => {
       if(article){
         scrollToY(0);
         if(!clone) return;
@@ -408,14 +422,6 @@ class Component extends DCLogic {
   }
 
 
-  toggleType(k){
-    this.setState(s => {
-      const a = s.types.slice(), i = a.indexOf(k);
-      if(i < 0) a.push(k); else a.splice(i, 1);
-      return { types:a };
-    });
-  }
-
   renderVals(){
     const st = this.state, fa = st.lang === "fa", L = st.lang;
     const J = window.TA_JOURNAL, M = window.TA_MEDIA;
@@ -427,38 +433,34 @@ class Component extends DCLogic {
     const mediaOf = (m) => M ? M.resolve(m, { lang:L }) : { backgroundImage:"none" };
     const hrefOf = (e) => "#article=" + e.slug + (fa ? "&lang=fa" : "");
 
-    const feat = J ? J.featured() : null;
-    const featM = feat ? mediaOf(feat.hero) : null;
-    const featMeta = feat ? (oneLabel(feat.type) + " · " + (feat.date || "")) : "";
-
-    const vis = all.filter(e => (!st.cat || PUBLIC[e.type] === st.cat) && (!feat || e.id !== feat.id))
+    const vis = all.filter(e => (st.type === "all" || e.type === st.type))
       .sort((a, b) => (b.sortOrder || 0) - (a.sortOrder || 0));
 
-    /* preserve V1's mixed rhythm: cycle large→medium→text→portrait rather than uniform cards */
-    const CYCLE = ["large","medium","text","portrait","medium","text"];
+    /* V1's card builder, ported as-is (v1/Journal.dc.html cardFor, ~line 1028): each entry is
+       laid into the next FIELD slot in order, not tiled by a uniform card size */
     const cards = vis.map((e, i) => {
-      const size = CYCLE[i % CYCLE.length];
-      const hasMedia = !!e.hero && size !== "text";
-      const t = TITLE[size];
+      const lay = FIELD[i % FIELD.length];
+      const small = !lay.ratio;
+      const t = TITLE[small ? "small" : "default"];
+      const hasMedia = !!e.hero;
+      const ratio = lay.ratio || (e.hero && e.hero.ratio) || "16/9";
       const title = fa ? e.fa : e.en;
       const metaStr = oneLabel(e.type) + " · " + (e.date || "") + " · " + authorOf(e);
       const excerpt = fa ? e.excerptFa : e.excerptEn;
       const mv = hasMedia ? mediaOf(e.hero) : null;
+      const P = e.projectId && J ? J.project(e.projectId) : null;
       return {
-        href: hrefOf(e), open: (ev) => { ev.preventDefault(); this.go(e.slug, ev.currentTarget); }, span: SPANS[size], hasMedia,
+        href: hrefOf(e), open: (ev) => { ev.preventDefault(); this.go(e.slug, ev.currentTarget); },
+        span: lay.col, mt: lay.mt, rule: lay.rule ? "1px solid var(--ink)" : "none", pt: lay.rule ? "var(--space-4)" : "0px",
+        hasMedia,
         bg: mv ? mv.backgroundImage : "none", size: mv ? mv.backgroundSize : "cover",
         pos: mv ? mv.backgroundPosition : "50% 50%", repeat: mv ? mv.backgroundRepeat : "no-repeat",
-        ratio: size === "portrait" ? "3/4" : "16/10",
+        ratio,
         metaParts: parts(metaStr, L),
         title, titleSize: t.size, titleLh: t.lh, titleLs: t.ls, titleW: t.w,
-        hasExcerpt: size === "large" && !!excerpt, excerpt: excerpt || ""
+        hasExcerpt: !!lay.excerpt && !!excerpt, excerpt: excerpt || "",
+        hasProject: !!P, projectLabel: P ? (fa ? P.fa : P.en) : ""
       };
-    });
-
-    const typeFilters = (J ? J.types.filter(t => t.id !== "all") : []).map(t => {
-      const on = st.types.indexOf(t.id) >= 0;
-      return { label: fa ? t.fa : t.en, pressed: on ? "true" : "false", fill: on ? "var(--turq)" : "transparent",
-        op: on ? "1" : "0.6", toggle: () => this.toggleType(t.id) };
     });
 
     /* ---- DETAIL view model — one renderer for every entry shape ---- */
@@ -530,13 +532,16 @@ class Component extends DCLogic {
       current: i === act ? "true" : "false", op: i === act ? "1" : "0.5",
       indent: i === act ? "var(--space-tight)" : "0px", numColor: i === act ? "var(--turq-dk)" : "var(--ink-45)",
       go: () => this.jumpTo(i) }));
-    const allPub = all;
     return {
-      cats: CATS.map(c => { const on = st.cat === c[0];
-        return { label: fa ? c[2] : c[1], pressed: on ? "true" : "false", op: (on || !st.cat) ? "1" : "0.5",
+      /* V1's actual filter tab bar: every type from journal-data.js (incl. "all"), single-select */
+      /* only the tabs V2 actually needs: "all" plus whichever types have at least one entry
+         — V1 always shows its full 7-tab set, but its dataset backs every one; this dataset
+         is still placeholder, so an empty tab would just be dead UI */
+      cats: (J ? J.types.filter(t => t.id === "all" || all.some(e => e.type === t.id)) : []).map(t => {
+        const on = st.type === t.id;
+        return { label: fa ? t.fa : t.en, pressed: on ? "true" : "false", op: on ? "1" : "0.6",
           fill: on ? "var(--turq)" : "transparent", lift: on ? "-2px" : "0px",
-          count: String(allPub.filter(e => PUBLIC[e.type] === c[0]).length).padStart(2, "0"),
-          toggle: () => this.setCat(c[0]) }; }),
+          toggle: () => this.setType(t.id) }; }),
       catNavLabel: fa ? "دسته‌بندی مجله" : "Journal categories",
       gridOp: String(st.gridOp), gridShift: st.gridShift,
       tocDesk: hasToc && !st.compact, tocMob: hasToc && st.compact, toc,
@@ -547,7 +552,7 @@ class Component extends DCLogic {
       toggleToc: () => this.setState(x => ({ tocOpen: !x.tocOpen })),
       tocExpanded: st.tocOpen ? "true" : "false", tocMobList: st.tocOpen ? "block" : "none",
       isArchive: !d, isDetail: !!d, d: d || {},
-      backHref: "Journal.dc.html" + (this.archiveCtx && this.archiveCtx.cat ? "#cat=" + this.archiveCtx.cat + amp : hsh), goBack: (ev) => { ev.preventDefault(); this.go(null); },
+      backHref: "Journal.dc.html" + (this.archiveCtx && this.archiveCtx.type && this.archiveCtx.type !== "all" ? "#type=" + this.archiveCtx.type + amp : hsh), goBack: (ev) => { ev.preventDefault(); this.go(null); },
       backLabel: fa ? "← بازگشت به مجله" : "← Back to Journal",
       relLabel: fa ? "مرتبط" : "Related", prevLabel: fa ? "قبلی" : "Previous", nextLabel: fa ? "بعدی" : "Next",
       dir: fa ? "rtl" : "ltr", upper: fa ? "none" : "uppercase",
@@ -555,8 +560,8 @@ class Component extends DCLogic {
       hrefHome: "Homepage.dc.html" + hsh, hrefAbout: "About.dc.html" + hsh,
       lang: st.lang,
       nav: [["Projects","پروژه‌ها","Projects.dc.html"],["Expertise","تخصص‌ها","Expertise.dc.html"],
-            ["Awards","جوایز","Awards.dc.html"],["About","درباره ما","About.dc.html"],["Contact","تماس","Contact.dc.html"]]
-        .map(n => ({ label: fa ? n[1] : n[0], href: n[2] + hsh, on:"0" })),
+            ["Awards","جوایز","Awards.dc.html"],["About","درباره ما","About.dc.html"],["Journal","مجله",""],["Contact","تماس","Contact.dc.html"]]
+        .map(n => ({ label: fa ? n[1] : n[0], href: (n[2] || "#") + (n[2] ? hsh : ""), on: n[2] ? "0" : "1" })),
       drawerLinks: [["Home","خانه","Homepage.dc.html"],["Projects","پروژه‌ها","Projects.dc.html"],
             ["Expertise","تخصص‌ها","Expertise.dc.html"],["Awards","جوایز","Awards.dc.html"],
             ["About","درباره ما","About.dc.html"],["Journal","مجله",""],["Contact","تماس","Contact.dc.html"]]
@@ -571,25 +576,9 @@ class Component extends DCLogic {
       countLabel: fa ? (String(all.length).padStart(2, "0").replace(/\d/g, d => "۰۱۲۳۴۵۶۷۸۹"[d]) + " نوشتار")
                       : String(all.length).padStart(2, "0") + " entries",
 
-      hasFeatured: !!feat,
-      feat: feat ? {
-        href: hrefOf(feat), bg: featM.backgroundImage, size: featM.backgroundSize,
-        pos: featM.backgroundPosition, repeat: featM.backgroundRepeat,
-        metaParts: parts(featMeta, L), title: fa ? feat.fa : feat.en,
-        excerpt: fa ? feat.excerptFa : feat.excerptEn
-      } : null,
-
       archiveLabel: fa ? "آرشیو" : "Archive",
-      toggleFilter: () => this.setState(s => ({ filterOpen: !s.filterOpen })),
-      filterExpanded: st.filterOpen ? "true" : "false",
-      filterMaxH: st.filterOpen ? "220px" : "0px",
-      filterLabel: fa ? "فیلتر" : "Filter",
-      filterCount: st.types.length ? String(st.types.length) : "",
-      filterCountOp: st.types.length ? "1" : "0",
-      typeFilters,
-      hasActiveFilter: st.types.length > 0,
-      resetFilter: () => this.setState({ types:[] }),
-      resetLabel: fa ? "پاک کردن" : "Reset",
+      scrollPctLabel: String(Math.round(st.scrollPct * 100)).padStart(2, "0"),
+      scrollPctPx: Math.round(st.scrollPct * 90) + "px",
       shownLabel: String(cards.length).padStart(2, "0") + " / " + String(vis.length).padStart(2, "0"),
       cards, empty: cards.length === 0,
       emptyLabel: fa ? "نوشتاری با این فیلتر یافت نشد." : "No entries match this filter.",

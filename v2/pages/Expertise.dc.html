@@ -25,17 +25,36 @@
 <script src="../runtime/scroll-coordinator.js"></script>
 <script src="../runtime/ambient.js"></script>
 <script src="../runtime/reveal.js"></script>
+<script src="../runtime/page-transition.js"></script>
 <script src="../runtime/ui-strings.js"></script>
 <script src="../runtime/motif.js"></script>
 <script src="../runtime/cursor.js"></script>
 <script src="../runtime/section-tracker.js"></script>
+<script src="../runtime/media-handoff.js"></script>
 <style>
+[data-ep2-root]{--space-section:clamp(48px,10vh,140px)}
 [data-ep2-preview]{position:sticky;top:96px;align-self:start}
-@media (max-width:1023px){ [data-ep2-preview]{display:none !important} [data-ep2-narrcol]{position:static} [data-ep2-crosssticky]{position:static !important;top:auto !important} }
+@media (max-width:1023px){ [data-ep2-preview]{display:none !important} [data-ep2-narrcol]{position:static} }
 @media (max-width:767px){
   [data-ep2-chapter]{left:var(--grid-margin) !important;right:auto !important;bottom:calc(var(--grid-margin) + env(safe-area-inset-bottom)) !important;max-width:calc(100vw - 2 * var(--grid-margin) - 60px)}
   [dir="rtl"] [data-ep2-chapter]{right:var(--grid-margin) !important;left:auto !important}
   [data-ep2-rowthumb]{display:block !important}
+  [data-ep2-progress]{display:none !important}
+}
+/* v1-parity interactions ported to the V2 idiom (CSS-only where possible, reduced-motion aware) */
+[data-ep2-cap]{transition:padding var(--m-standard) var(--e-editorial)}
+[data-ep2-cap] [data-ep2-capsq]{opacity:0;transition:opacity var(--m-fast) var(--e-smooth)}
+[data-ep2-cap] [data-ep2-captitle]{transition:color var(--m-fast) var(--e-smooth)}
+[data-ep2-nexttitle]{transition:transform var(--m-standard) var(--e-page)}
+@media (hover:hover){
+  [data-ep2-cap]:hover{padding-inline-start:14px}
+  [data-ep2-cap]:hover [data-ep2-capsq]{opacity:1}
+  [data-ep2-cap]:hover [data-ep2-captitle]{color:var(--turq-dk)}
+  [data-ep2-nextlink]:hover [data-ep2-nexttitle]{transform:translateX(10px)}
+  [dir="rtl"] [data-ep2-nextlink]:hover [data-ep2-nexttitle]{transform:translateX(-10px)}
+}
+@media (prefers-reduced-motion:reduce){
+  [data-ep2-nextlink]:hover [data-ep2-nexttitle]{transform:none}
 }
 </style>
 </helmet>
@@ -46,14 +65,14 @@
 
   <sc-if value="{{ isOverview }}" hint-placeholder-val="{{ true }}">
 
-  <section data-screen-label="01 Opening" data-ambient-zone="full" style="position:relative;padding:var(--space-section-lg) var(--grid-margin) var(--space-section)">
+  <section data-screen-label="01 Opening" data-v2-hero="1" data-ambient-zone="full" style="position:relative;padding:var(--space-section-lg) var(--grid-margin) var(--space-section)">
     <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter);align-items:end">
       <div style="grid-column:var(--span-wide)">
         <div data-v2-in="1" style="display:flex;align-items:center;gap:var(--space-3);font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45)">
           <i style="width:var(--c-indicator);height:var(--c-indicator);background:var(--turq)"></i>{{ eyebrow }}
         </div>
         <h1 data-v2-rise="1" style="margin:var(--rel-eyebrow-heading) 0 0;font-size:var(--t-dl);line-height:var(--t-dl-lh);letter-spacing:var(--t-dl-ls);font-weight:var(--t-dl-w)"><sc-for list="{{ openLines }}" as="l" hint-placeholder-count="2"><span style="display:block">{{ l }}</span></sc-for></h1>
-        <p style="margin:var(--space-content) 0 0;font-size:var(--t-bl);line-height:var(--t-bl-lh);color:var(--ink-60);max-width:var(--measure)">{{ intro }}</p>
+        <p data-v2-in="1" style="margin:var(--space-content) 0 0;font-size:var(--t-bl);line-height:var(--t-bl-lh);color:var(--ink-60);max-width:var(--measure);animation-delay:220ms">{{ intro }}</p>
       </div>
       <span data-grid-motif="static" data-grid-motif-size="anchor" data-motif-active="4" aria-hidden="true" style="grid-column:var(--span-support);justify-self:end;align-self:end"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
     </div>
@@ -77,41 +96,48 @@
       </div>
 
       <div data-ep2-preview="1" style="grid-column:var(--span-preview)">
-        <div style="position:relative;aspect-ratio:4/3;overflow:hidden;background:{{ pv.bg }}">
-          <div style="position:absolute;inset:0;background-image:{{ pv.img }};background-size:cover;background-position:50% 50%;opacity:{{ pv.op }};transform:scale({{ pv.scale }});transition:opacity var(--m-standard) var(--e-editorial),transform var(--m-slow) var(--e-cinematic)"></div>
+        <div data-reveal="media" style="position:relative;aspect-ratio:4/3;overflow:hidden;background:{{ pv.bg }}">
+          <div data-ep2-mhstage="1" style="position:absolute;inset:0"></div>
+          <div data-reveal-mask="1"></div>
         </div>
         <div style="margin-top:var(--rel-image-caption);display:flex;justify-content:space-between;font-size:var(--t-caption);line-height:var(--t-caption-lh);color:var(--ink-45)"><span>{{ pv.caption }}</span><span class="text-number">{{ pv.count }}</span></div>
+        <div style="margin-top:var(--space-5);display:flex;align-items:center;gap:var(--space-4)">
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:5px;width:64px;height:64px;position:relative;direction:ltr;flex:none">
+            <i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i>
+            <i style="position:absolute;left:0;top:0;width:18px;height:18px;background:var(--turq);transform:{{ pv.coordTransform }};transition:transform var(--m-base) var(--e-page)"></i>
+          </div>
+          <div style="font-size:var(--t-caption);line-height:var(--t-caption-lh);color:var(--ink-45);max-width:26ch">{{ coordCaption }}</div>
+        </div>
       </div>
     </div>
   </section>
 
-  <sc-if value="{{ hasCross }}" hint-placeholder-val="{{ true }}">
-    <section data-screen-label="03 Cross-disciplinary story" data-ambient-zone="soft" style="padding:var(--space-section) var(--grid-margin)">
-      <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter)">
-        <div data-ep2-crosssticky="1" style="grid-column:var(--span-label);position:sticky;top:96px;align-self:start">
-          <h2 data-reveal="content" style="margin:0;font-size:var(--t-hm);line-height:var(--t-hm-lh);letter-spacing:var(--t-hm-ls);font-weight:var(--t-hm-w);max-width:16ch">{{ interLead }}</h2>
-          <div style="margin-top:var(--space-block);position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--surface-1);direction:ltr">
-            <div style="position:absolute;inset:0;background-image:{{ crossPv.bg }};background-size:cover;background-position:50% 50%;opacity:{{ crossPv.op }};transition:opacity var(--m-standard) var(--e-editorial)"></div>
-          </div>
-          <div style="margin-top:var(--space-3);display:flex;flex-wrap:wrap;gap:var(--space-2)">
-            <sc-for list="{{ crossPv.tags }}" as="t" hint-placeholder-count="2">
-              <span style="font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};padding:var(--space-tight) var(--space-2);border:1px solid var(--turq);color:{{ t.color }};background:{{ t.bg }};transition:background var(--m-fast) var(--e-smooth),color var(--m-fast) var(--e-smooth)">{{ t.label }}</span>
-            </sc-for>
-          </div>
-          <div style="margin-top:var(--space-3);font-size:var(--t-meta);color:var(--ink-45)"><span class="text-number">{{ crossPv.count }}</span></div>
-        </div>
-        <div style="grid-column:var(--span-body);display:grid;gap:var(--space-section)">
-          <sc-for list="{{ crossChapters }}" as="ch" hint-placeholder-count="2">
-            <a href="{{ ch.href }}" data-sec="{{ ch.key }}" data-v2-cursor="view" style="display:block;min-height:50vh;display:flex;flex-direction:column;justify-content:center;opacity:{{ ch.op }};transition:opacity var(--m-standard) var(--e-editorial)">
-              <div data-ep2-rowthumb="1" style="display:none;width:100%;aspect-ratio:16/9;margin-bottom:var(--space-4);background-image:{{ ch.bg }};background-size:cover;background-position:50% 50%"></div>
-              <span style="font-size:var(--t-hl);line-height:var(--t-hl-lh);letter-spacing:var(--t-hl-ls);font-weight:var(--t-hl-w)">{{ ch.title }}</span>
-              <span style="margin-top:var(--space-3);font-size:var(--t-bs);color:var(--ink-45)">{{ ch.disciplines }}</span>
-            </a>
-          </sc-for>
-        </div>
+  <section data-screen-label="03 Between disciplines" data-ambient-zone="soft" style="padding:var(--space-section) var(--grid-margin)">
+    <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter)">
+      <div style="grid-column:var(--span-index)">
+        <p data-reveal="content" style="margin:0;font-size:var(--t-hl);line-height:var(--t-hl-lh);letter-spacing:var(--t-hl-ls);font-weight:var(--t-hl-w);max-width:18ch">{{ interLead }}</p>
       </div>
-    </section>
-  </sc-if>
+      <div data-ep2-field="1" style="grid-column:var(--span-preview);position:relative;aspect-ratio:1/1;direction:ltr">
+        <div style="position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr)">
+          <i style="border-right:1px solid var(--rule-soft);border-bottom:1px solid var(--rule-soft)"></i><i style="border-right:1px solid var(--rule-soft);border-bottom:1px solid var(--rule-soft)"></i><i style="border-bottom:1px solid var(--rule-soft)"></i>
+          <i style="border-right:1px solid var(--rule-soft);border-bottom:1px solid var(--rule-soft)"></i><i style="border-right:1px solid var(--rule-soft);border-bottom:1px solid var(--rule-soft)"></i><i style="border-bottom:1px solid var(--rule-soft)"></i>
+          <i style="border-right:1px solid var(--rule-soft)"></i><i style="border-right:1px solid var(--rule-soft)"></i><i></i>
+        </div>
+        <svg aria-hidden="true" viewBox="0 0 100 100" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible">
+          <sc-for list="{{ fieldLines }}" as="ln" hint-placeholder-count="4">
+            <line x1="{{ ln.x1 }}" y1="{{ ln.y1 }}" x2="{{ ln.x2 }}" y2="{{ ln.y2 }}" stroke="{{ ln.stroke }}" stroke-width="{{ ln.width }}" stroke-dasharray="120" stroke-dashoffset="{{ ln.dash }}" style="transition:stroke-dashoffset var(--m-base) var(--e-page) {{ ln.delay }}"></line>
+          </sc-for>
+        </svg>
+        <sc-for list="{{ fieldNodes }}" as="nd" hint-placeholder-count="5">
+          <div style="position:absolute;left:{{ nd.x }};top:{{ nd.y }};transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:{{ nd.op }};transition:opacity var(--m-base) var(--e-editorial) {{ nd.delay }}">
+            <i style="width:{{ nd.dot }};height:{{ nd.dot }};background:{{ nd.fill }}"></i>
+            <span style="font-size:var(--t-caption);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--ink-60);white-space:nowrap">{{ nd.label }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
   <sc-if value="{{ hasPlainWork }}" hint-placeholder-val="{{ false }}">
     <section data-screen-label="04 Selected work" data-ambient-zone="soft" style="padding:var(--space-section) var(--grid-margin)">
       <div style="font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45);margin-bottom:var(--space-block);display:flex;justify-content:space-between;border-top:1px solid var(--rule);padding-top:var(--space-4)">
@@ -119,7 +145,7 @@
       </div>
       <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter);align-items:end">
         <sc-for list="{{ overviewWork }}" as="w" hint-placeholder-count="3">
-          <a href="{{ w.href }}" data-v2-cursor="view" style="grid-column:{{ w.col }};display:block">
+          <a href="{{ w.href }}" data-v2-cursor="view" style="grid-column:{{ w.col }};margin-top:{{ w.mt }};display:block">
             <div data-reveal="media" style="position:relative;aspect-ratio:{{ w.ratio }};overflow:hidden;background:var(--surface-1);direction:ltr">
               <div data-reveal-img="1" style="position:absolute;inset:0;background-image:{{ w.bg }};background-size:cover;background-position:50% 50%"></div>
               <div data-reveal-mask="1"></div>
@@ -191,9 +217,9 @@
           <h2 data-reveal="content" style="grid-column:var(--span-label);margin:0;font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45)">{{ capabilitiesLabel }}</h2>
           <div data-reveal="group" style="grid-column:var(--span-body)">
             <sc-for list="{{ d.capabilities }}" as="c" hint-placeholder-count="6">
-              <div style="display:grid;grid-template-columns:44px minmax(0,1fr) minmax(0,1fr);gap:var(--space-4);align-items:baseline;border-top:1px solid var(--rule);padding:var(--space-4) 0">
-                <span class="text-number" style="font-size:var(--t-meta);color:var(--ink-45)">{{ c.num }}</span>
-                <span style="font-size:var(--t-hs);line-height:var(--t-hs-lh);font-weight:var(--t-hs-w)">{{ c.title }}</span>
+              <div data-ep2-cap="1" style="display:grid;grid-template-columns:44px minmax(0,1fr) minmax(0,1fr);gap:var(--space-4);align-items:baseline;border-top:1px solid var(--rule);padding:var(--space-4) 0">
+                <span class="text-number" style="display:flex;align-items:center;gap:var(--space-tight);font-size:var(--t-meta);color:var(--ink-45)"><i data-ep2-capsq="1" style="width:7px;height:7px;background:var(--turq)"></i>{{ c.num }}</span>
+                <span data-ep2-captitle="1" style="font-size:var(--t-hs);line-height:var(--t-hs-lh);font-weight:var(--t-hs-w)">{{ c.title }}</span>
                 <span style="font-size:var(--t-bs);line-height:var(--t-bs-lh);color:var(--ink-45)">{{ c.note }}</span>
               </div>
             </sc-for>
@@ -231,7 +257,7 @@
         </div>
         <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter);align-items:end">
           <sc-for list="{{ d.work }}" as="w" hint-placeholder-count="3">
-            <a href="{{ w.href }}" data-v2-cursor="view" style="grid-column:{{ w.col }};display:block">
+            <a href="{{ w.href }}" data-v2-cursor="view" style="grid-column:{{ w.col }};margin-top:{{ w.mt }};display:block">
               <div data-reveal="media" style="position:relative;aspect-ratio:{{ w.ratio }};overflow:hidden;background:var(--surface-1);direction:ltr">
                 <div data-reveal-img="1" style="position:absolute;inset:0;background-image:{{ w.bg }};background-size:cover;background-position:50% 50%"></div>
                 <div data-reveal-mask="1"></div>
@@ -248,13 +274,26 @@
       <section data-sec="knowledge" data-screen-label="D5 Knowledge" data-ambient-zone="minimal" data-grid-surface="standard" style="padding:var(--space-section) var(--grid-margin)">
         <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter)">
           <div style="grid-column:var(--span-label);font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45)">{{ knowledgeLabel }}</div>
-          <div data-reveal="group" style="grid-column:var(--span-body);border-top:1px solid var(--ink)">
-            <sc-for list="{{ d.knowledge }}" as="k" hint-placeholder-count="3">
-              <a href="{{ k.href }}" data-v2-cursor="read" style="display:block;border-bottom:1px solid var(--rule);padding:var(--space-4) 0">
-                <div style="display:flex;gap:var(--space-4);font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--ink-45)"><span class="text-number">{{ k.year }}</span><span>{{ k.kind }}</span></div>
-                <div style="margin-top:var(--space-2);font-size:var(--t-hs);line-height:var(--t-hs-lh);font-weight:var(--t-hs-w)">{{ k.title }}</div>
-              </a>
-            </sc-for>
+          <div style="grid-column:var(--span-body);display:flex;flex-wrap:wrap;gap:var(--space-block) var(--grid-gutter)">
+            <div data-reveal="group" style="flex:2 1 320px;min-width:0;border-top:1px solid var(--ink)">
+              <sc-for list="{{ d.knowledge }}" as="k" hint-placeholder-count="3">
+                <a href="{{ k.href }}" data-v2-cursor="read" style="display:block;border-bottom:1px solid var(--rule);padding:var(--space-4) 0">
+                  <div style="display:flex;gap:var(--space-4);font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--ink-45)"><span class="text-number">{{ k.year }}</span><span>{{ k.kind }}</span></div>
+                  <div style="margin-top:var(--space-2);font-size:var(--t-hs);line-height:var(--t-hs-lh);font-weight:var(--t-hs-w)">{{ k.title }}</div>
+                  <div style="margin-top:var(--space-2);font-size:var(--t-bs);line-height:var(--t-bs-lh);color:var(--ink-60);max-width:var(--measure)">{{ k.excerpt }}</div>
+                </a>
+              </sc-for>
+            </div>
+            <sc-if value="{{ d.hasMetrics }}" hint-placeholder-val="{{ false }}">
+              <div data-reveal="group" style="flex:1 1 220px;min-width:0;display:grid;gap:var(--space-block);align-content:start">
+                <sc-for list="{{ d.metrics }}" as="m" hint-placeholder-count="3">
+                  <div>
+                    <div class="text-number" style="font-size:var(--t-hl);line-height:1;letter-spacing:var(--t-hl-ls);font-weight:var(--t-hl-w)">{{ m.value }}</div>
+                    <div style="margin-top:var(--space-2);font-size:var(--t-meta);line-height:var(--t-bs-lh);color:var(--ink-45);max-width:20ch">{{ m.note }}</div>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-if>
           </div>
         </div>
       </section>
@@ -266,7 +305,7 @@
         <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter);align-items:start">
           <div style="grid-column:var(--span-index)">
             <sc-for list="{{ d.related }}" as="r" hint-placeholder-count="3">
-              <a href="{{ r.href }}" data-v2-cursor="explore" onClick="{{ r.open }}" onMouseEnter="{{ r.enter }}" onFocus="{{ r.enter }}" style="display:flex;align-items:baseline;gap:var(--space-4);border-top:1px solid var(--rule);padding:var(--space-5) 0">
+              <a href="{{ r.href }}" data-v2-cursor="explore" onClick="{{ r.open }}" onMouseEnter="{{ r.enter }}" onFocus="{{ r.enter }}" onMouseLeave="{{ r.leave }}" onBlur="{{ r.leave }}" style="display:flex;align-items:baseline;gap:var(--space-4);border-top:1px solid var(--rule);padding:var(--space-5) 0">
                 <span class="text-number" style="font-size:var(--t-meta);color:var(--ink-45)">{{ r.num }}</span>
                 <span style="font-size:var(--t-hm);line-height:var(--t-hm-lh);letter-spacing:var(--t-hm-ls);font-weight:var(--t-hm-w)">{{ r.title }}</span>
               </a>
@@ -274,18 +313,18 @@
             <div style="border-top:1px solid var(--rule)"></div>
           </div>
           <div style="grid-column:var(--span-preview);position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--surface-1);direction:ltr">
-            <div data-ep2-relimg="1" style="position:absolute;inset:0;background-image:{{ relPv.img }};background-size:cover;background-position:50% 50%;opacity:{{ relPv.op }};transition:opacity var(--m-standard) var(--e-editorial)"></div>
+            <div data-ep2-relimg="1" style="position:absolute;inset:0"></div>
           </div>
         </div>
       </section>
     </sc-if>
 
     <section data-screen-label="D7 Next" data-ambient-zone="full" style="position:relative;padding:var(--space-section-xl) var(--grid-margin) var(--space-element)">
-      <a href="{{ next.href }}" data-v2-cursor="next" onClick="{{ next.open }}" style="display:block">
+      <a href="{{ next.href }}" data-ep2-nextlink="1" data-v2-cursor="next" onClick="{{ next.open }}" style="display:block">
         <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter);align-items:end">
           <div style="grid-column:var(--span-lead)">
             <div style="font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45)">{{ nextLabel }}</div>
-            <div data-reveal="content" style="margin-top:var(--space-3);font-size:var(--t-dm);line-height:var(--t-dm-lh);letter-spacing:var(--t-dm-ls);font-weight:var(--t-dm-w)">{{ next.title }}</div>
+            <div data-ep2-nexttitle="1" data-reveal="content" style="margin-top:var(--space-3);font-size:var(--t-dm);line-height:var(--t-dm-lh);letter-spacing:var(--t-dm-ls);font-weight:var(--t-dm-w)">{{ next.title }}</div>
           </div>
           <div data-ep2-next="1" style="grid-column:var(--span-support);position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--surface-1);direction:ltr">
             <div data-ep2-nextimg="1" data-reveal="media" style="position:absolute;inset:-3% -1%;background-image:{{ next.bg }};background-size:cover;background-position:50% 50%"></div>
@@ -301,6 +340,9 @@
     <div data-ep2-chapter="1" aria-hidden="true" style="position:fixed;{{ chapterSide }}:var(--grid-margin);bottom:calc(var(--grid-margin) + 48px);z-index:40;display:flex;align-items:center;gap:var(--space-3);background:var(--surface-0);padding:var(--space-2) var(--space-3);opacity:{{ chapterOpacity }};transition:opacity var(--m-standard) var(--e-smooth);font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--ink-45)">
       <span style="display:block;height:12px;overflow:hidden;width:20px" class="text-number">{{ chapterNum }}</span>
       <span>{{ chapterLabel }}</span>
+    </div>
+    <div data-ep2-progress="1" aria-hidden="true" style="position:fixed;{{ progressSide }}:14px;bottom:var(--grid-margin);z-index:40;display:flex;flex-direction:column;align-items:center;gap:var(--space-2);opacity:{{ chapterOpacity }};transition:opacity var(--m-standard) var(--e-smooth)">
+      <span style="position:relative;display:block;width:9px;height:120px"><i style="position:absolute;left:4px;top:0;bottom:0;width:1px;background:var(--rule)"></i><i data-ep2-progresssq="1" style="position:absolute;left:1px;width:7px;height:7px;background:var(--turq);top:0;transition:top var(--m-fast) linear"></i></span>
     </div>
   </sc-if>
 </div>
@@ -321,7 +363,7 @@ const scrollToY = (y) => { const el = scroller(); if(el.scrollTo) el.scrollTo({ 
 
 class Component extends DCLogic {
   state = { lang:"en", slug:null, hover:null, relHover:null, chapterKey:"", chapterIdx:0, chapterN:0, chapterVisible:false, phaseActive:0,
-    registerScrollActive:null, crossActiveIdx:0 };
+    registerScrollActive:null, interDone:false };
 
   parseHash(){
     const out = {};
@@ -363,20 +405,27 @@ class Component extends DCLogic {
     this._raf = setTimeout(() => { this._raf = null; try{ this.tick(); }catch(e){ console.warn("tick", e); } }, 16);
   }
   tick(){
-    if(this.state.slug == null || reducedQ()) return;
+    if(this.state.slug == null) return;
     const root = document.querySelector("[data-ep2-root]");
     if(!root) return;
+    const red = reducedQ();
     const heroImg = root.querySelector("[data-ep2-heroimg]"), hero = root.querySelector("[data-ep2-hero]");
-    if(hero && heroImg){
+    if(hero && heroImg && !red){
       const r = hero.getBoundingClientRect();
       const p = clamp1(-r.top / Math.max(1, r.height), 0, 1);
       heroImg.style.transform = "translateY(" + (p * 5).toFixed(2) + "%) scale(" + (1 + p * 0.02).toFixed(3) + ")";
     }
     const nextImg = root.querySelector("[data-ep2-nextimg]"), next = root.querySelector("[data-ep2-next]");
-    if(next && nextImg){
+    if(next && nextImg && !red){
       const r = next.getBoundingClientRect(), vh = window.innerHeight;
       const p = clamp1(1 - Math.abs(r.top + r.height / 2 - vh / 2) / vh, 0, 1);
       nextImg.style.transform = "translateY(" + ((0.5 - p) * 6).toFixed(2) + "%) scale(" + (1.02 - p * 0.02).toFixed(3) + ")";
+    }
+    const sq = root.querySelector("[data-ep2-progresssq]");
+    if(sq){
+      const doc = document.documentElement, max = Math.max(1, doc.scrollHeight - window.innerHeight);
+      const frac = clamp1((window.scrollY || 0) / max, 0, 1);
+      sq.style.top = (frac * (120 - 7)) + "px";
     }
     this.tickNarrative(root);
   }
@@ -391,7 +440,18 @@ class Component extends DCLogic {
     items.forEach(el => { const d = Math.abs(el.getBoundingClientRect().top - zone * 0.3); if(d < topD){ topD = d; top = el; } });
     if(top){
       const idx = items.indexOf(top);
-      countEl.textContent = String(idx + 1).padStart(2, "0");
+      /* restrained counter transition on change: a small vertical dip, matching Projects'
+         chapter counter — never a rolling odometer */
+      if(idx !== this.state.phaseActive && !reducedQ()){
+        countEl.style.transition = "none"; countEl.style.transform = "translateY(-6px)"; countEl.style.opacity = "0";
+        countEl.textContent = String(idx + 1).padStart(2, "0");
+        setTimeout(() => {
+          countEl.style.transition = "transform var(--m-standard) var(--e-page),opacity var(--m-standard) var(--e-page)";
+          countEl.style.transform = "translateY(0)"; countEl.style.opacity = "1";
+        }, 16);
+      } else {
+        countEl.textContent = String(idx + 1).padStart(2, "0");
+      }
       items.forEach((el, i) => { el.style.opacity = i === idx ? "1" : "0.42"; el.style.transition = "opacity var(--m-standard) var(--e-smooth)"; });
       if(idx !== this.state.phaseActive) this.setState({ phaseActive: idx });
     }
@@ -400,6 +460,8 @@ class Component extends DCLogic {
      scroll observer (Design Contract §7c) */
   wireDetail(){
     this.teardownDetail();
+    this.ensureRelMh();
+    this.syncRelPreview();
     if(!window.TA_SECTION_TRACKER) return;
     this.stopTrack = window.TA_SECTION_TRACKER.track({
       root: () => document.querySelector("[data-ep2-root]"),
@@ -426,21 +488,62 @@ class Component extends DCLogic {
      page-local scroll engine. Priority: hover/focus > scroll-active > default (row 0). */
   wireOverview(){
     this.teardownOverview();
+    this.ensureMh();
+    this.syncPreview();
     if(!window.TA_SECTION_TRACKER) return;
     this.stopRegisterTrack = window.TA_SECTION_TRACKER.track({
       root: () => document.querySelector("[data-ep2-root] section[data-screen-label=\"02 Register\"]"),
       selector: "[data-sec]",
-      onChange: (s) => { if(s.key !== this.state.registerScrollActive) this.setState({ registerScrollActive:s.key }); }
+      onChange: (s) => {
+        if(s.key !== this.state.registerScrollActive) this.setState({ registerScrollActive:s.key }, () => this.syncPreview());
+      }
     });
-    this.stopCrossTrack = window.TA_SECTION_TRACKER.track({
-      root: () => document.querySelector("[data-ep2-root] section[data-screen-label=\"03 Cross-disciplinary story\"]"),
-      selector: "[data-sec]",
-      onChange: (s) => { if(s.index !== this.state.crossActiveIdx) this.setState({ crossActiveIdx:s.index }); }
-    });
+    /* the intersection field's connector lines draw in once, the first time it scrolls
+       into view — a one-shot scroll-triggered reveal, shared-coordinator driven (never
+       IO/a self-rescheduling timer) and self-unsubscribing once triggered */
+    if(!this.state.interDone && window.TA_SCROLL){
+      this.stopInterTrack = window.TA_SCROLL.subscribe(() => {
+        const el = document.querySelector("[data-ep2-field]");
+        if(!el) return;
+        const r = el.getBoundingClientRect();
+        if(r.top < window.innerHeight * 0.78 && r.bottom > 0){
+          this.setState({ interDone:true });
+          if(this.stopInterTrack){ this.stopInterTrack(); this.stopInterTrack = null; }
+        }
+      }, { root:window });
+    }
   }
   teardownOverview(){
     if(this.stopRegisterTrack){ this.stopRegisterTrack(); this.stopRegisterTrack = null; }
-    if(this.stopCrossTrack){ this.stopCrossTrack(); this.stopCrossTrack = null; }
+    if(this.stopInterTrack){ this.stopInterTrack(); this.stopInterTrack = null; }
+    if(this._mh){ this._mh.destroy(); this._mh = null; }
+  }
+  /* register preview crossfade — the shared V2 media-handoff engine (also powering
+     Projects' archive preview): a continuous two-layer stage the image content wipes
+     across, never an instant background-image swap. Imperative, outside React state,
+     so a fast hover sweep never triggers a re-render storm. */
+  ensureMh(){
+    if(this._mh) return;
+    const el = document.querySelector("[data-ep2-mhstage]");
+    if(el && window.TA_MEDIA_HANDOFF) this._mh = window.TA_MEDIA_HANDOFF.mount(el, { intensity:"high" });
+  }
+  showRegisterPreview(e, idx){
+    this.ensureMh();
+    if(!this._mh || !e) return;
+    const img = e.presentation && e.presentation.registerImage;
+    if(!img) return;
+    this._mh.show({ src: V1 + img, pos:"50% 50%", size:"cover", repeat:"no-repeat", index: idx });
+  }
+  /* recomputes the same hover/scroll/default priority used in renderVals and pushes it
+     to the media-handoff stage — called after every state change that can move the
+     active discipline (hover enter/leave, scroll-tracked register change, mount) */
+  syncPreview(){
+    const EX = window.TA_EXPERTISE;
+    if(!EX) return;
+    const all = EX.all();
+    const activeSlug = this.state.hover || this.state.registerScrollActive || (all[0] && all[0].slug);
+    if(activeSlug == null) return;
+    this.showRegisterPreview(EX.bySlug(activeSlug), EX.indexOf(activeSlug));
   }
   componentDidUpdate(){
     if(this._pSlug !== this.state.slug){
@@ -450,13 +553,64 @@ class Component extends DCLogic {
     }
   }
   setLang(l){ this.setState({ lang:l }, () => { try{ window.history.replaceState(null, "", this.buildHash(this.state.slug, l) || window.location.pathname); }catch(e){} }); }
+  /* the page's motion tokens are the single source of truth for the handoff timing —
+     read live from computed style so a token change never desyncs the JS transition */
+  msVar(name, fallback){
+    const v = getComputedStyle(document.documentElement).getPropertyValue(name);
+    const n = parseFloat(v);
+    return Number.isFinite(n) ? n : fallback;
+  }
+  /* overview → detail: the register preview the visitor is already looking at expands into
+     the detail hero — a real shared-element relationship, carrying its actual crop through,
+     not a generic fade. Mirrors the Projects V2 handoff. Reduced motion / hidden preview /
+     no image: instant, no clone. setTimeout(0), not rAF (rAF is unreliable in this preview
+     environment — it would silently skip the whole transition). */
   go(slug, ev){
     if(ev && ev.preventDefault) ev.preventDefault();
     const fromOverview = slug != null && this.state.slug == null;
     if(fromOverview) this.overviewY = scroller().scrollTop;
+    const previewBox = fromOverview ? document.querySelector("[data-ep2-preview] > div") : null;
+    const mhStage = previewBox ? previewBox.querySelector("[data-ep2-mhstage]") : null;
+    /* the media-handoff stage swaps which of its two layers is "front" without reordering
+       DOM, so the visible layer is whichever currently carries opacity:1 — not necessarily
+       the first child */
+    let previewImg = null;
+    if(mhStage) Array.prototype.forEach.call(mhStage.children, (c) => { if(parseFloat(c.style.opacity) === 1) previewImg = c; });
+    const canClone = !!(previewBox && previewImg && !reducedQ() && previewBox.offsetWidth > 0);
+    const fromRect = canClone ? previewBox.getBoundingClientRect() : null;
+    const fromBg = previewImg ? previewImg.style.backgroundImage : null;
+    const fromSize = previewImg ? (previewImg.style.backgroundSize || "cover") : "cover";
+    const fromPos = previewImg ? (previewImg.style.backgroundPosition || "50% 50%") : "50% 50%";
     try{ window.history.pushState(null, "", this.buildHash(slug, this.state.lang) || window.location.pathname); }catch(e){}
     this.setState({ slug, relHover:null }, () => {
-      if(slug != null) scrollToY(0); else scrollToY(this.overviewY || 0);
+      if(slug == null){ scrollToY(this.overviewY || 0); return; }
+      scrollToY(0);
+      if(!fromRect || !fromBg || fromBg === "none") return;
+      setTimeout(() => {
+        const hero = document.querySelector("[data-ep2-hero]");
+        if(!hero) return;
+        const toRect = hero.getBoundingClientRect();
+        const pageMs = this.msVar("--m-page", 1000), fastMs = this.msVar("--m-fast", 240), standardMs = this.msVar("--m-standard", 420);
+        const clone = document.createElement("div");
+        clone.style.cssText = "position:fixed;z-index:60;pointer-events:none;overflow:hidden;background-image:" + fromBg + ";background-size:" + fromSize + ";background-position:" + fromPos + ";"
+          + "left:" + fromRect.left + "px;top:" + fromRect.top + "px;width:" + fromRect.width + "px;height:" + fromRect.height + "px;"
+          + "transition:left var(--m-page) var(--e-cinematic),top var(--m-page) var(--e-cinematic),width var(--m-page) var(--e-cinematic),height var(--m-page) var(--e-cinematic)";
+        document.body.appendChild(clone);
+        hero.style.opacity = "0";
+        let handed = false;
+        const handoff = () => {
+          if(handed) return; handed = true;
+          hero.style.transition = "opacity var(--m-fast) var(--e-smooth)"; hero.style.opacity = "1";
+          clone.style.transition += ",opacity var(--m-fast) var(--e-smooth)"; clone.style.opacity = "0";
+          setTimeout(() => clone.remove(), fastMs + 60);
+        };
+        clone.addEventListener("transitionend", handoff, { once:true });
+        setTimeout(handoff, pageMs + standardMs); /* safety fallback if transitionend never fires */
+        setTimeout(() => {
+          clone.style.left = toRect.left + "px"; clone.style.top = toRect.top + "px";
+          clone.style.width = toRect.width + "px"; clone.style.height = toRect.height + "px";
+        }, 16);
+      }, 16);
     });
   }
 
@@ -481,16 +635,43 @@ class Component extends DCLogic {
         color: on ? "var(--turq-dk)" : "inherit",
         thumbBg: (e.presentation && e.presentation.registerImage) ? ("url(\"" + V1 + e.presentation.registerImage + "\")") : "var(--media-placeholder)",
         thumbPos: "50% 50%",
-        enter: () => this.setState({ hover:e.slug }), leave: () => this.setState({ hover:null })
+        enter: () => { this.setState({ hover:e.slug }); this.showRegisterPreview(e, i); },
+        leave: () => this.setState({ hover:null }, () => this.syncPreview())
       };
     });
     const activeE = all[activeIdx] || all[0];
-    const activeRegisterImg = activeE && activeE.presentation && activeE.presentation.registerImage;
+    const activeCoord = (activeE && activeE.presentation && activeE.presentation.coord) || [0, 0];
     const pv = {
       bg: "var(--media-placeholder)",
-      img: activeRegisterImg ? ("url(\"" + V1 + activeRegisterImg + "\")") : "none", op: activeRegisterImg ? "1" : "0", scale: "1.04",
-      caption: activeE ? pick(activeE.title) : "", count: String(activeIdx + 1).padStart(2, "0") + " / " + String(all.length).padStart(2, "0")
+      caption: activeE ? pick(activeE.title) : "", count: String(activeIdx + 1).padStart(2, "0") + " / " + String(all.length).padStart(2, "0"),
+      coordTransform: "translate(" + (activeCoord[0] * 23) + "px," + (activeCoord[1] * 23) + "px)"
     };
+
+    /* the shared conceptual field — a real coordinate system, not a decorative diagram:
+       every discipline's presentation.coord places it on the same 3x3 field, and the
+       connector lines run from the hub (the discipline sitting at the field's center
+       cell) to every other one, so the diagram stays correct if the taxonomy ever changes */
+    const coordOf = (x) => (x.presentation && x.presentation.coord) || [1, 1];
+    const posOf = (x) => { const c = coordOf(x); return { px: c[0] * 33.3 + 16.6, py: c[1] * 33.3 + 16.6 }; };
+    const hub = all.find(x => { const c = coordOf(x); return c[0] === 1 && c[1] === 1; }) || all[0];
+    const spokes = all.filter(x => x !== hub);
+    const hubPos = hub ? posOf(hub) : { px: 50, py: 50 };
+    const fieldNodes = all.map((x, i) => {
+      const p = posOf(x), isHub = x === hub;
+      return {
+        x: p.px.toFixed(1) + "%", y: p.py.toFixed(1) + "%", label: pick(x.title),
+        dot: isHub ? "14px" : "9px", fill: isHub ? "var(--turq)" : "var(--ink)",
+        op: st.interDone ? "1" : "0", delay: (i * 110) + "ms"
+      };
+    });
+    const fieldLines = spokes.map((x, i) => {
+      const p = posOf(x), isLast = i === spokes.length - 1;
+      return {
+        x1: hubPos.px.toFixed(1), y1: hubPos.py.toFixed(1), x2: p.px.toFixed(1), y2: p.py.toFixed(1),
+        stroke: isLast ? "var(--turq)" : "var(--ink)", width: isLast ? "0.6" : "0.4",
+        dash: st.interDone ? "0" : "120", delay: (i * 90) + "ms"
+      };
+    });
 
     const nav = [["Projects","پروژه‌ها","Projects.dc.html"],["Expertise","تخصص‌ها",""],
       ["Awards","جوایز","Awards.dc.html"],["About","درباره ما","About.dc.html"],["Journal","مجله","Journal.dc.html"],
@@ -501,13 +682,13 @@ class Component extends DCLogic {
     ).map(n => ({ label: fa ? n[1] : n[0], href: n[2] ? (n[2] + hsh) : "#", on: n[2] ? "0" : "1" }));
 
     const mkWork = (projList, colIdx0) => {
-      const LAYOUT = [{ col:"1 / span 7", ratio:"16/9" },{ col:"9 / span 4", ratio:"3/4" },{ col:"3 / span 5", ratio:"4/3" }];
+      const LAYOUT = [{ col:"1 / span 7", ratio:"16/9", mt:"0px" },{ col:"9 / span 4", ratio:"3/4", mt:"90px" },{ col:"3 / span 5", ratio:"4/3", mt:"80px" }];
       return projList.map((p, k) => {
         const lay = LAYOUT[(colIdx0 + k) % LAYOUT.length];
         const v = P.visual(p.id, "archive", "archive", { lang: st.lang });
         const has = !!(v && v.isRealMedia);
         return {
-          href: "Projects.dc.html#p=" + P.indexOf(p.id) + amp, col: lay.col, ratio: lay.ratio,
+          href: "Projects.dc.html#p=" + P.indexOf(p.id) + amp, col: lay.col, ratio: lay.ratio, mt: lay.mt,
           bg: has ? v.backgroundImage : "none",
           title: pick(p.title), year: p.years || p.year || "",
           location: pick(p.location), disciplines: (p.expertise || []).map(s => { const r = EX.bySlug(s); return r ? pick(r.title) : s; }).join(" · ")
@@ -517,32 +698,7 @@ class Component extends DCLogic {
     const overviewProjSeen = {};
     const overviewProj = [];
     all.forEach(e => { (EX.projects(e.slug) || []).forEach(p => { if(!overviewProjSeen[p.id]){ overviewProjSeen[p.id] = true; overviewProj.push(p); } }); });
-    /* the cross-disciplinary story requires REAL multi-expertise projects — never a fake
-       relationship diagram. If none exist, this chapter is omitted outright and the page
-       falls back to a plain Selected Work grid (a strong omission beats decorative filler). */
-    const crossProj = overviewProj.filter(p => (p.expertise || []).length >= 2).slice(0, 3);
-    const hasCross = crossProj.length > 0;
-    const crossChapters = crossProj.map((p, i) => {
-      const v = P.visual(p.id, "archive", "archive", { lang: st.lang });
-      const has = !!(v && v.isRealMedia);
-      return {
-        key: "cross-" + i, href: "Projects.dc.html#p=" + P.indexOf(p.id) + amp,
-        bg: has ? v.backgroundImage : "var(--media-placeholder)",
-        title: pick(p.title), disciplines: (p.expertise || []).map(s => { const r = EX.bySlug(s); return r ? pick(r.title) : s; }).join(" · "),
-        op: "1"
-      };
-    });
-    const crossActive = crossProj[clamp1(st.crossActiveIdx, 0, Math.max(0, crossProj.length - 1))];
-    const crossV = crossActive ? P.visual(crossActive.id, "archive", "archive", { lang: st.lang }) : null;
-    const crossPv = {
-      bg: (crossV && crossV.isRealMedia) ? crossV.backgroundImage : "var(--media-placeholder)", op: "1",
-      count: crossProj.length ? (String((st.crossActiveIdx % crossProj.length) + 1).padStart(2, "0") + " / " + String(crossProj.length).padStart(2, "0")) : "",
-      tags: crossActive ? (crossActive.expertise || []).map(s => {
-        const r = EX.bySlug(s), on = s === activeSlug;
-        return { label: r ? pick(r.title) : s, color: "var(--ink)", bg: "transparent" };
-      }) : []
-    };
-    const hasPlainWork = !hasCross && overviewProj.length > 0;
+    const hasPlainWork = overviewProj.length > 0;
 
     let d = null;
     if(activeSlug != null && st.slug != null){
@@ -562,13 +718,22 @@ class Component extends DCLogic {
         const knowledgeRows = (J ? J.forExpertise(st.slug) : []).slice(0, 3).map(k => ({
           href: "Journal.dc.html#article=" + k.slug + amp,
           year: k.date, kind: J.typeOne && J.typeOne[k.type] ? J.typeOne[k.type][fa ? 1 : 0] : k.type,
-          title: fa ? k.fa : k.en
+          title: fa ? k.fa : k.en,
+          excerpt: (fa ? k.excerptFa : k.excerptEn) || ""
         }));
+        const metricsSrc = EX.metrics ? (EX.metrics(st.slug) || []) : [];
+        const metrics = metricsSrc.map(m => ({ value: m.value, note: pick(m.note) }));
+        /* resolve a discipline's preview visual from its canonical presentation media */
+        const exImg = (rec) => {
+          const pr = rec && rec.presentation, src = pr && (pr.heroImage || pr.registerImage);
+          return src ? ("url(\"" + V1 + src + "\")") : null;
+        };
         const relRecs = EX.related(st.slug) || [];
         const related = relRecs.slice(0, 3).map(r => ({
           num: String(EX.indexOf(r.slug) + 1).padStart(2, "0"), title: pick(r.title), href: hrefOf(r.slug),
           open: (ev) => { this.relSource = r.slug; this.go(r.slug, ev); },
-          enter: () => this.setState({ relHover:r.slug })
+          enter: () => { this.setState({ relHover:r.slug }); this.showRelatedPreview(r); },
+          leave: () => this.setState({ relHover:null }, () => this.syncRelPreview())
         }));
         const nxRec = EX.next(st.slug);
         const nx = nxRec || all[0];
@@ -594,10 +759,10 @@ class Component extends DCLogic {
           filterHref: "Projects.dc.html#expertise=" + st.slug + amp,
           filterLabel: fa ? ("همه پروژه‌های " + title) : ("All " + title + " projects"),
           hasKnowledge: knowledgeRows.length > 0, knowledge: knowledgeRows,
+          hasMetrics: metrics.length > 0, metrics,
           hasRelated: related.length > 0, related
         };
-        var nextObj = { href: hrefOf(nx.slug), open: (ev) => this.go(nx.slug, ev), title: pick(nx.title), bg: "var(--media-placeholder)" };
-        var relPv = related.length ? { img: "none", op: "0" } : { img: "none", op: "0" };
+        var nextObj = { href: hrefOf(nx.slug), open: (ev) => this.go(nx.slug, ev), title: pick(nx.title), bg: exImg(nx) || "var(--media-placeholder)" };
       }
     }
 
@@ -621,9 +786,10 @@ class Component extends DCLogic {
       registerLabel: fa ? "فهرست تخصص‌ها" : "Register",
       registerMotifCell: String(window.TA_MOTIF ? window.TA_MOTIF.cellForIndex(activeIdx) : 5),
       rows, pv,
+      coordCaption: fa ? (all.length + " تخصص، یک دستگاه مختصات.") : (all.length + " disciplines, one coordinate system."),
 
       interLead: fa ? "میان تخصص‌ها، ایده‌های تازه آغاز می‌شوند." : "Between disciplines is where new ideas begin.",
-      hasCross, crossChapters, crossPv,
+      fieldNodes, fieldLines,
       hasPlainWork,
       workLabel: fa ? "کارهای منتخب — میان‌رشته‌ای" : "Selected work — across disciplines",
       allProjectsLabel: fa ? "همه پروژه‌ها" : "All projects",
@@ -642,11 +808,10 @@ class Component extends DCLogic {
       relatedLabel: fa ? "تخصص‌های مرتبط" : "Related expertise",
       nextLabel: fa ? "تخصص بعدی" : "Next expertise",
       next: typeof nextObj !== "undefined" ? nextObj : { href:"#", title:"", bg:"none" },
-      relPv: typeof relPv !== "undefined" ? relPv : { img:"none", op:"0" },
       backHref: "" + hsh, goBack: (ev) => this.go(null, ev),
       backLabel: fa ? "← بازگشت به تخصص‌ها" : "← Back to Expertise",
 
-      chapterSide: fa ? "right" : "left",
+      chapterSide: fa ? "right" : "left", progressSide: fa ? "left" : "right",
       chapterOpacity: chapterOn ? "1" : "0",
       chapterNum: String(st.chapterIdx + 1).padStart(2, "0") + " / " + String(st.chapterN).padStart(2, "0"),
       chapterLabel: chapterLbl[fa ? 1 : 0]

@@ -246,6 +246,10 @@
   --c-media-editorial:4/3;
   --c-media-portrait:3/4;
   --c-media-square:1/1;
+
+  /* HERO — every page-opening hero (archetype A) shares this footprint so the
+     box reads the same page to page; only its content is free to vary. */
+  --hero-min-h:clamp(210px, 24vh, 300px);
 }
 
 /* -----------------------------------------------------------------------------
@@ -356,6 +360,7 @@ html{font-family:var(--en);-webkit-font-smoothing:antialiased;text-wrap:pretty}
     --span-index:1 / -1;
     --span-preview:1 / -1;   /* the shared preview is hidden on mobile by the component, not here */
     --span-narrow:1 / -1;
+    --hero-min-h:clamp(190px, 26vh, 250px);
   }
 }
 

@@ -21,3 +21,26 @@ html,body{ overflow-x:clip; }
 @media (hover:none), (pointer:coarse){
   [data-cursor-el]{ display:none !important; }
 }
+
+@media (max-width:1023px){
+  [data-jr2-prog]{ opacity:.55; }
+}
+@media (max-width:767px){
+  [data-jr2-prog]{ display:none !important; }
+}
+
+/* V1's filter tab bar, ported: on narrow viewports it scrolls horizontally with the
+   scrollbar hidden, rather than wrapping every tab onto its own line. */
+@media (max-width:767px){
+  [data-jr2-filters]{ flex-wrap:nowrap !important; overflow-x:auto; -ms-overflow-style:none; scrollbar-width:none; }
+  [data-jr2-filters]::-webkit-scrollbar{ display:none; }
+  [data-jr2-filters] button{ flex:0 0 auto; }
+}
+
+/* V1's editorial field uses literal 12-column positions (e.g. "9 / span 4"), which only line
+   up with the desktop grid — var(--grid-cols) is redefined to 8 (tablet) / 4 (mobile)
+   elsewhere in this file, so below desktop every card simply stacks full-width, same as V1's
+   own mobile behavior (margin-top zeroed there too, matching v1/responsive.css §11). */
+@media (max-width:1023px){
+  [data-jr2-grid] [data-jr2-card]{ grid-column:1 / -1 !important; margin-top:0 !important; }
+}

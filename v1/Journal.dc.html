@@ -135,7 +135,6 @@ a:focus-visible,button:focus-visible{outline:2px solid #3E9692;outline-offset:3p
             </button>
           </sc-for>
         </div>
-        <button type="button" data-rm="1" onClick="{{ toggleReduced }}" title="{{ rmTitle }}" style="appearance:none;background:{{ rmBg }};color:{{ rmColor }};border:1px solid var(--rule);padding:7px 11px;cursor:pointer;font:inherit;font-size:10px;letter-spacing:.1em;text-transform:uppercase;display:inline-flex;align-items:center;gap:7px"><span style="width:7px;height:7px;background:currentColor;opacity:.7"></span><span style="direction:ltr">RM {{ rmState }}</span></button>
       </div>
     </section>
 
@@ -390,7 +389,6 @@ a:focus-visible,button:focus-visible{outline:2px solid #3E9692;outline-offset:3p
       <div style="display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-top:10vh;border-top:1px solid var(--rule);padding-top:22px">
         <a href="#" onClick="{{ backToArchive }}" data-arrow="1" style="display:inline-flex;align-items:center;gap:12px;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase"><span style="overflow:hidden;display:block;width:22px;height:9px;position:relative"><i data-arrowline="1" style="position:absolute;inset:0;background:currentColor;height:1px;top:4px;transition:transform var(--m-standard) var(--e-page)"></i></span><span data-en="1">Back to journal</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:14.5px;display:none">بازگشت به مجله</span></a>
         <div style="display:flex;align-items:center;gap:18px">
-          <button type="button" onClick="{{ toggleReduced }}" title="{{ rmTitle }}" style="appearance:none;background:{{ rmBg }};color:{{ rmColor }};border:1px solid var(--rule);padding:7px 11px;cursor:pointer;font:inherit;font-size:10px;letter-spacing:.1em;text-transform:uppercase;display:inline-flex;align-items:center;gap:7px"><span style="width:7px;height:7px;background:currentColor;opacity:.7"></span><span style="direction:ltr">RM {{ rmState }}</span></button>
           <span style="font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-45)">Tarh &amp; Afarinesh — طرح و آفرینش</span>
         </div>
       </div>
@@ -423,7 +421,7 @@ const EXP_LABEL_OF = (slug, fa) => {
 /* the editorial field: a deliberate rhythm, reused in order rather than tiled */
 const FIELD = [
   { col:"1 / span 7", mt:"0px", ratio:"16/9", excerpt:true },
-  { col:"9 / span 4", mt:"20px", ratio:null, excerpt:false, rule:true },
+  { col:"9 / span 4", mt:"20px", ratio:null, excerpt:false },
   { col:"1 / span 4", mt:"110px", ratio:"3/4", excerpt:false },
   { col:"6 / span 6", mt:"150px", ratio:"16/10", excerpt:true },
   { col:"2 / span 3", mt:"90px", ratio:null, excerpt:false, rule:true },
@@ -1030,15 +1028,16 @@ class Component extends DCLogic {
     const cardFor = (e, lay) => {
       const p = e.projectId ? project(e.projectId) : null;
       const small = !lay.ratio;
-      const v = rm(e.hero, lay.ratio || "16/9");
+      const ratio = lay.ratio || (e.hero && e.hero.ratio) || "16/9";
+      const v = rm(e.hero, ratio);
       return {
         bg:v.backgroundImage, bgSize:v.backgroundSize, bgPos:v.backgroundPosition, bgRepeat:v.backgroundRepeat,
         typeLabel: tOne(e.type),
         date: e.date,
         title: fa ? e.fa : e.en,
         excerpt: fa ? e.excerptFa : e.excerptEn,
-        hasMedia: !!(e.hero && lay.ratio),
-        ratio: lay.ratio || "16/9",
+        hasMedia: !!e.hero,
+        ratio: ratio,
         col: lay.col, mt: lay.mt,
         rule: lay.rule ? "1px solid var(--ink)" : "none",
         pt: lay.rule ? "14px" : "0px",

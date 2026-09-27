@@ -32,6 +32,7 @@
         <script src="../runtime/scroll-coordinator.js"></script>
         <script src="../runtime/ambient.js"></script>
         <script src="../runtime/reveal.js"></script>
+        <script src="../runtime/page-transition.js"></script>
         <script src="../runtime/ui-strings.js"></script>
         <script src="../runtime/cursor.js"></script>
         <script src="../runtime/motif.js"></script>
@@ -62,6 +63,7 @@
 
         <section
           data-screen-label="01 Awards opening"
+          data-v2-hero="1"
           data-ambient-zone="full"
           style="
             position: relative;
@@ -169,59 +171,6 @@
                   ><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i
                   ><i></i
                 ></span>
-                <div
-                  style="
-                    border-top: 1px solid var(--rule);
-                    padding-top: var(--space-4);
-                  "
-                >
-                  <div
-                    class="text-number"
-                    style="
-                      font-size: var(--t-fact);
-                      line-height: var(--t-fact-lh);
-                      letter-spacing: var(--t-fact-ls);
-                      font-weight: var(--t-fact-w);
-                      color: var(--turq-dk);
-                      transition: opacity var(--m-fast) var(--e-smooth);
-                    "
-                  >
-                    {{ recogPreview.year }}
-                  </div>
-                  <div
-                    style="
-                      margin-top: var(--space-3);
-                      font-size: var(--t-hs);
-                      line-height: var(--t-hs-lh);
-                      font-weight: var(--t-hs-w);
-                      transition: opacity var(--m-fast) var(--e-smooth);
-                    "
-                    class="text-mixed"
-                  >
-                    <sc-for
-                      list="{{ recogPreview.nameParts }}"
-                      as="p"
-                      hint-placeholder-count="1"
-                      ><span class="{{ p.cls }}">{{ p.t }}</span></sc-for
-                    >
-                  </div>
-                  <div
-                    style="
-                      margin-top: var(--space-2);
-                      font-size: var(--t-bs);
-                      line-height: var(--t-bs-lh);
-                      color: var(--ink-60);
-                    "
-                    class="text-mixed"
-                  >
-                    <sc-for
-                      list="{{ recogPreview.subjectParts }}"
-                      as="p"
-                      hint-placeholder-count="1"
-                      ><span class="{{ p.cls }}">{{ p.t }}</span></sc-for
-                    >
-                  </div>
-                </div>
               </div>
               <div
                 data-reveal="group"
@@ -597,8 +546,8 @@
                 style="
                   position: relative;
                   aspect-ratio: var(--c-media-portrait);
-                  width: min(100%, max(320px, calc((100dvh - 200px) * 0.75)));
-                  margin-inline-start: auto;
+                  width: min(100%, max(340px, calc((100dvh - 200px) * 0.8)));
+                  margin-inline: auto;
                   overflow: hidden;
                   background: var(--surface-0);
                 "
@@ -606,8 +555,8 @@
               <div
                 style="
                   margin-top: var(--rel-image-caption);
-                  width: min(100%, max(320px, calc((100dvh - 200px) * 0.75)));
-                  margin-inline-start: auto;
+                  width: min(100%, max(340px, calc((100dvh - 200px) * 0.8)));
+                  margin-inline: auto;
                   font-size: var(--t-caption);
                   line-height: var(--t-caption-lh);
                   color: var(--ink-60);
@@ -951,7 +900,7 @@
              Real <img> (not CSS background) so we get object-fit + native lazy/async decode.
              All source photographs share one 1086×1448 export, so width/height avoid layout shift
              even before the image itself loads. */
-          const active = st.hover ? all.find(a => a.id === st.hover) : null;
+          const active = st.hover ? all.find(a => a.id === st.hover) : vis[0];
           const hasImage = !!(active && active.image);
           const pv = {
             caption: active ? (fa ? (active.awardFa || active.award || "") : (active.award || "")) : ""
@@ -969,10 +918,6 @@
                 op: st.hoverFeatured == null || st.hoverFeatured === i ? "1" : "0.5",
                 enter: () => this.setState({ hoverFeatured:i }), leave: () => this.setState({ hoverFeatured:null }) };
             });
-          const activeFeatured = featured[st.hoverFeatured != null ? st.hoverFeatured : 0];
-          const recogPreview = activeFeatured
-            ? { year: activeFeatured.year, nameParts: activeFeatured.nameParts, subjectParts: activeFeatured.subjectParts }
-            : { year:"", nameParts:[], subjectParts:[] };
 
           /* recognised work: projects ranked by how often they were recognised */
           const tally = {};
@@ -1007,7 +952,7 @@
               : "Recognition is part of architectural practice, not its conclusion. This register keeps a record of how the work has been seen over time.",
             rangeLabel: (() => { const g = years.filter(y => y >= 1900); return g.length && B() ? B().range(Math.min.apply(null, g), Math.max.apply(null, g)) : ""; })(),
             countLabel: fa ? String(all.length) + " افتخار ثبت‌شده" : String(all.length) + " recognitions on record",
-            hasFeatured: featured.length > 0, featured, recogPreview,
+            hasFeatured: featured.length > 0, featured,
             recogMotifCell: String(window.TA_MOTIF ? window.TA_MOTIF.cellForIndex(st.hoverFeatured) : 5),
             featuredLabel: fa ? "افتخارات برگزیده" : "Selected recognition",
             archiveLabel: fa ? "آرشیو" : "Archive",

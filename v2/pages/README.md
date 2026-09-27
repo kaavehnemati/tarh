@@ -18,6 +18,7 @@ project root. Full contract: `../V2_ARCHITECTURE.md`. Helmet order:
 <script src="../runtime/ambient.js"></script>
 <script src="../runtime/reveal.js"></script>
 <script src="../runtime/ui-strings.js"></script>
+<script src="../runtime/page-transition.js"></script>  <!-- cross-page curtain; every page -->
 ```
 
 `TA_ASSET_BASE` must be set **before** `media-utils.js` loads, or image paths
