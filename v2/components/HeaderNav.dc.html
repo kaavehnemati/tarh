@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<header data-header-theme="{{ theme }}" style="position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;gap:var(--space-5);padding:calc(var(--space-4) + env(safe-area-inset-top)) calc(var(--grid-margin) + env(safe-area-inset-right)) var(--space-4) calc(var(--grid-margin) + env(safe-area-inset-left));background:{{ hdrBg }};border-bottom:1px solid {{ hdrBorder }};color:{{ hdrColor }};transition:background var(--m-standard) var(--e-smooth),color var(--m-standard) var(--e-smooth),border-color var(--m-standard) var(--e-smooth)">
+  <a href="{{ hrefHome }}" style="display:flex;align-items:center;gap:var(--space-3);flex:none">
+    <span style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;width:20px;height:20px;border:1.5px solid currentColor">
+      <i style="background:var(--turq)"></i><i style="background:var(--turq)"></i><i style="background:var(--turq)"></i><i style="background:var(--turq)"></i><i style="background:var(--turq)"></i><i style="background:var(--turq)"></i><i style="background:var(--turq)"></i><i style="background:var(--turq)"></i><i style="background:var(--turq)"></i>
+    </span>
+    <span style="font-size:var(--t-nav);letter-spacing:var(--t-nav-ls);font-weight:600;text-transform:{{ upper }};white-space:nowrap">{{ brand }}</span>
+  </a>
+  <nav data-v2-nav="1" style="display:flex;align-items:center;gap:var(--space-4);flex:1 1 auto;min-width:0;justify-content:safe center;overflow-x:auto;scrollbar-width:none;font-size:var(--t-nav);letter-spacing:var(--t-nav-ls);text-transform:{{ upper }}">
+    <sc-for list="{{ nav }}" as="n" hint-placeholder-count="4">
+      <a href="{{ n.href }}" data-active="{{ n.on }}" style="display:inline-flex;align-items:center;gap:var(--space-tight);min-height:var(--c-control-h);white-space:nowrap;flex:none;transition:transform var(--m-fast) var(--e-smooth)" style-hover="transform:translateY(calc(-1 * var(--c-hover-lift)))">
+        <i style="width:var(--c-indicator-sm);height:var(--c-indicator-sm);background:var(--turq);opacity:{{ n.on }}"></i>{{ n.label }}
+      </a>
+    </sc-for>
+  </nav>
+  <div class="text-ltr" style="display:flex;align-items:center;gap:var(--space-3);flex:none;font-size:12px">
+    <span style="display:flex;align-items:center;gap:var(--space-tight)">
+      <button type="button" onClick="{{ setEn }}" style="appearance:none;background:none;border:none;cursor:pointer;min-height:var(--c-control-h);padding:0 var(--space-1);font:inherit;color:inherit;opacity:{{ enOp }}">EN</button>
+      <span style="width:1px;height:11px;background:var(--rule)"></span>
+      <button type="button" onClick="{{ setFa }}" style="appearance:none;background:none;border:none;cursor:pointer;min-height:var(--c-control-h);padding:0 var(--space-1);font-size:13px;color:inherit;opacity:{{ faOp }}" lang="fa">فا</button>
+    </span>
+    <button type="button" data-v2-menu-trigger="1" onClick="{{ toggleMenu }}" aria-expanded="{{ menuExpanded }}" aria-controls="{{ menuId }}">
+      <span>{{ menuLabel }}</span><span aria-hidden="true">☰</span>
+    </button>
+  </div>
+</header>
+
+<div id="{{ menuId }}" data-v2-menu-drawer="1" data-open="{{ menuOpen }}" role="dialog" aria-modal="true" aria-hidden="{{ menuHidden }}" ref="{{ setDrawerRef }}">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:var(--space-5)">
+    <span style="font-size:var(--t-nav);font-weight:600;text-transform:{{ upper }}">{{ brand }}</span>
+    <button type="button" onClick="{{ toggleMenu }}" style="appearance:none;background:none;border:1px solid rgba(250,249,247,.3);color:inherit;cursor:pointer;min-height:var(--c-control-h);padding:0 var(--space-3);font:inherit">{{ closeLabel }}</button>
+  </div>
+  <nav style="display:grid;gap:var(--space-1)">
+    <sc-for list="{{ drawerLinks }}" as="n" hint-placeholder-count="4">
+      <a href="{{ n.href }}" style="border-top:1px solid rgba(250,249,247,.18);padding:var(--space-4) 0;font-size:var(--t-hs);font-weight:var(--t-hs-w);display:flex;align-items:center;gap:var(--space-3)">
+        <i style="width:var(--c-indicator-sm);height:var(--c-indicator-sm);background:var(--turq);opacity:{{ n.on }}"></i>{{ n.label }}
+      </a>
+    </sc-for>
+  </nav>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:960,&quot;height&quot;:72},&quot;brand&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;string&quot;},&quot;upper&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;string&quot;},&quot;hrefHome&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;string&quot;},&quot;nav&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;{href:string,label:string,on:string}[]&quot;},&quot;drawerLinks&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;{href:string,label:string,on:string}[]&quot;},&quot;lang&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;string&quot;},&quot;onSetEn&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;() =&gt; void&quot;},&quot;onSetFa&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;() =&gt; void&quot;},&quot;menuId&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;string&quot;},&quot;theme&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { open: false };
+
+
+  componentWillUnmount(){
+    if(this.onKey) document.removeEventListener("keydown", this.onKey);
+    document.body.style.overflow = "";
+  }
+
+  componentDidUpdate(){
+    if(this._pOpen !== this.state.open){ this._pOpen = this.state.open; this.onToggle(); }
+    this.syncInert();
+  }
+  /* imperative, not a templated attribute hole — passing a boolean (or a bare-value hole)
+     into inert="{{ x }}" was verified NOT to render the real DOM attribute in this runtime.
+     toggleAttribute() on the actual node is the mechanism confirmed to work. */
+  syncInert(){
+    if(this.drawerEl) this.drawerEl.toggleAttribute("inert", !this.state.open);
+  }
+
+  /* menu accessibility: scroll lock, Escape to close, focus enters/restores — one
+     canonical contract for every V2 page's mobile menu (Step 12). */
+  onToggle(){
+    const id = "v2-menu-" + (this.props.menuId || "x");
+    if(this.state.open){
+      this._lastFocus = document.activeElement;
+      document.body.style.overflow = "hidden";
+      this.onKey = (e) => {
+        if(e.key === "Escape"){ this.setState({ open:false }); return; }
+        if(e.key !== "Tab") return;
+        const d = document.getElementById(id);
+        if(!d) return;
+        const items = Array.prototype.slice.call(d.querySelectorAll("button,a[href]")).filter(el => el.offsetParent !== null);
+        if(!items.length) return;
+        const first = items[0], last = items[items.length - 1];
+        if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+        else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+      };
+      document.addEventListener("keydown", this.onKey);
+      setTimeout(() => { const d = document.getElementById(id); const f = d && d.querySelector("button,a"); if(f) f.focus(); }, 30);
+    } else {
+      document.body.style.overflow = "";
+      if(this.onKey) document.removeEventListener("keydown", this.onKey);
+      if(this._lastFocus && this._lastFocus.focus) this._lastFocus.focus();
+    }
+  }
+
+  renderVals(){
+    const p = this.props, fa = p.lang === "fa";
+    const U = window.TA_UI_V2;
+    return {
+      brand: p.brand, upper: p.upper, hrefHome: p.hrefHome,
+      nav: p.nav || [], drawerLinks: p.drawerLinks || p.nav || [],
+      setEn: p.onSetEn, setFa: p.onSetFa,
+      enOp: fa ? "0.5" : "1", faOp: fa ? "1" : "0.5",
+      toggleMenu: () => this.setState(s => ({ open: !s.open })),
+      menuId: "v2-menu-" + (p.menuId || "x"),
+      menuOpen: this.state.open ? "1" : "0",
+      menuExpanded: this.state.open ? "true" : "false",
+      menuHidden: this.state.open ? "false" : "true",
+      /* closed drawer: inert removes its descendants from tab order and blocks all
+         interaction \u2014 aria-hidden alone doesn't stop keyboard focus from reaching them */
+      setDrawerRef: (el) => { this.drawerEl = el; this.syncInert(); },
+      menuLabel: U ? U.t("menu", p.lang) : "Menu",
+      closeLabel: U ? U.t("close", p.lang) : "Close",
+      /* Context-aware Header (V2.3): a page may declare theme="transparent-dark" while a
+         dark/media hero fills the viewport behind it \u2014 declarative, set by the page's own
+         state (e.g. "am I still over the hero"), never by sampling pixels. Two canonical
+         themes only: "canvas" (default \u2014 solid surface, ink text) and "transparent-dark"
+         (transparent, light text, no border \u2014 for sitting over a dark/media hero). */
+      theme: p.theme || "canvas",
+      hdrBg: p.theme === "transparent-dark" ? "transparent" : "var(--surface-0)",
+      hdrBorder: p.theme === "transparent-dark" ? "transparent" : "var(--rule-soft)",
+      hdrColor: p.theme === "transparent-dark" ? "var(--canvas)" : "var(--ink)"
+    };
+  }
+}
+
+</script>
+</body>
+</html>

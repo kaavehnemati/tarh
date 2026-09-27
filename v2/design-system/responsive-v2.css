@@ -1,0 +1,23 @@
+/* Tarh & Afarinesh — V2 RESPONSIVE FOUNDATION (independent of V1's responsive.css)
+   V2 pages are inline-styled and self-contained: each page's own <style> block owns
+   its component-level @media rules (team columns, sticky→static, etc). The ONLY
+   thing this file provides is the breakpoint re-valuing of the shared grid tokens
+   (--marg/--gap, aliased by tokens-v2.css as --grid-margin/--grid-gutter) plus
+   global cross-page safety. Nothing here targets a V1 selector ([data-hd],
+   [data-aw-row]…) and nothing here collapses [style*="…"] strings — V2 pages
+   never needed that fallback (they already carry their own @media rules). */
+
+@media (max-width:1279px){ :root{ --marg:32px; --gap:20px; } }
+@media (max-width:1023px){ :root{ --marg:28px; --gap:18px; } }
+@media (max-width:767px){ :root{ --marg:20px; --gap:14px; } }
+@media (max-width:389px){ :root{ --marg:16px; --gap:12px; } }
+
+html,body{ overflow-x:clip; }
+
+@media (max-width:1023px){
+  [data-v2-shell]{ overflow-wrap:break-word; }
+}
+
+@media (hover:none), (pointer:coarse){
+  [data-cursor-el]{ display:none !important; }
+}

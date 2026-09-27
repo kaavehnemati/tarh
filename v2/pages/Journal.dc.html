@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet" />
+<script>window.TA_ASSET_BASE = "../../";</script>
+<link rel="stylesheet" href="../design-system/tokens-v2.css" />
+<link rel="stylesheet" href="../design-system/base-v2.css" />
+<link rel="stylesheet" href="../design-system/responsive-v2.css" />
+<script src="../runtime/bidi.js"></script>
+<script src="../../site-data.js"></script>
+<script src="../../media-utils.js"></script>
+<script src="../../projects-data.js"></script>
+<script src="../../expertise-data.js"></script>
+<script src="../../journal-data.js"></script>
+<script src="../runtime/scroll-coordinator.js"></script>
+<script src="../runtime/ambient.js"></script>
+<script src="../runtime/reveal.js"></script>
+<script src="../runtime/ui-strings.js"></script>
+<script src="../runtime/section-tracker.js"></script>
+<script src="../runtime/motif.js"></script>
+</helmet>
+
+<div data-jr2-root="1" data-v2-shell="1" dir="{{ dir }}" style="color:var(--ink);min-height:100svh;overflow-x:clip">
+
+  <dc-import name="../components/HeaderNav" dir="{{ dir }}" upper="{{ upper }}" brand="{{ brand }}" nav="{{ nav }}" drawer-links="{{ drawerLinks }}" href-home="{{ hrefHome }}" lang="{{ lang }}" on-set-en="{{ setEn }}" on-set-fa="{{ setFa }}" menu-id="jr" hint-size="100%,64px"></dc-import>
+
+  <sc-if value="{{ isArchive }}" hint-placeholder-val="{{ true }}">
+  <!-- 01 Opening -->
+  <section data-screen-label="01 Opening" data-ambient-zone="full" style="position:relative;padding:var(--space-section-lg) var(--grid-margin) var(--space-section)">
+    <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter);align-items:end">
+      <div style="grid-column:var(--span-wide)">
+        <div data-v2-in="1" style="display:flex;align-items:center;gap:var(--space-3);font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45)">
+          <i style="width:var(--c-indicator);height:var(--c-indicator);background:var(--turq)"></i>{{ eyebrow }}
+        </div>
+        <h1 data-v2-rise="1" style="margin:var(--rel-eyebrow-heading) 0 0;font-size:var(--t-dl);line-height:var(--t-dl-lh);letter-spacing:var(--t-dl-ls);font-weight:var(--t-dl-w)"><sc-for list="{{ openLines }}" as="l" hint-placeholder-count="2"><span style="display:block">{{ l }}</span></sc-for></h1>
+        <p style="margin:var(--space-content) 0 0;font-size:var(--t-bl);line-height:var(--t-bl-lh);color:var(--ink-60);max-width:var(--measure)">{{ intro }}</p>
+      </div>
+      <span data-grid-motif="static" data-grid-motif-size="anchor" data-motif-active="3" aria-hidden="true" style="grid-column:var(--span-support);justify-self:end;align-self:end"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+    </div>
+  </section>
+
+  <!-- 02 Featured story -->
+  <sc-if value="{{ hasFeatured }}" hint-placeholder-val="{{ true }}">
+    <section data-screen-label="02 Featured story" data-ambient-zone="off" style="padding:0 var(--grid-margin) var(--space-section-lg)">
+      <a href="{{ feat.href }}" style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter);border-top:1px solid var(--ink);padding-top:var(--space-5)">
+        <div style="grid-column:var(--span-wide);position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--surface-1);direction:ltr" data-reveal="media">
+          <div data-reveal-img="1" style="position:absolute;inset:0;background-image:{{ feat.bg }};background-size:{{ feat.size }};background-position:{{ feat.pos }};background-repeat:{{ feat.repeat }};transition:transform var(--m-slow) var(--e-cinematic)" style-hover="transform:scale(1.02)"></div>
+          <div data-reveal-mask="1"></div>
+        </div>
+        <div style="grid-column:var(--span-lead);align-self:end" data-reveal="content">
+          <div style="font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--turq-dk)" class="text-mixed"><sc-for list="{{ feat.metaParts }}" as="p" hint-placeholder-count="1"><span class="{{ p.cls }}">{{ p.t }}</span></sc-for></div>
+          <h2 style="margin:var(--space-tight) 0 0;font-size:var(--t-hl);line-height:var(--t-hl-lh);letter-spacing:var(--t-hl-ls);font-weight:var(--t-hl-w)">{{ feat.title }}</h2>
+          <p style="margin:var(--space-3) 0 0;font-size:var(--t-bm);line-height:var(--t-bm-lh);color:var(--ink-60);max-width:var(--measure)">{{ feat.excerpt }}</p>
+        </div>
+      </a>
+    </section>
+  </sc-if>
+
+  <!-- 03 Archive -->
+  <section data-screen-label="03 Archive" data-ambient-zone="soft" style="position:relative;padding:var(--space-section) var(--grid-margin) var(--space-section-lg)">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--space-4) var(--space-6);border-bottom:1px solid var(--ink);padding-bottom:var(--space-4)">
+      <h2 data-motif-wake="1" style="margin:0;display:flex;align-items:center;gap:var(--space-3);font-size:var(--t-hl);line-height:var(--t-hl-lh);letter-spacing:var(--t-hl-ls);font-weight:var(--t-hl-w);outline-offset:6px"><span data-grid-motif="interactive" data-motif-active="5" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>{{ archiveLabel }}<span class="text-number" style="font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);color:var(--ink-45);font-weight:400">{{ countLabel }}</span></h2>
+      <nav aria-label="{{ catNavLabel }}" style="display:flex;flex-wrap:wrap;align-items:center;gap:0 var(--space-6)">
+        <sc-for list="{{ cats }}" as="f" hint-placeholder-count="3">
+          <button type="button" onClick="{{ f.toggle }}" aria-pressed="{{ f.pressed }}" style="appearance:none;background:none;border:none;cursor:pointer;min-height:var(--c-control-h);padding:0;display:inline-flex;align-items:center;gap:var(--space-tight);font:inherit;font-size:var(--t-cta);letter-spacing:var(--t-cta-ls);text-transform:{{ upper }};color:inherit;opacity:{{ f.op }};transform:translateY({{ f.lift }});transition:opacity var(--m-fast) var(--e-smooth),transform var(--m-fast) var(--e-smooth)">
+            <i style="width:var(--c-indicator-sm);height:var(--c-indicator-sm);border:1px solid var(--turq);background:{{ f.fill }};transition:background var(--m-fast) var(--e-smooth)"></i>{{ f.label }}<span class="text-number" style="color:var(--ink-45)">{{ f.count }}</span>
+          </button>
+        </sc-for>
+      </nav>
+    </div>
+
+    <div style="display:flex;justify-content:flex-end;padding:var(--space-2) 0">
+      <span style="font-size:var(--t-meta);color:var(--ink-45)"><span class="text-number">{{ shownLabel }}</span></span>
+    </div>
+
+    <!-- mixed editorial rhythm, preserved from V1: varied spans by card.size, never a uniform grid -->
+    <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--space-block) var(--grid-gutter);margin-top:var(--space-4);opacity:{{ gridOp }};transform:translateY({{ gridShift }});transition:opacity var(--m-fast) var(--e-smooth),transform var(--m-fast) var(--e-smooth)">
+      <sc-for list="{{ cards }}" as="c" hint-placeholder-count="6">
+        <a href="{{ c.href }}" onClick="{{ c.open }}" style="grid-column:{{ c.span }};display:flex;flex-direction:column;gap:var(--space-3)">
+          <sc-if value="{{ c.hasMedia }}" hint-placeholder-val="{{ true }}">
+            <div style="position:relative;aspect-ratio:{{ c.ratio }};overflow:hidden;background:var(--surface-1);direction:ltr" data-reveal="media">
+              <div data-reveal-img="1" style="position:absolute;inset:0;background-image:{{ c.bg }};background-size:{{ c.size }};background-position:{{ c.pos }};background-repeat:{{ c.repeat }};transition:transform var(--m-slow) var(--e-cinematic)" style-hover="transform:scale(1.02)"></div>
+              <div data-reveal-mask="1"></div>
+            </div>
+          </sc-if>
+          <div style="font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--turq-dk)" class="text-mixed"><sc-for list="{{ c.metaParts }}" as="p" hint-placeholder-count="1"><span class="{{ p.cls }}">{{ p.t }}</span></sc-for></div>
+          <div data-jr2-ctitle="1" style="font-size:{{ c.titleSize }};line-height:{{ c.titleLh }};letter-spacing:{{ c.titleLs }};font-weight:{{ c.titleW }}">{{ c.title }}</div>
+          <sc-if value="{{ c.hasExcerpt }}" hint-placeholder-val="{{ false }}">
+            <p style="margin:0;font-size:var(--t-bs);line-height:var(--t-bs-lh);color:var(--ink-60);max-width:var(--measure)">{{ c.excerpt }}</p>
+          </sc-if>
+        </a>
+      </sc-for>
+    </div>
+    <sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:var(--space-block) 0;font-size:var(--t-bm);line-height:var(--t-bm-lh);color:var(--ink-60)">{{ emptyLabel }}</div>
+    </sc-if>
+  </section>
+
+  <!-- 04 Closing -->
+  <section data-screen-label="04 Closing" data-ambient-zone="full" style="position:relative;padding:var(--space-section-xl) var(--grid-margin) var(--space-block);overflow:hidden">
+    <svg aria-hidden="true" viewBox="0 0 340 340" style="position:absolute;top:50%;inset-inline-end:var(--grid-margin);transform:translateY(-50%) scaleX({{ motifFlip }});width:clamp(200px,26vw,380px);height:clamp(200px,26vw,380px);opacity:.4;pointer-events:none" fill="none">
+      <rect x="10" y="10" width="90" height="90" stroke="var(--turq)" stroke-width="1" /><rect x="120" y="10" width="90" height="90" stroke="var(--turq)" stroke-width="1" /><rect x="230" y="10" width="90" height="90" stroke="var(--turq)" stroke-width="1" />
+      <rect x="10" y="120" width="90" height="90" stroke="var(--turq)" stroke-width="1" /><rect x="120" y="120" width="90" height="90" stroke="var(--turq)" stroke-width="1" /><rect x="230" y="120" width="90" height="90" stroke="var(--turq)" stroke-width="1" />
+      <rect x="10" y="230" width="90" height="90" stroke="var(--turq)" stroke-width="1" /><rect x="120" y="230" width="90" height="90" stroke="var(--turq)" stroke-width="1" /><rect x="230" y="230" width="90" height="90" stroke="var(--turq)" stroke-width="1" />
+      <line x1="0" y1="340" x2="340" y2="0" stroke="var(--turq)" stroke-width="1" /><line x1="60" y1="340" x2="340" y2="60" stroke="var(--turq)" stroke-width="1" />
+    </svg>
+    <div style="position:relative;z-index:1;display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter)">
+      <div style="grid-column:var(--span-lead)">
+        <p style="margin:0;font-size:var(--t-hl);line-height:var(--t-hl-lh);letter-spacing:var(--t-hl-ls);font-weight:var(--t-hl-w);max-width:var(--grid-title-max)" data-reveal="content"><sc-for list="{{ closingLines }}" as="l" hint-placeholder-count="3"><span style="display:block">{{ l }}</span></sc-for></p>
+        <a href="{{ hrefAbout }}" data-v2-cursor="explore" style="margin-top:var(--space-5);display:inline-flex;align-items:baseline;gap:var(--space-4);font-size:var(--t-cta);letter-spacing:var(--t-cta-ls);text-transform:{{ upper }};min-height:var(--c-control-h)"><i style="width:var(--c-indicator-sm);height:var(--c-indicator-sm);background:var(--turq)"></i>{{ aboutLink }}<span aria-hidden="true">↗</span></a>
+      </div>
+      <div style="grid-column:var(--span-full);margin-top:var(--space-section);display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--space-4);border-top:1px solid var(--rule);padding-top:var(--space-5);font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--ink-45)">
+        <span style="display:inline-flex;align-items:center;min-height:var(--c-control-h)">{{ eyebrow }}</span>
+        <span style="display:inline-flex;align-items:center;min-height:var(--c-control-h)">Tarh &amp; Afarinesh — طرح و آفرینش</span>
+      </div>
+    </div>
+  </section>
+  </sc-if>
+
+  <sc-if value="{{ isDetail }}" hint-placeholder-val="{{ false }}">
+    <section data-screen-label="D1 Article opening" data-ambient-zone="full" style="padding:var(--space-section) var(--grid-margin) var(--space-block)">
+      <a href="{{ backHref }}" onClick="{{ goBack }}" style="display:inline-flex;align-items:center;gap:var(--space-tight);min-height:var(--c-control-h);font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--ink-45)">{{ backLabel }}</a>
+      <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter);margin-top:var(--space-block)" data-v2-in="1">
+        <div style="grid-column:var(--span-lead)">
+          <div style="font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--turq-dk)" class="text-mixed"><sc-for list="{{ d.metaParts }}" as="p" hint-placeholder-count="1"><span class="{{ p.cls }}">{{ p.t }}</span></sc-for></div>
+          <h1 data-jr2-dtitle="1" style="margin:var(--rel-eyebrow-heading) 0 0;font-size:var(--t-dm);line-height:var(--t-dm-lh);letter-spacing:var(--t-dm-ls);font-weight:var(--t-dm-w);max-width:var(--grid-title-max)">{{ d.title }}</h1>
+          <p style="margin:var(--space-content) 0 0;font-size:var(--t-bl);line-height:var(--t-bl-lh);color:var(--ink-60);max-width:var(--measure)">{{ d.excerpt }}</p>
+          <div style="margin-top:var(--rel-body-meta);font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--ink-45)" class="text-mixed"><sc-for list="{{ d.authorParts }}" as="p" hint-placeholder-count="1"><span class="{{ p.cls }}">{{ p.t }}</span></sc-for></div>
+        </div>
+      </div>
+    </section>
+
+    <sc-if value="{{ d.hasHero }}" hint-placeholder-val="{{ true }}">
+      <section data-screen-label="D2 Hero media" data-ambient-zone="off" style="padding:0 var(--grid-margin) var(--space-section)">
+        <div data-reveal="media" style="position:relative;aspect-ratio:{{ d.heroRatio }};max-height:78svh;width:100%;overflow:hidden;background:var(--surface-1);direction:ltr">
+          <div data-reveal-img="1" style="position:absolute;inset:0;background-image:{{ d.hero.backgroundImage }};background-size:{{ d.hero.backgroundSize }};background-position:{{ d.hero.backgroundPosition }};background-repeat:{{ d.hero.backgroundRepeat }}"></div>
+          <div data-reveal-mask="1"></div>
+        </div>
+        <sc-if value="{{ d.hasHeroCaption }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;justify-content:space-between;gap:var(--space-4);margin-top:var(--rel-image-caption);font-size:var(--t-meta);color:var(--ink-45)"><span>{{ d.heroCaption }}</span><span>{{ d.heroCredit }}</span></div>
+        </sc-if>
+      </section>
+    </sc-if>
+
+    <section data-screen-label="D3 Body" data-ambient-zone="soft" style="padding:0 var(--grid-margin) var(--space-section)">
+      <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter)">
+        <sc-if value="{{ tocDesk }}" hint-placeholder-val="{{ false }}">
+          <aside aria-label="{{ tocLabel }}" style="grid-column:var(--span-label);position:sticky;top:104px;align-self:start">
+            <div style="display:flex;align-items:center;gap:var(--space-3);font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45)"><span data-grid-motif="static" data-grid-motif-size="micro" data-motif-active="{{ tocMotif }}" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>{{ tocLabel }}</div>
+            <div style="position:relative;margin-top:var(--space-4);padding-inline-start:var(--space-4);display:flex;flex-direction:column">
+              <i aria-hidden="true" style="position:absolute;inset-inline-start:0;top:0;bottom:0;width:1px;background:var(--rule)"></i>
+              <i aria-hidden="true" style="position:absolute;inset-inline-start:0;top:0;width:1px;height:{{ tocProgress }};background:var(--turq);transition:height var(--m-standard) var(--e-editorial)"></i>
+              <sc-for list="{{ toc }}" as="t" hint-placeholder-count="4">
+                <button type="button" onClick="{{ t.go }}" aria-current="{{ t.current }}" style="appearance:none;background:none;border:none;cursor:pointer;min-height:var(--c-control-h);padding:0;padding-inline-start:{{ t.indent }};display:flex;align-items:baseline;gap:var(--space-3);font:inherit;font-size:var(--t-bs);line-height:var(--t-bs-lh);color:inherit;text-align:start;opacity:{{ t.op }};transition:opacity var(--m-fast) var(--e-smooth),padding var(--m-standard) var(--e-editorial)">
+                  <span class="text-number" style="font-size:var(--t-meta);color:{{ t.numColor }}">{{ t.num }}</span><span>{{ t.label }}</span>
+                </button>
+              </sc-for>
+            </div>
+          </aside>
+        </sc-if>
+        <sc-if value="{{ tocMob }}" hint-placeholder-val="{{ false }}">
+          <div style="grid-column:1 / -1;position:sticky;top:64px;z-index:5;background:var(--surface-0);border-bottom:1px solid var(--rule);margin-bottom:var(--space-content)">
+            <button type="button" onClick="{{ toggleToc }}" aria-expanded="{{ tocExpanded }}" style="appearance:none;background:none;border:none;cursor:pointer;width:100%;min-height:var(--c-control-h);padding:var(--space-3) 0;display:flex;align-items:center;justify-content:space-between;gap:var(--space-3);font:inherit;color:inherit;text-align:start">
+              <span style="font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45)">{{ tocLabel }}</span>
+              <span style="display:flex;align-items:baseline;gap:var(--space-tight);font-size:var(--t-bs)"><span class="text-number" style="font-size:var(--t-meta);color:var(--turq-dk)">{{ tocActiveNum }}</span>{{ tocActiveLabel }}</span>
+            </button>
+            <div style="display:{{ tocMobList }};padding-bottom:var(--space-3)">
+              <sc-for list="{{ toc }}" as="u" hint-placeholder-count="4">
+                <button type="button" onClick="{{ u.go }}" aria-current="{{ u.current }}" style="appearance:none;background:none;border:none;border-top:1px solid var(--rule-soft);cursor:pointer;width:100%;min-height:var(--c-control-h);padding:0;display:flex;align-items:center;gap:var(--space-3);font:inherit;font-size:var(--t-bs);color:inherit;text-align:start;opacity:{{ u.op }}">
+                  <span class="text-number" style="font-size:var(--t-meta);color:{{ u.numColor }}">{{ u.num }}</span><span>{{ u.label }}</span>
+                </button>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+        <div style="grid-column:var(--span-body);display:flex;flex-direction:column;gap:var(--space-content)">
+          <sc-if value="{{ d.hasLead }}" hint-placeholder-val="{{ false }}">
+            <p data-reveal="content" style="margin:0;font-size:var(--t-hs);line-height:var(--t-hs-lh);font-weight:var(--t-hs-w);max-width:var(--grid-title-max)">{{ d.lead }}</p>
+          </sc-if>
+          <sc-for list="{{ d.blocks }}" as="b" hint-placeholder-count="4">
+            <sc-if value="{{ b.isHeading }}" hint-placeholder-val="{{ false }}"><h2 data-reveal="content" id="{{ b.anchor }}" data-jr2-sec="{{ b.anchor }}" style="scroll-margin-top:120px;margin:var(--space-block) 0 0;font-size:var(--t-hm);line-height:var(--t-hm-lh);letter-spacing:var(--t-hm-ls);font-weight:var(--t-hm-w)">{{ b.text }}</h2></sc-if>
+            <sc-if value="{{ b.isPara }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-size:var(--t-bm);line-height:var(--t-bm-lh);color:var(--ink-80,var(--ink));max-width:var(--measure)">{{ b.text }}</p></sc-if>
+            <sc-if value="{{ b.isQuote }}" hint-placeholder-val="{{ false }}"><blockquote data-reveal="content" style="margin:var(--space-block) 0;border-inline-start:2px solid var(--turq);padding-inline-start:var(--space-5)"><p style="margin:0;font-size:var(--t-hl);line-height:var(--t-hl-lh);letter-spacing:var(--t-hl-ls);font-weight:var(--t-hl-w)">{{ b.text }}</p><footer style="margin-top:var(--space-3);font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--ink-45)">{{ b.by }}</footer></blockquote></sc-if>
+            <sc-if value="{{ b.isImage }}" hint-placeholder-val="{{ false }}">
+              <figure style="margin:var(--space-block) 0 0" data-reveal="media">
+                <div style="position:relative;aspect-ratio:{{ b.imgRatio }};overflow:hidden;background:var(--surface-1);direction:ltr">
+                  <div data-reveal-img="1" style="position:absolute;inset:0;background-image:{{ b.img.backgroundImage }};background-size:{{ b.img.backgroundSize }};background-position:{{ b.img.backgroundPosition }};background-repeat:{{ b.img.backgroundRepeat }}"></div>
+                  <div data-reveal-mask="1"></div>
+                </div>
+                <figcaption style="display:flex;justify-content:space-between;gap:var(--space-4);margin-top:var(--rel-image-caption);font-size:var(--t-meta);color:var(--ink-45)"><span>{{ b.caption }}</span><span>{{ b.credit }}</span></figcaption>
+              </figure>
+            </sc-if>
+          </sc-for>
+          <sc-if value="{{ d.noBody }}" hint-placeholder-val="{{ false }}"><p style="margin:0;font-size:var(--t-bm);line-height:var(--t-bm-lh);color:var(--ink-60);max-width:var(--measure)">{{ d.excerpt }}</p></sc-if>
+        </div>
+      </div>
+    </section>
+
+    <sc-if value="{{ d.hasWide }}" hint-placeholder-val="{{ false }}">
+      <section data-screen-label="D4 Wide media" data-ambient-zone="off" style="padding:0 var(--grid-margin) var(--space-section)">
+        <div data-reveal="media" style="position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--surface-1);direction:ltr">
+          <div data-reveal-img="1" style="position:absolute;inset:0;background-image:{{ d.wide.backgroundImage }};background-size:{{ d.wide.backgroundSize }};background-position:{{ d.wide.backgroundPosition }};background-repeat:{{ d.wide.backgroundRepeat }}"></div>
+          <div data-reveal-mask="1"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;gap:var(--space-4);margin-top:var(--rel-image-caption);font-size:var(--t-meta);color:var(--ink-45)"><span>{{ d.wideCaption }}</span><span>{{ d.wideCredit }}</span></div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ d.hasPair }}" hint-placeholder-val="{{ false }}">
+      <section data-screen-label="D5 Media pair" data-ambient-zone="soft" style="padding:0 var(--grid-margin) var(--space-section)">
+        <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter);align-items:end">
+          <div data-reveal="media" style="grid-column:span 5;position:relative;aspect-ratio:3/4;overflow:hidden;background:var(--surface-1);direction:ltr"><div data-reveal-img="1" style="position:absolute;inset:0;background-image:{{ d.pairA.backgroundImage }};background-size:{{ d.pairA.backgroundSize }};background-position:{{ d.pairA.backgroundPosition }};background-repeat:{{ d.pairA.backgroundRepeat }}"></div><div data-reveal-mask="1"></div></div>
+          <div data-reveal="media" style="grid-column:7 / span 4;position:relative;aspect-ratio:1/1;overflow:hidden;background:var(--surface-1);direction:ltr"><div data-reveal-img="1" style="position:absolute;inset:0;background-image:{{ d.pairB.backgroundImage }};background-size:{{ d.pairB.backgroundSize }};background-position:{{ d.pairB.backgroundPosition }};background-repeat:{{ d.pairB.backgroundRepeat }}"></div><div data-reveal-mask="1"></div></div>
+        </div>
+        <div style="margin-top:var(--rel-image-caption);font-size:var(--t-meta);color:var(--ink-45)">{{ d.pairCaption }}</div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ d.hasGallery }}" hint-placeholder-val="{{ false }}">
+      <section data-screen-label="D5b Gallery" data-ambient-zone="soft" style="padding:0 var(--grid-margin) var(--space-section)">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:var(--grid-gutter)">
+          <sc-for list="{{ d.gallery }}" as="g" hint-placeholder-count="2">
+            <div>
+              <div data-reveal="media" style="position:relative;aspect-ratio:{{ g.ratio }};overflow:hidden;background:var(--surface-1);direction:ltr">
+                <div data-reveal-img="1" style="position:absolute;inset:0;background-image:{{ g.bg }};background-size:{{ g.size }};background-position:{{ g.pos }};background-repeat:{{ g.repeat }}"></div>
+                <div data-reveal-mask="1"></div>
+              </div>
+              <div style="margin-top:var(--rel-image-caption);font-size:var(--t-meta);color:var(--ink-45)">{{ g.caption }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ d.hasModules }}" hint-placeholder-val="{{ false }}">
+      <section data-screen-label="D6 Modules" data-ambient-zone="soft" style="padding:0 var(--grid-margin) var(--space-section)">
+        <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter)">
+          <div style="grid-column:var(--span-body);display:flex;flex-direction:column">
+            <sc-for list="{{ d.modules }}" as="m" hint-placeholder-count="2">
+              <div style="display:grid;grid-template-columns:minmax(96px,.28fr) minmax(0,1fr);gap:var(--grid-gutter);border-top:1px solid var(--rule);padding:var(--space-4) 0">
+                <span style="font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--turq-dk)">{{ m.kind }}</span>
+                <span style="display:flex;flex-direction:column;gap:var(--space-micro)"><span style="font-size:var(--t-hs);line-height:var(--t-hs-lh);font-weight:var(--t-hs-w)">{{ m.title }}</span><span style="font-size:var(--t-bs);color:var(--ink-45)" class="text-mixed"><sc-for list="{{ m.noteParts }}" as="p" hint-placeholder-count="1"><span class="{{ p.cls }}">{{ p.t }}</span></sc-for></span></span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+    </sc-if>
+
+    <section data-screen-label="D7 Relations" data-ambient-zone="full" style="padding:0 var(--grid-margin) var(--space-section)">
+      <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter);border-top:1px solid var(--ink);padding-top:var(--space-5)">
+        <div style="grid-column:var(--span-label);font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45)">{{ relLabel }}</div>
+        <div style="grid-column:var(--span-body);display:flex;flex-direction:column;gap:var(--space-4)">
+          <sc-if value="{{ d.hasProject }}" hint-placeholder-val="{{ false }}"><a href="{{ d.projectHref }}" style="font-size:var(--t-hs);font-weight:var(--t-hs-w)" class="text-mixed"><sc-for list="{{ d.projectParts }}" as="p" hint-placeholder-count="1"><span class="{{ p.cls }}">{{ p.t }}</span></sc-for></a></sc-if>
+          <div style="display:flex;flex-wrap:wrap;gap:var(--space-tight) var(--space-5);font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--ink-60)"><sc-for list="{{ d.topics }}" as="t" hint-placeholder-count="2"><a href="{{ t.href }}" style="display:inline-flex;align-items:center;gap:var(--space-tight)"><i style="width:var(--c-indicator-sm);height:var(--c-indicator-sm);background:var(--turq)"></i>{{ t.label }}</a></sc-for></div>
+        </div>
+      </div>
+      <nav style="display:grid;grid-template-columns:1fr 1fr;gap:var(--grid-gutter);margin-top:var(--space-section);border-top:1px solid var(--rule);padding-top:var(--space-5)">
+        <a href="{{ d.prevHref }}" onClick="{{ d.goPrev }}" style="display:flex;flex-direction:column;gap:var(--space-micro)"><span style="font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--ink-45)">{{ prevLabel }}</span><span style="font-size:var(--t-hs);line-height:var(--t-hs-lh);font-weight:var(--t-hs-w)">{{ d.prevTitle }}</span></a>
+        <a href="{{ d.nextHref }}" onClick="{{ d.goNext }}" style="display:flex;flex-direction:column;gap:var(--space-micro);text-align:end"><span style="font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--ink-45)">{{ nextLabel }}</span><span style="font-size:var(--t-hs);line-height:var(--t-hs-lh);font-weight:var(--t-hs-w)">{{ d.nextTitle }}</span></a>
+      </nav>
+    </section>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;startLang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;en&quot;,&quot;options&quot;:[&quot;en&quot;,&quot;fa&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Bilingual&quot;}}">
+const B = () => window.TA_BIDI;
+const parts = (s, l) => B() ? B().parts(s, l) : [{ t: String(s || ""), cls: "" }];
+/* card size → grid span + type scale, preserving V1's mixed rhythm (large/medium/text/portrait) */
+const SPANS = { large:"var(--span-wide)", medium:"span 6", text:"span 4", portrait:"span 4" };
+const TITLE = {
+  large:  { size:"var(--t-hl)", lh:"var(--t-hl-lh)", ls:"var(--t-hl-ls)", w:"var(--t-hl-w)" },
+  medium: { size:"var(--t-hm)", lh:"var(--t-hm-lh)", ls:"var(--t-hm-ls)", w:"var(--t-hm-w)" },
+  text:   { size:"var(--t-hs)", lh:"var(--t-hs-lh)", ls:"var(--t-hs-ls)", w:"var(--t-hs-w)" },
+  portrait:{ size:"var(--t-hm)", lh:"var(--t-hm-lh)", ls:"var(--t-hm-ls)", w:"var(--t-hm-w)" }
+};
+
+const PUBLIC = { news:"news", update:"news", article:"articles", book:"articles", research:"research", paper:"research" };
+const CATS = [["news","News","اخبار"],["articles","Articles","مقاله‌ها"],["research","Research","پژوهش"]];
+const scroller = () => (document.body.scrollHeight > document.body.clientHeight + 1 ? document.body : (document.scrollingElement || document.documentElement));
+const scrollToY = (y, smooth) => { const el = scroller(); if(el.scrollTo) el.scrollTo({ top:y, behavior: smooth ? "smooth" : "auto" }); else el.scrollTop = y; };
+const reduced = () => window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+class Component extends DCLogic {
+  state = { lang: "en", types:[], hover:null, filterOpen:false, article:null,
+           cat:null, gridOp:1, gridShift:"0px", activeSec:0, tocOpen:false, compact:false };
+
+  /* one route contract: #article=<slug>&lang=fa — parsed robustly, order-free */
+  parseHash(){
+    const out = {};
+    (window.location.hash || "").replace(/^#/, "").split("&").forEach(p => {
+      if(!p) return; const i = p.indexOf("="); if(i > 0) out[p.slice(0, i)] = decodeURIComponent(p.slice(i + 1));
+    });
+    return out;
+  }
+  readRoute(){
+    const q = this.parseHash(), J = window.TA_JOURNAL;
+    const e = J && q.article ? (J.bySlug(q.article) || J.byId(q.article)) : null;
+    this.setState({ lang: (q.lang === "fa" || (!window.location.hash && this.props.startLang === "fa")) ? "fa" : "en",
+                    article: e ? e.slug : null, cat: CATS.some(c => c[0] === q.cat) ? q.cat : null });
+    if(q.article && !e){ try{ window.history.replaceState(null, "", this.buildHash(null, q.lang === "fa" ? "fa" : "en") || window.location.pathname); }catch(err){} }
+  }
+  buildHash(article, lang, cat){
+    const parts = [];
+    if(article) parts.push("article=" + encodeURIComponent(article));
+    else if(cat) parts.push("cat=" + cat);
+    if(lang === "fa") parts.push("lang=fa");
+    return parts.length ? "#" + parts.join("&") : "";
+  }
+  componentDidMount(){
+    this.onHash = () => { this.readRoute(); if(this.state.article) scrollToY(0); };
+    window.addEventListener("hashchange", this.onHash);
+    window.addEventListener("popstate", this.onHash);
+    this.readRoute();
+    this.mq = window.matchMedia("(max-width:1023px)");
+    this.onMq = () => this.setState({ compact: this.mq.matches });
+    this.mq.addEventListener("change", this.onMq); this.onMq();
+  }
+  componentDidUpdate(){
+    if(this._tocFor !== this.state.article){ this._tocFor = this.state.article; this.wireToc(); }
+  }
+  /* Contents active-item tracking now runs on the shared V2 Section Tracker (scroll +
+     scheduled timeout) instead of a page-local IntersectionObserver \u2014 IO does not
+     reliably fire in this preview environment (confirmed independently here, matching
+     Projects V2.2's earlier finding), which meant this tracking was silently frozen. */
+  wireToc(){
+    if(this._stopToc){ this._stopToc(); this._stopToc = null; }
+    if(!this.state.article || !window.TA_SECTION_TRACKER) return;
+    this._stopToc = window.TA_SECTION_TRACKER.track({
+      root: () => document,
+      selector: "[data-jr2-sec]",
+      onChange: (s) => { if(s.index !== this.state.activeSec) this.setState({ activeSec:s.index }); }
+    });
+  }
+  jumpTo(i){
+    const el = document.querySelectorAll("[data-jr2-sec]")[i];
+    if(!el) return;
+    const y = el.getBoundingClientRect().top + scroller().scrollTop - (this.state.compact ? 150 : 110);
+    scrollToY(y, !reduced());
+    this.setState({ activeSec:i, tocOpen:false });
+  }
+  /* category change: current set resolves out, list updates, new set resolves in */
+  setCat(k){
+    const next = this.state.cat === k ? null : k;
+    const apply = () => {
+      this.setState({ cat:next, gridOp:1, gridShift:"0px" });
+      try{ window.history.replaceState(null, "", this.buildHash(null, this.state.lang, next) || window.location.pathname); }catch(e){}
+    };
+    if(reduced()){ apply(); return; }
+    this.setState({ gridOp:0, gridShift:"6px" });
+    clearTimeout(this._catT); this._catT = setTimeout(apply, 200);
+  }
+  componentWillUnmount(){ if(this._stopToc) this._stopToc(); if(this.mq) this.mq.removeEventListener("change", this.onMq); window.removeEventListener("hashchange", this.onHash); window.removeEventListener("popstate", this.onHash); }
+
+  /* language switch preserves the active article */
+  setLang(l){
+    this.setState({ lang:l });
+    try{ window.history.replaceState(null, "", this.buildHash(this.state.article, l, this.state.cat) || window.location.pathname); }catch(e){}
+  }
+  go(article, src){
+    const fromArchive = article && !this.state.article;
+    if(fromArchive) this.archiveCtx = { y: scroller().scrollTop, cat: this.state.cat };
+    let clone = null, from = null, fsFrom = 0;
+    const t = src && src.querySelector ? src.querySelector("[data-jr2-ctitle]") : null;
+    if(fromArchive && t && !reduced()){
+      from = t.getBoundingClientRect(); fsFrom = parseFloat(getComputedStyle(t).fontSize) || 1;
+      clone = t.cloneNode(true);
+      const rtl = this.state.lang === "fa";
+      Object.assign(clone.style, { position:"fixed", left: from.left + "px", top: from.top + "px", width: from.width + "px",
+        margin:"0", zIndex:"60", pointerEvents:"none", color:"var(--ink)", transformOrigin: rtl ? "top right" : "top left" });
+      document.querySelector("[data-jr2-root]").appendChild(clone);
+    }
+    const cat = article ? this.state.cat : (this.archiveCtx ? this.archiveCtx.cat : this.state.cat);
+    const h = this.buildHash(article, this.state.lang, cat);
+    try{ window.history.pushState(null, "", h || window.location.pathname); }catch(e){}
+    this.setState({ article, cat, activeSec:0, tocOpen:false }, () => {
+      if(article){
+        scrollToY(0);
+        if(!clone) return;
+        setTimeout(() => {
+          const h1 = document.querySelector("[data-jr2-dtitle]");
+          if(!h1){ clone.remove(); return; }
+          const to = h1.getBoundingClientRect(), k = (parseFloat(getComputedStyle(h1).fontSize) || fsFrom) / fsFrom;
+          const rtl = this.state.lang === "fa";
+          const dx = rtl ? (to.right - from.right) : (to.left - from.left), dy = to.top - from.top;
+          h1.style.opacity = "0";
+          clone.style.transition = "transform var(--m-reveal) var(--e-editorial), opacity var(--m-fast) var(--e-smooth)";
+          clone.style.transform = "translate(" + dx + "px," + dy + "px) scale(" + k + ")";
+          setTimeout(() => {
+            h1.style.transition = "opacity var(--m-fast) var(--e-smooth)"; h1.style.opacity = "1";
+            clone.style.opacity = "0"; setTimeout(() => clone.remove(), 260);
+          }, 620);
+        });
+      } else {
+        const y = this.archiveCtx ? this.archiveCtx.y : 0;
+        setTimeout(() => scrollToY(y), 0);
+      }
+    });
+  }
+
+
+  toggleType(k){
+    this.setState(s => {
+      const a = s.types.slice(), i = a.indexOf(k);
+      if(i < 0) a.push(k); else a.splice(i, 1);
+      return { types:a };
+    });
+  }
+
+  renderVals(){
+    const st = this.state, fa = st.lang === "fa", L = st.lang;
+    const J = window.TA_JOURNAL, M = window.TA_MEDIA;
+    const amp = fa ? "&lang=fa" : "", hsh = fa ? "#lang=fa" : "";
+    const all = J ? J.entries : [];
+    const typeLabel = (id) => J && J.types.find(t => t.id === id) ? J.types.find(t => t.id === id)[fa ? "fa" : "en"] : id;
+    const oneLabel = (t) => J && J.typeOne[t] ? J.typeOne[t][fa ? 1 : 0] : t;
+    const authorOf = (a) => J && J.authors[a.author] ? J.authors[a.author][fa ? 1 : 0] : "";
+    const mediaOf = (m) => M ? M.resolve(m, { lang:L }) : { backgroundImage:"none" };
+    const hrefOf = (e) => "#article=" + e.slug + (fa ? "&lang=fa" : "");
+
+    const feat = J ? J.featured() : null;
+    const featM = feat ? mediaOf(feat.hero) : null;
+    const featMeta = feat ? (oneLabel(feat.type) + " · " + (feat.date || "")) : "";
+
+    const vis = all.filter(e => (!st.cat || PUBLIC[e.type] === st.cat) && (!feat || e.id !== feat.id))
+      .sort((a, b) => (b.sortOrder || 0) - (a.sortOrder || 0));
+
+    /* preserve V1's mixed rhythm: cycle large→medium→text→portrait rather than uniform cards */
+    const CYCLE = ["large","medium","text","portrait","medium","text"];
+    const cards = vis.map((e, i) => {
+      const size = CYCLE[i % CYCLE.length];
+      const hasMedia = !!e.hero && size !== "text";
+      const t = TITLE[size];
+      const title = fa ? e.fa : e.en;
+      const metaStr = oneLabel(e.type) + " · " + (e.date || "") + " · " + authorOf(e);
+      const excerpt = fa ? e.excerptFa : e.excerptEn;
+      const mv = hasMedia ? mediaOf(e.hero) : null;
+      return {
+        href: hrefOf(e), open: (ev) => { ev.preventDefault(); this.go(e.slug, ev.currentTarget); }, span: SPANS[size], hasMedia,
+        bg: mv ? mv.backgroundImage : "none", size: mv ? mv.backgroundSize : "cover",
+        pos: mv ? mv.backgroundPosition : "50% 50%", repeat: mv ? mv.backgroundRepeat : "no-repeat",
+        ratio: size === "portrait" ? "3/4" : "16/10",
+        metaParts: parts(metaStr, L),
+        title, titleSize: t.size, titleLh: t.lh, titleLs: t.ls, titleW: t.w,
+        hasExcerpt: size === "large" && !!excerpt, excerpt: excerpt || ""
+      };
+    });
+
+    const typeFilters = (J ? J.types.filter(t => t.id !== "all") : []).map(t => {
+      const on = st.types.indexOf(t.id) >= 0;
+      return { label: fa ? t.fa : t.en, pressed: on ? "true" : "false", fill: on ? "var(--turq)" : "transparent",
+        op: on ? "1" : "0.6", toggle: () => this.toggleType(t.id) };
+    });
+
+    /* ---- DETAIL view model — one renderer for every entry shape ---- */
+    const E = st.article && J ? J.bySlug(st.article) : null;
+    const pick2 = (o, k) => o ? (fa ? (o[k + "Fa"] || o[k + "En"]) : (o[k + "En"] || o[k + "Fa"])) : "";
+    let d = null;
+    if(E){
+      const order = all;
+      const i = order.findIndex(x => x.id === E.id);
+      const prev = order[(i - 1 + order.length) % order.length], next = order[(i + 1) % order.length];
+      const role = fa ? E.roleFa : E.roleEn;
+      const authors = [authorOf(E)].concat(E.coAuthor && J.authors[E.coAuthor] ? [J.authors[E.coAuthor][fa ? 1 : 0]] : []).join(" · ");
+      let hk = 0;
+      const blocks = (E.body || []).map(b => ({
+        anchor: b.type === "heading" ? "sec-" + (hk++) : "",
+        isHeading: b.type === "heading", isPara: b.type === "paragraph", isQuote: b.type === "quote",
+        isImage: b.type === "image",
+        text: fa ? b.fa : b.en, by: fa ? (b.byFa || "") : (b.byEn || ""),
+        img: b.type === "image" && b.media ? mediaOf(b.media) : {},
+        imgRatio: (b.media && b.media.ratio) || "16/9",
+        caption: b.type === "image" ? pick2(b, "caption") : "", credit: b.type === "image" ? pick2(b, "credit") : ""
+      }));
+      const modules = [];
+      if(E.video) modules.push({ kind: fa ? "ویدئو" : "Video",
+        title: E.video.src ? (fa ? "ویدئو" : "Video") : (fa ? "ویدئو — در انتظار فایل" : "Video — file to be provided"),
+        noteParts: parts([pick2(E.video, "caption"), E.video.duration].filter(Boolean).join(" · "), L) });
+      if(E.audio) modules.push({ kind: fa ? "صوت" : "Audio",
+        title: fa ? (E.audio.titleFa || "") : (E.audio.titleEn || ""),
+        noteParts: parts([E.audio.duration, E.audio.src ? "" : (fa ? "فایل بعداً ارائه می‌شود" : "file to be provided")].filter(Boolean).join(" · "), L) });
+      if(E.doc) modules.push({ kind: fa ? (E.doc.kindFa || "سند") : (E.doc.kindEn || "Document"),
+        title: fa ? (E.doc.topicFa || E.doc.publisher || "") : (E.doc.topicEn || E.doc.publisher || ""),
+        noteParts: parts([E.doc.publisher, E.doc.file ? "" : (fa ? "فایل بعداً ارائه می‌شود" : "file to be provided")].filter(Boolean).join(" · "), L) });
+      const P = E.projectId ? J.project(E.projectId) : null;
+      const EX = window.TA_EXPERTISE;
+      d = {
+        metaParts: parts(oneLabel(E.type) + " · " + (E.date || ""), L),
+        title: fa ? E.fa : E.en, excerpt: fa ? (E.subtitleFa || E.excerptFa) : (E.subtitleEn || E.excerptEn),
+        authorParts: parts(authors + (role ? " — " + role : ""), L),
+        hasHero: !!E.hero, hero: E.hero ? mediaOf(E.hero) : {}, heroRatio: (E.hero && E.hero.ratio) || "16/9",
+        hasHeroCaption: !!(E.heroCaptionEn || E.heroCaptionFa),
+        heroCaption: pick2(E, "heroCaption"), heroCredit: pick2(E, "heroCredit"),
+        hasLead: !!(E.leadEn || E.leadFa), lead: pick2(E, "lead"),
+        blocks, noBody: !blocks.length,
+        hasWide: !!(E.media && E.media.wide), wide: E.media && E.media.wide ? mediaOf(E.media.wide.media) : {},
+        wideCaption: E.media && E.media.wide ? pick2(E.media.wide, "caption") : "",
+        wideCredit: E.media && E.media.wide ? pick2(E.media.wide, "credit") : "",
+        hasPair: !!(E.media && E.media.pair), pairA: E.media && E.media.pair ? mediaOf(E.media.pair.a) : {},
+        pairB: E.media && E.media.pair ? mediaOf(E.media.pair.b) : {},
+        pairCaption: E.media && E.media.pair ? pick2(E.media.pair, "caption") : "",
+        hasGallery: !!(E.media && E.media.gallery && E.media.gallery.length),
+        gallery: (E.media && E.media.gallery || []).map(g => { const gv = mediaOf(g.media); return {
+          bg: gv.backgroundImage, size: gv.backgroundSize, pos: gv.backgroundPosition, repeat: gv.backgroundRepeat,
+          ratio: (g.media && g.media.ratio) || "3/4", caption: pick2(g, "caption") }; }),
+        hasModules: modules.length > 0, modules,
+        hasProject: !!P,
+        projectParts: P ? parts((fa ? P.fa : P.en) + " · " + ((fa ? P.locFa : P.locEn) || "") + " · " + (P.year || ""), L) : [],
+        projectHref: P && P.routeIndex >= 0 ? "Projects.dc.html#p=" + P.routeIndex + amp : "#",
+        topics: (E.exp || []).map(sl => EX && EX.bySlug(sl)).filter(Boolean).map(x => ({
+          label: fa ? x.title.fa : x.title.en, href: "Expertise.dc.html#expertise=" + x.slug + amp })),
+        prevTitle: fa ? prev.fa : prev.en, prevHref: hrefOf(prev), goPrev: (ev) => { ev.preventDefault(); this.go(prev.slug); },
+        nextTitle: fa ? next.fa : next.en, nextHref: hrefOf(next), goNext: (ev) => { ev.preventDefault(); this.go(next.slug); }
+      };
+    }
+
+    const heads = E ? (E.body || []).filter(b => b.type === "heading") : [];
+    const hasToc = heads.length >= 2;
+    const act = Math.min(st.activeSec, Math.max(0, heads.length - 1));
+    const toc = heads.map((b, i) => ({ num: String(i + 1).padStart(2, "0"), label: fa ? b.fa : b.en,
+      current: i === act ? "true" : "false", op: i === act ? "1" : "0.5",
+      indent: i === act ? "var(--space-tight)" : "0px", numColor: i === act ? "var(--turq-dk)" : "var(--ink-45)",
+      go: () => this.jumpTo(i) }));
+    const allPub = all;
+    return {
+      cats: CATS.map(c => { const on = st.cat === c[0];
+        return { label: fa ? c[2] : c[1], pressed: on ? "true" : "false", op: (on || !st.cat) ? "1" : "0.5",
+          fill: on ? "var(--turq)" : "transparent", lift: on ? "-2px" : "0px",
+          count: String(allPub.filter(e => PUBLIC[e.type] === c[0]).length).padStart(2, "0"),
+          toggle: () => this.setCat(c[0]) }; }),
+      catNavLabel: fa ? "دسته‌بندی مجله" : "Journal categories",
+      gridOp: String(st.gridOp), gridShift: st.gridShift,
+      tocDesk: hasToc && !st.compact, tocMob: hasToc && st.compact, toc,
+      tocLabel: fa ? "فهرست مطالب" : "Contents",
+      tocProgress: hasToc ? Math.round(((act + 1) / heads.length) * 100) + "%" : "0%",
+      tocMotif: String(window.TA_MOTIF ? window.TA_MOTIF.cellForIndex(act) : 5),
+      tocActiveNum: toc[act] ? toc[act].num : "", tocActiveLabel: toc[act] ? toc[act].label : "",
+      toggleToc: () => this.setState(x => ({ tocOpen: !x.tocOpen })),
+      tocExpanded: st.tocOpen ? "true" : "false", tocMobList: st.tocOpen ? "block" : "none",
+      isArchive: !d, isDetail: !!d, d: d || {},
+      backHref: "Journal.dc.html" + (this.archiveCtx && this.archiveCtx.cat ? "#cat=" + this.archiveCtx.cat + amp : hsh), goBack: (ev) => { ev.preventDefault(); this.go(null); },
+      backLabel: fa ? "← بازگشت به مجله" : "← Back to Journal",
+      relLabel: fa ? "مرتبط" : "Related", prevLabel: fa ? "قبلی" : "Previous", nextLabel: fa ? "بعدی" : "Next",
+      dir: fa ? "rtl" : "ltr", upper: fa ? "none" : "uppercase",
+      brand: fa ? "طرح و آفرینش" : "Tarh & Afarinesh",
+      hrefHome: "Homepage.dc.html" + hsh, hrefAbout: "About.dc.html" + hsh,
+      lang: st.lang,
+      nav: [["Projects","پروژه‌ها","Projects.dc.html"],["Expertise","تخصص‌ها","Expertise.dc.html"],
+            ["Awards","جوایز","Awards.dc.html"],["About","درباره ما","About.dc.html"],["Contact","تماس","Contact.dc.html"]]
+        .map(n => ({ label: fa ? n[1] : n[0], href: n[2] + hsh, on:"0" })),
+      drawerLinks: [["Home","خانه","Homepage.dc.html"],["Projects","پروژه‌ها","Projects.dc.html"],
+            ["Expertise","تخصص‌ها","Expertise.dc.html"],["Awards","جوایز","Awards.dc.html"],
+            ["About","درباره ما","About.dc.html"],["Journal","مجله",""],["Contact","تماس","Contact.dc.html"]]
+        .map(n => ({ label: fa ? n[1] : n[0], href: (n[2] || "#") + (n[2] ? hsh : ""), on: n[2] ? "0" : "1" })),
+      setEn: () => this.setLang("en"), setFa: () => this.setLang("fa"),
+
+      eyebrow: fa ? "جورنال — ایده‌ها و مشاهدات" : "Journal — ideas & observations",
+      openLines: fa ? ["معماری، فراتر از", "ساختمانِ ساخته‌شده ادامه دارد."] : ["Architecture continues", "beyond the finished building."],
+      intro: fa
+        ? "روایت‌های تحریری، پژوهش و یادداشت‌های استودیو — امتداد فکری کار معماری."
+        : "Editorial stories, research and studio notes — the intellectual extension of the work.",
+      countLabel: fa ? (String(all.length).padStart(2, "0").replace(/\d/g, d => "۰۱۲۳۴۵۶۷۸۹"[d]) + " نوشتار")
+                      : String(all.length).padStart(2, "0") + " entries",
+
+      hasFeatured: !!feat,
+      feat: feat ? {
+        href: hrefOf(feat), bg: featM.backgroundImage, size: featM.backgroundSize,
+        pos: featM.backgroundPosition, repeat: featM.backgroundRepeat,
+        metaParts: parts(featMeta, L), title: fa ? feat.fa : feat.en,
+        excerpt: fa ? feat.excerptFa : feat.excerptEn
+      } : null,
+
+      archiveLabel: fa ? "آرشیو" : "Archive",
+      toggleFilter: () => this.setState(s => ({ filterOpen: !s.filterOpen })),
+      filterExpanded: st.filterOpen ? "true" : "false",
+      filterMaxH: st.filterOpen ? "220px" : "0px",
+      filterLabel: fa ? "فیلتر" : "Filter",
+      filterCount: st.types.length ? String(st.types.length) : "",
+      filterCountOp: st.types.length ? "1" : "0",
+      typeFilters,
+      hasActiveFilter: st.types.length > 0,
+      resetFilter: () => this.setState({ types:[] }),
+      resetLabel: fa ? "پاک کردن" : "Reset",
+      shownLabel: String(cards.length).padStart(2, "0") + " / " + String(vis.length).padStart(2, "0"),
+      cards, empty: cards.length === 0,
+      emptyLabel: fa ? "نوشتاری با این فیلتر یافت نشد." : "No entries match this filter.",
+
+      motifFlip: fa ? "-1" : "1",
+      closingLines: fa
+        ? ["این مجله ادامه می‌دهد","تفکری را که پیش از هر پروژه شکل می‌گیرد؛","پرسش‌ها، پیش از پاسخ‌ها."]
+        : ["This journal continues", "the thinking behind the work —", "the questions before the answers."],
+      aboutLink: fa ? "درباره استودیو" : "About the studio"
+    };
+  }
+}
+</script>
+</body>
+</html>

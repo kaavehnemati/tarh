@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<script>window.TA_ASSET_BASE = "../../";</script>
+<link rel="stylesheet" href="../design-system/tokens-v2.css" />
+<link rel="stylesheet" href="../design-system/base-v2.css" />
+<link rel="stylesheet" href="../design-system/responsive-v2.css" />
+<script src="../runtime/bidi.js"></script>
+<script src="../../site-data.js"></script>
+<script src="../../media-utils.js"></script>
+<script src="../../expertise-data.js"></script>
+<script src="../../projects-data.js"></script>
+<script src="../../journal-data.js"></script>
+<script src="../runtime/scroll-coordinator.js"></script>
+<script src="../runtime/ambient.js"></script>
+<script src="../runtime/reveal.js"></script>
+<script src="../runtime/ui-strings.js"></script>
+<script src="../runtime/motif.js"></script>
+<script src="../runtime/cursor.js"></script>
+<script src="../runtime/section-tracker.js"></script>
+<style>
+[data-ep2-preview]{position:sticky;top:96px;align-self:start}
+@media (max-width:1023px){ [data-ep2-preview]{display:none !important} [data-ep2-narrcol]{position:static} [data-ep2-crosssticky]{position:static !important;top:auto !important} }
+@media (max-width:767px){
+  [data-ep2-chapter]{left:var(--grid-margin) !important;right:auto !important;bottom:calc(var(--grid-margin) + env(safe-area-inset-bottom)) !important;max-width:calc(100vw - 2 * var(--grid-margin) - 60px)}
+  [dir="rtl"] [data-ep2-chapter]{right:var(--grid-margin) !important;left:auto !important}
+  [data-ep2-rowthumb]{display:block !important}
+}
+</style>
+</helmet>
+
+<div data-ep2-root="1" data-v2-shell="1" dir="{{ dir }}" style="color:var(--ink);min-height:100svh;overflow-x:clip">
+
+  <dc-import name="../components/HeaderNav" upper="{{ upper }}" brand="{{ brand }}" nav="{{ nav }}" drawer-links="{{ drawerLinks }}" href-home="{{ hrefHome }}" lang="{{ lang }}" on-set-en="{{ setEn }}" on-set-fa="{{ setFa }}" menu-id="ex" theme="canvas" hint-size="100%,64px"></dc-import>
+
+  <sc-if value="{{ isOverview }}" hint-placeholder-val="{{ true }}">
+
+  <section data-screen-label="01 Opening" data-ambient-zone="full" style="position:relative;padding:var(--space-section-lg) var(--grid-margin) var(--space-section)">
+    <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter);align-items:end">
+      <div style="grid-column:var(--span-wide)">
+        <div data-v2-in="1" style="display:flex;align-items:center;gap:var(--space-3);font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45)">
+          <i style="width:var(--c-indicator);height:var(--c-indicator);background:var(--turq)"></i>{{ eyebrow }}
+        </div>
+        <h1 data-v2-rise="1" style="margin:var(--rel-eyebrow-heading) 0 0;font-size:var(--t-dl);line-height:var(--t-dl-lh);letter-spacing:var(--t-dl-ls);font-weight:var(--t-dl-w)"><sc-for list="{{ openLines }}" as="l" hint-placeholder-count="2"><span style="display:block">{{ l }}</span></sc-for></h1>
+        <p style="margin:var(--space-content) 0 0;font-size:var(--t-bl);line-height:var(--t-bl-lh);color:var(--ink-60);max-width:var(--measure)">{{ intro }}</p>
+      </div>
+      <span data-grid-motif="static" data-grid-motif-size="anchor" data-motif-active="4" aria-hidden="true" style="grid-column:var(--span-support);justify-self:end;align-self:end"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+    </div>
+  </section>
+
+  <section data-screen-label="02 Register" data-ambient-zone="minimal" style="position:relative;padding:var(--space-section) var(--grid-margin) var(--space-section-lg)">
+    <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter);align-items:start">
+      <div style="grid-column:var(--span-index)">
+        <h2 data-reveal="content" data-motif-wake="1" style="margin:0 0 var(--space-4);display:flex;align-items:center;gap:var(--space-3);font-size:var(--t-hl);line-height:var(--t-hl-lh);letter-spacing:var(--t-hl-ls);font-weight:var(--t-hl-w);outline-offset:6px"><span data-grid-motif="interactive" data-grid-motif-size="standard" data-motif-active="{{ registerMotifCell }}" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>{{ registerLabel }}<span class="text-number" style="font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);color:var(--ink-45);font-weight:400">{{ countLabel }}</span></h2>
+        <sc-for list="{{ rows }}" as="row" hint-placeholder-count="5">
+          <a href="{{ row.href }}" data-sec="{{ row.slug }}" data-v2-cursor="explore" onClick="{{ row.open }}" onMouseEnter="{{ row.enter }}" onFocus="{{ row.enter }}" onMouseLeave="{{ row.leave }}" onBlur="{{ row.leave }}" style="display:grid;grid-template-columns:44px minmax(0,1fr) minmax(0,200px);gap:var(--space-4);align-items:center;border-top:1px solid var(--rule);padding:var(--space-5) 0;min-height:var(--c-control-h);opacity:{{ row.op }};transition:opacity var(--m-standard) var(--e-editorial)">
+            <span class="text-number" style="display:flex;align-items:center;gap:var(--space-tight);font-size:var(--t-meta);color:var(--ink-45);align-self:start">{{ row.num }}</span>
+            <div style="min-width:0;display:flex;align-items:center;gap:var(--space-3)">
+              <span data-ep2-rowthumb="1" style="display:none;flex:none;width:56px;height:56px;background-image:{{ row.thumbBg }};background-size:cover;background-position:{{ row.thumbPos }}"></span>
+              <span style="min-width:0;font-size:var(--t-hm);line-height:var(--t-hm-lh);letter-spacing:var(--t-hm-ls);font-weight:var(--t-hm-w);color:{{ row.color }};transition:color var(--m-fast) var(--e-smooth)">{{ row.title }}</span>
+            </div>
+            <span style="min-width:0;font-size:var(--t-bs);line-height:var(--t-bs-lh);color:var(--ink-45);align-self:start;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ row.strap }}</span>
+          </a>
+        </sc-for>
+        <div style="border-top:1px solid var(--rule)"></div>
+      </div>
+
+      <div data-ep2-preview="1" style="grid-column:var(--span-preview)">
+        <div style="position:relative;aspect-ratio:4/3;overflow:hidden;background:{{ pv.bg }}">
+          <div style="position:absolute;inset:0;background-image:{{ pv.img }};background-size:cover;background-position:50% 50%;opacity:{{ pv.op }};transform:scale({{ pv.scale }});transition:opacity var(--m-standard) var(--e-editorial),transform var(--m-slow) var(--e-cinematic)"></div>
+        </div>
+        <div style="margin-top:var(--rel-image-caption);display:flex;justify-content:space-between;font-size:var(--t-caption);line-height:var(--t-caption-lh);color:var(--ink-45)"><span>{{ pv.caption }}</span><span class="text-number">{{ pv.count }}</span></div>
+      </div>
+    </div>
+  </section>
+
+  <sc-if value="{{ hasCross }}" hint-placeholder-val="{{ true }}">
+    <section data-screen-label="03 Cross-disciplinary story" data-ambient-zone="soft" style="padding:var(--space-section) var(--grid-margin)">
+      <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter)">
+        <div data-ep2-crosssticky="1" style="grid-column:var(--span-label);position:sticky;top:96px;align-self:start">
+          <h2 data-reveal="content" style="margin:0;font-size:var(--t-hm);line-height:var(--t-hm-lh);letter-spacing:var(--t-hm-ls);font-weight:var(--t-hm-w);max-width:16ch">{{ interLead }}</h2>
+          <div style="margin-top:var(--space-block);position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--surface-1);direction:ltr">
+            <div style="position:absolute;inset:0;background-image:{{ crossPv.bg }};background-size:cover;background-position:50% 50%;opacity:{{ crossPv.op }};transition:opacity var(--m-standard) var(--e-editorial)"></div>
+          </div>
+          <div style="margin-top:var(--space-3);display:flex;flex-wrap:wrap;gap:var(--space-2)">
+            <sc-for list="{{ crossPv.tags }}" as="t" hint-placeholder-count="2">
+              <span style="font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};padding:var(--space-tight) var(--space-2);border:1px solid var(--turq);color:{{ t.color }};background:{{ t.bg }};transition:background var(--m-fast) var(--e-smooth),color var(--m-fast) var(--e-smooth)">{{ t.label }}</span>
+            </sc-for>
+          </div>
+          <div style="margin-top:var(--space-3);font-size:var(--t-meta);color:var(--ink-45)"><span class="text-number">{{ crossPv.count }}</span></div>
+        </div>
+        <div style="grid-column:var(--span-body);display:grid;gap:var(--space-section)">
+          <sc-for list="{{ crossChapters }}" as="ch" hint-placeholder-count="2">
+            <a href="{{ ch.href }}" data-sec="{{ ch.key }}" data-v2-cursor="view" style="display:block;min-height:50vh;display:flex;flex-direction:column;justify-content:center;opacity:{{ ch.op }};transition:opacity var(--m-standard) var(--e-editorial)">
+              <div data-ep2-rowthumb="1" style="display:none;width:100%;aspect-ratio:16/9;margin-bottom:var(--space-4);background-image:{{ ch.bg }};background-size:cover;background-position:50% 50%"></div>
+              <span style="font-size:var(--t-hl);line-height:var(--t-hl-lh);letter-spacing:var(--t-hl-ls);font-weight:var(--t-hl-w)">{{ ch.title }}</span>
+              <span style="margin-top:var(--space-3);font-size:var(--t-bs);color:var(--ink-45)">{{ ch.disciplines }}</span>
+            </a>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+  <sc-if value="{{ hasPlainWork }}" hint-placeholder-val="{{ false }}">
+    <section data-screen-label="04 Selected work" data-ambient-zone="soft" style="padding:var(--space-section) var(--grid-margin)">
+      <div style="font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45);margin-bottom:var(--space-block);display:flex;justify-content:space-between;border-top:1px solid var(--rule);padding-top:var(--space-4)">
+        <span>{{ workLabel }}</span><a href="{{ hrefProjects }}" style="color:inherit">{{ allProjectsLabel }}</a>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter);align-items:end">
+        <sc-for list="{{ overviewWork }}" as="w" hint-placeholder-count="3">
+          <a href="{{ w.href }}" data-v2-cursor="view" style="grid-column:{{ w.col }};display:block">
+            <div data-reveal="media" style="position:relative;aspect-ratio:{{ w.ratio }};overflow:hidden;background:var(--surface-1);direction:ltr">
+              <div data-reveal-img="1" style="position:absolute;inset:0;background-image:{{ w.bg }};background-size:cover;background-position:50% 50%"></div>
+              <div data-reveal-mask="1"></div>
+            </div>
+            <div style="margin-top:var(--rel-image-caption);display:flex;justify-content:space-between;gap:var(--space-3)"><span style="font-size:var(--t-hs);font-weight:var(--t-hs-w)">{{ w.title }}</span><span class="text-number" style="font-size:var(--t-meta);color:var(--ink-45)">{{ w.year }}</span></div>
+            <div style="margin-top:var(--space-micro);font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--ink-45)">{{ w.disciplines }}</div>
+          </a>
+        </sc-for>
+      </div>
+    </section>
+  </sc-if>
+
+  <section data-screen-label="05 Closing" data-ambient-zone="full" style="position:relative;padding:var(--space-section-xl) var(--grid-margin) var(--space-block);overflow:hidden">
+    <svg aria-hidden="true" viewBox="0 0 340 340" style="position:absolute;top:50%;inset-inline-end:var(--grid-margin);transform:translateY(-50%) scaleX({{ motifFlip }});width:clamp(200px,26vw,380px);height:clamp(200px,26vw,380px);opacity:.4;pointer-events:none" fill="none">
+      <rect x="10" y="10" width="90" height="90" stroke="var(--turq)" stroke-width="1" /><rect x="120" y="10" width="90" height="90" stroke="var(--turq)" stroke-width="1" /><rect x="230" y="10" width="90" height="90" stroke="var(--turq)" stroke-width="1" />
+      <rect x="10" y="120" width="90" height="90" stroke="var(--turq)" stroke-width="1" /><rect x="120" y="120" width="90" height="90" stroke="var(--turq)" stroke-width="1" /><rect x="230" y="120" width="90" height="90" stroke="var(--turq)" stroke-width="1" />
+      <rect x="10" y="230" width="90" height="90" stroke="var(--turq)" stroke-width="1" /><rect x="120" y="230" width="90" height="90" stroke="var(--turq)" stroke-width="1" /><rect x="230" y="230" width="90" height="90" stroke="var(--turq)" stroke-width="1" />
+      <line x1="0" y1="340" x2="340" y2="0" stroke="var(--turq)" stroke-width="1" /><line x1="60" y1="340" x2="340" y2="60" stroke="var(--turq)" stroke-width="1" />
+    </svg>
+    <div style="position:relative;z-index:1;display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter)">
+      <div style="grid-column:var(--span-lead)">
+        <p data-reveal="content" style="margin:0;font-size:var(--t-hl);line-height:var(--t-hl-lh);letter-spacing:var(--t-hl-ls);font-weight:var(--t-hl-w);max-width:var(--grid-title-max)"><sc-for list="{{ closingLines }}" as="l" hint-placeholder-count="3"><span style="display:block">{{ l }}</span></sc-for></p>
+        <a href="{{ hrefContact }}" data-v2-cursor="select" style="margin-top:var(--space-5);display:inline-flex;align-items:baseline;gap:var(--space-4);font-size:var(--t-cta);letter-spacing:var(--t-cta-ls);text-transform:{{ upper }};min-height:var(--c-control-h)"><i style="width:var(--c-indicator-sm);height:var(--c-indicator-sm);background:var(--turq)"></i>{{ contactLink }}<span aria-hidden="true">↗</span></a>
+      </div>
+      <div style="grid-column:var(--span-full);margin-top:var(--space-section);display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--space-4);border-top:1px solid var(--rule);padding-top:var(--space-5);font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--ink-45)">
+        <span style="display:inline-flex;align-items:center;min-height:var(--c-control-h)">{{ eyebrow }}</span>
+        <span style="display:inline-flex;align-items:center;min-height:var(--c-control-h)">Tarh &amp; Afarinesh — طرح و آفرینش</span>
+      </div>
+    </div>
+  </section>
+  </sc-if>
+
+  <sc-if value="{{ isDetail }}" hint-placeholder-val="{{ false }}">
+    <section data-sec="hero" data-screen-label="D0 Hero" data-ambient-zone="off" style="padding:0 var(--grid-margin) var(--space-block);position:relative">
+      <div data-ep2-hero="1" data-reveal="media" style="position:relative;aspect-ratio:16/9;max-height:78svh;width:100%;overflow:hidden;background:var(--surface-1);direction:ltr">
+        <div data-ep2-heroimg="1" data-reveal-img="1" style="position:absolute;inset:-3% -1%;background-image:{{ d.heroBg }};background-size:cover;background-position:50% 50%"></div>
+        <div data-reveal-mask="1"></div>
+      </div>
+      <div style="margin-top:var(--space-block);display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter);align-items:end">
+        <div style="grid-column:var(--span-lead)">
+          <div class="text-number" style="font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);color:var(--ink-45)">{{ d.num }} / {{ d.count }}</div>
+          <h1 data-v2-rise="1" style="margin:var(--rel-eyebrow-heading) 0 0;font-size:var(--t-dm);line-height:var(--t-dm-lh);letter-spacing:var(--t-dm-ls);font-weight:var(--t-dm-w)">{{ d.title }}</h1>
+        </div>
+        <div style="grid-column:var(--span-support)">
+          <p style="margin:0;font-size:var(--t-hs);line-height:var(--t-hs-lh);color:var(--turq-dk);max-width:var(--measure)">{{ d.proposition }}</p>
+        </div>
+      </div>
+    </section>
+
+    <sc-if value="{{ d.hasApproach }}" hint-placeholder-val="{{ false }}">
+      <section data-sec="approach" data-screen-label="D1 Approach" data-ambient-zone="soft" style="padding:var(--space-section) var(--grid-margin)">
+        <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter)">
+          <div data-reveal="content" style="grid-column:var(--span-label);font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45)">{{ approachLabel }}</div>
+          <div style="grid-column:var(--span-body)">
+            <p data-reveal="content" style="margin:0;font-size:var(--t-hs);line-height:var(--t-hs-lh);max-width:var(--measure)">{{ d.lead }}</p>
+            <div style="margin-top:var(--space-block);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:var(--space-content) var(--grid-gutter)">
+              <sc-for list="{{ d.bodies }}" as="b" hint-placeholder-count="2">
+                <p style="margin:0;font-size:var(--t-bm);line-height:var(--t-bm-lh);color:var(--ink-60);max-width:var(--measure)">{{ b }}</p>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ d.hasCapabilities }}" hint-placeholder-val="{{ false }}">
+      <section data-sec="capabilities" data-screen-label="D2 Capabilities" data-ambient-zone="minimal" style="padding:var(--space-section) var(--grid-margin)">
+        <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter)">
+          <h2 data-reveal="content" style="grid-column:var(--span-label);margin:0;font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45)">{{ capabilitiesLabel }}</h2>
+          <div data-reveal="group" style="grid-column:var(--span-body)">
+            <sc-for list="{{ d.capabilities }}" as="c" hint-placeholder-count="6">
+              <div style="display:grid;grid-template-columns:44px minmax(0,1fr) minmax(0,1fr);gap:var(--space-4);align-items:baseline;border-top:1px solid var(--rule);padding:var(--space-4) 0">
+                <span class="text-number" style="font-size:var(--t-meta);color:var(--ink-45)">{{ c.num }}</span>
+                <span style="font-size:var(--t-hs);line-height:var(--t-hs-lh);font-weight:var(--t-hs-w)">{{ c.title }}</span>
+                <span style="font-size:var(--t-bs);line-height:var(--t-bs-lh);color:var(--ink-45)">{{ c.note }}</span>
+              </div>
+            </sc-for>
+            <div style="border-top:1px solid var(--rule)"></div>
+          </div>
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ d.hasProcess }}" hint-placeholder-val="{{ false }}">
+      <section data-sec="process" data-screen-label="D3 Process" data-ambient-zone="minimal" style="padding:var(--space-section) var(--grid-margin)">
+        <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter)">
+          <div data-ep2-narrcol="1" style="grid-column:var(--span-label);position:sticky;top:96px;align-self:start">
+            <div style="font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45)">{{ processLabel }}</div>
+            <h2 style="margin:var(--space-3) 0 0;font-size:var(--t-hm);line-height:var(--t-hm-lh);letter-spacing:var(--t-hm-ls);font-weight:var(--t-hm-w)">{{ d.phaseTitle }}</h2>
+            <p style="margin:var(--space-3) 0 0;font-size:var(--t-bs);line-height:var(--t-bs-lh);color:var(--ink-60);max-width:26ch">{{ d.phaseBody }}</p>
+            <div style="margin-top:var(--space-3);font-size:var(--t-meta);color:var(--ink-45)"><span class="text-number" data-ep2-narrcount="1">{{ d.phaseActiveNum }}</span> / <span class="text-number">{{ d.phaseCount }}</span></div>
+          </div>
+          <div data-ep2-narrmedia="1" style="grid-column:var(--span-body);display:grid;gap:var(--space-content)">
+            <sc-for list="{{ d.phases }}" as="ph" hint-placeholder-count="4">
+              <div data-ep2-narritem="1" style="position:relative;aspect-ratio:{{ ph.ratio }};overflow:hidden;background:#fff;border:1px solid var(--rule);margin-inline-start:{{ ph.indent }};direction:ltr">
+                <div style="position:absolute;inset:0;background:{{ ph.plate }};opacity:{{ ph.plateOp }}"></div>
+                <div style="position:absolute;inset-inline-start:22px;bottom:18px;display:flex;align-items:center;gap:var(--space-3);font-size:var(--t-caption);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--ink-45)"><i style="width:8px;height:8px;background:var(--turq)"></i>{{ ph.label }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ d.hasWork }}" hint-placeholder-val="{{ false }}">
+      <section data-sec="work" data-screen-label="D4 Selected work" data-ambient-zone="soft" style="padding:var(--space-section) var(--grid-margin)">
+        <div style="display:flex;justify-content:space-between;gap:var(--space-4);border-top:1px solid var(--rule);padding-top:var(--space-4);margin-bottom:var(--space-block);font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45)">
+          <span>{{ workInFieldLabel }}</span><a href="{{ d.filterHref }}" style="color:inherit">{{ d.filterLabel }}</a>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter);align-items:end">
+          <sc-for list="{{ d.work }}" as="w" hint-placeholder-count="3">
+            <a href="{{ w.href }}" data-v2-cursor="view" style="grid-column:{{ w.col }};display:block">
+              <div data-reveal="media" style="position:relative;aspect-ratio:{{ w.ratio }};overflow:hidden;background:var(--surface-1);direction:ltr">
+                <div data-reveal-img="1" style="position:absolute;inset:0;background-image:{{ w.bg }};background-size:cover;background-position:50% 50%"></div>
+                <div data-reveal-mask="1"></div>
+              </div>
+              <div style="margin-top:var(--rel-image-caption);display:flex;justify-content:space-between;gap:var(--space-3)"><span style="font-size:var(--t-hs);font-weight:var(--t-hs-w)">{{ w.title }}</span><span class="text-number" style="font-size:var(--t-meta);color:var(--ink-45)">{{ w.year }}</span></div>
+              <div style="margin-top:var(--space-micro);font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--ink-45)">{{ w.location }}</div>
+            </a>
+          </sc-for>
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ d.hasKnowledge }}" hint-placeholder-val="{{ false }}">
+      <section data-sec="knowledge" data-screen-label="D5 Knowledge" data-ambient-zone="minimal" data-grid-surface="standard" style="padding:var(--space-section) var(--grid-margin)">
+        <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter)">
+          <div style="grid-column:var(--span-label);font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45)">{{ knowledgeLabel }}</div>
+          <div data-reveal="group" style="grid-column:var(--span-body);border-top:1px solid var(--ink)">
+            <sc-for list="{{ d.knowledge }}" as="k" hint-placeholder-count="3">
+              <a href="{{ k.href }}" data-v2-cursor="read" style="display:block;border-bottom:1px solid var(--rule);padding:var(--space-4) 0">
+                <div style="display:flex;gap:var(--space-4);font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--ink-45)"><span class="text-number">{{ k.year }}</span><span>{{ k.kind }}</span></div>
+                <div style="margin-top:var(--space-2);font-size:var(--t-hs);line-height:var(--t-hs-lh);font-weight:var(--t-hs-w)">{{ k.title }}</div>
+              </a>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ d.hasRelated }}" hint-placeholder-val="{{ false }}">
+      <section data-sec="related" data-screen-label="D6 Related" data-ambient-zone="soft" style="padding:var(--space-section) var(--grid-margin)">
+        <div data-reveal="content" style="font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45);margin-bottom:var(--space-block)">{{ relatedLabel }}</div>
+        <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter);align-items:start">
+          <div style="grid-column:var(--span-index)">
+            <sc-for list="{{ d.related }}" as="r" hint-placeholder-count="3">
+              <a href="{{ r.href }}" data-v2-cursor="explore" onClick="{{ r.open }}" onMouseEnter="{{ r.enter }}" onFocus="{{ r.enter }}" style="display:flex;align-items:baseline;gap:var(--space-4);border-top:1px solid var(--rule);padding:var(--space-5) 0">
+                <span class="text-number" style="font-size:var(--t-meta);color:var(--ink-45)">{{ r.num }}</span>
+                <span style="font-size:var(--t-hm);line-height:var(--t-hm-lh);letter-spacing:var(--t-hm-ls);font-weight:var(--t-hm-w)">{{ r.title }}</span>
+              </a>
+            </sc-for>
+            <div style="border-top:1px solid var(--rule)"></div>
+          </div>
+          <div style="grid-column:var(--span-preview);position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--surface-1);direction:ltr">
+            <div data-ep2-relimg="1" style="position:absolute;inset:0;background-image:{{ relPv.img }};background-size:cover;background-position:50% 50%;opacity:{{ relPv.op }};transition:opacity var(--m-standard) var(--e-editorial)"></div>
+          </div>
+        </div>
+      </section>
+    </sc-if>
+
+    <section data-screen-label="D7 Next" data-ambient-zone="full" style="position:relative;padding:var(--space-section-xl) var(--grid-margin) var(--space-element)">
+      <a href="{{ next.href }}" data-v2-cursor="next" onClick="{{ next.open }}" style="display:block">
+        <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter);align-items:end">
+          <div style="grid-column:var(--span-lead)">
+            <div style="font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45)">{{ nextLabel }}</div>
+            <div data-reveal="content" style="margin-top:var(--space-3);font-size:var(--t-dm);line-height:var(--t-dm-lh);letter-spacing:var(--t-dm-ls);font-weight:var(--t-dm-w)">{{ next.title }}</div>
+          </div>
+          <div data-ep2-next="1" style="grid-column:var(--span-support);position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--surface-1);direction:ltr">
+            <div data-ep2-nextimg="1" data-reveal="media" style="position:absolute;inset:-3% -1%;background-image:{{ next.bg }};background-size:cover;background-position:50% 50%"></div>
+          </div>
+        </div>
+      </a>
+      <div style="margin-top:var(--space-section);display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--space-4);border-top:1px solid var(--rule);padding-top:var(--space-5);font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--ink-45)">
+        <a href="{{ backHref }}" onClick="{{ goBack }}" style="display:inline-flex;align-items:center;min-height:var(--c-control-h)">{{ backLabel }}</a>
+        <span style="display:inline-flex;align-items:center;min-height:var(--c-control-h)">Tarh &amp; Afarinesh — طرح و آفرینش</span>
+      </div>
+    </section>
+
+    <div data-ep2-chapter="1" aria-hidden="true" style="position:fixed;{{ chapterSide }}:var(--grid-margin);bottom:calc(var(--grid-margin) + 48px);z-index:40;display:flex;align-items:center;gap:var(--space-3);background:var(--surface-0);padding:var(--space-2) var(--space-3);opacity:{{ chapterOpacity }};transition:opacity var(--m-standard) var(--e-smooth);font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--ink-45)">
+      <span style="display:block;height:12px;overflow:hidden;width:20px" class="text-number">{{ chapterNum }}</span>
+      <span>{{ chapterLabel }}</span>
+    </div>
+  </sc-if>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440},&quot;startLang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;en&quot;,&quot;options&quot;:[&quot;en&quot;,&quot;fa&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Bilingual&quot;}}">
+const B = () => window.TA_BIDI;
+const V1 = "../../";
+const CHAPTER_LBL = {
+  approach: ["Approach","رویکرد"], capabilities: ["Capabilities","توانمندی‌ها"],
+  process: ["Process","فرایند"], work: ["Selected Work","پروژه‌های منتخب"],
+  knowledge: ["Knowledge","دانش"], related: ["Related Expertise","تخصص‌های مرتبط"]
+};
+const clamp1 = (v, a, b) => v < a ? a : v > b ? b : v;
+const reducedQ = () => window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const scroller = () => (document.body.scrollHeight > document.body.clientHeight + 1 ? document.body : (document.scrollingElement || document.documentElement));
+const scrollToY = (y) => { const el = scroller(); if(el.scrollTo) el.scrollTo({ top:y, behavior:"auto" }); else el.scrollTop = y; };
+
+class Component extends DCLogic {
+  state = { lang:"en", slug:null, hover:null, relHover:null, chapterKey:"", chapterIdx:0, chapterN:0, chapterVisible:false, phaseActive:0,
+    registerScrollActive:null, crossActiveIdx:0 };
+
+  parseHash(){
+    const out = {};
+    (window.location.hash || "").replace(/^#/, "").split("&").forEach(p => {
+      if(!p) return; const i = p.indexOf("="); if(i > 0) out[p.slice(0, i)] = decodeURIComponent(p.slice(i + 1));
+    });
+    return out;
+  }
+  readRoute(){
+    const q = this.parseHash();
+    const EX = window.TA_EXPERTISE;
+    const slug = q.expertise && EX && EX.bySlug(q.expertise) ? q.expertise : null;
+    this.setState({ lang: (q.lang === "fa" || (!window.location.hash && this.props.startLang === "fa")) ? "fa" : "en", slug });
+  }
+  buildHash(slug, lang){
+    const parts = [];
+    if(slug) parts.push("expertise=" + slug);
+    if(lang === "fa") parts.push("lang=fa");
+    return parts.length ? "#" + parts.join("&") : "";
+  }
+  componentDidMount(){
+    this.onHash = () => { this.readRoute(); if(this.state.slug != null) scrollToY(0); };
+    window.addEventListener("hashchange", this.onHash);
+    window.addEventListener("popstate", this.onHash);
+    this.unsubScroll = window.TA_SCROLL ? window.TA_SCROLL.subscribe(() => this.requestTick(), { root:window }) : null;
+    this.readRoute();
+    if(this.state.slug == null) this.wireOverview();
+  }
+  componentWillUnmount(){
+    window.removeEventListener("hashchange", this.onHash);
+    window.removeEventListener("popstate", this.onHash);
+    if(this.unsubScroll) this.unsubScroll();
+    this.teardownDetail();
+    this.teardownOverview();
+    if(this._raf) clearTimeout(this._raf);
+  }
+  requestTick(){
+    if(this._raf) return;
+    this._raf = setTimeout(() => { this._raf = null; try{ this.tick(); }catch(e){ console.warn("tick", e); } }, 16);
+  }
+  tick(){
+    if(this.state.slug == null || reducedQ()) return;
+    const root = document.querySelector("[data-ep2-root]");
+    if(!root) return;
+    const heroImg = root.querySelector("[data-ep2-heroimg]"), hero = root.querySelector("[data-ep2-hero]");
+    if(hero && heroImg){
+      const r = hero.getBoundingClientRect();
+      const p = clamp1(-r.top / Math.max(1, r.height), 0, 1);
+      heroImg.style.transform = "translateY(" + (p * 5).toFixed(2) + "%) scale(" + (1 + p * 0.02).toFixed(3) + ")";
+    }
+    const nextImg = root.querySelector("[data-ep2-nextimg]"), next = root.querySelector("[data-ep2-next]");
+    if(next && nextImg){
+      const r = next.getBoundingClientRect(), vh = window.innerHeight;
+      const p = clamp1(1 - Math.abs(r.top + r.height / 2 - vh / 2) / vh, 0, 1);
+      nextImg.style.transform = "translateY(" + ((0.5 - p) * 6).toFixed(2) + "%) scale(" + (1.02 - p * 0.02).toFixed(3) + ")";
+    }
+    this.tickNarrative(root);
+  }
+  tickNarrative(root){
+    const group = root.querySelector("[data-ep2-narrmedia]");
+    if(!group) return;
+    const items = Array.prototype.slice.call(group.querySelectorAll("[data-ep2-narritem]"));
+    const countEl = root.querySelector("[data-ep2-narrcount]");
+    if(!items.length || !countEl) return;
+    const zone = window.innerHeight * 0.5;
+    let top = null, topD = Infinity;
+    items.forEach(el => { const d = Math.abs(el.getBoundingClientRect().top - zone * 0.3); if(d < topD){ topD = d; top = el; } });
+    if(top){
+      const idx = items.indexOf(top);
+      countEl.textContent = String(idx + 1).padStart(2, "0");
+      items.forEach((el, i) => { el.style.opacity = i === idx ? "1" : "0.42"; el.style.transition = "opacity var(--m-standard) var(--e-smooth)"; });
+      if(idx !== this.state.phaseActive) this.setState({ phaseActive: idx });
+    }
+  }
+  /* content-aware chapter indicator via the SHARED Section Tracker — never a page-local
+     scroll observer (Design Contract §7c) */
+  wireDetail(){
+    this.teardownDetail();
+    if(!window.TA_SECTION_TRACKER) return;
+    this.stopTrack = window.TA_SECTION_TRACKER.track({
+      root: () => document.querySelector("[data-ep2-root]"),
+      selector: "[data-sec]",
+      exclude: (el) => el.getAttribute("data-sec") === "hero",
+      onChange: (s) => {
+        const root = document.querySelector("[data-ep2-root]");
+        const hero = root && root.querySelector("[data-ep2-hero]");
+        const visible = hero ? (hero.getBoundingClientRect().bottom < window.innerHeight * 0.6) : true;
+        if(s.key !== this.state.chapterKey || visible !== this.state.chapterVisible || s.total !== this.state.chapterN){
+          this.setState({ chapterKey:s.key, chapterIdx:s.index, chapterN:s.total, chapterVisible:visible });
+        }
+      }
+    });
+    this.requestTick();
+  }
+  teardownDetail(){
+    if(this.stopTrack){ this.stopTrack(); this.stopTrack = null; }
+    if(this.state.chapterKey || this.state.chapterVisible) this.setState({ chapterKey:"", chapterVisible:false, chapterN:0 });
+  }
+  /* the Register's active discipline follows scroll position when the visitor is not
+     actively hovering/focusing a row — restores the V1 behavior of "scroll advances the
+     active discipline," implemented through the SHARED Section Tracker rather than a
+     page-local scroll engine. Priority: hover/focus > scroll-active > default (row 0). */
+  wireOverview(){
+    this.teardownOverview();
+    if(!window.TA_SECTION_TRACKER) return;
+    this.stopRegisterTrack = window.TA_SECTION_TRACKER.track({
+      root: () => document.querySelector("[data-ep2-root] section[data-screen-label=\"02 Register\"]"),
+      selector: "[data-sec]",
+      onChange: (s) => { if(s.key !== this.state.registerScrollActive) this.setState({ registerScrollActive:s.key }); }
+    });
+    this.stopCrossTrack = window.TA_SECTION_TRACKER.track({
+      root: () => document.querySelector("[data-ep2-root] section[data-screen-label=\"03 Cross-disciplinary story\"]"),
+      selector: "[data-sec]",
+      onChange: (s) => { if(s.index !== this.state.crossActiveIdx) this.setState({ crossActiveIdx:s.index }); }
+    });
+  }
+  teardownOverview(){
+    if(this.stopRegisterTrack){ this.stopRegisterTrack(); this.stopRegisterTrack = null; }
+    if(this.stopCrossTrack){ this.stopCrossTrack(); this.stopCrossTrack = null; }
+  }
+  componentDidUpdate(){
+    if(this._pSlug !== this.state.slug){
+      this._pSlug = this.state.slug;
+      if(this.state.slug != null){ this.teardownOverview(); this.wireDetail(); }
+      else { this.teardownDetail(); this.wireOverview(); }
+    }
+  }
+  setLang(l){ this.setState({ lang:l }, () => { try{ window.history.replaceState(null, "", this.buildHash(this.state.slug, l) || window.location.pathname); }catch(e){} }); }
+  go(slug, ev){
+    if(ev && ev.preventDefault) ev.preventDefault();
+    const fromOverview = slug != null && this.state.slug == null;
+    if(fromOverview) this.overviewY = scroller().scrollTop;
+    try{ window.history.pushState(null, "", this.buildHash(slug, this.state.lang) || window.location.pathname); }catch(e){}
+    this.setState({ slug, relHover:null }, () => {
+      if(slug != null) scrollToY(0); else scrollToY(this.overviewY || 0);
+    });
+  }
+
+  renderVals(){
+    const st = this.state, fa = st.lang === "fa";
+    const EX = window.TA_EXPERTISE, P = window.TA_PROJECTS, J = window.TA_JOURNAL;
+    const hsh = fa ? "#lang=fa" : "", amp = fa ? "&lang=fa" : "";
+    const pick = (v) => v == null ? "" : (typeof v === "object" ? (fa ? (v.fa || v.en) : (v.en || v.fa)) : String(v));
+    const all = EX ? EX.all() : [];
+    const hrefOf = (slug) => "#expertise=" + slug + amp;
+
+    /* state priority: temporary hover/focus > scroll-active discipline > default (row 0) —
+       so the register still responds while the visitor is only scrolling, not hovering */
+    const activeSlug = st.hover || st.registerScrollActive || (all[0] && all[0].slug);
+    const activeIdx = all.findIndex(e => e.slug === activeSlug);
+    const rows = all.map((e, i) => {
+      const on = e.slug === activeSlug;
+      const title = pick(e.title);
+      return {
+        num: String(i + 1).padStart(2, "0"), href: hrefOf(e.slug), slug: e.slug, open: (ev) => this.go(e.slug, ev),
+        title, strap: pick(e.strap), op: on ? "1" : "0.5",
+        color: on ? "var(--turq-dk)" : "inherit",
+        thumbBg: (e.presentation && e.presentation.registerImage) ? ("url(\"" + V1 + e.presentation.registerImage + "\")") : "var(--media-placeholder)",
+        thumbPos: "50% 50%",
+        enter: () => this.setState({ hover:e.slug }), leave: () => this.setState({ hover:null })
+      };
+    });
+    const activeE = all[activeIdx] || all[0];
+    const activeRegisterImg = activeE && activeE.presentation && activeE.presentation.registerImage;
+    const pv = {
+      bg: "var(--media-placeholder)",
+      img: activeRegisterImg ? ("url(\"" + V1 + activeRegisterImg + "\")") : "none", op: activeRegisterImg ? "1" : "0", scale: "1.04",
+      caption: activeE ? pick(activeE.title) : "", count: String(activeIdx + 1).padStart(2, "0") + " / " + String(all.length).padStart(2, "0")
+    };
+
+    const nav = [["Projects","پروژه‌ها","Projects.dc.html"],["Expertise","تخصص‌ها",""],
+      ["Awards","جوایز","Awards.dc.html"],["About","درباره ما","About.dc.html"],["Journal","مجله","Journal.dc.html"],
+      ["Contact","تماس","Contact.dc.html"]].map(n => ({ label: fa ? n[1] : n[0], href: n[2] ? (n[2] + hsh) : "#", on: n[2] ? "0" : "1" }));
+    const drawerLinks = [["Home","خانه","Homepage.dc.html"]].concat(
+      [["Projects","پروژه‌ها","Projects.dc.html"],["Expertise","تخصص‌ها",""],["Awards","جوایز","Awards.dc.html"],
+       ["About","درباره ما","About.dc.html"],["Journal","مجله","Journal.dc.html"],["Contact","تماس","Contact.dc.html"]]
+    ).map(n => ({ label: fa ? n[1] : n[0], href: n[2] ? (n[2] + hsh) : "#", on: n[2] ? "0" : "1" }));
+
+    const mkWork = (projList, colIdx0) => {
+      const LAYOUT = [{ col:"1 / span 7", ratio:"16/9" },{ col:"9 / span 4", ratio:"3/4" },{ col:"3 / span 5", ratio:"4/3" }];
+      return projList.map((p, k) => {
+        const lay = LAYOUT[(colIdx0 + k) % LAYOUT.length];
+        const v = P.visual(p.id, "archive", "archive", { lang: st.lang });
+        const has = !!(v && v.isRealMedia);
+        return {
+          href: "Projects.dc.html#p=" + P.indexOf(p.id) + amp, col: lay.col, ratio: lay.ratio,
+          bg: has ? v.backgroundImage : "none",
+          title: pick(p.title), year: p.years || p.year || "",
+          location: pick(p.location), disciplines: (p.expertise || []).map(s => { const r = EX.bySlug(s); return r ? pick(r.title) : s; }).join(" · ")
+        };
+      });
+    };
+    const overviewProjSeen = {};
+    const overviewProj = [];
+    all.forEach(e => { (EX.projects(e.slug) || []).forEach(p => { if(!overviewProjSeen[p.id]){ overviewProjSeen[p.id] = true; overviewProj.push(p); } }); });
+    /* the cross-disciplinary story requires REAL multi-expertise projects — never a fake
+       relationship diagram. If none exist, this chapter is omitted outright and the page
+       falls back to a plain Selected Work grid (a strong omission beats decorative filler). */
+    const crossProj = overviewProj.filter(p => (p.expertise || []).length >= 2).slice(0, 3);
+    const hasCross = crossProj.length > 0;
+    const crossChapters = crossProj.map((p, i) => {
+      const v = P.visual(p.id, "archive", "archive", { lang: st.lang });
+      const has = !!(v && v.isRealMedia);
+      return {
+        key: "cross-" + i, href: "Projects.dc.html#p=" + P.indexOf(p.id) + amp,
+        bg: has ? v.backgroundImage : "var(--media-placeholder)",
+        title: pick(p.title), disciplines: (p.expertise || []).map(s => { const r = EX.bySlug(s); return r ? pick(r.title) : s; }).join(" · "),
+        op: "1"
+      };
+    });
+    const crossActive = crossProj[clamp1(st.crossActiveIdx, 0, Math.max(0, crossProj.length - 1))];
+    const crossV = crossActive ? P.visual(crossActive.id, "archive", "archive", { lang: st.lang }) : null;
+    const crossPv = {
+      bg: (crossV && crossV.isRealMedia) ? crossV.backgroundImage : "var(--media-placeholder)", op: "1",
+      count: crossProj.length ? (String((st.crossActiveIdx % crossProj.length) + 1).padStart(2, "0") + " / " + String(crossProj.length).padStart(2, "0")) : "",
+      tags: crossActive ? (crossActive.expertise || []).map(s => {
+        const r = EX.bySlug(s), on = s === activeSlug;
+        return { label: r ? pick(r.title) : s, color: "var(--ink)", bg: "transparent" };
+      }) : []
+    };
+    const hasPlainWork = !hasCross && overviewProj.length > 0;
+
+    let d = null;
+    if(activeSlug != null && st.slug != null){
+      const e = EX.bySlug(st.slug);
+      if(e){
+        const idx = EX.indexOf(st.slug);
+        const REX = e; const PXD = EX.prototypeDetail(st.slug);
+        const title = pick(e.title);
+        const caps = (e.capabilities || []).map((c, i) => ({ num: String(i + 1).padStart(2, "0"), title: pick(c.title), note: pick(c.note) }));
+        const phaseList = EX.phases(st.slug) || [];
+        const bodies = [];
+        const b1 = PXD ? pick(PXD.body[0]) : (e.body && e.body[0] ? pick(e.body[0]) : null);
+        const b2 = PXD ? pick(PXD.body[1]) : (e.body && e.body[1] ? pick(e.body[1]) : null);
+        if(b1) bodies.push(b1); if(b2) bodies.push(b2);
+        const lead = PXD ? pick(PXD.lead) : (e.lead ? pick(e.lead) : null);
+        const workProj = EX.projects(st.slug) || [];
+        const knowledgeRows = (J ? J.forExpertise(st.slug) : []).slice(0, 3).map(k => ({
+          href: "Journal.dc.html#article=" + k.slug + amp,
+          year: k.date, kind: J.typeOne && J.typeOne[k.type] ? J.typeOne[k.type][fa ? 1 : 0] : k.type,
+          title: fa ? k.fa : k.en
+        }));
+        const relRecs = EX.related(st.slug) || [];
+        const related = relRecs.slice(0, 3).map(r => ({
+          num: String(EX.indexOf(r.slug) + 1).padStart(2, "0"), title: pick(r.title), href: hrefOf(r.slug),
+          open: (ev) => { this.relSource = r.slug; this.go(r.slug, ev); },
+          enter: () => this.setState({ relHover:r.slug })
+        }));
+        const nxRec = EX.next(st.slug);
+        const nx = nxRec || all[0];
+
+        d = {
+          num: String(idx + 1).padStart(2, "0"), count: String(all.length).padStart(2, "0"),
+          title, proposition: e.proposition ? pick(e.proposition) : pick(e.strap),
+          heroBg: (e.presentation && e.presentation.heroImage) ? ("url(\"" + V1 + e.presentation.heroImage + "\")") : "var(--media-placeholder)",
+          hasApproach: !!(lead || bodies.length), approachLabel: fa ? "رویکرد ما" : "Our approach",
+          lead, bodies,
+          hasCapabilities: caps.length > 0, capabilities: caps,
+          hasProcess: !!e.hasProcess && phaseList.length > 0,
+          phases: phaseList.map((ph) => ({
+            label: pick(ph.label), body: pick(ph.body), ratio: (ph.presentation && ph.presentation.ratio) || "4/3",
+            indent: (ph.presentation && ph.presentation.indent) || "0%",
+            plate: (ph.presentation && ph.presentation.image) ? ("url(\"" + V1 + ph.presentation.image + "\") center / cover no-repeat") : "var(--media-placeholder)",
+            plateOp: (ph.presentation && ph.presentation.image) ? "1" : String((ph.presentation && ph.presentation.plateOpacity) || 0)
+          })),
+          phaseTitle: phaseList[st.phaseActive] ? pick(phaseList[st.phaseActive].label) : "",
+          phaseBody: phaseList[st.phaseActive] ? pick(phaseList[st.phaseActive].body) : "",
+          phaseActiveNum: String((st.phaseActive || 0) + 1).padStart(2, "0"), phaseCount: String(phaseList.length).padStart(2, "0"),
+          hasWork: workProj.length > 0, work: mkWork(workProj, 0),
+          filterHref: "Projects.dc.html#expertise=" + st.slug + amp,
+          filterLabel: fa ? ("همه پروژه‌های " + title) : ("All " + title + " projects"),
+          hasKnowledge: knowledgeRows.length > 0, knowledge: knowledgeRows,
+          hasRelated: related.length > 0, related
+        };
+        var nextObj = { href: hrefOf(nx.slug), open: (ev) => this.go(nx.slug, ev), title: pick(nx.title), bg: "var(--media-placeholder)" };
+        var relPv = related.length ? { img: "none", op: "0" } : { img: "none", op: "0" };
+      }
+    }
+
+    const chapterOn = d && st.chapterVisible;
+    const chapterLbl = CHAPTER_LBL[st.chapterKey] || ["",""];
+
+    return {
+      dir: fa ? "rtl" : "ltr", upper: fa ? "none" : "uppercase", lang: st.lang,
+      brand: fa ? "طرح و آفرینش" : "Tarh & Afarinesh", nav, drawerLinks,
+      hrefHome: "Homepage.dc.html" + hsh, hrefProjects: "Projects.dc.html" + hsh, hrefContact: "Contact.dc.html" + hsh,
+      setEn: () => this.setLang("en"), setFa: () => this.setLang("fa"),
+
+      isOverview: st.slug == null, isDetail: st.slug != null, d: d || {},
+
+      eyebrow: fa ? "تخصص‌ها — شیوه کار ما" : "Expertise — how we work",
+      openLines: fa ? ["رشته‌های متفاوت،", "یک اندیشه معماری."] : ["Different disciplines.", "One architectural intent."],
+      intro: fa ? "معماری، مهندسی، طراحی داخلی و نگاه محیطی به‌صورت هم‌زمان و یکپارچه توسعه می‌یابند، نه جدا از یکدیگر."
+        : "Design is never one discipline. Every project is shaped by the intersection of several.",
+      countLabel: String(all.length).padStart(2, "0") + (fa ? " تخصص" : " disciplines"),
+
+      registerLabel: fa ? "فهرست تخصص‌ها" : "Register",
+      registerMotifCell: String(window.TA_MOTIF ? window.TA_MOTIF.cellForIndex(activeIdx) : 5),
+      rows, pv,
+
+      interLead: fa ? "میان تخصص‌ها، ایده‌های تازه آغاز می‌شوند." : "Between disciplines is where new ideas begin.",
+      hasCross, crossChapters, crossPv,
+      hasPlainWork,
+      workLabel: fa ? "کارهای منتخب — میان‌رشته‌ای" : "Selected work — across disciplines",
+      allProjectsLabel: fa ? "همه پروژه‌ها" : "All projects",
+      overviewWork: mkWork(overviewProj.slice(0, 3), 0),
+
+      motifFlip: fa ? "-1" : "1",
+      closingLines: fa ? ["هر تخصص، لایه‌ای است","از یک کار معمارانه واحد؛","متمایز در روش، یکپارچه در هدف."]
+        : ["Each discipline is a layer", "of one architectural practice —", "distinct in method, unified in intent."],
+      contactLink: fa ? "با ما کار کنید" : "Work with us",
+
+      approachLabel: fa ? "رویکرد ما" : "Our approach",
+      capabilitiesLabel: fa ? "توانمندی‌ها" : "Capabilities",
+      processLabel: fa ? "روش" : "Method",
+      workInFieldLabel: fa ? "پروژه‌ها در این حوزه" : "Work in this field",
+      knowledgeLabel: fa ? "دانش" : "Knowledge",
+      relatedLabel: fa ? "تخصص‌های مرتبط" : "Related expertise",
+      nextLabel: fa ? "تخصص بعدی" : "Next expertise",
+      next: typeof nextObj !== "undefined" ? nextObj : { href:"#", title:"", bg:"none" },
+      relPv: typeof relPv !== "undefined" ? relPv : { img:"none", op:"0" },
+      backHref: "" + hsh, goBack: (ev) => this.go(null, ev),
+      backLabel: fa ? "← بازگشت به تخصص‌ها" : "← Back to Expertise",
+
+      chapterSide: fa ? "right" : "left",
+      chapterOpacity: chapterOn ? "1" : "0",
+      chapterNum: String(st.chapterIdx + 1).padStart(2, "0") + " / " + String(st.chapterN).padStart(2, "0"),
+      chapterLabel: chapterLbl[fa ? 1 : 0]
+    };
+  }
+}
+
+</script>
+</body>
+</html>

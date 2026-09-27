@@ -1,0 +1,140 @@
+{
+  "note": "Fingerprint of V1 at the moment V2 architecture was set up. V1 pages must match this until V2 replaces them. Shared modules may change additively — record the reason in VERSION_STRATEGY.md.",
+  "locationNote": "All v1Pages files and the sharedModules entries listed here as V1's own copies (layout-mode.js, responsive.css, tokens-v2.css, support.js) were relocated from the project root into v1/ in cleanup pass 3 (2026-09-27); content is unchanged (hashes below still apply) except the 8 v1Pages files, whose <head> import paths were necessarily updated for the move — see VERSION_STRATEGY.md §7 and docs/REGRESSION_BASELINE.md for current hashes. The bidi.js entry below is stale (file removed in cleanup pass 2, 2026-09-27) and should be dropped whenever this baseline is next regenerated.",
+  "created": "2026-09-24",
+  "algorithm": "djb2 over UTF-16 content",
+  "v1Pages": [
+    {
+      "file": "Homepage.dc.html",
+      "role": "v1-page",
+      "bytes": 109703,
+      "hash": "53178fb4"
+    },
+    {
+      "file": "Projects.dc.html",
+      "role": "v1-page",
+      "bytes": 125803,
+      "hash": "1f68ffbe"
+    },
+    {
+      "file": "Expertise.dc.html",
+      "role": "v1-page",
+      "bytes": 84595,
+      "hash": "49faceaa"
+    },
+    {
+      "file": "Awards.dc.html",
+      "role": "v1-page",
+      "bytes": 52255,
+      "hash": "3641bef9"
+    },
+    {
+      "file": "About.dc.html",
+      "role": "v1-page",
+      "bytes": 59373,
+      "hash": "48297537"
+    },
+    {
+      "file": "Journal.dc.html",
+      "role": "v1-page",
+      "bytes": 87087,
+      "hash": "cc38f417"
+    },
+    {
+      "file": "Contact.dc.html",
+      "role": "v1-page",
+      "bytes": 65869,
+      "hash": "1912522f"
+    },
+    {
+      "file": "Design System.dc.html",
+      "role": "v1-page",
+      "bytes": 234115,
+      "hash": "be9d9da5",
+      "updated": "2026-09-24 — ambient intensity + edge fix (logged)"
+    }
+  ],
+  "sharedModules": [
+    {
+      "file": "projects-data.js",
+      "role": "shared",
+      "bytes": 113084,
+      "hash": "b17202de"
+    },
+    {
+      "file": "expertise-data.js",
+      "role": "shared",
+      "bytes": 11993,
+      "hash": "63adc01c"
+    },
+    {
+      "file": "about-data.js",
+      "role": "shared",
+      "bytes": 10108,
+      "hash": "b71e9b5a"
+    },
+    {
+      "file": "awards-data.js",
+      "role": "shared",
+      "bytes": 11514,
+      "hash": "5436ae35"
+    },
+    {
+      "file": "journal-data.js",
+      "role": "shared",
+      "bytes": 16705,
+      "hash": "e4faacd3"
+    },
+    {
+      "file": "contact-data.js",
+      "role": "shared",
+      "bytes": 3380,
+      "hash": "279b9944"
+    },
+    {
+      "file": "site-data.js",
+      "role": "shared",
+      "bytes": 9280,
+      "hash": "6a31dd0c"
+    },
+    {
+      "file": "media-utils.js",
+      "role": "shared",
+      "bytes": 4003,
+      "hash": "4534cffa"
+    },
+    {
+      "file": "layout-mode.js",
+      "role": "shared",
+      "bytes": 5513,
+      "hash": "0ba418fb"
+    },
+    {
+      "file": "responsive.css",
+      "role": "shared",
+      "bytes": 32596,
+      "hash": "a666dfc6"
+    },
+    {
+      "file": "tokens-v2.css",
+      "role": "shared",
+      "bytes": 16511,
+      "hash": "659ae1e5",
+      "updated": "2026-09-24 — ambient intensity + edge fix (logged)"
+    },
+    {
+      "file": "support.js",
+      "role": "shared",
+      "bytes": 69134,
+      "hash": "f8be3c3d"
+    },
+    {
+      "file": "bidi.js",
+      "role": "shared",
+      "bytes": 2865,
+      "hash": "d67d3e7f",
+      "added": "2026-09-24",
+      "updated": "2026-09-24 — Phase 2B.1 bidi hardening (logged)"
+    }
+  ]
+}

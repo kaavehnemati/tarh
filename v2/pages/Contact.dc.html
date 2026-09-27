@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet" />
+<script>window.TA_ASSET_BASE = "../../";</script>
+<link rel="stylesheet" href="../design-system/tokens-v2.css" />
+<link rel="stylesheet" href="../design-system/base-v2.css" />
+<link rel="stylesheet" href="../design-system/responsive-v2.css" />
+<script src="../runtime/bidi.js"></script>
+<script src="../../site-data.js"></script>
+<script src="../../media-utils.js"></script>
+<script src="../../expertise-data.js"></script>
+<script src="../../contact-data.js"></script>
+<script src="../runtime/scroll-coordinator.js"></script>
+<script src="../runtime/ambient.js"></script>
+<script src="../runtime/reveal.js"></script>
+<script src="../runtime/ui-strings.js"></script>
+<script src="../runtime/motif.js"></script>
+<script src="../runtime/cursor.js"></script>
+<style>
+[data-ct2-form]{display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter)}
+[data-ct2-context]{grid-column:var(--span-label);position:sticky;top:96px;align-self:start}
+[data-ct2-fields]{grid-column:var(--span-body);display:flex;flex-direction:column;gap:var(--space-block)}
+@media (max-width:1023px){ [data-ct2-context]{position:static} }
+@media (max-width:640px){ [data-ct2-threshold-band]{aspect-ratio:3/4 !important} }
+</style>
+</helmet>
+
+<div data-ct2-root="1" data-v2-shell="1" dir="{{ dir }}" style="color:var(--ink);min-height:100svh;overflow-x:clip">
+
+  <dc-import name="../components/HeaderNav" upper="{{ upper }}" brand="{{ brand }}" nav="{{ nav }}" drawer-links="{{ drawerLinks }}" href-home="{{ hrefHome }}" lang="{{ lang }}" on-set-en="{{ setEn }}" on-set-fa="{{ setFa }}" menu-id="ct" hint-size="100%,64px"></dc-import>
+
+  <section data-screen-label="01 Opening" data-ambient-zone="full" style="position:relative;padding:var(--space-section-lg) var(--grid-margin) var(--space-section)">
+    <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter);align-items:end">
+      <div style="grid-column:var(--span-wide)">
+        <div data-v2-in="1" style="display:flex;align-items:center;gap:var(--space-3);font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45)">
+          <i style="width:var(--c-indicator);height:var(--c-indicator);background:var(--turq)"></i>{{ eyebrow }}
+        </div>
+        <h1 data-v2-rise="1" style="margin:var(--rel-eyebrow-heading) 0 0;font-size:var(--t-dl);line-height:var(--t-dl-lh);letter-spacing:var(--t-dl-ls);font-weight:var(--t-dl-w)">
+          <sc-for list="{{ openLines }}" as="l" hint-placeholder-count="2"><span style="display:block">{{ l }}</span></sc-for>
+        </h1>
+        <p style="margin:var(--space-content) 0 0;font-size:var(--t-bl);line-height:var(--t-bl-lh);color:var(--ink-60);max-width:var(--measure)">{{ intro }}</p>
+      </div>
+      <span data-grid-motif="static" data-grid-motif-size="anchor" data-motif-active="5" aria-hidden="true" style="grid-column:var(--span-support);justify-self:end;align-self:end"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+    </div>
+  </section>
+
+  <section data-screen-label="01c Threshold visual" data-ambient-zone="off" style="padding:0 var(--grid-margin) var(--space-section)">
+    <div data-reveal="media" data-ct2-threshold-band="1" style="position:relative;width:100%;aspect-ratio:{{ thresholdRatio }};overflow:hidden;background:var(--surface-1)">
+      <img src="../../assets/contact/contact-threshold.webp" alt="{{ thresholdAlt }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:{{ thresholdPos }}" />
+    </div>
+  </section>
+
+  <section data-screen-label="01b Interlude" data-ambient-zone="off" style="background:var(--surface-4);color:var(--canvas);padding:var(--space-block) var(--grid-margin)">
+    <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter)">
+      <p data-reveal="content" style="grid-column:var(--span-lead);margin:0;font-size:var(--t-hxl);line-height:var(--t-hxl-lh);letter-spacing:var(--t-hxl-ls);font-weight:var(--t-hxl-w)">{{ interlude }}</p>
+    </div>
+  </section>
+
+  <section id="inquiry" data-screen-label="02 Inquiry type" data-ambient-zone="soft" style="padding:var(--space-section) var(--grid-margin)">
+    <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter)">
+      <div style="grid-column:var(--span-label);display:flex;flex-direction:column;gap:var(--space-4)">
+        <h2 data-reveal="content" style="margin:0;font-size:var(--t-hl);line-height:var(--t-hl-lh);letter-spacing:var(--t-hl-ls);font-weight:var(--t-hl-w);max-width:20ch">{{ askLabel }}</h2>
+        <span data-grid-motif="static" data-grid-motif-size="standard" data-motif-active="{{ inquiryMotifCell }}" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+      </div>
+      <div style="grid-column:var(--span-body)">
+        <sc-for list="{{ intents }}" as="t" hint-placeholder-count="5">
+          <button type="button" data-v2-cursor="select" onClick="{{ t.pick }}" onMouseEnter="{{ t.enter }}" onFocus="{{ t.enter }}" onMouseLeave="{{ t.leave }}" onBlur="{{ t.leave }}" aria-pressed="{{ t.pressed }}" style="appearance:none;background:none;border:none;border-top:1px solid var(--rule);width:100%;text-align:start;padding:var(--space-5) 0;cursor:pointer;font:inherit;color:inherit;display:{{ t.display }};align-items:baseline;gap:var(--space-5);min-height:var(--c-control-h);transition:opacity var(--m-standard) var(--e-editorial)">
+            <span class="text-number" style="display:flex;align-items:center;gap:var(--space-tight);font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);color:var(--ink-45);flex:none"><i style="width:var(--c-indicator-sm);height:var(--c-indicator-sm);background:var(--turq);opacity:{{ t.sq }}"></i>{{ t.num }}</span>
+            <span style="flex:1;font-size:var(--t-hm);line-height:var(--t-hm-lh);letter-spacing:var(--t-hm-ls);font-weight:var(--t-hm-w)">{{ t.label }}</span>
+            <span aria-hidden="true" style="font-size:13px;color:var(--ink-45);flex:none">↗</span>
+          </button>
+        </sc-for>
+        <div style="border-top:1px solid var(--rule)"></div>
+        <sc-if value="{{ hasIntent }}" hint-placeholder-val="{{ false }}">
+          <button type="button" onClick="{{ clearIntent }}" style="appearance:none;background:none;border:none;padding:var(--space-4) 0 0;cursor:pointer;font:inherit;color:var(--ink-45);font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};display:inline-flex;align-items:center;gap:var(--space-3);min-height:var(--c-control-h)"><span aria-hidden="true" style="display:block;width:18px;height:1px;background:currentColor"></span>{{ changeLabel }}</button>
+        </sc-if>
+      </div>
+    </div>
+  </section>
+
+  <sc-if value="{{ hasIntent }}" hint-placeholder-val="{{ false }}">
+    <section data-screen-label="03 Contextual form" data-ambient-zone="off" style="padding:var(--space-section) var(--grid-margin)">
+      <form onSubmit="{{ submit }}" noValidate="{{ true }}" data-ct2-form="1">
+        <div data-ct2-context="1">
+          <div style="font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45)">{{ contextLabel }}</div>
+          <div style="margin-top:var(--space-3);font-size:var(--t-hs);line-height:var(--t-hs-lh);font-weight:var(--t-hs-w)">{{ intentLabel }}</div>
+          <p style="margin:var(--space-3) 0 0;font-size:var(--t-bs);line-height:var(--t-bs-lh);color:var(--ink-45);max-width:26ch">{{ intentNote }}</p>
+        </div>
+        <div data-ct2-fields="1">
+          <sc-for list="{{ fields }}" as="f" hint-placeholder-count="5">
+            <div style="display:flex;flex-direction:column;gap:var(--space-2)">
+              <label for="{{ f.id }}" style="font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45)">{{ f.label }}<span style="display:{{ f.optionalDisplay }}"> {{ optionalLabel }}</span></label>
+              <sc-if value="{{ f.isArea }}" hint-placeholder-val="{{ false }}">
+                <textarea id="{{ f.id }}" name="{{ f.id }}" rows="5" onInput="{{ f.set }}" onChange="{{ f.set }}" aria-invalid="{{ f.invalid }}" aria-describedby="{{ f.errId }}" dir="{{ f.dir }}" autoComplete="off" style="appearance:none;background:none;border:none;border-bottom:{{ f.ruleWidth }} solid {{ f.ruleColor }};padding:var(--space-2) 0;resize:vertical;font:inherit;font-size:var(--t-bm);line-height:var(--t-bm-lh)"></textarea>
+              </sc-if>
+              <sc-if value="{{ f.isText }}" hint-placeholder-val="{{ true }}">
+                <input id="{{ f.id }}" name="{{ f.id }}" type="{{ f.type }}" onInput="{{ f.set }}" onChange="{{ f.set }}" autoComplete="{{ f.autocomplete }}" aria-invalid="{{ f.invalid }}" aria-describedby="{{ f.errId }}" dir="{{ f.dir }}" style="appearance:none;background:none;border:none;border-bottom:{{ f.ruleWidth }} solid {{ f.ruleColor }};padding:var(--space-2) 0;font:inherit;font-size:var(--t-bm)" />
+              </sc-if>
+              <div id="{{ f.errId }}" role="alert" style="display:{{ f.errDisplay }};align-items:center;gap:var(--space-2);font-size:var(--t-bs);color:var(--ink)">
+                <i aria-hidden="true" style="width:6px;height:6px;background:var(--ink);flex:none"></i>{{ f.error }}
+              </div>
+            </div>
+          </sc-for>
+
+          <sc-if value="{{ showExpertise }}" hint-placeholder-val="{{ false }}">
+            <fieldset style="border:none;padding:0;margin:0;display:flex;flex-direction:column;gap:var(--space-3)">
+              <legend style="padding:0;font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45)">{{ expertiseLabel }} <span>{{ optionalLabel }}</span></legend>
+              <sc-for list="{{ expertiseOptions }}" as="x" hint-placeholder-count="5">
+                <button type="button" onClick="{{ x.toggle }}" aria-pressed="{{ x.pressed }}" style="appearance:none;background:none;border:none;border-top:1px solid var(--rule-soft);width:100%;text-align:start;padding:var(--space-3) 0;cursor:pointer;font:inherit;color:inherit;display:flex;align-items:center;gap:var(--space-3);min-height:var(--c-control-h);opacity:{{ x.opacity }};transition:opacity var(--m-fast) var(--e-smooth)">
+                  <i style="width:var(--c-indicator);height:var(--c-indicator);background:var(--turq);opacity:{{ x.sq }};flex:none"></i>
+                  <span style="font-size:var(--t-bm);line-height:1.4">{{ x.label }}</span>
+                </button>
+              </sc-for>
+            </fieldset>
+          </sc-if>
+
+          <sc-if value="{{ showStage }}" hint-placeholder-val="{{ false }}">
+            <fieldset style="border:none;padding:0;margin:0;display:flex;flex-direction:column;gap:var(--space-3)">
+              <legend style="padding:0;font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45)">{{ stageLabel }} <span>{{ optionalLabel }}</span></legend>
+              <div style="display:flex;flex-wrap:wrap;gap:var(--space-3) var(--space-6)">
+                <sc-for list="{{ stageOptions }}" as="s" hint-placeholder-count="6">
+                  <button type="button" onClick="{{ s.pick }}" aria-pressed="{{ s.pressed }}" style="appearance:none;background:none;border:none;padding:var(--space-2) 0;cursor:pointer;font:inherit;color:inherit;display:inline-flex;align-items:center;gap:var(--space-tight);min-height:var(--c-control-h);opacity:{{ s.opacity }};transition:opacity var(--m-fast) var(--e-smooth)">
+                    <i style="width:var(--c-indicator-sm);height:var(--c-indicator-sm);background:var(--turq);opacity:{{ s.sq }};flex:none"></i>
+                    <span style="font-size:var(--t-bs)">{{ s.label }}</span>
+                  </button>
+                </sc-for>
+              </div>
+            </fieldset>
+          </sc-if>
+
+          <sc-if value="{{ showAttachment }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;flex-direction:column;gap:var(--space-2)">
+              <span style="font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45)">{{ attachLabel }} <span>{{ optionalLabel }}</span></span>
+              <button type="button" onClick="{{ attach }}" style="appearance:none;background:none;border:none;border-bottom:1px solid var(--rule);padding:var(--space-2) 0;cursor:pointer;font:inherit;color:inherit;display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);text-align:start;min-height:var(--c-control-h)">
+                <span style="display:flex;align-items:center;gap:var(--space-3);font-size:var(--t-bm)"><i style="width:var(--c-indicator);height:var(--c-indicator);background:var(--turq)"></i>{{ attachState }}</span>
+                <span class="text-code" style="font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);color:var(--ink-45)">PDF / DOC / ZIP</span>
+              </button>
+            </div>
+          </sc-if>
+
+          <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:var(--space-6);flex-wrap:wrap;border-top:1px solid var(--rule);padding-top:var(--space-5)">
+            <div style="font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);line-height:1.7;color:var(--ink-45);max-width:34ch">{{ privacyNote }}</div>
+            <button type="submit" style="appearance:none;background:none;border:none;padding:0;cursor:pointer;font:inherit;color:inherit;display:inline-flex;align-items:baseline;gap:var(--space-4);font-size:var(--t-hm);line-height:1.1;letter-spacing:var(--t-hm-ls);font-weight:var(--t-hm-w);min-height:var(--c-control-h)">{{ submitLabel }}<span aria-hidden="true" style="font-size:.6em">↗</span></button>
+          </div>
+
+          <sc-if value="{{ showReady }}" hint-placeholder-val="{{ false }}">
+            <div role="status" style="border-top:1px solid var(--ink);padding-top:var(--space-4);display:flex;align-items:flex-start;gap:var(--space-3)">
+              <i style="width:9px;height:9px;background:var(--turq);flex:none;margin-top:6px"></i>
+              <div>
+                <div style="font-size:var(--t-hs);line-height:var(--t-hs-lh)">{{ readyLabel }}</div>
+                <button type="button" onClick="{{ editMessage }}" style="appearance:none;background:none;border:none;padding:var(--space-3) 0 0;cursor:pointer;font:inherit;color:var(--ink-45);font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};min-height:var(--c-control-h)">{{ editLabel }}</button>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+      </form>
+    </section>
+  </sc-if>
+
+  <section data-screen-label="04 Studio information" data-ambient-zone="minimal" data-grid-surface="standard" style="padding:var(--space-section) var(--grid-margin)">
+    <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter)">
+      <h2 data-reveal="content" style="grid-column:var(--span-label);margin:0;font-size:var(--t-hm);line-height:var(--t-hm-lh);letter-spacing:var(--t-hm-ls);font-weight:var(--t-hm-w)">{{ studioLabel }}</h2>
+      <div style="grid-column:var(--span-body)">
+        <sc-for list="{{ directRows }}" as="row" hint-placeholder-count="2">
+          <div style="display:grid;grid-template-columns:minmax(0,160px) minmax(0,1fr);gap:var(--space-5);align-items:baseline;border-top:1px solid var(--rule);padding:var(--space-4) 0">
+            <span style="font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45)">{{ row.label }}</span>
+            <span class="{{ row.cls }}" style="font-size:var(--t-hs);line-height:var(--t-hs-lh)">{{ row.value }}</span>
+          </div>
+        </sc-for>
+        <div style="display:grid;grid-template-columns:minmax(0,160px) minmax(0,1fr);gap:var(--space-5);align-items:baseline;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:var(--space-4) 0">
+          <span style="font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45)">{{ socialLabel }}</span>
+          <span style="display:flex;flex-wrap:wrap;gap:var(--space-3) var(--space-5)">
+            <sc-for list="{{ socials }}" as="s" hint-placeholder-count="2">
+              <span class="text-ltr" style="display:inline-flex;align-items:baseline;gap:var(--space-tight);font-size:var(--t-hs)">
+                <sc-if value="{{ s.live }}" hint-placeholder-val="{{ false }}"><a href="{{ s.href }}" target="_blank" rel="noopener noreferrer" aria-label="{{ s.aria }}">{{ s.label }}</a></sc-if>
+                <sc-if value="{{ s.pending }}" hint-placeholder-val="{{ true }}"><span style="color:var(--ink-60)">{{ s.label }}</span><span style="font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--ink-45);margin-inline-start:var(--space-2)">{{ s.state }}</span></sc-if>
+              </span>
+            </sc-for>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <sc-if value="{{ hasOffices }}" hint-placeholder-val="{{ false }}">
+      <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter);margin-top:var(--space-section)">
+        <h2 style="grid-column:var(--span-label);margin:0;font-size:var(--t-hm);line-height:var(--t-hm-lh);letter-spacing:var(--t-hm-ls);font-weight:var(--t-hm-w)">{{ officesLabel }}</h2>
+        <div style="grid-column:var(--span-body);display:grid;gap:var(--space-block)">
+          <sc-for list="{{ offices }}" as="o" hint-placeholder-count="1">
+            <div>
+              <div style="display:flex;align-items:baseline;gap:var(--space-4);border-top:1px solid var(--ink);padding-top:var(--space-3)">
+                <span style="font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45)">{{ o.label }}</span>
+                <span style="font-size:var(--t-hs);line-height:var(--t-hs-lh)">{{ o.city }}</span>
+              </div>
+              <sc-for list="{{ o.rows }}" as="row" hint-placeholder-count="3">
+                <div style="display:grid;grid-template-columns:minmax(0,160px) minmax(0,1fr);gap:var(--space-5);align-items:baseline;border-bottom:1px solid var(--rule-soft);padding:var(--space-3) 0">
+                  <span style="font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--ink-45)">{{ row.label }}</span>
+                  <span class="{{ row.cls }}" style="font-size:var(--t-bm);line-height:1.7">{{ row.value }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+  </section>
+
+  <section data-screen-label="05 Other pathways" data-ambient-zone="soft" style="padding:var(--space-section) var(--grid-margin)">
+    <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter);border-top:1px solid var(--rule);padding-top:var(--space-5)">
+      <div style="grid-column:var(--span-lead)">
+        <h2 style="margin:0;font-size:var(--t-hxl);line-height:var(--t-hxl-lh);letter-spacing:var(--t-hxl-ls);font-weight:var(--t-hxl-w)">{{ workLabel }}</h2>
+        <p style="margin:var(--space-4) 0 0;font-size:var(--t-bl);line-height:var(--t-bl-lh);color:var(--ink-60);max-width:var(--measure)">{{ workNote }}</p>
+      </div>
+      <div style="grid-column:var(--span-support);align-self:end;display:flex;flex-direction:column;gap:var(--space-4)">
+        <button type="button" onClick="{{ pickCareer }}" style="appearance:none;background:none;border:none;padding:0;cursor:pointer;font:inherit;color:inherit;display:inline-flex;align-items:center;gap:var(--space-3);font-size:var(--t-cta);letter-spacing:var(--t-cta-ls);text-transform:{{ upper }};min-height:var(--c-control-h)"><i style="width:var(--c-indicator-sm);height:var(--c-indicator-sm);background:var(--turq)"></i>{{ careerCta }}<span aria-hidden="true">↗</span></button>
+        <button type="button" onClick="{{ pickMedia }}" style="appearance:none;background:none;border:none;padding:0;cursor:pointer;font:inherit;color:var(--ink-45);display:inline-flex;align-items:center;gap:var(--space-3);font-size:var(--t-cta);letter-spacing:var(--t-cta-ls);text-transform:{{ upper }};min-height:var(--c-control-h)"><i style="width:var(--c-indicator-sm);height:var(--c-indicator-sm);background:var(--turq);opacity:.5"></i>{{ mediaCta }}<span aria-hidden="true">↗</span></button>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="06 Closing" data-ambient-zone="full" style="position:relative;padding:var(--space-section-xl) var(--grid-margin) var(--space-element);overflow:hidden">
+    <svg aria-hidden="true" viewBox="0 0 340 340" style="position:absolute;top:50%;inset-inline-end:var(--grid-margin);transform:translateY(-50%) scaleX({{ motifFlip }});width:clamp(200px,26vw,380px);height:clamp(200px,26vw,380px);opacity:.4;pointer-events:none" fill="none">
+      <rect x="10" y="10" width="90" height="90" stroke="var(--turq)" stroke-width="1" /><rect x="120" y="10" width="90" height="90" stroke="var(--turq)" stroke-width="1" /><rect x="230" y="10" width="90" height="90" stroke="var(--turq)" stroke-width="1" />
+      <rect x="10" y="120" width="90" height="90" stroke="var(--turq)" stroke-width="1" /><rect x="120" y="120" width="90" height="90" stroke="var(--turq)" stroke-width="1" /><rect x="230" y="120" width="90" height="90" stroke="var(--turq)" stroke-width="1" />
+      <rect x="10" y="230" width="90" height="90" stroke="var(--turq)" stroke-width="1" /><rect x="120" y="230" width="90" height="90" stroke="var(--turq)" stroke-width="1" /><rect x="230" y="230" width="90" height="90" stroke="var(--turq)" stroke-width="1" />
+      <line x1="0" y1="340" x2="340" y2="0" stroke="var(--turq)" stroke-width="1" /><line x1="60" y1="340" x2="340" y2="60" stroke="var(--turq)" stroke-width="1" />
+    </svg>
+    <div style="position:relative;z-index:1;display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter)">
+      <div style="grid-column:var(--span-lead)">
+        <p data-reveal="content" style="margin:0;font-size:var(--t-hl);line-height:var(--t-hl-lh);letter-spacing:var(--t-hl-ls);font-weight:var(--t-hl-w);max-width:var(--grid-title-max)">
+          <sc-for list="{{ closingLines }}" as="l" hint-placeholder-count="2"><span style="display:block">{{ l }}</span></sc-for>
+        </p>
+        <a href="#inquiry" onClick="{{ clearIntent }}" data-v2-cursor="select" style="margin-top:var(--space-5);display:inline-flex;align-items:baseline;gap:var(--space-4);font-size:var(--t-cta);letter-spacing:var(--t-cta-ls);text-transform:{{ upper }};min-height:var(--c-control-h)"><i style="width:var(--c-indicator-sm);height:var(--c-indicator-sm);background:var(--turq)"></i>{{ closingCta }}<span aria-hidden="true">↗</span></a>
+      </div>
+      <div style="grid-column:var(--span-full);margin-top:var(--space-section);display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter);border-top:1px solid var(--ink);padding-top:var(--space-5)">
+        <div style="grid-column:var(--span-label);display:flex;flex-direction:column;gap:var(--space-2);font-size:var(--t-bs);line-height:1.7">
+          <a href="{{ hrefProjects }}">{{ navProjects }}</a>
+          <a href="{{ hrefExpertise }}">{{ navExpertise }}</a>
+          <a href="{{ hrefAwards }}">{{ navAwards }}</a>
+          <a href="{{ hrefAbout }}">{{ navAbout }}</a>
+          <a href="{{ hrefJournal }}">{{ navJournal }}</a>
+        </div>
+        <div style="grid-column:var(--span-body);display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--space-4);font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--ink-45);align-self:end">
+          <span>Tarh &amp; Afarinesh — طرح و آفرینش</span>
+          <span class="text-number">© {{ year }}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440},&quot;startLang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;en&quot;,&quot;options&quot;:[&quot;en&quot;,&quot;fa&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Bilingual&quot;}}">
+const B = () => window.TA_BIDI;
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const FIELD_DEF = {
+  name:        { en:"Name", fa:"نام", type:"text", dir:"auto", ac:"name", required:true },
+  email:       { en:"Email", fa:"ایمیل", type:"email", dir:"ltr", ac:"email", required:true },
+  organisation:{ en:"Organisation", fa:"شرکت / سازمان", type:"text", dir:"auto", ac:"organization" },
+  location:    { en:"Project location", fa:"محل پروژه", type:"text", dir:"auto", ac:"country-name" },
+  scale:       { en:"Approximate scale", fa:"مقیاس تقریبی", type:"text", dir:"auto" },
+  timeline:    { en:"Desired timeline", fa:"زمان‌بندی موردنظر", type:"text", dir:"auto" },
+  area:        { en:"Nature of collaboration", fa:"نوع همکاری", type:"text", dir:"auto" },
+  url:         { en:"Website / portfolio", fa:"وب‌سایت / نمونه‌کار", type:"url", dir:"ltr", ac:"url" },
+  deadline:    { en:"Deadline", fa:"مهلت", type:"text", dir:"auto" },
+  subject:     { en:"Subject", fa:"موضوع", type:"text", dir:"auto", required:true },
+  role:        { en:"Role of interest", fa:"عنوان شغلی مدنظر", type:"text", dir:"auto" },
+  message:     { en:"Message", fa:"پیام", type:"area", dir:"auto", required:true }
+};
+const ORDER = ["name","email","organisation","location","area","url","deadline","subject","role","scale","timeline","message"];
+
+class Component extends DCLogic {
+  state = { lang:"en", intent:null, expertise:[], stage:null, values:{}, errors:{}, attached:false, ready:false, hoverIntent:null };
+
+  parseHash(){
+    const out = {};
+    (window.location.hash || "").replace(/^#/, "").split("&").forEach(p => {
+      if(!p) return; const i = p.indexOf("="); if(i > 0) out[p.slice(0, i)] = decodeURIComponent(p.slice(i + 1));
+    });
+    return out;
+  }
+
+  componentDidMount(){
+    this.root = document.querySelector("[data-ct2-root]");
+    this.vals = {};
+    const hq = this.parseHash();
+    const D = window.TA_CONTACT;
+    let next = {};
+    if(hq.lang === "fa" || this.props.startLang === "fa") next.lang = "fa";
+    if(hq.intent && D && D.type(hq.intent)) next.intent = hq.intent;
+    if(hq.expertise && D){
+      const ids = String(hq.expertise).split(",").filter(id => D.expertise.some(x => x.id === id));
+      if(ids.length){ next.expertise = ids; if(!next.intent && !this.state.intent) next.intent = "project"; }
+    }
+    if(Object.keys(next).length) this.setState(next);
+  }
+
+  componentDidUpdate(){
+    this.restoreValues();
+  }
+
+  restoreValues(){
+    if(!this.root) return;
+    const v = this.vals || {};
+    const active = document.activeElement;
+    Object.keys(v).forEach(k => {
+      const el = this.root.querySelector("#ct2-" + k);
+      if(el && el !== active && el.value !== v[k]) el.value = v[k];
+    });
+  }
+
+  hashString(){
+    const parts = [];
+    if(this.state.intent) parts.push("intent=" + this.state.intent);
+    if(this.state.intent === "project" && this.state.expertise.length) parts.push("expertise=" + this.state.expertise.join(","));
+    if(this.state.lang === "fa") parts.push("lang=fa");
+    return parts.length ? "#" + parts.join("&") : "";
+  }
+  syncHash(){
+    try{
+      const h = this.hashString();
+      if(window.history && window.history.replaceState) window.history.replaceState(null, "", h || window.location.pathname);
+    }catch(e){}
+  }
+  setLang(l){ this.setState({ lang:l }, () => this.syncHash()); }
+  /* calm micro-motion for the one real state change on this LOW-density page: picking a
+     different inquiry swaps the field set. A brief dip-and-settle, not a page jump. */
+  fieldsDip(){
+    if(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const el = document.querySelector('[data-ct2-fields]');
+    if(!el) return;
+    el.style.transition = "none"; el.style.opacity = "0"; el.style.transform = "translateY(4px)";
+    setTimeout(() => {
+      el.style.transition = "opacity var(--m-fast) var(--e-smooth), transform var(--m-fast) var(--e-smooth)";
+      el.style.opacity = "1"; el.style.transform = "translateY(0)";
+    }, 20);
+  }
+
+  activeFields(){
+    const D = window.TA_CONTACT, intent = this.state.intent;
+    if(!D || !intent) return [];
+    const extra = D.fieldsFor[intent] || [];
+    return ORDER.filter(k => k === "name" || k === "email" || k === "message" || extra.indexOf(k) >= 0);
+  }
+  readField(k){
+    const el = this.root.querySelector("#ct2-" + k);
+    if(el) this.vals[k] = el.value;
+    return this.vals[k] || "";
+  }
+  messageLabel(intent, fa){
+    if(intent === "project") return fa ? "شرح پروژه" : "Project brief";
+    if(intent === "career" || intent === "collaboration") return fa ? "یادداشت کوتاه" : "Short note";
+    return fa ? "پیام" : "Message";
+  }
+  attachmentLabel(intent, fa){
+    if(intent === "career") return fa ? "بارگذاری رزومه / نمونه‌کار" : "CV / portfolio upload";
+    if(intent === "project") return fa ? "فایل‌ها / مدارک پروژه" : "Attachments";
+    return fa ? "پیوست" : "Attachment";
+  }
+  validate(){
+    const errs = {}, fa = this.state.lang === "fa", v = {};
+    this.activeFields().forEach(k => { v[k] = this.readField(k); });
+    this.activeFields().forEach(k => {
+      const def = FIELD_DEF[k];
+      if(!def || !def.required) return;
+      const val = (v[k] || "").trim();
+      if(!val){
+        errs[k] = k === "email" ? (fa ? "لطفاً ایمیل خود را وارد کنید." : "Please enter your email.")
+          : k === "name" ? (fa ? "لطفاً نام خود را وارد کنید." : "Please enter your name.")
+          : k === "subject" ? (fa ? "لطفاً موضوع را وارد کنید." : "Please enter a subject.")
+          : (fa ? "لطفاً پیام خود را بنویسید." : "Please write your message.");
+      } else if(k === "email" && !EMAIL_RE.test(val)){
+        errs[k] = fa ? "ایمیل وارد‌شده معتبر نیست." : "Please enter a valid email address.";
+      }
+    });
+    return errs;
+  }
+  submit(e){
+    if(e && e.preventDefault) e.preventDefault();
+    this.activeFields().forEach(k => this.readField(k));
+    const errs = this.validate(), keys = Object.keys(errs);
+    this.setState({ errors:errs, ready: keys.length === 0 }, () => {
+      if(keys.length){
+        const first = this.root.querySelector("#ct2-" + keys[0]);
+        if(first) first.focus();
+      }
+    });
+  }
+
+  renderVals(){
+    const st = this.state, fa = st.lang === "fa";
+    const D = window.TA_CONTACT;
+    const hsh = fa ? "#lang=fa" : "";
+    const active = st.intent ? (D ? D.type(st.intent) : null) : null;
+
+    const intents = (D ? D.inquiryTypes : []).map((t, i) => {
+      const on = st.intent === t.id;
+      return {
+        num:t.num, label: fa ? t.fa : t.en, pressed: on ? "true" : "false",
+        display: (st.intent && !on) ? "none" : "flex", sq: on ? "1" : "0",
+        enter: () => this.setState({ hoverIntent:i }), leave: () => this.setState({ hoverIntent:null }),
+        pick: () => { this.fieldsDip(); this.setState({ intent:t.id, ready:false, errors:{} }, () => this.syncHash()); }
+      };
+    });
+
+    const fields = this.activeFields().map(k => {
+      const def = FIELD_DEF[k], err = st.errors[k], isArea = def.type === "area";
+      const label = k === "message" ? this.messageLabel(st.intent, fa) : (fa ? def.fa : def.en);
+      return {
+        id: "ct2-" + k, label,
+        optionalDisplay: def.required ? "none" : "inline",
+        isArea, isText: !isArea, type: isArea ? "text" : def.type,
+        dir: def.dir === "ltr" ? "ltr" : (fa ? "rtl" : "ltr"),
+        autocomplete: def.ac || "off",
+        invalid: err ? "true" : "false",
+        ruleWidth: err ? "2px" : "1px", ruleColor: err ? "var(--ink)" : "var(--rule)",
+        errId: "ct2-" + k + "-err", error: err || "", errDisplay: err ? "flex" : "none",
+        set: (e) => {
+          const val = e && e.target ? e.target.value : "";
+          this.vals[k] = val;
+          if(this.state.errors[k]) this.setState(s => { const er = Object.assign({}, s.errors); delete er[k]; return { errors:er }; });
+        }
+      };
+    });
+
+    const expertiseOptions = (D ? D.expertise : []).map(x => {
+      const on = st.expertise.indexOf(x.id) >= 0;
+      return { label: fa ? x.fa : x.en, sq: on ? "1" : "0", opacity: on ? "1" : "0.55", pressed: on ? "true" : "false",
+        toggle: () => this.setState(s => { const a = s.expertise.slice(), i = a.indexOf(x.id); if(i < 0) a.push(x.id); else a.splice(i, 1); return { expertise:a }; }, () => this.syncHash()) };
+    });
+    const stageOptions = (D ? D.stages : []).map(s2 => {
+      const on = st.stage === s2.id;
+      return { label: fa ? s2.fa : s2.en, sq: on ? "1" : "0", opacity: on ? "1" : "0.55", pressed: on ? "true" : "false",
+        pick: () => this.setState({ stage: on ? null : s2.id }) };
+    });
+
+    const studio = D ? D.studio : { email:"[EMAIL]", offices:[], socials:[] };
+    const firstOffice = (studio.offices && studio.offices[0]) || null;
+    const directRows = [];
+    const addRow = (label, value, cls) => { if(value) directRows.push({ label, value, cls: cls || "" }); };
+    addRow(fa ? "ایمیل" : "Email", fa ? (studio.emailFa || studio.email) : studio.email, "text-ltr");
+    addRow(fa ? "تلفن" : "Telephone", fa ? (studio.phoneFa || studio.phone) : studio.phone, "text-ltr");
+    addRow(fa ? "همکاری شغلی" : "Careers", studio.careerEmail, "text-ltr");
+    addRow(fa ? "دفتر" : "Office", firstOffice ? (fa ? firstOffice.cityFa : firstOffice.city) : null, "");
+    addRow(fa ? "وب‌سایت" : "Website", studio.website, "text-ltr");
+    addRow(fa ? "ساعات کاری" : "Hours", studio.hours ? (fa ? (studio.hoursFa || studio.hours) : studio.hours) : null, "");
+    const offices = (studio.offices || []).map(o => {
+      const rows = [];
+      const add = (label, value, cls) => { if(value) rows.push({ label, value, cls: cls || "" }); };
+      add(fa ? "آدرس" : "Address", fa ? (o.addressFa || o.address) : o.address, "");
+      add(fa ? "تلفن" : "Telephone", o.phone, "text-ltr");
+      add(fa ? "ایمیل" : "Email", o.email, "text-ltr");
+      return { label: fa ? o.labelFa : o.labelEn, city: fa ? o.cityFa : o.city, rows };
+    });
+    const socials = (studio.socials || []).map(s2 => ({
+      label:s2.label, live: !!s2.href, pending: !s2.href, href: s2.href || "",
+      aria: s2.href ? (s2.label + (fa ? " — در پنجره جدید" : " — opens in a new tab")) : s2.label,
+      state: fa ? "نشانی بعداً ارائه می‌شود" : "URL to be provided"
+    }));
+
+    const navList = [["Projects","پروژه‌ها","Projects.dc.html"],["Expertise","تخصص‌ها","Expertise.dc.html"],
+      ["Awards","جوایز","Awards.dc.html"],["About","درباره ما","About.dc.html"],["Journal","مجله","Journal.dc.html"],
+      ["Contact","تماس",""]];
+    const nav = navList.map(n => ({ label: fa ? n[1] : n[0], href: n[2] ? (n[2] + hsh) : "#", on: n[2] ? "0" : "1" }));
+    const drawerLinks = [["Home","خانه","Homepage.dc.html"]].concat(navList)
+      .map(n => ({ label: fa ? n[1] : n[0], href: n[2] ? (n[2] + hsh) : "#", on: n[2] ? "0" : "1" }));
+
+    return {
+      dir: fa ? "rtl" : "ltr", upper: fa ? "none" : "uppercase", lang: st.lang,
+      brand: fa ? "طرح و آفرینش" : "Tarh & Afarinesh",
+      nav, drawerLinks, hrefHome: "Homepage.dc.html" + hsh,
+      setEn: () => this.setLang("en"), setFa: () => this.setLang("fa"),
+
+      eyebrow: fa ? "تماس — نقطه آغاز" : "Contact — how we begin",
+      openLines: fa ? ["هر پروژه،","پیش از نخستین خط آغاز می‌شود."] : ["Every project begins","before the first line is drawn."],
+      intro: fa
+        ? "از زمین، ایده و مرحله‌ای که پروژه در آن قرار دارد برای ما بگویید. ما معماری، مهندسی و اجرا را در یک گفت‌وگوی واحد کنار هم می‌آوریم."
+        : "Tell us about the site, the ambition and where the project stands. We bring architecture, engineering and delivery into one conversation.",
+      thresholdRatio: "2.4 / 1",
+      thresholdPos: "62% 55%",
+      thresholdAlt: fa
+        ? "فضایی معماری با سطوح عظیم بتنی، نور طبیعی و مرزی تیره که آستانه‌ای فضایی را شکل می‌دهد."
+        : "Abstract architectural threshold defined by monumental concrete planes, natural light and a dark spatial edge.",
+
+      interlude: fa ? "پروژه‌ی خوب با پرسشی خوب آغاز می‌شود." : "A good project starts with a good question.",
+      askLabel: fa ? "درباره چه چیزی می‌خواهید صحبت کنیم؟" : "What would you like to talk about?",
+      inquiryMotifCell: String((window.TA_MOTIF ? window.TA_MOTIF.cellForIndex(
+        st.hoverIntent != null ? st.hoverIntent : (D ? D.inquiryTypes.findIndex(t => t.id === st.intent) : -1)
+      ) : 5)),
+      intents, hasIntent: !!st.intent,
+      clearIntent: () => this.setState({ intent:null, ready:false, errors:{} }, () => this.syncHash()),
+      changeLabel: fa ? "تغییر موضوع" : "Change inquiry type",
+
+      contextLabel: fa ? "موضوع گفت‌وگو" : "Inquiry",
+      intentLabel: st.intent === "project" ? (fa ? "از آنچه امروز می‌دانید شروع کنید." : "Start with what you know.") : (active ? (fa ? active.fa : active.en) : ""),
+      intentNote:
+        st.intent === "project" ? (fa
+          ? "زمین، برنامه، یک مسئله یا حتی یک ایده اولیه برای آغاز کافی است. آنچه مشخص شده را با ما در میان بگذارید؛ مسیر بعدی پروژه را می‌توانیم با هم تعریف کنیم."
+          : "A site, a programme, a challenge or simply an early idea is enough to begin. Share what is already defined; we can help frame what comes next.")
+        : st.intent === "career" ? (fa
+          ? "درخواست‌های همکاری شغلی را می‌توانید مستقیماً نیز ارسال کنید به: apply4job@tarh-afarinesh.com"
+          : "Applications may also be sent directly to: apply4job@tarh-afarinesh.com")
+        : st.intent === "media" ? (fa
+          ? "برای درخواست انتشار، دریافت اطلاعات پروژه، مجوز استفاده از تصاویر یا اطلاعات استودیو، لطفاً نام رسانه، موضوع درخواست و زمان موردنیاز را با ما در میان بگذارید."
+          : "For publication requests, project material, image permissions or studio information, please share the publication name, subject and deadline.")
+        : (fa ? "فقط همین اندازه کافی است؛ جزئیات را در گفت‌وگو کامل می‌کنیم."
+          : "This much is enough to begin; the details can follow in conversation."),
+      fields, optionalLabel: fa ? "(اختیاری)" : "(optional)",
+
+      showExpertise: !!(D && st.intent && D.has(st.intent, "expertise")),
+      expertiseLabel: fa ? "حوزه‌های موردنیاز" : "Areas of expertise", expertiseOptions,
+      showStage: !!(D && st.intent && D.has(st.intent, "stage")),
+      stageLabel: fa ? "مرحله پروژه" : "Project stage", stageOptions,
+      showAttachment: !!(D && st.intent && D.has(st.intent, "attachment")),
+      attachLabel: this.attachmentLabel(st.intent, fa),
+      attachState: st.attached ? (fa ? "بارگذاری فایل بعداً متصل می‌شود" : "File upload to be connected") : (fa ? "پیوست فایل" : "Attach file"),
+      attach: () => { this.setState({ attached:true }); clearTimeout(this._atT); this._atT = setTimeout(() => this.setState({ attached:false }), 2200); },
+
+      privacyNote: fa ? "متن حریم خصوصی بعداً ارائه می‌شود." : "Privacy notice to be provided.",
+      submit: (e) => this.submit(e),
+      submitLabel: fa ? "ارسال پیام" : "Send inquiry",
+      showReady: st.ready,
+      readyLabel: fa ? "فرم آماده است — ارسال در مرحله پیاده‌سازی متصل می‌شود." : "Form ready — submission will be connected during implementation.",
+      editMessage: () => this.setState({ ready:false }), editLabel: fa ? "ویرایش پیام" : "Edit message",
+
+      studioLabel: fa ? "تماس مستقیم" : "Direct contact", directRows,
+      socialLabel: fa ? "شبکه‌ها" : "Social", socials,
+      hasOffices: offices.length > 0,
+      officesLabel: offices.length > 1 ? (fa ? "دفاتر" : "Offices") : (fa ? "دفتر" : "Office"), offices,
+
+      workLabel: fa ? "با ما کار کنید" : "Work with us",
+      workNote: fa ? "اگر می‌خواهید بخشی از استودیو باشید، از همین‌جا آغاز کنید. متن جایگزین؛ موقعیت‌های شغلی بعداً اعلام می‌شود."
+        : "If you would like to work here, start from the same place. Placeholder copy; open roles will be announced later.",
+      careerCta: fa ? "درخواست همکاری شغلی" : "Career inquiry",
+      pickCareer: () => { this.fieldsDip(); this.setState({ intent:"career", ready:false, errors:{} }, () => this.syncHash()); },
+      mediaCta: fa ? "رسانه / مطبوعات" : "Media / press",
+      pickMedia: () => { this.fieldsDip(); this.setState({ intent:"media", ready:false, errors:{} }, () => this.syncHash()); },
+
+      navProjects: fa ? "پروژه‌ها" : "Projects", hrefProjects: "Projects.dc.html" + hsh,
+      navExpertise: fa ? "تخصص‌ها" : "Expertise", hrefExpertise: "Expertise.dc.html" + hsh,
+      navAwards: fa ? "جوایز" : "Awards", hrefAwards: "Awards.dc.html" + hsh,
+      navAbout: fa ? "درباره ما" : "About", hrefAbout: "About.dc.html" + hsh,
+      navJournal: fa ? "مجله" : "Journal", hrefJournal: "Journal.dc.html" + hsh,
+      motifFlip: fa ? "-1" : "1",
+      closingLines: fa ? ["شرح پروژه را بیاورید؛","یا حتی فقط نقطه‌ی آغازش را؛","در هر دو حالت، بیایید شروع کنیم."]
+        : ["Bring us the brief.", "Or just the beginning of one.", "Either way, let's begin."],
+      closingCta: fa ? "شروع گفت‌وگو" : "Start a conversation",
+      year: String(new Date().getFullYear())
+    };
+  }
+}
+
+</script>
+</body>
+</html>

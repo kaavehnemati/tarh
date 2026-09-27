@@ -1,0 +1,33 @@
+# OS metadata (colon and Windows/WSL private-use-colon variants)
+*:Zone.Identifier
+*Zone.Identifier
+*:Zone.Identifier:$DATA
+.thumbnail
+.thumbnails/
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Desktop.ini
+desktop.ini
+.DS_Store
+._*
+.Spotlight-V100/
+.Trashes/
+
+# Editor temporary files
+*.swp
+*.swo
+*~
+
+# Tool caches
+.cache/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Local browser-test output
+/test-results/
+/playwright-report/
+
+# Claude Code session-internal state (not project content)
+/.claude/

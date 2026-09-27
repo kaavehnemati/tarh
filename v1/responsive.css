@@ -1,0 +1,677 @@
+/* Tarh & Afarinesh — responsive foundation.
+   Desktop composition is locked: every rule here is scoped to laptop and below,
+   so 1440 and 1920 render exactly as approved.
+
+   Mechanism: the pages are inline-styled, so responsive work happens by
+   (a) re-valuing the shared tokens per breakpoint — margins, gaps, type, spacing —
+       which propagates automatically anywhere var(--*) is used, and
+   (b) targeted structural overrides keyed on the data-attributes the pages already carry.
+   Overrides need !important to win against inline styles; that is intentional and
+   confined to this file. */
+
+/* ============================================================
+   01 — RESPONSIVE TOKENS
+   ============================================================ */
+
+/* laptop 1024–1279 */
+@media (max-width: 1279px) {
+  html:root { --marg: 32px !important; --gap: 20px !important; }
+}
+
+/* tablet 768–1023 — 8-column thinking, publication scale */
+@media (max-width: 1023px) {
+  html:root {
+    --marg: 28px !important; --gap: 18px !important;
+    --header-h: 64px; --touch: 44px;
+    --section-xl: 13vh; --section-lg: 10vh; --section-md: 7vh;
+  }
+}
+
+/* mobile <768 — edited story scale */
+@media (max-width: 767px) {
+  html:root {
+    --marg: 20px !important; --gap: 14px !important;
+    --header-h: 62px; --touch: 44px;
+    --section-xl: 10vh; --section-lg: 8vh; --section-md: 6vh;
+  }
+}
+
+/* compact mobile */
+@media (max-width: 389px) {
+  html:root { --marg: 16px !important; --gap: 12px !important; }
+}
+
+/* ============================================================
+   01b — LAYER TOKENS
+   Documents the layering already in use so overlays cannot conflict.
+   Values match what the pages ship today; nothing moves.
+   ============================================================ */
+
+/* ============================================================
+   01c — TYPOGRAPHY TOKENS
+   Recurring display scales, tuned per breakpoint and per script.
+   Components opt in; desktop values match what already ships.
+   ============================================================ */
+
+html:root {
+  --display-xl: clamp(64px, 8vw, 150px);
+  --display-lg: clamp(48px, 6vw, 110px);
+  --heading-xl: clamp(40px, 4.8vw, 92px);
+  --heading-lg: clamp(30px, 3.4vw, 58px);
+  --lead: clamp(24px, 2.6vw, 42px);
+  --body: 17px;
+  --meta: 11.5px;
+  --display-xl-fa: clamp(52px, 6.6vw, 124px);
+  --display-lg-fa: clamp(40px, 5vw, 92px);
+  --heading-xl-fa: clamp(34px, 4vw, 76px);
+  --lead-fa: clamp(21px, 2.2vw, 34px);
+  --body-fa: 16.5px;
+  --lh-display: 0.96;
+  --lh-display-fa: 1.4;
+  --lh-body: 1.62;
+  --lh-body-fa: 2;
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  html:root {
+    --display-xl: clamp(56px, 9.4vw, 96px);
+    --display-lg: clamp(44px, 7vw, 74px);
+    --heading-xl: clamp(38px, 5.6vw, 64px);
+    --heading-lg: clamp(28px, 4vw, 46px);
+    --lead: clamp(21px, 3vw, 32px);
+    --display-xl-fa: clamp(46px, 7.8vw, 84px);
+    --display-lg-fa: clamp(36px, 6vw, 64px);
+    --heading-xl-fa: clamp(30px, 4.6vw, 56px);
+    --lead-fa: clamp(19px, 2.6vw, 28px);
+  }
+}
+
+@media (max-width: 767px) {
+  html:root {
+    --display-xl: clamp(42px, 12vw, 68px);
+    --display-lg: clamp(34px, 10vw, 54px);
+    --heading-xl: clamp(30px, 8.6vw, 48px);
+    --heading-lg: clamp(24px, 7vw, 36px);
+    --lead: clamp(19px, 5.4vw, 26px);
+    --body: 17px;
+    --display-xl-fa: clamp(36px, 10.4vw, 58px);
+    --display-lg-fa: clamp(30px, 8.6vw, 46px);
+    --heading-xl-fa: clamp(26px, 7.4vw, 40px);
+    --lead-fa: clamp(18px, 4.8vw, 24px);
+    --body-fa: 16.5px;
+  }
+}
+
+@media (max-width: 389px) {
+  html:root {
+    --display-xl: clamp(36px, 11.6vw, 50px);
+    --display-lg: clamp(30px, 9.6vw, 42px);
+    --heading-xl: clamp(26px, 8.4vw, 38px);
+  }
+}
+
+html:root {
+  --z-content: 1; --z-sticky: 2; --z-progress: 90; --z-header: 95;
+  --z-menu: 100; --z-filter: 102; --z-shared: 104; --z-viewer: 106;
+  --z-expand: 108; --z-intro: 120; --z-cursor: 130;
+}
+
+/* ============================================================
+   02 — GLOBAL SAFETY
+   ============================================================ */
+
+@media (max-width: 1023px) {
+  html, body { overflow-x: hidden; }
+  /* no important control against a device edge */
+  [data-hd] { padding-top: max(14px, env(safe-area-inset-top)) !important; }
+  [data-menu], [data-filter], [data-viewer] {
+    padding-bottom: max(32px, env(safe-area-inset-bottom)) !important;
+  }
+  /* long emails, URLs and Persian compounds must never push the page sideways.
+     break-word keeps min-content at the longest word, so flex/grid children cannot
+     collapse below it and break Latin labels character-by-character. */
+  [data-hp-root], [data-pr-root], [data-ex-root], [data-ab-root],
+  [data-aw-root], [data-jr-root], [data-ct-root] { overflow-wrap: break-word; }
+
+  /* only genuine unbreakable tokens may split mid-word */
+  input[type="email"], input[type="url"],
+  [data-ct-root] [dir="ltr"], [data-aw-root] [dir="ltr"] { overflow-wrap: anywhere; }
+
+  /* nav and control labels stay on one line */
+  [data-hd] nav a span, [data-hd] button span,
+  [data-ct-row] span, [data-aw-root] button span { white-space: nowrap; }
+}
+
+/* touch: the custom cursor is disabled entirely, logic included */
+@media (hover: none), (pointer: coarse) {
+  [data-cursor-el] { display: none !important; }
+}
+
+/* keyboard focus survives every responsive mode */
+@media (max-width: 1023px) {
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+    outline: 2px solid #3E9692 !important; outline-offset: 3px !important;
+  }
+}
+
+/* minimum interactive area without changing visible type size */
+@media (max-width: 1023px) {
+  [data-ix-row], [data-aw-row], [data-ov-row], [data-ct-row], [data-pp-row],
+  [data-exp], [data-rel], [data-res], [data-cap], [data-ml], [data-nav] {
+    min-height: var(--touch) !important;
+  }
+}
+
+/* ============================================================
+   03 — HEADER + MENU
+   ============================================================ */
+
+/* tablet: tighten before anything crowds */
+@media (max-width: 1023px) {
+  [data-hd] { padding-left: var(--marg) !important; padding-right: var(--marg) !important; }
+  [data-hd] nav { gap: 18px !important; font-size: 11.5px !important; }
+}
+
+/* mobile: brand · language · menu only — primary nav lives in the menu */
+@media (max-width: 767px) {
+  [data-hd] { padding-top: 12px !important; padding-bottom: 12px !important; min-height: var(--header-h); }
+  [data-hd] nav { display: none !important; }
+  [data-hd] > a > span[data-en] { font-size: 11px !important; letter-spacing: .1em !important; }
+  [data-hd] > a > span[data-fa] { font-size: 13.5px !important; }
+  [data-hd] > a > span:first-child { width: 20px !important; height: 20px !important; }
+}
+
+/* compact mobile: the mark carries the brand, name abbreviates */
+@media (max-width: 389px) {
+  [data-hd] > a > span[data-en], [data-hd] > a > span[data-fa] { display: none !important; }
+}
+
+/* fullscreen menu recomposed, scrollable on short screens */
+@media (max-width: 1023px) {
+  [data-menu] { overflow-y: auto !important; }
+  [data-menu] nav { grid-template-columns: 1fr !important; gap: 26px !important; }
+  [data-menu] nav > div { grid-column: 1 / -1 !important; }
+  [data-menu-prev] { display: none !important; }
+  [data-ml] { padding: 16px 0 !important; }
+}
+@media (max-width: 767px) {
+  [data-ml] span:nth-child(2) { font-size: clamp(26px, 8vw, 40px) !important; line-height: 1.16 !important; }
+  [data-ml] span[data-fa] { line-height: 1.6 !important; }
+}
+@media (max-height: 650px) {
+  [data-menu] { justify-content: flex-start !important; gap: 26px !important; }
+  [data-ml] { padding: 11px 0 !important; }
+  [data-ml] span:nth-child(2) { font-size: clamp(20px, 4.4vw, 30px) !important; }
+}
+
+/* ============================================================
+   04 — OVERLAYS: one philosophy for menu, filter, viewer
+   ============================================================ */
+
+@media (max-width: 767px) {
+  [data-filter] { padding: 18px var(--marg) 40px !important; gap: 28px !important; }
+  [data-filter] > div:last-child { grid-template-columns: 1fr !important; gap: 30px !important; margin-top: 0 !important; }
+  [data-filter] > div:last-child > div { grid-column: 1 / -1 !important; }
+  [data-filter] button { min-height: var(--touch); }
+  [data-viewer] { padding: 16px var(--marg) max(24px, env(safe-area-inset-bottom)) !important; }
+  [data-viewer] [data-viewer-plate] { width: 100% !important; height: 58vh !important; }
+  [data-viewer] button { min-height: var(--touch); min-width: var(--touch); }
+}
+
+/* progress rail: quieter on tablet, gone on mobile where width is precious */
+@media (max-width: 1023px) {
+  /* opacity belongs to the page's own show/hide logic — dim the parts instead */
+  [data-prog] [data-prog-num] { color: rgba(18,27,27,.28) !important; }
+  [data-prog] [data-prog-sq] { transform: scale(.72); }
+  [data-prog] > span:last-child { opacity: .55; }
+}
+@media (max-width: 767px) {
+  [data-prog] { display: none !important; }
+  [data-secnav] { bottom: max(12px, env(safe-area-inset-bottom)) !important; font-size: 10px !important; }
+}
+
+/* ============================================================
+   05 — UNIVERSAL REFLOW (mobile)
+   Any 12-column container becomes a single column and its children span it.
+   Exceptions are re-established below where two-up still reads well.
+   ============================================================ */
+
+@media (max-width: 767px) {
+  :not([data-v2-shell]) [style*="repeat(12,1fr)"] { grid-template-columns: 1fr !important; gap: var(--gap) !important; }
+  :not([data-v2-shell]) [style*="grid-column"] { grid-column: 1 / -1 !important; }
+  /* inner repeat(n) grids keep their own tracks — only the 12-column field collapses */
+  :not([data-v2-shell]) [style*="repeat(2,minmax(0,1fr))"] > *, :not([data-v2-shell]) [style*="repeat(3,minmax(0,1fr))"] > *,
+  :not([data-v2-shell]) [style*="repeat(2,1fr)"] > *, :not([data-v2-shell]) [style*="repeat(3,1fr)"] > * { grid-column: auto !important; }
+  :not([data-v2-shell]) [style*="margin-top:110px"], :not([data-v2-shell]) [style*="margin-top:120px"], :not([data-v2-shell]) [style*="margin-top:150px"],
+  :not([data-v2-shell]) [style*="margin-top:180px"], :not([data-v2-shell]) [style*="margin-top:90px"], :not([data-v2-shell]) [style*="margin-top:96px"] {
+    margin-top: 0 !important;
+  }
+  /* sticky columns stop being sticky once they are full width — V2 pages own their
+     sticky contract explicitly (Header, Journal Contents, Awards year) and are exempt */
+  :not([data-v2-shell]) [style*="position:sticky"] { position: static !important; }
+}
+
+/* ============================================================
+   05b — TABLET: 8-COLUMN PUBLICATION COMPOSITION (768–1023)
+   Compositions resolve as 4/4, 5/3, 3/5 or 2/6 of a conceptual 8-column
+   publication grid. Selectors are semantic — no inline-style matching.
+   ============================================================ */
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  :not([data-v2-shell]) [style*="repeat(12,1fr)"] { gap: var(--gap) !important; }
+
+  /* --- Homepage --- */
+  /* hero: three lines recomposed, not desktop offsets */
+  [data-hlw]:nth-of-type(1) { grid-column: 1 / span 7 !important; }
+  [data-hlw]:nth-of-type(2) { grid-column: 2 / span 8 !important; }
+  [data-hlw]:nth-of-type(3) { grid-column: 4 / span 9 !important; }
+  [data-hlw] div { font-size: 10.4vw !important; }
+  [data-hlw] div[data-fa] { font-size: 8.8vw !important; line-height: 1.32 !important; }
+  /* studio: 5/3 of eight */
+  [data-st-label] { grid-column: 1 / span 4 !important; }
+  [data-st-head] { grid-column: 1 / span 8 !important; }
+  [data-st-body] { grid-column: 1 / span 5 !important; }
+  /* selected projects: text ~3 of 8, stage ~5 of 8 (set in JS as 74vw) */
+  [data-pj-top], [data-pj-textcol], [data-pj-foot] { grid-column: 1 / span 5 !important; }
+  [data-pj-text] div[data-en], [data-pj-text] div[data-fa] { font-size: clamp(30px, 4.6vw, 46px) !important; }
+  /* expertise: a true 4/4 spread */
+  [data-exp-head] { grid-column: 1 / span 6 !important; }
+  [data-exp-list] { grid-column: 1 / span 6 !important; }
+  [data-exp-stage] { grid-column: 8 / span 5 !important; }
+  /* research: publication spread */
+  [data-res-col] { grid-column: 1 / span 5 !important; }
+  [data-res-stagecol] { grid-column: 7 / span 6 !important; }
+  [data-aw-head] { grid-column: 1 / span 4 !important; }
+  [data-aw-list] { grid-column: 1 / span 12 !important; }
+
+  /* --- Projects archive: index keeps primacy, preview narrows --- */
+  [data-ix-list] { grid-column: 1 / span 7 !important; }
+  [data-ix-stagecol] { grid-column: 9 / span 4 !important; }
+  /* tablet index hierarchy: number+name primary, location/year secondary */
+  [data-ix-head] { display: none !important; }
+  [data-ix-row] { grid-template-columns: 40px minmax(0, 1fr) !important; row-gap: 4px !important; }
+  [data-ix-row] > span:nth-child(3), [data-ix-row] > span:nth-child(4) { grid-column: 2 !important; font-size: 11.5px !important; }
+  [data-ix-row] > span:nth-child(5) { grid-column: 2 !important; }
+  /* visual view: two-column editorial rhythm rather than the desktop map */
+  [data-vs-card]:nth-child(odd) { grid-column: 1 / span 7 !important; }
+  [data-vs-card]:nth-child(even) { grid-column: 8 / span 5 !important; margin-top: 60px !important; }
+
+  /* --- Project detail: splits survive --- */
+  [data-dt-title] { grid-column: 1 / span 8 !important; }
+  [data-dt-meta] { grid-column: 9 / span 4 !important; }
+  [data-dt-narrcol] { grid-column: 1 / span 5 !important; }
+  [data-dt-narrmedia] { grid-column: 7 / span 6 !important; }
+  [data-dt-infotitle] { grid-column: 1 / span 3 !important; }
+
+  /* --- Expertise --- */
+  [data-ov-list] { grid-column: 1 / span 7 !important; }
+  [data-ov-stagecol] { grid-column: 9 / span 4 !important; }
+  [data-ov-inter] { grid-column: 6 / span 7 !important; }
+  [data-pc-col] { grid-column: 1 / span 5 !important; }
+  [data-pc-media] { grid-column: 7 / span 6 !important; }
+
+  /* --- About --- */
+  [data-hs-col] { grid-column: 1 / span 5 !important; }
+  [data-hs-list] { grid-column: 7 / span 6 !important; }
+  [data-pp-stagecol] { grid-column: 1 / span 5 !important; }
+  [data-pp-list] { grid-column: 7 / span 6 !important; }
+
+  /* --- Awards: the preview stays while the rows still read --- */
+  [data-aw-stagecol] { display: block !important; grid-column: 10 / span 3 !important; }
+  [data-aw-list] { grid-column: 1 / span 8 !important; }
+  [data-aw-group] { grid-template-columns: 96px minmax(0, 1fr) !important; }
+  [data-aw-row] { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) !important; row-gap: 6px !important; }
+  [data-aw-row] > span:nth-child(3) { grid-column: 1 / -1 !important; }
+
+  /* --- Journal: publication layout --- */
+  [data-jr-featmedia] { grid-column: 1 / span 7 !important; }
+  [data-jr-featmedia] + div { grid-column: 9 / span 4 !important; }
+  [data-jr-card]:nth-child(odd) { grid-column: 1 / span 7 !important; }
+  [data-jr-card]:nth-child(even) { grid-column: 8 / span 5 !important; margin-top: 70px !important; }
+  [data-jr-prose] { grid-column: 3 / span 8 !important; }
+  [data-jr-toc] { grid-column: 1 / span 2 !important; }
+
+  /* --- Contact: form 5, context 3 --- */
+  [data-ct-list] { grid-column: 1 / span 12 !important; }
+  [data-ct-form] form > div:first-child { grid-column: 1 / span 4 !important; }
+  [data-ct-form] form > div:last-child { grid-column: 6 / span 7 !important; }
+}
+
+/* narrow tablet portrait: the Awards preview finally yields to the rows */
+@media (min-width: 768px) and (max-width: 833px) {
+  [data-aw-stagecol] { display: none !important; }
+  [data-aw-list] { grid-column: 1 / span 12 !important; }
+}
+
+/* ============================================================
+   06 — HOMEPAGE
+   ============================================================ */
+
+/* scroll ranges: the JS reads element geometry, so shortening here is enough */
+@media (max-width: 1023px) {
+  [data-sc="hero"] { height: 190svh !important; }
+  [data-sc="studio"] { min-height: 170svh !important; }
+  [data-sc="projects"] { height: 330svh !important; }
+  [data-sc="expertise"] { height: 250svh !important; }
+  [data-sc="philo"] { height: 220svh !important; }
+}
+@media (max-width: 767px) {
+  [data-sc="hero"] { height: 150svh !important; }
+  [data-sc="studio"] { min-height: 150svh !important; }
+  [data-sc="projects"] { height: 290svh !important; }
+  [data-sc="expertise"] { height: 210svh !important; }
+  [data-sc="philo"] { height: 175svh !important; }
+  [data-sc="research"] { margin-top: -100svh !important; min-height: 150svh !important; }
+  /* hero: typography first, image below — never colliding */
+  [data-hlw] div { font-size: 13.5vw !important; line-height: .96 !important; }
+  [data-hlw] div[data-fa] { font-size: 11.5vw !important; line-height: 1.34 !important; }
+  [data-hero-rail] { display: none !important; }
+  [data-hero-label] { bottom: 96px !important; }
+  [data-hero-label] > div { max-width: 22ch !important; }
+  /* the shared image stage spans the screen and sits low, text above it */
+  [data-pj-stage] { width: 100vw !important; left: 0 !important; right: auto !important; }
+  [data-pj-col] { padding-top: calc(var(--header-h) + 18px) !important; }
+  [data-pj-textcol] { min-height: 34vh !important; }
+  [data-pj-text] div[data-en], [data-pj-text] div[data-fa] { font-size: clamp(28px, 8.4vw, 42px) !important; }
+  [data-pj-meta] { gap: 8px 16px !important; font-size: 11px !important; }
+  [data-pj-bridge] { font-size: clamp(34px, 11vw, 56px) !important; bottom: 10vh !important; position: static !important; margin-top: 6vh !important; clip-path: none !important; opacity: 1 !important; }
+  /* four natural project chapters replace the single pinned stage */
+  [data-sc="projects"] { height: auto !important; }
+  [data-sc="projects"] > div { position: static !important; height: auto !important; overflow: visible !important; }
+  [data-pj-col] { display: none !important; }
+  [data-pj-chapters] { display: block !important; padding-top: 6vh !important; }
+  [data-pj-chapter] h3 { max-width: 20ch; }
+  /* expertise: rows read on their own, the stage becomes a band behind them */
+  [data-exp-stage] { grid-row: 3 !important; margin: 0 !important; height: 34vh !important; }
+  [data-exp] span:nth-child(2) { font-size: clamp(24px, 7.4vw, 36px) !important; }
+  [data-exp] { padding: 14px 0 !important; }
+  /* philosophy: crop reveal instead of width expansion on an already narrow screen */
+  [data-ph-img] { width: 100vw !important; height: 62svh !important; }
+  [data-ph-text] { bottom: 8vh !important; }
+  [data-ph-text] div { font-size: clamp(30px, 9vw, 46px) !important; max-width: none !important; }
+  [data-res-stagecol] { margin-top: 26px !important; }
+  [data-aw] { grid-template-columns: 1fr !important; gap: 6px !important; padding: 16px 0 !important; }
+  [data-cta] div[data-en] { font-size: clamp(38px, 12vw, 62px) !important; }
+  [data-cta] div[data-fa] { font-size: clamp(32px, 10vw, 52px) !important; }
+  [data-cta-sq] { width: 44px !important; height: 44px !important; }
+}
+
+/* ============================================================
+   07 — PROJECTS
+   ============================================================ */
+
+@media (max-width: 1023px) {
+  [data-ix-stagecol] { position: static !important; }
+  [data-pj-stage] { position: fixed; }
+}
+@media (max-width: 767px) {
+  /* index rows become editorial vertical units */
+  [data-ix-head] { display: none !important; }
+  [data-ix-row] { grid-template-columns: 1fr !important; gap: 4px !important; padding: 18px 0 !important; }
+  [data-ix-row] span:nth-child(2) { font-size: clamp(22px, 6.6vw, 30px) !important; }
+  [data-ix-stagecol] { display: none !important; }
+  /* visual view: single column with deliberate ratios */
+  [data-vs-card] { margin-top: 0 !important; }
+  [data-dt-hero] { height: 56svh !important; }
+  [data-dt-full] { width: 100vw !important; height: 46svh !important; }
+  [data-dt-narrmedia] > div { width: 100% !important; margin-inline-start: 0 !important; }
+  [data-dt-narrcol] { position: static !important; }
+  [data-dt-infotitle] { margin-bottom: 18px !important; }
+  [data-expand-hero] { padding: var(--marg) !important; }
+}
+
+/* ============================================================
+   08 — EXPERTISE
+   ============================================================ */
+
+@media (max-width: 767px) {
+  [data-ov-stagecol] { position: static !important; margin-top: 22px !important; }
+  [data-ov-stage] { height: 38vh !important; }
+  [data-ov-row] { padding: 20px 0 !important; }
+  [data-ov-row] span:nth-child(2) { font-size: clamp(26px, 7.6vw, 38px) !important; }
+  [data-ov-inter] { aspect-ratio: 1/1 !important; margin-top: 30px !important; }
+  [data-ov-node] span { font-size: 9.5px !important; }
+  [data-pc-col] { position: static !important; }
+  [data-pc-media] > div { margin-inline-start: 0 !important; }
+  [data-cap] { grid-template-columns: 1fr !important; gap: 6px !important; padding: 16px 0 !important; }
+  [data-cap-note] { opacity: 1 !important; transform: none !important; }
+  [data-dt-num] { position: static !important; }
+}
+
+/* ============================================================
+   09 — ABOUT
+   ============================================================ */
+
+@media (max-width: 767px) {
+  [data-hs-col] { position: static !important; }
+  [data-hs-years] { transition: none !important; }
+  [data-pp-stagecol] { position: static !important; }
+  [data-pp-row] { grid-template-columns: 1fr !important; gap: 4px !important; padding: 16px 0 !important; }
+  /* registers that stay two-up: they read as a list, not a table */
+  [data-pp-list] > div[style*="repeat(2,minmax(0,1fr))"],
+  [data-ab-root] [style*="repeat(4,minmax(0,1fr))"] { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  [data-pp-list] > div[style*="repeat(2,minmax(0,1fr))"] > div,
+  [data-ab-root] [style*="repeat(4,minmax(0,1fr))"] > div { grid-column: auto !important; }
+  [data-ab-root] [style*="repeat(3,minmax(0,1fr))"] { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  [data-ab-root] [style*="repeat(3,minmax(0,1fr))"] > div { grid-column: auto !important; }
+}
+
+/* ============================================================
+   10 — AWARDS
+   ============================================================ */
+
+@media (max-width: 833px) {
+  [data-aw-stagecol] { display: none !important; }
+}
+@media (max-width: 767px) {
+  [data-aw-group] { grid-template-columns: 1fr !important; gap: 10px !important; margin-bottom: 40px !important; }
+  /* the year stays sticky but clears the header */
+  [data-aw-group] > div:first-child {
+    position: sticky !important; top: calc(var(--header-h) + 4px) !important;
+    background: #FAF9F7; padding: 6px 0 !important; z-index: 2;
+    font-size: 20px !important;
+  }
+  [data-aw-row] { grid-template-columns: 1fr !important; gap: 5px !important; padding: 16px 0 !important; }
+  [data-aw-row] span:first-child { font-size: 17px !important; }
+}
+@media (max-height: 650px) {
+  [data-aw-group] > div:first-child { position: static !important; }
+}
+
+/* ============================================================
+   11 — JOURNAL
+   ============================================================ */
+
+@media (max-width: 1023px) {
+  [data-jr-toc] { position: static !important; }
+}
+@media (max-width: 767px) {
+  /* featured stacks: media, then type/date, then title */
+  [data-jr-featmedia] { grid-row: auto !important; }
+  [data-jr-grid] { gap: 44px !important; }
+  [data-jr-card] { margin-top: 0 !important; }
+  [data-jr-card] h3 { font-size: clamp(22px, 6.4vw, 30px) !important; }
+  [data-jr-prose] { grid-column: 1 / -1 !important; }
+  [data-jr-toc] { display: none !important; }
+  [data-jr-filters] {
+    flex-wrap: nowrap !important; overflow-x: auto !important;
+    scrollbar-width: none; -ms-overflow-style: none;
+    padding-bottom: 6px !important; gap: 18px !important;
+  }
+  [data-jr-filters]::-webkit-scrollbar { display: none; }
+  [data-jr-filters] button { flex: none !important; min-height: var(--touch); }
+  [data-jr-next] { gap: 20px !important; }
+}
+
+/* ============================================================
+   12 — CONTACT
+   ============================================================ */
+
+@media (max-width: 767px) {
+  [data-ct-row] { padding: 20px 0 !important; }
+  [data-ct-row] span:nth-child(2) { font-size: clamp(24px, 7.2vw, 34px) !important; }
+  [data-ct-gridmark] { width: 56px !important; height: 56px !important; justify-self: start; }
+  /* full-width fields; 16px+ prevents mobile browser zoom on focus */
+  [data-ct-field] input, [data-ct-field] textarea {
+    width: 100% !important; font-size: 17px !important;
+  }
+  [data-ct-field] textarea { min-height: 140px; }
+  [data-ct-form] fieldset button { min-height: var(--touch); }
+  [data-ct-submit] { font-size: clamp(22px, 6.4vw, 30px) !important; }
+}
+
+/* ============================================================
+   11b — COMPACT INTERACTION
+   A coarse pointer on a short screen (landscape phone) gets the mobile
+   interaction model even when its width says tablet.
+   ============================================================ */
+
+html[data-compact="1"] [data-hd] nav { display: none !important; }
+html[data-compact="1"] [data-cursor-el] { display: none !important; }
+html[data-compact="1"] [data-prog] { display: none !important; }
+html[data-compact="1"] [data-aw-stagecol] { display: none !important; }
+html[data-compact="1"] [data-aw-list] { grid-column: 1 / -1 !important; }
+html[data-compact="1"] [data-sc="projects"] { height: auto !important; }
+html[data-compact="1"] [data-sc="projects"] > div { position: static !important; height: auto !important; overflow: visible !important; }
+html[data-compact="1"] [data-pj-col] { display: none !important; }
+html[data-compact="1"] [data-pj-chapters] { display: block !important; padding-top: 5vh !important; }
+html[data-compact="1"] [data-pj-bridge] { position: static !important; clip-path: none !important; opacity: 1 !important; margin-top: 5vh !important; }
+html[data-compact="1"] [data-sc="hero"] { height: 150svh !important; }
+html[data-compact="1"] [data-sc="expertise"] { height: 190svh !important; }
+html[data-compact="1"] [data-sc="philo"] { height: 165svh !important; }
+
+/* ============================================================
+   12b — SHORT VIEWPORT SAFETY (landscape phones, small laptops)
+   A hard 100vh sticky box cannot hold desktop vertical rhythm at 540px or 390px,
+   so the inners become content-driven and the vertical padding contracts.
+   ============================================================ */
+
+@media (max-height: 650px) {
+  /* every homepage sticky stage */
+  [data-sc="hero"] > div, [data-sc="studio"] > div, [data-sc="projects"] > div,
+  [data-sc="expertise"] > div, [data-ph-stage] {
+    height: auto !important; min-height: 100svh !important; overflow: visible !important;
+  }
+  [data-sc="expertise"] > div, [data-pj-col] {
+    padding-top: calc(var(--header-h) + 14px) !important; padding-bottom: 20px !important;
+    row-gap: 10px !important;
+  }
+  /* expertise index contracts rather than overflowing its stage */
+  [data-exp] { padding: 9px 0 !important; min-height: 0 !important; }
+  [data-exp] span:nth-child(2) { font-size: clamp(18px, 2.6vw, 28px) !important; }
+  [data-exp] span[data-fa] { line-height: 1.4 !important; }
+  [data-exp-stage] { height: auto !important; }
+  [data-exp-head] h2 { font-size: clamp(22px, 2.6vw, 34px) !important; }
+  /* studio statement stops spilling past its sticky box */
+  [data-st-label] { padding-top: 8vh !important; }
+  [data-st-head] div { font-size: clamp(26px, 3.6vw, 46px) !important; }
+  [data-st-head] div[data-fa] { line-height: 1.34 !important; }
+  [data-st-body] { margin-top: 16px !important; }
+  [data-st-body] p { font-size: 15px !important; line-height: 1.5 !important; }
+  /* hero and projects type contract to fit the frame */
+  [data-hlw] div { font-size: 7.4vh !important; line-height: .96 !important; }
+  [data-hero-label] { bottom: 56px !important; }
+  [data-pj-textcol] { min-height: clamp(180px, 34svh, 260px) !important; }
+  [data-pj-text] div[data-en], [data-pj-text] div[data-fa] { font-size: clamp(22px, 4.4vh, 38px) !important; }
+  [data-pj-meta] { margin-top: 12px !important; gap: 6px 16px !important; }
+  [data-ph-img] { height: 74svh !important; }
+  [data-ph-text] div { font-size: clamp(24px, 5.4vh, 44px) !important; }
+  /* long pinned sequences shorten further on a short screen */
+  [data-sc="hero"] { height: 170svh !important; }
+  [data-sc="projects"] { height: 300svh !important; }
+  [data-sc="expertise"] { height: 230svh !important; }
+  [data-sc="philo"] { height: 190svh !important; }
+}
+
+/* ============================================================
+   13 — REDUCED MOTION HAS PRIORITY OVER EVERY RESPONSIVE CHOICE
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  [data-pj-inner], [data-hero-inner], [data-ph-inner], [data-rv-inner],
+  [data-ov-img], [data-aw-img], [data-jr-img], [data-pp-img], [data-ct-sq],
+  [data-ov-sq], [data-hs-sq], [data-exp-sq], [data-cta-sq], [data-cta-diag] {
+    transition: none !important; animation: none !important;
+  }
+}
+
+
+/* ============================================================
+   50 — EXPLICIT MOBILE COMPONENT LAYOUT
+   Tables, award rows and journal cards declare their own mobile
+   composition instead of inheriting the generic collapse. Ordering is
+   visual only — DOM order, headings and tab order stay intact.
+   ============================================================ */
+
+@media (max-width: 767px) {
+
+  /* --- Project information: stacked key/value, bidi-safe values --- */
+  [data-dt-infotitle] ~ div > div {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 5px !important;
+    padding: 14px 0 !important;
+  }
+  [data-dt-infotitle] ~ div > div > span:first-child { font-size: 10.5px !important; letter-spacing: .12em !important; }
+  [data-dt-infotitle] ~ div > div > span:last-child { font-size: 16.5px !important; line-height: 1.6 !important; }
+
+  /* --- About team index: one column, name over role --- */
+  [data-pp-list] > div[style*="repeat(2,minmax(0,1fr))"] { grid-template-columns: 1fr !important; }
+  [data-pp-list] > div[style*="repeat(2,minmax(0,1fr))"] > div {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 3px !important;
+  }
+  [data-pp-list] > div[style*="repeat(2,minmax(0,1fr))"] > div > span:last-child { font-size: 10.5px !important; }
+
+  /* --- Award rows: name, then category, then project. Year lives in the group. --- */
+  [data-aw-group] { grid-template-columns: 1fr !important; gap: 10px !important; }
+  [data-aw-group] > div:first-child {
+    position: static !important;
+    font-size: clamp(22px, 7vw, 30px) !important;
+  }
+  [data-aw-row] {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 6px !important;
+    padding: 18px 0 !important;
+  }
+  [data-aw-row] > span:nth-child(1) { font-size: clamp(16px, 4.8vw, 20px) !important; order: 1; }
+  [data-aw-row] > span:nth-child(2) { font-size: 10.5px !important; order: 2; }
+  [data-aw-row] > span:nth-child(3) { font-size: 12px !important; order: 3; }
+  [data-aw-row] > i { order: 4; }
+
+  /* About's selected recognition uses its own four-part row */
+  [data-ab-section="recognition"] [data-aw-row] { grid-template-columns: 1fr !important; }
+  [data-ab-section="recognition"] [data-aw-row] > span:nth-child(1) { font-size: 10.5px !important; letter-spacing: .12em !important; order: 0; }
+
+  /* --- Journal: archive cards are already block-flow in DOM order
+     (media, type/date, title, excerpt) — only the featured grid needs pinning,
+     so its order is identical in both scripts. --- */
+  [data-jr-featmedia] { grid-row: 1 !important; grid-column: 1 / -1 !important; }
+  [data-jr-featmedia] + div { grid-row: 2 !important; grid-column: 1 / -1 !important; padding-bottom: 0 !important; }
+
+  /* --- Contact: logical order is the DOM order; nothing reorders --- */
+  [data-ct-form] form { display: flex !important; flex-direction: column !important; gap: 34px !important; }
+  [data-ct-form] form > div:first-child { position: static !important; }
+
+  /* --- Facts and small matrices that may stay two-up --- */
+  [data-r-two-up] { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+}
+
+@media (max-width: 389px) {
+  /* at compact width even the two-up matrices yield */
+  [data-r-two-up] { grid-template-columns: 1fr !important; }
+}
+
+
+/* ============================================================
+   51 — HEADER COMPACTS BEFORE IT CROWDS
+   Four nav items plus language and Menu stop fitting comfortably
+   below ~1100px, so the compact arrangement starts there rather
+   than waiting for the tablet breakpoint.
+   ============================================================ */
+
+@media (max-width: 1099px) {
+  [data-hd] nav { display: none !important; }
+}

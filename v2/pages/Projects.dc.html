@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet" />
+<script>window.TA_ASSET_BASE = "../../";</script>
+<link rel="stylesheet" href="../design-system/tokens-v2.css" />
+<link rel="stylesheet" href="../design-system/base-v2.css" />
+<link rel="stylesheet" href="../design-system/responsive-v2.css" />
+<script src="../runtime/bidi.js"></script>
+<script src="../../site-data.js"></script>
+<script src="../../media-utils.js"></script>
+<script src="../../projects-data.js"></script>
+<script src="../../expertise-data.js"></script>
+<script src="../../awards-data.js"></script>
+<script src="../../journal-data.js"></script>
+<script src="../runtime/scroll-coordinator.js"></script>
+<script src="../runtime/ambient.js"></script>
+<script src="../runtime/reveal.js"></script>
+<script src="../runtime/ui-strings.js"></script>
+<script src="../runtime/cursor.js"></script>
+<script src="../runtime/motif.js"></script>
+<script src="../runtime/media-handoff.js"></script>
+<style>
+[data-pr2-preview]{position:sticky;top:96px;align-self:start}
+@media (max-width:1023px){ [data-pr2-preview]{display:none !important} }
+@media (max-width:1023px){ [data-pr2-narrcol]{position:static} }
+@media (max-width:767px){
+  [data-pr2-progress]{display:none !important}
+  [data-pr2-chapter]{left:var(--grid-margin) !important;right:auto !important;bottom:calc(var(--grid-margin) + env(safe-area-inset-bottom)) !important;max-width:calc(100vw - 2 * var(--grid-margin) - 60px)}
+  [dir="rtl"] [data-pr2-chapter]{right:var(--grid-margin) !important;left:auto !important}
+  [data-pr2-rowthumb]{display:block !important}
+  [data-pr2-expand]{width:100vw !important;margin-inline:calc(50% - 50vw) !important}
+}
+</style>
+</helmet>
+
+<div data-pr2-root="1" data-v2-shell="1" dir="{{ dir }}" style="color:var(--ink);min-height:100svh;overflow-x:clip">
+
+  <dc-import name="../components/HeaderNav" upper="{{ upper }}" brand="{{ brand }}" nav="{{ nav }}" drawer-links="{{ drawerLinks }}" href-home="{{ hrefHome }}" lang="{{ lang }}" on-set-en="{{ setEn }}" on-set-fa="{{ setFa }}" menu-id="pr" theme="{{ headerTheme }}" hint-size="100%,64px"></dc-import>
+
+  <sc-if value="{{ isArchive }}" hint-placeholder-val="{{ true }}">
+
+  <section data-screen-label="01 Opening" data-ambient-zone="full" style="position:relative;padding:var(--space-section-lg) var(--grid-margin) var(--space-section)">
+    <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter);align-items:end">
+      <div style="grid-column:var(--span-wide)">
+        <div data-v2-in="1" style="display:flex;align-items:center;gap:var(--space-3);font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45)">
+          <i style="width:var(--c-indicator);height:var(--c-indicator);background:var(--turq)"></i>{{ eyebrow }}
+        </div>
+        <h1 data-v2-rise="1" style="margin:var(--rel-eyebrow-heading) 0 0;font-size:var(--t-dl);line-height:var(--t-dl-lh);letter-spacing:var(--t-dl-ls);font-weight:var(--t-dl-w)"><sc-for list="{{ openLines }}" as="l" hint-placeholder-count="2"><span style="display:block">{{ l }}</span></sc-for></h1>
+        <p style="margin:var(--space-content) 0 0;font-size:var(--t-bl);line-height:var(--t-bl-lh);color:var(--ink-60);max-width:var(--measure)">{{ intro }}</p>
+      </div>
+      <span data-grid-motif="static" data-grid-motif-size="anchor" data-motif-active="3" aria-hidden="true" style="grid-column:var(--span-support);justify-self:end;align-self:end"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+    </div>
+  </section>
+
+  <section data-screen-label="02 Register" data-ambient-zone="minimal" style="position:relative;padding:var(--space-section) var(--grid-margin) var(--space-section-lg)">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--space-4) var(--space-6);border-bottom:1px solid var(--ink);padding-bottom:var(--space-4)">
+      <h2 data-motif-wake="1" style="margin:0;display:flex;align-items:center;gap:var(--space-3);font-size:var(--t-hl);line-height:var(--t-hl-lh);letter-spacing:var(--t-hl-ls);font-weight:var(--t-hl-w);outline-offset:6px"><span data-grid-motif="interactive" data-motif-active="{{ registerMotifCell }}" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>{{ registerLabel }}<span class="text-number" style="font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);color:var(--ink-45);font-weight:400">{{ countLabel }}</span></h2>
+      <button type="button" onClick="{{ toggleFilter }}" aria-expanded="{{ filterExpanded }}" aria-controls="pr2-filter-panel" style="appearance:none;background:none;border:1px solid currentColor;cursor:pointer;min-height:var(--c-control-h);padding:0 var(--space-3);display:inline-flex;align-items:center;gap:var(--space-tight);font:inherit;letter-spacing:inherit;text-transform:inherit;color:inherit">
+        {{ filterLabel }}<span class="text-number" style="opacity:{{ filterCountOp }}">{{ filterCount }}</span>
+      </button>
+    </div>
+
+    <div id="pr2-filter-panel" ref="{{ setFilterRef }}" style="display:grid;grid-template-rows:{{ filterRows }};transition:grid-template-rows var(--m-standard) var(--e-editorial)"><div style="overflow:hidden">
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:0 var(--space-5);padding:var(--space-3) 0;border-bottom:1px solid var(--rule)">
+        <sc-for list="{{ filters }}" as="f" hint-placeholder-count="6">
+          <button type="button" onClick="{{ f.toggle }}" aria-pressed="{{ f.pressed }}" style="appearance:none;background:none;border:none;cursor:pointer;min-height:var(--c-control-h);padding:0;display:inline-flex;align-items:center;gap:var(--space-tight);font:inherit;font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:inherit;opacity:{{ f.op }};transition:opacity var(--m-fast) var(--e-smooth)">
+            <i style="width:var(--c-indicator-sm);height:var(--c-indicator-sm);border:1px solid var(--turq);background:{{ f.fill }}"></i>{{ f.label }}
+          </button>
+        </sc-for>
+        <sc-if value="{{ hasActiveFilters }}" hint-placeholder-val="{{ false }}">
+          <button type="button" onClick="{{ resetFilters }}" style="appearance:none;background:none;border:none;cursor:pointer;min-height:var(--c-control-h);padding:0;font:inherit;font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--ink-45)">{{ resetLabel }}</button>
+        </sc-if>
+      </div>
+    </div></div>
+
+    <div style="position:relative;margin-top:var(--space-5);display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter);align-items:start">
+      <div style="grid-column:var(--span-index)">
+        <sc-for list="{{ rows }}" as="row" hint-placeholder-count="6">
+          <a href="{{ row.href }}" onClick="{{ row.open }}" onMouseEnter="{{ row.enter }}" onFocus="{{ row.enter }}" onMouseLeave="{{ row.leave }}" onBlur="{{ row.leave }}" data-v2-cursor="view" style="display:grid;grid-template-columns:44px minmax(0,1fr) minmax(0,200px);gap:var(--space-4);align-items:center;border-top:1px solid var(--rule);padding:var(--space-5) 0;min-height:var(--c-control-h);opacity:{{ row.op }};transition:opacity var(--m-standard) var(--e-editorial)">
+            <span class="text-number" style="display:flex;align-items:center;gap:var(--space-tight);font-size:var(--t-meta);color:var(--ink-45);align-self:start">{{ row.num }}</span>
+            <div style="min-width:0;display:flex;align-items:center;gap:var(--space-3)">
+              <span data-pr2-rowthumb="1" style="display:none;flex:none;width:56px;height:56px;background-image:{{ row.thumbBg }};background-size:cover;background-position:{{ row.thumbPos }}"></span>
+              <span style="min-width:0;font-size:var(--t-hm);line-height:var(--t-hm-lh);letter-spacing:var(--t-hm-ls);font-weight:var(--t-hm-w);color:{{ row.color }};transition:color var(--m-fast) var(--e-smooth)" class="text-mixed"><sc-for list="{{ row.titleParts }}" as="p" hint-placeholder-count="1"><span class="{{ p.cls }}">{{ p.t }}</span></sc-for></span>
+            </div>
+            <span style="min-width:0;font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--ink-45);text-align:end;align-self:start">{{ row.locYear }}</span>
+          </a>
+        </sc-for>
+        <div style="border-top:1px solid var(--rule)"></div>
+        <sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
+          <div style="padding:var(--space-block) 0;font-size:var(--t-bm);line-height:var(--t-bm-lh);color:var(--ink-60)">{{ emptyLabel }}</div>
+        </sc-if>
+      </div>
+
+      <div data-pr2-preview="1" style="grid-column:var(--span-preview);display:{{ previewDisplay }}">
+        <div data-pr2-mhstage="1" style="position:relative;aspect-ratio:{{ pv.ratio }};overflow:hidden;background:var(--surface-1)"></div>
+        <div style="margin-top:var(--rel-image-caption);font-size:var(--t-caption);line-height:var(--t-caption-lh);color:var(--ink-45);min-height:2em">{{ pv.caption }}</div>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="03 Closing" data-ambient-zone="full" style="position:relative;padding:var(--space-section-xl) var(--grid-margin) var(--space-block);overflow:hidden">
+    <svg aria-hidden="true" viewBox="0 0 340 340" style="position:absolute;top:50%;inset-inline-end:var(--grid-margin);transform:translateY(-50%) scaleX({{ motifFlip }});width:clamp(200px,26vw,380px);height:clamp(200px,26vw,380px);opacity:.4;pointer-events:none" fill="none">
+      <rect x="10" y="10" width="90" height="90" stroke="var(--turq)" stroke-width="1" /><rect x="120" y="10" width="90" height="90" stroke="var(--turq)" stroke-width="1" /><rect x="230" y="10" width="90" height="90" stroke="var(--turq)" stroke-width="1" />
+      <rect x="10" y="120" width="90" height="90" stroke="var(--turq)" stroke-width="1" /><rect x="120" y="120" width="90" height="90" stroke="var(--turq)" stroke-width="1" /><rect x="230" y="120" width="90" height="90" stroke="var(--turq)" stroke-width="1" />
+      <rect x="10" y="230" width="90" height="90" stroke="var(--turq)" stroke-width="1" /><rect x="120" y="230" width="90" height="90" stroke="var(--turq)" stroke-width="1" /><rect x="230" y="230" width="90" height="90" stroke="var(--turq)" stroke-width="1" />
+      <line x1="0" y1="340" x2="340" y2="0" stroke="var(--turq)" stroke-width="1" /><line x1="60" y1="340" x2="340" y2="60" stroke="var(--turq)" stroke-width="1" />
+    </svg>
+    <div style="position:relative;z-index:1;display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter)">
+      <div style="grid-column:var(--span-lead)">
+        <p data-reveal="content" style="margin:0;font-size:var(--t-hl);line-height:var(--t-hl-lh);letter-spacing:var(--t-hl-ls);font-weight:var(--t-hl-w);max-width:var(--grid-title-max)"><sc-for list="{{ closingLines }}" as="l" hint-placeholder-count="3"><span style="display:block">{{ l }}</span></sc-for></p>
+        <a href="{{ hrefExpertise }}" data-v2-cursor="explore" style="margin-top:var(--space-5);display:inline-flex;align-items:baseline;gap:var(--space-4);font-size:var(--t-cta);letter-spacing:var(--t-cta-ls);text-transform:{{ upper }};min-height:var(--c-control-h)"><i style="width:var(--c-indicator-sm);height:var(--c-indicator-sm);background:var(--turq)"></i>{{ expertiseLink }}<span aria-hidden="true">↗</span></a>
+      </div>
+      <div style="grid-column:var(--span-full);margin-top:var(--space-section);display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--space-4);border-top:1px solid var(--rule);padding-top:var(--space-5);font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--ink-45)">
+        <span style="display:inline-flex;align-items:center;min-height:var(--c-control-h)">{{ eyebrow }}</span>
+        <span style="display:inline-flex;align-items:center;min-height:var(--c-control-h)">Tarh &amp; Afarinesh — طرح و آفرینش</span>
+      </div>
+    </div>
+  </section>
+  </sc-if>
+
+  <sc-if value="{{ isDetail }}" hint-placeholder-val="{{ false }}">
+    <section data-sec="hero" data-screen-label="D0 Hero" data-ambient-zone="off" style="padding:0 var(--grid-margin) var(--space-block);position:relative">
+      <div data-pr2-hero="1" data-reveal="media" style="position:relative;aspect-ratio:16/9;max-height:82svh;width:100%;overflow:hidden;background:var(--surface-1);direction:ltr">
+        <div data-pr2-heroimg="1" data-reveal-img="1" style="position:absolute;inset:-3% -1%;background-image:{{ d.hero.bg }};background-size:{{ d.hero.size }};background-position:{{ d.hero.pos }};background-repeat:{{ d.hero.repeat }}"></div>
+        <div data-reveal-mask="1"></div>
+      </div>
+      <div style="margin-top:var(--space-block);display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter);align-items:end">
+        <div style="grid-column:var(--span-lead)">
+          <div class="text-number" style="font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);color:var(--ink-45)">{{ d.num }} / {{ d.count }}</div>
+          <h1 data-v2-rise="1" style="margin:var(--rel-eyebrow-heading) 0 0;font-size:var(--t-dm);line-height:var(--t-dm-lh);letter-spacing:var(--t-dm-ls);font-weight:var(--t-dm-w)" class="text-mixed"><sc-for list="{{ d.titleParts }}" as="p" hint-placeholder-count="1"><span class="{{ p.cls }}">{{ p.t }}</span></sc-for></h1>
+        </div>
+        <div style="grid-column:var(--span-support);display:flex;flex-direction:column;gap:var(--space-2);font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--ink-60)">
+          <span>{{ d.location }}</span><span class="text-number">{{ d.years }}</span><span>{{ d.typology }}</span>
+        </div>
+      </div>
+    </section>
+
+    <section data-sec="glance" data-screen-label="D1 At a glance" data-ambient-zone="soft" style="padding:var(--space-section) var(--grid-margin)">
+      <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter)">
+        <p style="grid-column:var(--span-lead);margin:0;font-size:var(--t-hl);line-height:var(--t-hl-lh);letter-spacing:var(--t-hl-ls);font-weight:var(--t-hl-w);color:var(--turq-dk)">{{ d.proposition }}</p>
+        <div style="grid-column:var(--span-support);display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:var(--space-content)">
+          <sc-for list="{{ d.glance }}" as="g" hint-placeholder-count="4">
+            <div><div style="font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--ink-45)">{{ g.label }}</div><div style="margin-top:var(--space-micro);font-size:var(--t-bm)" class="{{ g.cls }}">{{ g.value }}</div></div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <sc-if value="{{ d.hasIntent }}" hint-placeholder-val="{{ false }}">
+      <section data-sec="intent" data-screen-label="D2 Design intent" data-ambient-zone="off" style="padding:0 var(--grid-margin) var(--space-section)">
+        <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter)">
+          <div style="grid-column:var(--span-label);font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45)">{{ intentLabel }}</div>
+          <div style="grid-column:var(--span-body)">
+            <p style="margin:0;font-size:var(--t-hs);line-height:var(--t-hs-lh);max-width:var(--measure)">{{ d.lead }}</p>
+            <div style="margin-top:var(--space-block);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:var(--space-content) var(--grid-gutter)">
+              <sc-for list="{{ d.chapters }}" as="ch" hint-placeholder-count="4">
+                <p style="margin:0;font-size:var(--t-bm);line-height:var(--t-bm-lh);color:var(--ink-60);max-width:var(--measure)">{{ ch }}</p>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-for list="{{ d.blocks }}" as="b" hint-placeholder-count="2">
+      <sc-if value="{{ b.isFull }}" hint-placeholder-val="{{ false }}">
+        <section data-sec="{{ b.sec }}" data-ambient-zone="off" style="padding:0 var(--grid-margin) var(--space-section)">
+          <div data-pr2-expand="{{ b.expand }}" data-reveal="media" style="position:relative;aspect-ratio:{{ b.ratio }};overflow:hidden;background:var(--surface-1);direction:ltr;width:{{ b.width }};margin:0 auto;transition:width var(--m-slow) var(--e-cinematic)">
+            <div data-reveal-img="1" style="position:absolute;inset:0;background-image:{{ b.bg }};background-size:{{ b.size }};background-position:{{ b.pos }};background-repeat:{{ b.repeat }}"></div>
+            <div data-reveal-mask="1"></div>
+          </div>
+          <sc-if value="{{ b.hasCaption }}" hint-placeholder-val="{{ false }}">
+            <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter);margin-top:var(--space-block)">
+              <h2 style="grid-column:var(--span-lead);margin:0;font-size:var(--t-hl);line-height:var(--t-hl-lh);letter-spacing:var(--t-hl-ls);font-weight:var(--t-hl-w)">{{ b.title }}</h2>
+              <p style="grid-column:var(--span-support);margin:0;font-size:var(--t-bm);line-height:var(--t-bm-lh);color:var(--ink-60)">{{ b.body }}</p>
+            </div>
+          </sc-if>
+        </section>
+      </sc-if>
+      <sc-if value="{{ b.isSplit }}" hint-placeholder-val="{{ false }}">
+        <section data-sec="{{ b.sec }}" data-ambient-zone="soft" style="padding:var(--space-section) var(--grid-margin)">
+          <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter);align-items:end">
+            <div style="grid-column:{{ b.textCol }}">
+              <h2 style="margin:0;font-size:var(--t-hm);line-height:var(--t-hm-lh);letter-spacing:var(--t-hm-ls);font-weight:var(--t-hm-w);max-width:24ch">{{ b.title }}</h2>
+              <p style="margin:var(--space-4) 0 0;font-size:var(--t-bm);line-height:var(--t-bm-lh);color:var(--ink-60);max-width:var(--measure)">{{ b.body }}</p>
+            </div>
+            <div data-reveal="media" style="grid-column:{{ b.mediaCol }};position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--surface-1);direction:ltr">
+              <div data-reveal-img="1" style="position:absolute;inset:0;background-image:{{ b.bg }};background-size:{{ b.size }};background-position:{{ b.pos }};background-repeat:{{ b.repeat }}"></div>
+              <div data-reveal-mask="1"></div>
+            </div>
+          </div>
+          <sc-if value="{{ b.hasCaption }}" hint-placeholder-val="{{ false }}">
+            <div style="margin-top:var(--rel-image-caption);font-size:var(--t-caption);color:var(--ink-45)">{{ b.caption }}</div>
+          </sc-if>
+        </section>
+      </sc-if>
+      <sc-if value="{{ b.isSticky }}" hint-placeholder-val="{{ false }}">
+        <section data-sec="{{ b.sec }}" data-screen-label="D3 Spatial experience" data-ambient-zone="minimal" style="padding:var(--space-section) var(--grid-margin)">
+          <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter)">
+            <div data-pr2-narrcol="1" style="grid-column:var(--span-label);position:sticky;top:96px;align-self:start">
+              <h2 style="margin:0;font-size:var(--t-hm);line-height:var(--t-hm-lh);letter-spacing:var(--t-hm-ls);font-weight:var(--t-hm-w)">{{ b.title }}</h2>
+              <p style="margin:var(--space-3) 0 0;font-size:var(--t-bs);line-height:var(--t-bs-lh);color:var(--ink-60);max-width:26ch">{{ b.body }}</p>
+              <div style="margin-top:var(--space-3);font-size:var(--t-meta);color:var(--ink-45)"><span class="text-number" data-pr2-narrcount="1">{{ b.activeCount }}</span> / <span class="text-number">{{ b.count }}</span></div>
+            </div>
+            <div data-pr2-narrmedia="1" style="grid-column:var(--span-body);display:grid;gap:var(--space-content)">
+              <sc-for list="{{ b.media }}" as="m" hint-placeholder-count="3">
+                <div data-pr2-narritem="1" data-reveal="media" style="position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--surface-1);direction:ltr">
+                  <div data-reveal-img="1" style="position:absolute;inset:0;background-image:{{ m.bg }};background-size:{{ m.size }};background-position:{{ m.pos }};background-repeat:{{ m.repeat }}"></div>
+                  <div data-reveal-mask="1"></div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </section>
+      </sc-if>
+    </sc-for>
+
+    <sc-if value="{{ d.hasDrawings }}" hint-placeholder-val="{{ false }}">
+      <section data-sec="drawings" data-screen-label="D4 Drawings" data-ambient-zone="minimal" data-grid-surface="standard" style="padding:var(--space-section) var(--grid-margin)">
+        <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter)">
+          <div style="grid-column:var(--span-label);font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45)">{{ drawingsLabel }}</div>
+          <div style="grid-column:var(--span-body);display:grid;gap:var(--space-block)">
+            <sc-for list="{{ d.drawings }}" as="dw" hint-placeholder-count="2">
+              <div>
+                <div data-pr2-plan="{{ dw.build }}" style="position:relative;aspect-ratio:16/9;overflow:hidden;background:#fff;border:1px solid var(--rule);direction:ltr;clip-path:{{ dw.clip }};transition:clip-path var(--m-slow) var(--e-page)">
+                  <div style="position:absolute;inset:0;background-image:{{ dw.bg }};background-size:{{ dw.size }};background-position:{{ dw.pos }};background-repeat:{{ dw.repeat }}"></div>
+                </div>
+                <div style="margin-top:var(--rel-image-caption);font-size:var(--t-caption);color:var(--ink-45)">{{ dw.caption }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+    </sc-if>
+
+    <section data-sec="information" data-screen-label="D5 Project information" data-ambient-zone="minimal" style="padding:var(--space-section) var(--grid-margin)">
+      <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter)">
+        <h2 style="grid-column:var(--span-label);margin:0;font-size:var(--t-hm);line-height:var(--t-hm-lh);letter-spacing:var(--t-hm-ls);font-weight:var(--t-hm-w)">{{ infoLabel }}</h2>
+        <div style="grid-column:var(--span-body)">
+          <sc-for list="{{ d.info }}" as="row" hint-placeholder-count="6">
+            <div style="display:grid;grid-template-columns:minmax(0,200px) minmax(0,1fr);gap:var(--space-5);border-top:1px solid var(--rule);padding:var(--space-4) 0">
+              <span style="font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--ink-45)">{{ row.label }}</span>
+              <span class="{{ row.cls }}" style="font-size:var(--t-bm)">{{ row.value }}</span>
+            </div>
+          </sc-for>
+          <sc-if value="{{ d.hasFacts }}" hint-placeholder-val="{{ false }}">
+            <div style="margin-top:var(--space-block);display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:var(--space-block)">
+              <sc-for list="{{ d.facts }}" as="f" hint-placeholder-count="4">
+                <div>
+                  <div class="text-number" style="font-size:var(--t-fact);line-height:var(--t-fact-lh);letter-spacing:var(--t-fact-ls);font-weight:var(--t-fact-w)">{{ f.value }}</div>
+                  <div style="margin-top:var(--space-micro);font-size:var(--t-bs);line-height:var(--t-bs-lh);color:var(--ink-60)">{{ f.note }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
+      </div>
+    </section>
+
+    <sc-if value="{{ d.hasTeam }}" hint-placeholder-val="{{ false }}">
+      <section data-sec="team" data-screen-label="D6 Team" data-ambient-zone="minimal" style="padding:0 var(--grid-margin) var(--space-section)">
+        <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter);border-top:1px solid var(--rule);padding-top:var(--space-4)">
+          <div style="grid-column:var(--span-label);font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45)">{{ teamLabel }}</div>
+          <div style="grid-column:var(--span-body)">
+            <sc-for list="{{ d.team }}" as="t" hint-placeholder-count="5">
+              <div style="display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:var(--space-5);border-top:1px solid var(--rule-soft);padding:var(--space-3) 0">
+                <span style="font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--ink-45)">{{ t.role }}</span>
+                <span style="font-size:var(--t-bs)" class="text-mixed"><sc-for list="{{ t.nameParts }}" as="p" hint-placeholder-count="1"><span class="{{ p.cls }}">{{ p.t }}</span></sc-for></span>
+              </div>
+            </sc-for>
+            <sc-if value="{{ d.hasServices }}" hint-placeholder-val="{{ false }}">
+              <div style="margin-top:var(--space-4);display:flex;flex-wrap:wrap;gap:var(--space-2) var(--space-5);font-size:var(--t-bs);color:var(--ink-60)">
+                <sc-for list="{{ d.services }}" as="s" hint-placeholder-count="4"><span>{{ s }}</span></sc-for>
+              </div>
+            </sc-if>
+          </div>
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ d.hasRecognition }}" hint-placeholder-val="{{ false }}">
+      <section data-sec="recognition" data-screen-label="D7 Recognition" data-ambient-zone="soft" style="padding:0 var(--grid-margin) var(--space-section)">
+        <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter);border-top:1px solid var(--rule);padding-top:var(--space-4)">
+          <div style="grid-column:var(--span-label);font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45)">{{ recognitionLabel }}</div>
+          <div style="grid-column:var(--span-body);display:flex;flex-direction:column;gap:var(--space-3)">
+            <sc-for list="{{ d.awards }}" as="aw" hint-placeholder-count="2">
+              <div style="display:grid;grid-template-columns:80px minmax(0,1fr) auto;gap:var(--space-4);align-items:baseline;border-top:1px solid var(--rule-soft);padding:var(--space-3) 0">
+                <span class="text-number" style="font-size:var(--t-meta);color:var(--ink-45)">{{ aw.year }}</span>
+                <span style="font-size:var(--t-bs)" class="text-mixed"><sc-for list="{{ aw.nameParts }}" as="p" hint-placeholder-count="1"><span class="{{ p.cls }}">{{ p.t }}</span></sc-for></span>
+                <span style="font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--turq-dk)">{{ aw.level }}</span>
+              </div>
+            </sc-for>
+            <sc-for list="{{ d.journal }}" as="j" hint-placeholder-count="2">
+              <a href="{{ j.href }}" style="display:grid;grid-template-columns:80px minmax(0,1fr);gap:var(--space-4);border-top:1px solid var(--rule-soft);padding:var(--space-3) 0;font-size:var(--t-bs)">
+                <span style="color:var(--ink-45)">{{ j.type }}</span><span>{{ j.title }}</span>
+              </a>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ d.hasRelated }}" hint-placeholder-val="{{ false }}">
+      <section data-sec="related" data-screen-label="D8 Related" data-ambient-zone="soft" style="padding:var(--space-section) var(--grid-margin)">
+        <div style="font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45);margin-bottom:var(--space-block)">{{ relatedLabel }}</div>
+        <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter);align-items:end">
+          <sc-for list="{{ d.related }}" as="r" hint-placeholder-count="2">
+            <a href="{{ r.href }}" onClick="{{ r.open }}" data-v2-cursor="view" style="grid-column:{{ r.col }};display:block">
+              <div data-reveal="media" style="position:relative;aspect-ratio:{{ r.ratio }};overflow:hidden;background:var(--surface-1);direction:ltr">
+                <div data-reveal-img="1" style="position:absolute;inset:0;background-image:{{ r.bg }};background-size:{{ r.size }};background-position:{{ r.pos }};background-repeat:{{ r.repeat }}"></div>
+                <div data-reveal-mask="1"></div>
+              </div>
+              <div style="margin-top:var(--rel-image-caption);font-size:var(--t-hs);font-weight:var(--t-hs-w)">{{ r.title }}</div>
+            </a>
+          </sc-for>
+        </div>
+      </section>
+    </sc-if>
+
+    <section data-screen-label="D9 Next" data-ambient-zone="full" style="position:relative;padding:var(--space-section-xl) var(--grid-margin) var(--space-element)">
+      <a href="{{ next.href }}" onClick="{{ next.open }}" data-v2-cursor="next" style="display:block">
+        <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter);align-items:end">
+          <div style="grid-column:var(--span-lead)">
+            <div style="font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45)">{{ nextLabel }}</div>
+            <div data-reveal="content" style="margin-top:var(--space-3);font-size:var(--t-dm);line-height:var(--t-dm-lh);letter-spacing:var(--t-dm-ls);font-weight:var(--t-dm-w)">{{ next.title }}</div>
+          </div>
+          <div data-pr2-next="1" style="grid-column:var(--span-support);position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--surface-1);direction:ltr">
+            <div data-pr2-nextimg="1" data-reveal="media" style="position:absolute;inset:-3% -1%;background-image:{{ next.bg }};background-size:{{ next.size }};background-position:{{ next.pos }};background-repeat:{{ next.repeat }}"></div>
+          </div>
+        </div>
+      </a>
+      <div style="margin-top:var(--space-section);display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--space-4);border-top:1px solid var(--rule);padding-top:var(--space-5);font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--ink-45)">
+        <a href="{{ backHref }}" onClick="{{ goBack }}" style="display:inline-flex;align-items:center;min-height:var(--c-control-h)">{{ backLabel }}</a>
+        <span style="display:inline-flex;align-items:center;min-height:var(--c-control-h)">Tarh &amp; Afarinesh — طرح و آفرینش</span>
+      </div>
+    </section>
+
+    <div data-pr2-chapter="1" aria-hidden="true" style="position:fixed;{{ chapterSide }}:var(--grid-margin);bottom:calc(var(--grid-margin) + 48px);z-index:40;display:flex;align-items:center;gap:var(--space-3);background:var(--surface-0);padding:var(--space-2) var(--space-3);opacity:{{ chapterOpacity }};transition:opacity var(--m-standard) var(--e-smooth);font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--ink-45)">
+      <span style="display:block;height:12px;overflow:hidden;width:20px" class="text-number"><span data-pr2-chapternum="1" style="display:block;transition:transform var(--m-standard) var(--e-page)">{{ chapterNum }}</span></span>
+      <span data-pr2-chapterlabel="1">{{ chapterLabel }}</span>
+    </div>
+    <div data-pr2-progress="1" aria-hidden="true" style="position:fixed;{{ progressSide }}:14px;bottom:var(--grid-margin);z-index:40;display:flex;flex-direction:column;align-items:center;gap:var(--space-2);opacity:{{ chapterOpacity }};transition:opacity var(--m-standard) var(--e-smooth)">
+      <span style="position:relative;display:block;width:9px;height:120px"><i style="position:absolute;left:4px;top:0;bottom:0;width:1px;background:var(--rule)"></i><i data-pr2-progresssq="1" style="position:absolute;left:1px;width:7px;height:7px;background:var(--turq);top:0;transition:top var(--m-fast) linear"></i></span>
+    </div>
+  </sc-if>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440},&quot;startLang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;en&quot;,&quot;options&quot;:[&quot;en&quot;,&quot;fa&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Bilingual&quot;}}">
+const B = () => window.TA_BIDI;
+const parts = (s, l) => B() ? B().parts(s, l) : [{ t: String(s || ""), cls: "" }];
+const scroller = () => (document.body.scrollHeight > document.body.clientHeight + 1 ? document.body : (document.scrollingElement || document.documentElement));
+const scrollToY = (y) => { const el = scroller(); if(el.scrollTo) el.scrollTo({ top:y, behavior:"auto" }); else el.scrollTop = y; };
+
+const CHAPTER_LBL = {
+  glance: ["At a Glance","نمای کلی"], intent: ["Design Intent","ایده طراحی"], context: ["Context","زمینه"],
+  strategy: ["Architectural Strategy","راهبرد معماری"], experience: ["Spatial Experience","تجربه فضایی"],
+  material: ["Material & Structure","مصالح و سازه"], technical: ["Technical Resolution","حل فنی"],
+  drawings: ["Drawings","نقشه‌ها"], information: ["Information","اطلاعات"], team: ["Team","تیم"],
+  recognition: ["Recognition","افتخارات"], related: ["Related","مرتبط"]
+};
+const clamp1 = (v, a, b) => v < a ? a : v > b ? b : v;
+const reducedQ = () => window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+class Component extends DCLogic {
+  state = { lang:"en", index:null, filters:[], hover:null, chapterKey:"", chapterIdx:0, chapterN:0, chapterVisible:false };
+
+  parseHash(){
+    const out = {};
+    (window.location.hash || "").replace(/^#/, "").split("&").forEach(p => {
+      if(!p) return; const i = p.indexOf("="); if(i > 0) out[p.slice(0, i)] = decodeURIComponent(p.slice(i + 1));
+    });
+    return out;
+  }
+  readRoute(){
+    const q = this.parseHash();
+    const idx = q.p != null ? parseInt(q.p, 10) : NaN;
+    this.setState({
+      lang: (q.lang === "fa" || (!window.location.hash && this.props.startLang === "fa")) ? "fa" : "en",
+      index: Number.isFinite(idx) ? idx : null
+    });
+    if(q.expertise && window.TA_EXPERTISE && window.TA_EXPERTISE.bySlug(q.expertise) && idx == null){
+      this.setState({ filters:[q.expertise] });
+    }
+  }
+  buildHash(idx, lang){
+    const parts = [];
+    if(idx != null) parts.push("p=" + idx);
+    if(lang === "fa") parts.push("lang=fa");
+    return parts.length ? "#" + parts.join("&") : "";
+  }
+  componentDidMount(){
+    this.ensureMh();
+    this.paintInitialPreview();
+    this.onHash = () => { this.readRoute(); if(this.state.index != null) scrollToY(0); };
+    window.addEventListener("hashchange", this.onHash);
+    window.addEventListener("popstate", this.onHash);
+    /* shared V2 Scroll Coordinator, not a page-local window scroll listener */
+    this.unsubScroll = window.TA_SCROLL ? window.TA_SCROLL.subscribe(() => this.requestTick(), { root:window }) : null;
+    this.readRoute();
+  }
+  showPreview(p, idx, lang){
+    this.ensureMh();
+    if(!this._mh || !p) return;
+    const P = window.TA_PROJECTS;
+    const av = P.visual(p.id, "archive", "archive", { lang });
+    if(!av || !av.isRealMedia) return;
+    this._mh.show({ src: av.backgroundImage.replace(/^url\((['"]?)(.*?)\1\)$/, "$2"), pos: av.backgroundPosition, size: av.backgroundSize, repeat: av.backgroundRepeat, index: idx });
+  }
+  ensureMh(){
+    if(this._mh) return;
+    const el = document.querySelector("[data-pr2-mhstage]");
+    if(el && window.TA_MEDIA_HANDOFF) this._mh = window.TA_MEDIA_HANDOFF.mount(el, { intensity:"high" });
+  }
+  paintInitialPreview(){
+    if(!this._mh || !this._lastPv || this._lastPv.bg === "none") return;
+    this._mh.show({ src: this._lastPv.bg.replace(/^url\((['"]?)(.*?)\1\)$/, "$2"), pos: this._lastPv.pos, size: this._lastPv.size, repeat: this._lastPv.repeat, index: 0 });
+  }
+  componentWillUnmount(){
+    if(this._mh) this._mh.destroy();
+    window.removeEventListener("hashchange", this.onHash);
+    window.removeEventListener("popstate", this.onHash);
+    if(this.unsubScroll) this.unsubScroll();
+    this.teardownDetail();
+    if(this._raf) clearTimeout(this._raf);
+  }
+  /* setTimeout, not requestAnimationFrame: rAF (like IntersectionObserver) does not fire in
+     a backgrounded/occluded preview iframe in this environment, which would silently break
+     every Narrative Scroll primitive there even though it works in a normal focused tab.
+     setTimeout(0-16ms) still coalesces bursts of scroll events into one tick, without that
+     visibility dependency. */
+  requestTick(){
+    if(this._raf) return;
+    this._raf = setTimeout(() => { this._raf = null; try{ this.tick(); }catch(e){ console.warn("tick", e); } }, 16);
+  }
+  /* One scroll-driven tick, gated by a pending setTimeout flag (never a permanent loop) —
+     drives every Narrative Scroll primitive on this page. Rebuilt this way, matching V1's own
+     proven mechanism (PROJECTS_V1_SCROLL_CHOREOGRAPHY_AUDIT.md), after confirming IntersectionObserver
+     callbacks do not fire in this preview environment (verified with a bare, option-less
+     observer on a real, already-laid-out element — zero callbacks after 1s+ and a manual
+     scroll) — getBoundingClientRect() during the scroll handler is the reliable primitive
+     here, so every wireX below reads geometry directly instead of subscribing to IO. */
+  tick(){
+    if(this.state.index == null) return;
+    const root = document.querySelector("[data-pr2-root]");
+    if(!root) return;
+    const red = reducedQ();
+    const heroImg = root.querySelector("[data-pr2-heroimg]"), hero = root.querySelector("[data-pr2-hero]");
+    if(hero && heroImg && !red){
+      const r = hero.getBoundingClientRect();
+      const p = clamp1(-r.top / Math.max(1, r.height), 0, 1);
+      heroImg.style.transform = "translateY(" + (p * 5).toFixed(2) + "%) scale(" + (1 + p * 0.02).toFixed(3) + ")";
+    }
+    /* Context-aware Header theme is deliberately NOT wired here this pass \u2014 see
+       V2_3_EXPERIENCE_HARDENING_AUDIT.md. Theme stays "canvas" until the overlay-hero
+       layout change it needs is approved. */
+    const nextImg = root.querySelector("[data-pr2-nextimg]"), next = root.querySelector("[data-pr2-next]");
+    if(next && nextImg && !red){
+      const r = next.getBoundingClientRect(), vh = window.innerHeight;
+      const p = clamp1(1 - Math.abs(r.top + r.height / 2 - vh / 2) / vh, 0, 1);
+      nextImg.style.transform = "translateY(" + ((0.5 - p) * 6).toFixed(2) + "%) scale(" + (1.02 - p * 0.02).toFixed(3) + ")";
+    }
+    const sq = root.querySelector("[data-pr2-progresssq]");
+    if(sq){
+      const doc = document.documentElement, max = Math.max(1, doc.scrollHeight - window.innerHeight);
+      const frac = clamp1((window.scrollY || 0) / max, 0, 1);
+      sq.style.top = (frac * (120 - 7)) + "px";
+    }
+    this.tickChapters(root, hero);
+    if(!red){ this.tickExpand(root); this.tickDrawing(root); }
+    this.tickNarrative(root);
+  }
+  /* content-aware: reads whichever [data-sec] chapters this project actually rendered */
+  tickChapters(root, hero){
+    const secs = Array.prototype.slice.call(root.querySelectorAll("[data-sec]")).filter(el => el.getAttribute("data-sec") !== "hero");
+    if(!secs.length) return;
+    let best = null, bestDist = Infinity, vhMid = window.innerHeight * 0.42;
+    secs.forEach(el => {
+      const r = el.getBoundingClientRect();
+      if(r.top > window.innerHeight || r.bottom < 0) return;
+      const d = Math.abs(r.top - vhMid);
+      if(r.top < vhMid && d < bestDist){ bestDist = d; best = el; }
+    });
+    if(!best) best = secs[0];
+    const idx = secs.indexOf(best);
+    const key = best.getAttribute("data-sec");
+    const visible = hero ? (hero.getBoundingClientRect().bottom < window.innerHeight * 0.6) : true;
+    if(key !== this.state.chapterKey || visible !== this.state.chapterVisible || secs.length !== this.state.chapterN){
+      const changed = key !== this.state.chapterKey;
+      const numEl = root.querySelector("[data-pr2-chapternum]");
+      /* restrained counter transition: a small vertical dip, never a rolling odometer */
+      if(changed && numEl && !reducedQ()){
+        numEl.style.transition = "none"; numEl.style.transform = "translateY(-6px)"; numEl.style.opacity = "0";
+      }
+      this.setState({ chapterKey:key, chapterIdx:idx, chapterN:secs.length, chapterVisible:visible }, () => {
+        if(changed && numEl && !reducedQ()){
+          setTimeout(() => {
+            numEl.style.transition = "transform var(--m-fast) var(--e-smooth), opacity var(--m-fast) var(--e-smooth)";
+            numEl.style.transform = "translateY(0)"; numEl.style.opacity = "1";
+          }, 20);
+        }
+      });
+    }
+  }
+  /* media expansion: contained → confident full-bleed once, as the block enters the reading
+     zone. True breakout (not "wider than its padded parent") — width:100vw alone would
+     overflow past the viewport inside a padded section, so the margin-inline breakout trick
+     goes with it, in one step, so there is never a frame where the box is 100vw wide but
+     still inset by the section's padding. */
+  tickExpand(root){
+    if(window.innerWidth < 768) return; /* mobile: deliberate edge-to-edge via CSS, no width interpolation */
+    Array.prototype.slice.call(root.querySelectorAll('[data-pr2-expand="1"]')).forEach(el => {
+      if(el.__expanded) return;
+      const r = el.getBoundingClientRect();
+      if(r.top < window.innerHeight * 0.6 && r.bottom > 0){
+        el.style.width = "100vw"; el.style.marginInline = "calc(50% - 50vw)"; el.__expanded = true;
+      }
+    });
+  }
+  /* the primary drawing builds structurally (clip progression) once; others stay calm */
+  tickDrawing(root){
+    const el = root.querySelector('[data-pr2-plan="1"]');
+    if(!el || el.__built) return;
+    const r = el.getBoundingClientRect();
+    if(r.top < window.innerHeight * 0.75 && r.bottom > 0){ el.style.clipPath = "inset(0 0 0 0)"; el.__built = true; }
+  }
+  /* sticky narrative counter — independent per sticky group */
+  tickNarrative(root){
+    Array.prototype.slice.call(root.querySelectorAll("[data-pr2-narrmedia]")).forEach(group => {
+      const items = Array.prototype.slice.call(group.querySelectorAll("[data-pr2-narritem]"));
+      const countEl = group.parentElement.querySelector("[data-pr2-narrcount]");
+      if(!items.length || !countEl) return;
+      const zone = window.innerHeight * 0.5;
+      let top = null, topD = Infinity;
+      items.forEach(el => { const d = Math.abs(el.getBoundingClientRect().top - zone * 0.3); if(d < topD){ topD = d; top = el; } });
+      if(top) countEl.textContent = String(items.indexOf(top) + 1).padStart(2, "0");
+    });
+  }
+  wireDetail(){
+    this.teardownDetail();
+    if(reducedQ()){
+      const root = document.querySelector("[data-pr2-root]");
+      const plan = root && root.querySelector('[data-pr2-plan="1"]');
+      if(plan) plan.style.clipPath = "inset(0 0 0 0)";
+    }
+    this.requestTick();
+  }
+  teardownDetail(){
+    if(this.state.chapterKey || this.state.chapterVisible) this.setState({ chapterKey:"", chapterVisible:false, chapterN:0 });
+  }
+  /* imperative, not a templated attribute hole \u2014 passing a boolean (or a bare-value
+     hole) into inert="{{ x }}" was verified NOT to render the real DOM attribute in this
+     runtime. toggleAttribute() on the actual node is the mechanism confirmed to work. */
+  syncFilterInert(){
+    if(this.filterEl) this.filterEl.toggleAttribute("inert", !this.state.filterOpen);
+  }
+  componentDidUpdate(){
+    if(this._pIndex !== this.state.index){
+      this._pIndex = this.state.index;
+      if(this.state.index != null) this.wireDetail(); else this.teardownDetail();
+    }
+  }
+  setLang(l){ this.setState({ lang:l }, () => { try{ window.history.replaceState(null, "", this.buildHash(this.state.index, l) || window.location.pathname); }catch(e){} }); }
+  /* the page's own motion tokens are the single source of truth for this transition's timing —
+     read live from computed style so a future token change never desyncs the JS handoff */
+  msVar(name, fallback){
+    const v = getComputedStyle(document.documentElement).getPropertyValue(name);
+    const n = parseFloat(v);
+    return Number.isFinite(n) ? n : fallback;
+  }
+  /* archive → detail: the preview image the user was already looking at expands into the hero —
+     a real shared-element relationship, carrying its actual crop (size/position) through, not
+     a generic fade. Reduced motion: instant crossfade, no clone. Uses setTimeout(0), not
+     requestAnimationFrame — rAF does not fire in a backgrounded/occluded preview iframe in
+     this environment (confirmed directly), which would silently skip the whole transition. */
+  go(idx, ev){
+    if(ev && ev.preventDefault) ev.preventDefault();
+    const fromArchive = idx != null && this.state.index == null;
+    if(fromArchive) this.archiveY = scroller().scrollTop;
+    const previewBox = fromArchive ? document.querySelector("[data-pr2-preview] > div") : null;
+    const previewImg = previewBox ? previewBox.firstElementChild : null;
+    const fromRect = previewImg && !reducedQ() ? previewBox.getBoundingClientRect() : null;
+    const fromBg = previewImg ? previewImg.style.backgroundImage : null;
+    const fromSize = previewImg ? (previewImg.style.backgroundSize || "cover") : "cover";
+    const fromPos = previewImg ? (previewImg.style.backgroundPosition || "50% 50%") : "50% 50%";
+    try{ window.history.pushState(null, "", this.buildHash(idx, this.state.lang) || window.location.pathname); }catch(e){}
+    this.setState({ index:idx }, () => {
+      if(idx != null){
+        scrollToY(0);
+        if(fromRect && fromBg && fromBg !== "none"){
+          setTimeout(() => {
+            const hero = document.querySelector("[data-pr2-hero]");
+            if(!hero) return;
+            const toRect = hero.getBoundingClientRect();
+            const pageMs = this.msVar("--m-page", 1000), fastMs = this.msVar("--m-fast", 240), standardMs = this.msVar("--m-standard", 420);
+            const clone = document.createElement("div");
+            clone.style.cssText = "position:fixed;z-index:60;pointer-events:none;overflow:hidden;background-image:" + fromBg + ";background-size:" + fromSize + ";background-position:" + fromPos + ";"
+              + "left:" + fromRect.left + "px;top:" + fromRect.top + "px;width:" + fromRect.width + "px;height:" + fromRect.height + "px;"
+              + "transition:left var(--m-page) var(--e-cinematic),top var(--m-page) var(--e-cinematic),width var(--m-page) var(--e-cinematic),height var(--m-page) var(--e-cinematic)";
+            document.body.appendChild(clone);
+            hero.style.opacity = "0";
+            let handed = false;
+            const handoff = () => {
+              if(handed) return; handed = true;
+              hero.style.transition = "opacity var(--m-fast) var(--e-smooth)"; hero.style.opacity = "1";
+              clone.style.transition += ",opacity var(--m-fast) var(--e-smooth)"; clone.style.opacity = "0";
+              setTimeout(() => clone.remove(), fastMs + 60);
+            };
+            clone.addEventListener("transitionend", handoff, { once:true });
+            setTimeout(handoff, pageMs + standardMs); /* safety fallback if transitionend never fires */
+            setTimeout(() => {
+              clone.style.left = toRect.left + "px"; clone.style.top = toRect.top + "px";
+              clone.style.width = toRect.width + "px"; clone.style.height = toRect.height + "px";
+            }, 16);
+          }, 16);
+        }
+      } else {
+        scrollToY(this.archiveY || 0);
+      }
+    });
+  }
+  toggleFilter(slug){
+    this.setState(s => { const a = s.filters.slice(), i = a.indexOf(slug); if(i < 0) a.push(slug); else a.splice(i, 1); return { filters:a }; });
+  }
+
+  renderVals(){
+    const st = this.state, fa = st.lang === "fa";
+    const P = window.TA_PROJECTS, EX = window.TA_EXPERTISE, AW = window.TA_AWARDS, J = window.TA_JOURNAL;
+    const hsh = fa ? "#lang=fa" : "", amp = fa ? "&lang=fa" : "";
+    const pick = (v) => v == null ? "" : (typeof v === "object" ? (fa ? (v.fa || v.en) : (v.en || v.fa)) : String(v));
+    const all = P ? P.published() : [];
+
+    const vis = all.filter(p => !st.filters.length || (p.expertise || []).some(e => st.filters.indexOf(e) >= 0));
+
+    const expTags = EX ? EX.all().filter(e => all.some(p => (p.expertise || []).indexOf(e.slug) >= 0)) : [];
+    const filters = expTags.map(e => {
+      const on = st.filters.indexOf(e.slug) >= 0;
+      return { label: pick(e.title), pressed: on ? "true" : "false", op: on ? "1" : "0.55",
+        fill: on ? "var(--turq)" : "transparent", toggle: () => this.toggleFilter(e.slug) };
+    });
+
+    const hrefOf = (idx) => "#p=" + idx + amp;
+    const rows = vis.map(p => {
+      const idx = P.indexOf(p.id);
+      const on = st.hover === p.id, title = pick(p.title);
+      const locYear = [pick(p.location), p.years || p.year].filter(Boolean).join(" · ");
+      /* mobile has no hover, so it needs its own small thumbnail per row (archetype E's
+         mobile translation: media-first sequential rows, not a hover-only shared preview) */
+      const tv = P.visual(p.id, "archive", "archive", { lang: st.lang });
+      const tHas = !!(tv && tv.isRealMedia);
+      return {
+        num: String(idx + 1).padStart(2, "0"), href: hrefOf(idx),
+        open: (ev) => this.go(idx, ev),
+        title, titleParts: parts(title, st.lang),
+        locYear, op: st.hover == null || on ? "1" : "0.5",
+        color: on ? "var(--turq-dk)" : "inherit",
+        thumbBg: tHas ? tv.backgroundImage : "none", thumbPos: tv ? tv.backgroundPosition : "50% 50%",
+        enter: () => { this.setState({ hover:p.id }); this.showPreview(p, idx, st.lang); },
+        leave: () => this.setState({ hover:null })
+      };
+    });
+
+    const activeP = st.hover ? all.find(p => p.id === st.hover) : (vis[0] || null);
+    const av = activeP && P ? P.visual(activeP.id, "archive", "archive", { lang: st.lang }) : null;
+    const hasImage = !!(av && av.isRealMedia);
+    const pv = {
+      ratio: (activeP && activeP.presentation && activeP.presentation.ratio) || "4/3",
+      bg: hasImage ? av.backgroundImage : "none", size: av ? av.backgroundSize : "cover",
+      pos: av ? av.backgroundPosition : "50% 50%", repeat: av ? av.backgroundRepeat : "no-repeat",
+      op: hasImage ? "1" : "0", scale: hasImage ? "1" : "1.04",
+      caption: activeP ? pick(activeP.title) : ""
+    };
+
+    const nav = [["Projects","پروژه‌ها",""],["Expertise","تخصص‌ها","Expertise.dc.html"],
+      ["Awards","جوایز","Awards.dc.html"],["About","درباره ما","About.dc.html"],["Journal","مجله","Journal.dc.html"],
+      ["Contact","تماس","Contact.dc.html"]].map(n => ({ label: fa ? n[1] : n[0], href: n[2] ? (n[2] + hsh) : "#", on: n[2] ? "0" : "1" }));
+    const drawerLinks = [["Home","خانه","Homepage.dc.html"]].concat(
+      [["Projects","پروژه‌ها",""],["Expertise","تخصص‌ها","Expertise.dc.html"],["Awards","جوایز","Awards.dc.html"],
+       ["About","درباره ما","About.dc.html"],["Journal","مجله","Journal.dc.html"],["Contact","تماس","Contact.dc.html"]]
+    ).map(n => ({ label: fa ? n[1] : n[0], href: n[2] ? (n[2] + hsh) : "#", on: n[2] ? "0" : "1" }));
+
+    let d = null;
+    const cur = st.index != null ? P.byIndex(st.index) : null;
+    if(cur){
+      const ED = cur.editorial || {};
+      const hv = P.visual(cur.id, "hero", "hero", { lang: st.lang });
+      const heroHas = !!(hv && hv.isRealMedia);
+      const title = pick(cur.title);
+      let expandUsed = 0;
+      /* ROLE_LABEL covers the optional semantic roles a canonical record may set on a story
+         block (context/strategy/experience/material/technical/drawing) — none of the current
+         records set one, so every project today still falls back to the positional
+         Strategy(first)/Experience(rest) split; the capability exists for when a content
+         editor supplies it, per PROJECTS_V2_BLUEPRINT.md. Never inferred from block text. */
+      const ROLE_OK = ["context","strategy","experience","material","technical"];
+      const blocks = (P.story(cur.id, { lang: st.lang }) || []).map((b, i) => {
+        const m0 = b.media[0] || {};
+        const sec = (b.role && ROLE_OK.indexOf(b.role) >= 0) ? b.role : (i === 0 ? "strategy" : "experience");
+        if(b.type === "full-image"){
+          const canExpand = expandUsed < 1; if(canExpand) expandUsed++;
+          return {
+            isFull:true, sec, bg: m0.isRealMedia ? m0.backgroundImage : "none", size: m0.backgroundSize || "cover",
+            pos: m0.backgroundPosition || "50% 50%", repeat: m0.backgroundRepeat || "no-repeat",
+            ratio: (m0.ratio || "16/9"), hasCaption: !!(b.title), title: pick(b.title), body: pick(b.body),
+            expand: canExpand ? "1" : "0", width: canExpand ? "92vw" : "100%"
+          };
+        }
+        if(b.type === "image-text") { const flip = i % 2 === 1;
+          return { isSplit:true, sec, textCol: flip ? "9 / span 4" : "1 / span 7", mediaCol: flip ? "1 / span 7" : "9 / span 4",
+          bg: m0.isRealMedia ? m0.backgroundImage : "none", size: m0.backgroundSize || "cover",
+          pos: m0.backgroundPosition || "50% 50%", repeat: m0.backgroundRepeat || "no-repeat",
+          title: pick(b.title), body: pick(b.body), hasCaption: !!b.caption, caption: pick(b.caption) };
+        }
+        if(b.type === "sticky-narrative") return {
+          isSticky:true, sec, title: pick(b.title), body: pick(b.body), count: String(b.media.length).padStart(2, "0"), activeCount:"01",
+          media: b.media.map(m => ({ bg: m.isRealMedia ? m.backgroundImage : "none", size: m.backgroundSize, pos: m.backgroundPosition, repeat: m.backgroundRepeat }))
+        };
+        return { isFull:false, isSplit:false, isSticky:false, sec };
+      });
+
+      const drawList = P.drawingList ? P.drawingList(cur.id, { lang: st.lang }) : [];
+      const facts = (cur.facts || []).map(f => ({ value: f.value, note: pick(f.note) }));
+      const awardsFor = (AW ? AW.forProject(cur.id) : []).map(a => ({
+        year: a.year, level: AW.levels && AW.levels[a.level] ? AW.levels[a.level][fa ? 1 : 0] : a.level,
+        nameParts: parts(fa ? (a.nameFa || a.name) : a.name, st.lang)
+      }));
+      const journalFor = (J ? J.forProject(cur.id) : []).map(e => ({
+        href: "Journal.dc.html#article=" + e.slug + amp,
+        type: J.typeOne && J.typeOne[e.type] ? J.typeOne[e.type][fa ? 1 : 0] : e.type,
+        title: fa ? e.fa : e.en
+      }));
+      const glance = [];
+      const addGlance = (label, value, cls) => { if(value) glance.push({ label, value, cls: cls || "" }); };
+      addGlance(fa ? "موقعیت" : "Location", pick(cur.location), "");
+      addGlance(fa ? "سال" : "Year", cur.years || cur.year, "text-number");
+      addGlance(fa ? "وضعیت" : "Status", pick(cur.statusLabel) || cur.status, "");
+      addGlance(fa ? "کارفرما" : "Client", pick(cur.client), "");
+      const info = [];
+      const addInfo = (label, value, cls) => { if(value) info.push({ label, value, cls: cls || "" }); };
+      addInfo(fa ? "موقعیت" : "Location", pick(cur.location), "");
+      addInfo(fa ? "سال" : "Year", cur.years || cur.year, "text-number");
+      addInfo(fa ? "کارفرما" : "Client", pick(cur.client), "");
+      addInfo(fa ? "برنامه" : "Programme", pick(cur.programme), "");
+      addInfo(fa ? "زیربنا" : "Built Area", cur.builtArea, "text-number");
+      addInfo(fa ? "مساحت سایت" : "Site Area", cur.siteArea, "text-number");
+      addInfo(fa ? "وضعیت" : "Status", pick(cur.statusLabel) || cur.status, "");
+      const relIds = (cur.relatedProjects && cur.relatedProjects.length) ? cur.relatedProjects
+        : all.filter(p => p.id !== cur.id && (p.expertise || []).some(e => (cur.expertise || []).indexOf(e) >= 0)).slice(0, 2).map(p => p.id);
+      const related = relIds.map((rid, i) => {
+        const rp = P.byId(rid); if(!rp) return null;
+        const ridx = P.indexOf(rid);
+        const rv = P.visual(rid, "archive", "archive", { lang: st.lang });
+        const rHas = !!(rv && rv.isRealMedia);
+        return { href: hrefOf(ridx), open: (ev) => this.go(ridx, ev), title: pick(rp.title),
+          col: i % 2 === 0 ? "1 / span 7" : "9 / span 4", ratio: i % 2 === 0 ? "16/10" : "3/4",
+          bg: rHas ? rv.backgroundImage : "none", size: rv ? rv.backgroundSize : "cover",
+          pos: rv ? rv.backgroundPosition : "50% 50%", repeat: rv ? rv.backgroundRepeat : "no-repeat" };
+      }).filter(Boolean);
+
+      const nextIdx = (st.index + 1) % all.length, nextP = P.byIndex ? P.byIndex(nextIdx >= 0 ? nextIdx : 0) : null;
+      const nextReal = nextP ? all.find(p => p.id === nextP.id) : null;
+      const nextTarget = nextReal ? P.indexOf(nextReal.id) : 0;
+      const nv = nextReal ? P.visual(nextReal.id, "archive", "archive", { lang: st.lang }) : null;
+      const nvHas = !!(nv && nv.isRealMedia);
+
+      d = {
+        num: String(st.index + 1).padStart(2, "0"), count: String(all.length).padStart(2, "0"),
+        titleParts: parts(title, st.lang), proposition: pick(cur.proposition),
+        location: pick(cur.location), years: cur.years || cur.year || "", typology: pick(cur.typologyLabel) || cur.typology || "",
+        hero: { bg: heroHas ? hv.backgroundImage : "none", size: hv ? hv.backgroundSize : "cover", pos: hv ? hv.backgroundPosition : "50% 50%", repeat: hv ? hv.backgroundRepeat : "no-repeat" },
+        glance,
+        hasIntent: !!(pick(ED.lead) || (ED.chapters || []).length),
+        lead: pick(ED.lead), chapters: (ED.chapters || []).map(pick),
+        team: (cur.team || []).map(t => ({ role: pick(t.role), nameParts: parts(pick(t.name), st.lang) })),
+        awards: awardsFor, hasTeam: (cur.team || []).length > 0,
+        blocks,
+        hasDrawings: drawList.length > 0,
+        drawings: drawList.map((dw, i) => ({
+          bg: dw.visual.isRealMedia ? dw.visual.backgroundImage : "none", size: dw.visual.backgroundSize,
+          pos: dw.visual.backgroundPosition, repeat: dw.visual.backgroundRepeat, caption: pick(dw.title),
+          build: i === 0 ? "1" : "0", clip: i === 0 ? "inset(0 100% 0 0)" : "inset(0 0 0 0)"
+        })),
+        info, hasFacts: facts.length > 0, facts,
+        hasServices: (cur.serviceList || cur.services || []).length > 0,
+        services: (cur.serviceList && cur.serviceList.length ? cur.serviceList : cur.services || []).map(pick),
+        hasRecognition: awardsFor.length > 0 || journalFor.length > 0, journal: journalFor,
+        hasRelated: related.length > 0, related
+      };
+      var nextObj = {
+        href: hrefOf(nextTarget), open: (ev) => this.go(nextTarget, ev),
+        title: nextReal ? pick(nextReal.title) : "",
+        bg: nvHas ? nv.backgroundImage : "none", size: nv ? nv.backgroundSize : "cover",
+        pos: nv ? nv.backgroundPosition : "50% 50%", repeat: nv ? nv.backgroundRepeat : "no-repeat"
+      };
+    }
+
+    const chapterOn = cur && st.chapterVisible;
+    const chapterLbl = CHAPTER_LBL[st.chapterKey] || ["",""];
+
+    return {
+      dir: fa ? "rtl" : "ltr", upper: fa ? "none" : "uppercase", lang: st.lang,
+      brand: fa ? "طرح و آفرینش" : "Tarh & Afarinesh", nav, drawerLinks,
+      hrefHome: "Homepage.dc.html" + hsh, hrefExpertise: "Expertise.dc.html" + hsh,
+      setEn: () => this.setLang("en"), setFa: () => this.setLang("fa"),
+
+      isArchive: cur == null, isDetail: cur != null, d: d || {},
+
+      eyebrow: fa ? "پروژه‌ها — آثار منتخب" : "Projects — selected work",
+      openLines: fa ? ["هر پروژه با", "یک پرسش متفاوت آغاز می‌شود."] : ["Every project begins", "with a different question."],
+      intro: fa ? "پروژه‌های ما به بستر، برنامه، سازه و مصالح پاسخ می‌دهند و محدودیت‌ها را به امکان‌های فضایی تبدیل می‌کنند."
+        : "A record of the studio's work over time — from urban scale to architectural detail.",
+      countLabel: String(all.length).padStart(2, "0") + (fa ? " پروژه" : " projects"),
+
+      registerLabel: fa ? "فهرست" : "Register",
+      registerMotifCell: String(window.TA_MOTIF ? window.TA_MOTIF.cellForIndex(st.hover != null ? vis.findIndex(p => p.id === st.hover) : null) : 5),
+      filters, hasActiveFilters: st.filters.length > 0,
+      toggleFilter: () => this.setState(s => ({ filterOpen: !s.filterOpen }), () => this.syncFilterInert()),
+      setFilterRef: (el) => { this.filterEl = el; this.syncFilterInert(); },
+      filterOpen: st.filterOpen, filterExpanded: st.filterOpen ? "true" : "false",
+      filterRows: st.filterOpen ? "1fr" : "0fr",
+      filterLabel: fa ? "فیلتر" : "Filter",
+      filterCount: st.filters.length ? String(st.filters.length) : "",
+      filterCountOp: st.filters.length ? "1" : "0",
+      resetLabel: fa ? "پاک کردن" : "Reset", resetFilters: () => this.setState({ filters:[] }),
+      rows, empty: rows.length === 0, emptyLabel: fa ? "پروژه‌ای با این فیلترها یافت نشد." : "No projects match these filters.",
+      pv: (this._lastPv = pv), previewDisplay: rows.length ? "block" : "none",
+
+      motifFlip: fa ? "-1" : "1",
+      closingLines: fa ? ["هر پروژه فصلی است","از همان جست‌وجوی معمارانه،","که با بستر شکل می‌گیرد و با دقت ساخته می‌شود."]
+        : ["Every project is a chapter", "in the same architectural inquiry,", "carried forward by place and craft."],
+      expertiseLink: fa ? "همه تخصص‌ها" : "All expertise",
+
+      intentLabel: fa ? "ایده طراحی" : "Design intent",
+      drawingsLabel: fa ? "نقشه‌ها" : "Drawings",
+      infoLabel: fa ? "اطلاعات پروژه" : "Project information",
+      teamLabel: fa ? "تیم و خدمات" : "Team & services",
+      recognitionLabel: fa ? "افتخارات و مجله" : "Recognition & journal",
+      relatedLabel: fa ? "پروژه‌های مرتبط" : "Related projects",
+      nextLabel: fa ? "پروژه بعدی" : "Next project", next: typeof nextObj !== "undefined" ? nextObj : { href:"#", title:"", bg:"none" },
+      backHref: "Projects.dc.html" + hsh, goBack: (ev) => this.go(null, ev),
+      backLabel: fa ? "← بازگشت به پروژه‌ها" : "← Back to Projects",
+
+      headerTheme: "canvas",
+      chapterSide: fa ? "right" : "left", progressSide: fa ? "left" : "right",
+      chapterOpacity: chapterOn ? "1" : "0",
+      chapterNum: String(st.chapterIdx + 1).padStart(2, "0") + " / " + String(st.chapterN).padStart(2, "0"),
+      chapterLabel: chapterLbl[fa ? 1 : 0]
+    };
+  }
+}
+
+</script>
+</body>
+</html>

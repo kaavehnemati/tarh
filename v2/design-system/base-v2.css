@@ -1,0 +1,24 @@
+/* Tarh & Afarinesh — V2 SHARED BASE STYLES
+   The link/focus/selection rules every V2 page repeated identically with
+   literal hex values. One source, token-driven, loaded after tokens-v2.css.
+   Page-entry keyframes (ab2-/aw2-/jr2- rise+in) remain per-page for now —
+   consolidating them means renaming every data-*-rise reference sitewide,
+   left as a separate follow-up rather than risked here. */
+body{margin:0;color:var(--ink)}
+a{color:inherit;text-decoration:none}
+a:hover{color:var(--turq-dk)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--turq-dk);outline-offset:3px}
+::selection{background:var(--turq-pale);color:var(--ink)}
+
+/* -----------------------------------------------------------------------------
+   PAGE-ENTRY MOTION — the one grammar for a page's opening reveal, replacing the
+   per-page aw2-rise/ab2-rise/jr2-rise duplicates (Step 15). A future V2 page
+   reuses these two attributes; it never invents its own ct2-rise/pr2-rise/etc.
+     data-v2-rise   the hero heading — clips up into place
+     data-v2-in     the eyebrow/label above it — simple fade
+   ----------------------------------------------------------------------------- */
+@keyframes v2-rise{from{clip-path:inset(0 0 105% 0);transform:translateY(24px)}to{clip-path:inset(0 0 -25% 0);transform:none}}
+@keyframes v2-in{from{opacity:0}to{opacity:1}}
+[data-v2-rise]{animation:v2-rise var(--m-reveal) var(--e-editorial) 60ms both}
+[data-v2-in]{animation:v2-in var(--m-reveal) var(--e-editorial) both}
+@media (prefers-reduced-motion:reduce){[data-v2-rise],[data-v2-in]{animation:none !important}}

@@ -1,0 +1,669 @@
+/* =============================================================================
+   TARH & AFARINESH — DESIGN SYSTEM V2 TOKENS
+   Single source of truth. Every page and component consumes these; none redefines
+   them. Generated from the Design System in Phase 1H — edit HERE, not in a page.
+
+   Three layers:
+     1  :root            base values (English, desktop)
+     2  [dir="rtl"]      language resolution — components never name a -fa token
+     3  @media           breakpoint resolution — components never write a media query
+   ============================================================================= */
+
+:root{
+
+  /* PALETTE */
+  --ink:#121B1B;
+  --turq:#56B1AC;
+  --canvas:#FAF9F7;
+  --turq-dk:#3E9692;
+  --turq-pale:#D9EFED;
+  --grey:#E8E8E4;
+  --rule:rgba(18,27,27,.14);
+  --rule-soft:rgba(18,27,27,.08);
+  --ink-60:rgba(18,27,27,.6);
+  --ink-45:rgba(18,27,27,.45);
+
+  /* FONTS */
+  --en:"Schibsted Grotesk",-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --fa:"Vazirmatn","Schibsted Grotesk",Tahoma,sans-serif;
+
+  /* SURFACE */
+  --surface-0:var(--canvas);
+  --surface-1:#F5F5F2;
+  --surface-2:#F7F9F8;
+  --surface-3:repeating-linear-gradient(-45deg,#E8E8E4 0 18px,#E1E1DC 18px 36px);
+  --surface-4:var(--ink);
+  --surface-grid:rgba(18,27,27,.035);
+  --surface-grid-strong:rgba(18,27,27,.055);
+  --surface-fall:linear-gradient(180deg,#FAF9F7 0%,#F5F5F2 100%);
+
+  /* GRID SURFACE — structural registration for information-led sections (archives,
+     indexes, facts, project information). Distinct role from the Ambient/Signature
+     atmosphere: this is static, represents order/precision, and is felt as
+     alignment infrastructure rather than decoration. Three variants, one system —
+     a page never writes its own vertical-line markup. */
+  --gs-line:rgba(18,27,27,.022);            /* ~37% softer than --surface-grid-strong */
+  --gs-light-cols:3;   --gs-light-wash:1.2%;
+  --gs-standard-cols:5; --gs-standard-wash:2%;
+  --gs-dense-cols:9;   --gs-dense-wash:2.5%;
+  --gs-wash-radius:72vmax;
+
+  /* MOTION */
+  --m-instant:180ms;
+  --m-fast:240ms;
+  --m-standard:420ms;
+  --m-reveal:620ms;
+  --m-slow:900ms;
+  --m-page:1000ms;
+  --m-base:620ms;
+  --e-editorial:cubic-bezier(.16,1,.3,1);
+  --e-cinematic:cubic-bezier(.22,1,.36,1);
+  --e-smooth:cubic-bezier(.4,0,.2,1);
+  --e-standard:cubic-bezier(.4,0,.2,1);
+  --e-page:cubic-bezier(.76,0,.24,1);
+  --e-enter:cubic-bezier(.16,1,.3,1);
+  --e-exit:cubic-bezier(.7,0,.84,0);
+
+  /* TYPOGRAPHY */
+  --t-dxl:clamp(62px,9.4vw,164px);
+  --t-dxl-lh:.88;
+  --t-dxl-ls:-.05em;
+  --t-dxl-w:500;
+  --t-dxl-fa:clamp(52px,7.6vw,132px);
+  --t-dxl-fa-lh:1.2;
+  --t-dxl-fa-w:700;
+  --t-dl:clamp(46px,6.2vw,116px);
+  --t-dl-lh:.98;
+  --t-dl-ls:-.045em;
+  --t-dl-w:500;
+  --t-dl-fa:clamp(38px,4.9vw,92px);
+  --t-dl-fa-lh:1.4;
+  --t-dl-fa-w:700;
+  --t-dm:clamp(40px,4.8vw,92px);
+  --t-dm-lh:1;
+  --t-dm-ls:-.04em;
+  --t-dm-w:500;
+  --t-dm-fa:clamp(34px,3.8vw,72px);
+  --t-dm-fa-lh:1.44;
+  --t-dm-fa-w:700;
+  --t-hxl:clamp(34px,4.4vw,78px);
+  --t-hxl-lh:1;
+  --t-hxl-ls:-.035em;
+  --t-hxl-w:500;
+  --t-hxl-fa:clamp(28px,3.6vw,62px);
+  --t-hxl-fa-lh:1.46;
+  --t-hxl-fa-w:700;
+  --t-hl:clamp(30px,3.4vw,58px);
+  --t-hl-lh:1.02;
+  --t-hl-ls:-.03em;
+  --t-hl-w:500;
+  --t-hl-fa:clamp(26px,2.9vw,48px);
+  --t-hl-fa-lh:1.5;
+  --t-hl-fa-w:500;
+  --t-hm:clamp(24px,2.4vw,38px);
+  --t-hm-lh:1.1;
+  --t-hm-ls:-.025em;
+  --t-hm-w:500;
+  --t-hm-fa:clamp(21px,2.1vw,32px);
+  --t-hm-fa-lh:1.5;
+  --t-hm-fa-w:500;
+  --t-hs:clamp(18px,1.6vw,24px);
+  --t-hs-lh:1.2;
+  --t-hs-ls:-.015em;
+  --t-hs-w:500;
+  --t-hs-fa:clamp(17px,1.5vw,22px);
+  --t-hs-fa-lh:1.55;
+  --t-hs-fa-w:500;
+  --t-bl:19px;
+  --t-bl-lh:1.6;
+  --t-bl-fa:18px;
+  --t-bl-fa-lh:2;
+  --t-bm:17px;
+  --t-bm-lh:1.62;
+  --t-bm-fa:16.5px;
+  --t-bm-fa-lh:2;
+  --t-bs:14.5px;
+  --t-bs-lh:1.7;
+  --t-bs-fa:14px;
+  --t-bs-fa-lh:1.95;
+  --t-body-w:400;
+  --t-meta-lh:1.5;
+  --t-caption-lh:1.6;
+  --t-nav-lh:1.2;
+  --t-meta:11.5px;
+  --t-meta-ls:.12em;
+  --t-meta-w:500;
+  --t-meta-fa:13px;
+  --t-meta-fa-lh:1.8;
+  --t-meta-fa-w:500;
+  --t-eyebrow:11px;
+  --t-eyebrow-ls:.14em;
+  --t-eyebrow-w:600;
+  --t-eyebrow-fa:13px;
+  --t-eyebrow-fa-w:700;
+  --t-caption:11.5px;
+  --t-caption-fa:13px;
+  --t-caption-fa-lh:1.85;
+  --t-nav:12.5px;
+  --t-nav-ls:.1em;
+  --t-nav-w:500;
+  --t-nav-fa:14.5px;
+  --t-nav-fa-lh:1.6;
+  --t-nav-fa-w:500;
+  --t-cta:12.5px;
+  --t-cta-ls:.12em;
+  --t-cta-w:500;
+  --t-cta-fa:14.5px;
+  --t-cta-fa-w:500;
+  --t-fact:clamp(40px,4.6vw,88px);
+  --t-fact-lh:.94;
+  --t-fact-ls:-.04em;
+  --t-fact-w:500;
+  --t-quote:clamp(28px,3.2vw,54px);
+  --t-quote-lh:1.14;
+  --t-quote-w:500;
+  --t-quote-fa:clamp(24px,2.7vw,44px);
+  --t-quote-fa-lh:1.62;
+  --t-quote-fa-w:500;
+  --measure-en:62ch;
+  --measure-fa:38ch;
+
+  /* SPACING */
+  --space-1:4px;
+  --space-2:8px;
+  --space-3:12px;
+  --space-4:16px;
+  --space-5:24px;
+  --space-6:32px;
+  --space-7:48px;
+  --space-8:64px;
+  --space-9:96px;
+  --space-10:128px;
+  --space-micro:var(--space-1);
+  --space-tight:var(--space-2);
+  --space-element:var(--space-4);
+  --space-content:var(--space-5);
+  --space-block:var(--space-7);
+  --space-section:clamp(64px,14vh,180px);
+  --space-section-lg:clamp(88px,17vh,232px);
+  --space-section-xl:clamp(112px,20vh,288px);
+  --space-immersive:clamp(160px,30vh,420px);
+  --pause-block:var(--space-section);
+  --pause-chapter:var(--space-section-lg);
+  --pause-manifesto:var(--space-section-xl);
+  --rel-eyebrow-heading:var(--space-3);
+  --rel-heading-intro:var(--space-5);
+  --rel-heading-body:var(--space-4);
+  --rel-body-cta:var(--space-7);
+  --rel-body-meta:var(--space-5);
+  --rel-image-caption:var(--space-3);
+  --rel-title-info:var(--space-6);
+  --rel-fact-label:var(--space-3);
+  --rel-heading-body-fa:var(--space-3);
+  --rel-body-meta-fa:var(--space-4);
+  --rel-title-info-fa:var(--space-5);
+
+  /* GRID */
+  --grid-cols:12;
+  --grid-margin:var(--marg);
+  --grid-gutter:var(--gap);
+  --container-max:1760px;
+  --container-full:100%;
+  --container-wide:calc(100% - 2 * var(--grid-margin));
+  --container-content:min(1280px, var(--container-wide));
+  --container-narrow:min(760px, var(--container-wide));
+  --span-full:1 / -1;
+  --span-wide:1 / span 10;
+  --span-lead:1 / span 7;
+  --span-support:9 / span 4;
+  --span-label:1 / span 3;
+  --span-body:4 / span 9;
+  --span-index:1 / span 6;
+  --span-preview:8 / span 5;
+  --span-narrow:4 / span 6;
+  --grid-title-max:14ch;
+  --grid-title-max-fa:12ch;
+  --grid-hero-max:9ch;
+  --grid-hero-max-fa:8ch;
+  --gap:24px;
+  --marg:40px;
+
+  /* COMPONENT */
+  --c-radius:0;
+  --c-control-h:44px;
+  --c-rule:1px;
+  --c-indicator:8px;
+  --c-indicator-sm:6px;
+  --c-hover-lift:3px;
+  --c-hover-scale:1.02;
+  --c-media-landscape:16/9;
+  --c-media-editorial:4/3;
+  --c-media-portrait:3/4;
+  --c-media-square:1/1;
+}
+
+/* -----------------------------------------------------------------------------
+   TYPOGRAPHY FOUNDATION — the only place a font family is decided.
+   Pages set dir="ltr|rtl" on their root; they never declare a font-family.
+   Any element marked lang="fa" (e.g. the فا switch inside an English header)
+   takes the Persian family without an inline override.
+   ----------------------------------------------------------------------------- */
+html{font-family:var(--en);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+[dir="ltr"]{font-family:var(--en)}
+:lang(fa){font-family:var(--fa)}
+
+/* -----------------------------------------------------------------------------
+   LAYER 2 — LANGUAGE RESOLUTION
+   Inside any [dir="rtl"] subtree, every role re-points to its Persian value.
+   A component writes font-size:var(--t-hl) once; Persian resolves by inheritance.
+   This is what retires the per-component  fa ? … : …  metric ternaries.
+   Tracking is zeroed for every role — Persian never inherits Latin letter-spacing.
+   ----------------------------------------------------------------------------- */
+[dir="rtl"]{
+  font-family:var(--fa);
+  --t-dxl:var(--t-dxl-fa);
+  --t-dxl-lh:var(--t-dxl-fa-lh);
+  --t-dxl-w:var(--t-dxl-fa-w);
+  --t-dl:var(--t-dl-fa);
+  --t-dl-lh:var(--t-dl-fa-lh);
+  --t-dl-w:var(--t-dl-fa-w);
+  --t-dm:var(--t-dm-fa);
+  --t-dm-lh:var(--t-dm-fa-lh);
+  --t-dm-w:var(--t-dm-fa-w);
+  --t-hxl:var(--t-hxl-fa);
+  --t-hxl-lh:var(--t-hxl-fa-lh);
+  --t-hxl-w:var(--t-hxl-fa-w);
+  --t-hl:var(--t-hl-fa);
+  --t-hl-lh:var(--t-hl-fa-lh);
+  --t-hl-w:var(--t-hl-fa-w);
+  --t-hm:var(--t-hm-fa);
+  --t-hm-lh:var(--t-hm-fa-lh);
+  --t-hm-w:var(--t-hm-fa-w);
+  --t-hs:var(--t-hs-fa);
+  --t-hs-lh:var(--t-hs-fa-lh);
+  --t-hs-w:var(--t-hs-fa-w);
+  --t-bl:var(--t-bl-fa);
+  --t-bl-lh:var(--t-bl-fa-lh);
+  --t-bm:var(--t-bm-fa);
+  --t-bm-lh:var(--t-bm-fa-lh);
+  --t-bs:var(--t-bs-fa);
+  --t-bs-lh:var(--t-bs-fa-lh);
+  --t-meta:var(--t-meta-fa);
+  --t-meta-w:var(--t-meta-fa-w);
+  --t-eyebrow:var(--t-eyebrow-fa);
+  --t-eyebrow-w:var(--t-eyebrow-fa-w);
+  --t-caption:var(--t-caption-fa);
+  --t-nav:var(--t-nav-fa);
+  --t-nav-w:var(--t-nav-fa-w);
+  --t-cta:var(--t-cta-fa);
+  --t-cta-w:var(--t-cta-fa-w);
+  --t-quote:var(--t-quote-fa);
+  --t-quote-lh:var(--t-quote-fa-lh);
+  --t-quote-w:var(--t-quote-fa-w);
+  --t-meta-lh:var(--t-meta-fa-lh);
+  --t-caption-lh:var(--t-caption-fa-lh);
+  --t-nav-lh:var(--t-nav-fa-lh);
+  /* Persian carries no tracking at any role */
+  --t-dxl-ls:0; --t-dl-ls:0; --t-dm-ls:0; --t-hxl-ls:0; --t-hl-ls:0; --t-hm-ls:0; --t-hs-ls:0;
+  --t-meta-ls:0; --t-eyebrow-ls:0; --t-nav-ls:0; --t-cta-ls:0; --t-fact-ls:0;
+  /* measure and caps follow the language */
+  --measure:var(--measure-fa);
+  --grid-title-max:var(--grid-title-max-fa);
+  --grid-hero-max:var(--grid-hero-max-fa);
+  /* spacing: the three optical corrections (Persian blocks carry more internal air) */
+  --rel-heading-body:var(--rel-heading-body-fa);
+  --rel-body-meta:var(--rel-body-meta-fa);
+  --rel-title-info:var(--rel-title-info-fa);
+}
+/* English measure alias so components reference one name */
+:root{ --measure:var(--measure-en); }
+
+/* -----------------------------------------------------------------------------
+   LAYER 3 — BREAKPOINT RESOLUTION
+   Matches the existing responsive.css breakpoints. Components use
+     grid-template-columns:repeat(var(--grid-cols),1fr);  grid-column:var(--span-lead);
+   and never write their own media query for layout.
+   Margins and gutters are already overridden by responsive.css; --grid-margin and
+   --grid-gutter alias them, so they are intentionally NOT redefined here.
+   ----------------------------------------------------------------------------- */
+@media (max-width:1023px){
+  :root{
+    --grid-cols:8;
+    --span-wide:1 / -1;
+    --span-lead:1 / span 5;
+    --span-support:6 / span 3;
+    --span-label:1 / span 2;
+    --span-body:3 / span 6;
+    --span-index:1 / span 4;
+    --span-preview:5 / span 4;
+    --span-narrow:2 / span 6;
+  }
+}
+@media (max-width:767px){
+  :root{
+    --grid-cols:4;
+    --span-wide:1 / -1;
+    --span-lead:1 / -1;
+    --span-support:1 / -1;
+    --span-label:1 / -1;
+    --span-body:1 / -1;
+    --span-index:1 / -1;
+    --span-preview:1 / -1;   /* the shared preview is hidden on mobile by the component, not here */
+    --span-narrow:1 / -1;
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   REDUCED MOTION — the scale collapses so no component needs its own fallback
+   ----------------------------------------------------------------------------- */
+@media (prefers-reduced-motion:reduce){
+  :root{
+    --m-reveal:200ms; --m-base:200ms; --m-slow:200ms; --m-page:200ms;
+    --c-hover-lift:0; --c-hover-scale:1;
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   LAYER 4 — BIDI / DIRECTION UTILITIES
+   Robust bilingual text. Direction follows content, never the page by accident.
+
+   .text-rtl     a Persian block — rtl, right-aligned, isolated from its neighbours
+   .text-ltr     an English block inside Persian — ltr, but keeps the column's edge
+   .text-number  years, counts, dimensions, ranges — always ltr, isolated, tabular
+   .text-code    project codes, IDs, acronyms used as codes — ltr, isolated, no tracking
+   .text-mixed   a Persian string that may contain Latin words or acronyms
+
+   Why isolate: without unicode-bidi:isolate, neutral characters beside a number
+   (—, –, ·, /, parentheses) are claimed by the surrounding direction and jump sides.
+   Numerals are never converted; digits stay as the content stores them.
+   ----------------------------------------------------------------------------- */
+.text-rtl{direction:rtl;unicode-bidi:isolate;text-align:right;font-family:var(--fa);letter-spacing:0}
+.text-ltr{direction:ltr;unicode-bidi:isolate;text-align:match-parent;font-family:var(--en)}
+/* numbers use the English family in both languages: stable digit metrics, no mixed shapes.
+   Actual Persian-digit characters (۰-۹) need Vazirmatn's own numerals, not Latin glyphs. */
+.text-number{direction:ltr;unicode-bidi:isolate;text-align:match-parent;font-family:var(--en);font-variant-numeric:tabular-nums;white-space:nowrap;letter-spacing:0}
+.text-number-fa{direction:ltr;unicode-bidi:isolate;text-align:match-parent;font-family:var(--fa);white-space:nowrap;letter-spacing:0}
+.text-code{direction:ltr;unicode-bidi:isolate;text-align:match-parent;font-family:var(--en);letter-spacing:0;white-space:nowrap}
+/* a mixed string: the page language decides direction; font follows the language */
+.text-mixed{unicode-bidi:isolate;text-align:match-parent}
+[dir="rtl"] .text-mixed{direction:rtl;font-family:var(--fa)}
+[dir="ltr"] .text-mixed{direction:ltr;font-family:var(--en)}
+/* an English-only string inside Persian flows ltr but keeps the rtl column edge */
+[dir="rtl"] .text-ltr,[dir="rtl"] .text-number,[dir="rtl"] .text-code{text-align:right}
+
+/* -----------------------------------------------------------------------------
+   AMBIENT INTERACTION (LEGACY / HISTORICAL) — the original per-section opt-in
+   atmosphere. Superseded by the canonical GLOBAL PAGE-LEVEL AMBIENT system
+   below ([data-ambient-page] + data-ambient-zone), which is the current V2
+   architecture: one continuous page-level field, surface-aware visibility.
+   This per-section variant is retained only for the Design System demo
+   (section 18) and is not used by About V2 or Awards V2. Do not build new
+   pages against it — use data-ambient-zone on [data-v2-shell] pages instead.
+   A section enables it with data-ambient="soft" | "faint". The field is painted
+   by the section's own ::before, behind all content, from the brand turquoise.
+   ambient.js moves it with a slow lag on fine pointers only; everywhere else it
+   stays a static, barely-there field at its rest position.
+   Valid on Surface 0 / 1 (limited on 2). Never on image, gallery, form or list
+   sections, and never on Surface 3 or 4.
+   ----------------------------------------------------------------------------- */
+:root{
+  --ambient-accent:var(--turq);
+  /* layer 1 — static base atmosphere, always present (≈0.5–0.8% perceived) */
+  --ambient-base:4.7%;
+  --ambient-base-radius:61vmax;
+  /* layer 2 — interactive field, fine pointer only (≈1.5–2% perceived) */
+  --ambient-strength:9.9%;
+  --ambient-strength-faint:6.5%;
+  --ambient-radius:34vmax;
+  --ambient-lag:0.08;
+  /* the field rests in the open side of the composition, away from the text column:
+     right of left-aligned English, left of right-aligned Persian */
+  --ambient-rest-x:76%; --ambient-rest-y:30%;
+}
+[dir="rtl"]{ --ambient-rest-x:24%; }
+[data-ambient]{position:relative;isolation:isolate}
+[data-ambient]::before,[data-ambient]::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 14%,#000 50%,transparent 100%);
+          mask-image:linear-gradient(to bottom,transparent 0,#000 14%,#000 50%,transparent 100%)}
+/* layer 1 — the canvas feels spatial, not coloured */
+[data-ambient]::after{
+  background:radial-gradient(ellipse var(--ambient-base-radius) calc(var(--ambient-base-radius) * .7) at var(--ambient-rest-x) var(--ambient-rest-y),
+    color-mix(in srgb,var(--ambient-accent) var(--ambient-base),transparent) 0%,
+    color-mix(in srgb,var(--ambient-accent) calc(var(--ambient-base) * .45),transparent) 40%,
+    transparent 100%);
+}
+/* layer 2 — breathes toward the pointer */
+[data-ambient]::before{
+  background:radial-gradient(circle var(--ambient-radius) at var(--ax,var(--ambient-rest-x)) var(--ay,var(--ambient-rest-y)),
+    color-mix(in srgb,var(--ambient-accent) var(--ambient-strength),transparent) 0%,
+    color-mix(in srgb,var(--ambient-accent) calc(var(--ambient-strength) * .55),transparent) 30%,
+    color-mix(in srgb,var(--ambient-accent) calc(var(--ambient-strength) * .18),transparent) 62%,
+    transparent 100%),
+    radial-gradient(circle calc(var(--ambient-radius) * 1.23) at var(--ex,var(--ambient-rest-x)) var(--ey,var(--ambient-rest-y)),
+    color-mix(in srgb,var(--ambient-accent) calc(var(--ambient-strength) * .43),transparent) 0%,transparent 80%);
+}
+[data-ambient="faint"]::before{
+  background:radial-gradient(circle var(--ambient-radius) at var(--ax,var(--ambient-rest-x)) var(--ay,var(--ambient-rest-y)),
+    color-mix(in srgb,var(--ambient-accent) var(--ambient-strength-faint),transparent) 0%,
+    color-mix(in srgb,var(--ambient-accent) calc(var(--ambient-strength-faint) * .55),transparent) 30%,
+    color-mix(in srgb,var(--ambient-accent) calc(var(--ambient-strength-faint) * .18),transparent) 62%,
+    transparent 100%);
+}
+/* touch and reduced motion: the static base only — no simulated tracking */
+@media not ((hover:hover) and (pointer:fine)){ [data-ambient]::before{display:none} }
+@media (prefers-reduced-motion:reduce){ [data-ambient]::before{display:none} }
+/* SIGNATURE ATMOSPHERE — data-atmosphere="signature" is the documented V2 entry point for a
+   dry Surface 0/1 text-led section; it is the same system as data-ambient, kept as one alias
+   so pages opt in with the name that matches their intent (hero vs. general dry surface). */
+[data-atmosphere="signature"]{position:relative;isolation:isolate}
+[data-atmosphere="signature"]::before,[data-atmosphere="signature"]::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 14%,#000 50%,transparent 100%);
+          mask-image:linear-gradient(to bottom,transparent 0,#000 14%,#000 50%,transparent 100%)}
+[data-atmosphere="signature"]::after{
+  background:radial-gradient(ellipse var(--ambient-base-radius) calc(var(--ambient-base-radius) * .7) at var(--ambient-rest-x) var(--ambient-rest-y),
+    color-mix(in srgb,var(--ambient-accent) var(--ambient-base),transparent) 0%,
+    color-mix(in srgb,var(--ambient-accent) calc(var(--ambient-base) * .45),transparent) 40%,transparent 100%);
+}
+[data-atmosphere="signature"]::before{
+  background:radial-gradient(circle var(--ambient-radius) at var(--ax,var(--ambient-rest-x)) var(--ay,var(--ambient-rest-y)),
+    color-mix(in srgb,var(--ambient-accent) var(--ambient-strength),transparent) 0%,
+    color-mix(in srgb,var(--ambient-accent) calc(var(--ambient-strength) * .55),transparent) 30%,
+    color-mix(in srgb,var(--ambient-accent) calc(var(--ambient-strength) * .18),transparent) 62%,
+    transparent 100%),
+    radial-gradient(circle calc(var(--ambient-radius) * 1.23) at var(--ex,var(--ambient-rest-x)) var(--ey,var(--ambient-rest-y)),
+    color-mix(in srgb,var(--ambient-accent) calc(var(--ambient-strength) * .43),transparent) 0%,transparent 80%);
+}
+@media not ((hover:hover) and (pointer:fine)){ [data-atmosphere="signature"]::before{display:none} }
+@media (prefers-reduced-motion:reduce){ [data-atmosphere="signature"]::before{display:none} }
+
+/* -----------------------------------------------------------------------------
+   PAGE-LEVEL AMBIENT FIELD — one continuous field for the whole page, replacing
+   independent per-section fields. Mounted once by ambient.js as a fixed full-
+   viewport layer behind content. Pointer position is tracked in viewport space,
+   so the field never resets or jumps crossing a section boundary — only its
+   opacity changes, per the section currently under the reading position.
+     data-ambient-zone="full" | "soft" | "minimal" | "off" (default soft)
+   full = hero/closing statement · soft = editorial/text sections ·
+   minimal = archive/dense-content sections · off = imagery already has depth.
+   Legacy [data-ambient] / [data-atmosphere="signature"] (independent per-
+   section fields) remain supported for anything not yet migrated.
+   ----------------------------------------------------------------------------- */
+:root{--ambient-zone-full:1;--ambient-zone-soft:.6;--ambient-zone-minimal:.28;--ambient-zone-off:0}
+/* CANONICAL V2 PAGE SHELL — every V2 page's root opts in with [data-v2-shell] instead
+   of repeating this stacking fix locally. The global ambient field ([data-ambient-page])
+   is appended to <body> by ambient.js as body's last child, so it always follows the
+   shell in source order; body carries the visible canvas behind it, the shell paints
+   transparent with its own stacking context so content can sit above the field while
+   individual sections (in Surface 0/1/2 "reveal" zones) stay transparent/tinted to let
+   it show through. This replaces the page-local fix earlier versions of About/Awards
+   each carried in their own <style> block. */
+body{background:var(--surface-0)}
+[data-v2-shell]{position:relative;z-index:1;isolation:isolate;background:transparent}
+/* the shell and [data-ambient-page] are NOT siblings in the runtime DOM (the shell
+   sits inside the DC mount wrapper, ambient-page is appended directly to <body>),
+   so a sibling combinator never matches — key off <body> via :has() instead */
+body:has([data-v2-shell]) [data-ambient-page]{z-index:0}
+[data-ambient-page]{position:fixed;inset:0;z-index:-1;pointer-events:none;isolation:isolate;
+  opacity:var(--ambient-page-opacity,.6);transition:opacity 480ms var(--e-editorial,ease)}
+[data-ambient-page]::before,[data-ambient-page]::after{content:"";position:absolute;inset:0}
+[data-ambient-page]::after{
+  background:radial-gradient(ellipse var(--ambient-base-radius) calc(var(--ambient-base-radius) * .7) at var(--ambient-rest-x) var(--ambient-rest-y),
+    color-mix(in srgb,var(--ambient-accent) var(--ambient-base),transparent) 0%,
+    color-mix(in srgb,var(--ambient-accent) calc(var(--ambient-base) * .45),transparent) 40%,transparent 100%);
+}
+[data-ambient-page]::before{
+  background:radial-gradient(circle var(--ambient-radius) at var(--pax,var(--ambient-rest-x)) var(--pay,var(--ambient-rest-y)),
+    color-mix(in srgb,var(--ambient-accent) var(--ambient-strength),transparent) 0%,
+    color-mix(in srgb,var(--ambient-accent) calc(var(--ambient-strength) * .55),transparent) 30%,
+    color-mix(in srgb,var(--ambient-accent) calc(var(--ambient-strength) * .18),transparent) 62%,
+    transparent 100%),
+    radial-gradient(circle calc(var(--ambient-radius) * 1.23) at var(--pex,var(--ambient-rest-x)) var(--pey,var(--ambient-rest-y)),
+    color-mix(in srgb,var(--ambient-accent) calc(var(--ambient-strength) * .43),transparent) 0%,transparent 80%);
+}
+@media not ((hover:hover) and (pointer:fine)){ [data-ambient-page]::before{display:none} }
+@media (prefers-reduced-motion:reduce){ [data-ambient-page]::before{display:none} [data-ambient-page]{transition:none} }
+
+/* -----------------------------------------------------------------------------
+   RESPONSIVE MENU — the labelled MENU/منو trigger, canonical across V2 pages:
+   desktop keeps full inline nav; ≤767px collapses to one
+   explicit labelled MENU trigger (V1's clarity, V2's styling). Never a bare icon,
+   never a contextual page label standing in for it. Brand / language stay put.
+   ----------------------------------------------------------------------------- */
+[data-v2-menu-trigger]{display:none}
+[data-v2-menu-drawer]{position:fixed;inset:0;z-index:100;background:var(--ink);color:var(--canvas);
+  clip-path:polygon(0 0,0 0,0 0,0 0);transition:clip-path var(--m-page) var(--e-page);pointer-events:none;
+  display:flex;flex-direction:column;justify-content:space-between;padding:var(--space-4) var(--grid-margin) var(--space-5)}
+[data-v2-menu-drawer][data-open="1"]{clip-path:polygon(0 0,100% 0,100% 100%,0 100%);pointer-events:auto}
+@media (max-width:767px){
+  [data-v2-nav]{display:none}
+  [data-v2-menu-trigger]{display:inline-flex;align-items:center;gap:var(--space-tight);appearance:none;background:none;
+    border:1px solid currentColor;cursor:pointer;font:inherit;color:inherit;
+    min-height:var(--c-control-h);padding:0 var(--space-3);font-size:var(--t-nav);letter-spacing:var(--t-nav-ls);text-transform:inherit}
+}
+/* -----------------------------------------------------------------------------
+   GRID MOTIF — the V1 modular 3×3 identity mark, carried into V2 as ONE shared
+   brand signature. Consolidates the former [data-ambient-anchor] duplicate.
+     variant   data-grid-motif="static" (default) | "interactive" | "inverse"
+     size      data-grid-motif-size="micro" (default,7px) | "standard" (9px) | "anchor" (12px)
+     position  data-motif-active="1".."9" sets which cell carries the turquoise
+               accent (default 5, centre) — lets a page progress the active cell
+               deterministically section to section without a second stylesheet.
+   Decorative only: aria-hidden, never tabindex, never an actionable control.
+   Interactive wake is hover/focus on an ANCESTOR opting in (e.g. a heading or
+   section), never the motif itself. Static under reduced motion.
+   ----------------------------------------------------------------------------- */
+[data-grid-motif]{display:inline-grid;grid-template-columns:repeat(3,var(--motif-cell,7px));grid-template-rows:repeat(3,var(--motif-cell,7px));gap:3px;opacity:.55;vertical-align:middle}
+[data-grid-motif-size="standard"]{--motif-cell:9px}
+[data-grid-motif-size="anchor"]{--motif-cell:12px}
+/* an anchor-size motif can be positioned detached from text in a large empty
+   field (About §07-A) — the utility a page reaches for instead of writing its
+   own absolute-position rule per instance */
+[data-grid-motif-size="anchor"][data-motif-detached]{position:absolute;inset-inline-end:var(--grid-margin);bottom:var(--space-block);pointer-events:none}
+[data-grid-motif] i{border:1px solid var(--rule);transition:opacity var(--m-fast) var(--e-smooth),background var(--m-fast) var(--e-smooth),border-color var(--m-fast) var(--e-smooth)}
+[data-grid-motif="inverse"] i{border-color:rgba(250,249,247,.3)}
+/* accent cell — cell 5 (centre) unless a page sets data-motif-active */
+[data-grid-motif] i:nth-child(5){background:var(--turq);border-color:var(--turq)}
+/* explicit accent position, cells 1–9 — a page sets this on the motif's own element */
+[data-grid-motif][data-motif-active="1"] i:nth-child(1),
+[data-grid-motif][data-motif-active="2"] i:nth-child(2),
+[data-grid-motif][data-motif-active="3"] i:nth-child(3),
+[data-grid-motif][data-motif-active="4"] i:nth-child(4),
+[data-grid-motif][data-motif-active="6"] i:nth-child(6),
+[data-grid-motif][data-motif-active="7"] i:nth-child(7),
+[data-grid-motif][data-motif-active="8"] i:nth-child(8),
+[data-grid-motif][data-motif-active="9"] i:nth-child(9){background:var(--turq);border-color:var(--turq)}
+[data-grid-motif][data-motif-active]:not([data-motif-active="5"]) i:nth-child(5){background:none;border-color:var(--rule)}
+[data-grid-motif="inverse"][data-motif-active]:not([data-motif-active="5"]) i:nth-child(5){border-color:rgba(250,249,247,.3)}
+
+/* interactive variant — a second cell (one grid step from the accent) softly
+   appears when an ANCESTOR that opts in ([data-motif-wake]) is hovered/focused.
+   The motif itself is never the interactive target. */
+[data-grid-motif="interactive"] i:nth-child(7){opacity:0}
+[data-motif-wake]:hover [data-grid-motif="interactive"] i:nth-child(7),
+[data-motif-wake]:focus-within [data-grid-motif="interactive"] i:nth-child(7){
+  opacity:1;background:color-mix(in srgb,var(--turq) 55%,transparent);border-color:var(--turq)}
+@media (prefers-reduced-motion:reduce){[data-grid-motif] i{transition:none}}
+
+/* -----------------------------------------------------------------------------
+   PROGRESSIVE REVEAL & LOADING — one shared V2 system (reveal.js drives the
+   lifecycle; this block owns the visual states). Gated on [data-reveal-boot],
+   set synchronously by reveal.js before any observer runs — if the script
+   never executes, nothing here ever applies and content stays in normal flow
+   (progressive enhancement, no permanently-hidden HTML).
+
+     data-reveal="media"    wrapper; data-reveal-img is the settling layer,
+                             data-reveal-mask (optional) the covering surface
+     data-reveal="content"  the element itself fades/lifts
+     data-reveal="group"    direct children stagger in, capped at 5
+     data-reveal="none"     explicit opt-out — dense/repeated/orientation content
+
+   Reveal is one-time: [data-reveal-state="revealed"] is never removed, so
+   back-scrolling never re-hides anything. Reduced motion resolves every
+   target immediately with no transition. */
+[data-reveal-boot] [data-reveal="media"] [data-reveal-img]{transform:scale(1.03);transition:transform var(--m-slow) var(--e-cinematic)}
+[data-reveal-boot] [data-reveal="media"][data-reveal-state="revealed"] [data-reveal-img]{transform:scale(1)}
+[data-reveal-boot] [data-reveal="media"] [data-reveal-mask]{position:absolute;inset:0;background:var(--surface-1);clip-path:inset(0 0 0 0);transition:clip-path var(--m-slow) var(--e-cinematic);pointer-events:none}
+[data-reveal-boot] [data-reveal="media"][data-reveal-state="revealed"] [data-reveal-mask]{clip-path:inset(0 0 100% 0)}
+
+[data-reveal-boot] [data-reveal="content"]{opacity:0;transform:translateY(10px);transition:opacity var(--m-reveal) var(--e-editorial),transform var(--m-reveal) var(--e-editorial)}
+[data-reveal-boot] [data-reveal="content"][data-reveal-state="revealed"]{opacity:1;transform:none}
+
+[data-reveal-boot] [data-reveal="group"] > *{opacity:0;transform:translateY(10px);transition:opacity var(--m-reveal) var(--e-editorial),transform var(--m-reveal) var(--e-editorial)}
+[data-reveal-boot] [data-reveal="group"][data-reveal-state="revealed"] > *{opacity:1;transform:none}
+[data-reveal-boot] [data-reveal="group"][data-reveal-state="revealed"] > *:nth-child(1){transition-delay:0ms}
+[data-reveal-boot] [data-reveal="group"][data-reveal-state="revealed"] > *:nth-child(2){transition-delay:70ms}
+[data-reveal-boot] [data-reveal="group"][data-reveal-state="revealed"] > *:nth-child(3){transition-delay:140ms}
+[data-reveal-boot] [data-reveal="group"][data-reveal-state="revealed"] > *:nth-child(4){transition-delay:210ms}
+[data-reveal-boot] [data-reveal="group"][data-reveal-state="revealed"] > *:nth-child(5){transition-delay:280ms}
+
+@media (prefers-reduced-motion:reduce){
+  [data-reveal="media"] [data-reveal-img],
+  [data-reveal="content"],[data-reveal="group"] > *{transition:opacity var(--m-instant) linear !important;transform:none !important;clip-path:none !important}
+  /* the mask is a covering surface, not a clip shape — removing clip-path alone still
+     leaves it opaque over the media, so it must be hidden outright */
+  [data-reveal="media"] [data-reveal-mask]{transition:opacity var(--m-instant) linear !important;opacity:0 !important}
+}
+
+/* -----------------------------------------------------------------------------
+   GRID SURFACE — structural registration, the counterpart to Ambient/Signature
+   atmosphere. Ambient = editorial, spatial, sometimes interactive. Grid Surface =
+   order, precision, always static. Never both roles on one section.
+     data-grid-surface="light" | "standard" (default) | "dense"
+   Lines align to the real column count (var(--grid-cols)) but only every Nth
+   boundary draws — "fewer meaningful lines", not one per column. Lines fade
+   near the top/bottom of the section (mask) rather than reading edge-to-edge,
+   and carry a static turquoise wash far weaker than the interactive field, held
+   toward one corner rather than centred. No mouse tracking on this surface.
+   ----------------------------------------------------------------------------- */
+[data-grid-surface]{position:relative}
+[data-grid-surface]::before,[data-grid-surface]::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:0}
+[data-grid-surface]:not([data-experiment="ambient"])::before{
+  inset:0 var(--grid-margin);
+  background-image:repeating-linear-gradient(to right,var(--gs-line) 0 1px,transparent 1px calc(100% / var(--gs-standard-cols)));
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 12%,#000 82%,transparent 100%);
+          mask-image:linear-gradient(to bottom,transparent 0,#000 12%,#000 82%,transparent 100%);
+}
+[data-grid-surface="light"]:not([data-experiment="ambient"])::before{background-image:repeating-linear-gradient(to right,var(--gs-line) 0 1px,transparent 1px calc(100% / var(--gs-light-cols)));opacity:.7}
+[data-grid-surface="dense"]:not([data-experiment="ambient"])::before{background-image:repeating-linear-gradient(to right,var(--gs-line) 0 1px,transparent 1px calc(100% / var(--gs-dense-cols)));opacity:1.3}
+[data-grid-surface]:not([data-experiment="ambient"])::after{
+  background:radial-gradient(circle var(--gs-wash-radius) at 88% 14%,
+    color-mix(in srgb,var(--turq) var(--gs-standard-wash),transparent) 0%,
+    color-mix(in srgb,var(--turq) calc(var(--gs-standard-wash) * .4),transparent) 45%,transparent 100%);
+}
+[data-grid-surface="light"]:not([data-experiment="ambient"])::after{background:radial-gradient(circle var(--gs-wash-radius) at 88% 14%,
+    color-mix(in srgb,var(--turq) var(--gs-light-wash),transparent) 0%,
+    color-mix(in srgb,var(--turq) calc(var(--gs-light-wash) * .4),transparent) 45%,transparent 100%)}
+[data-grid-surface="dense"]:not([data-experiment="ambient"])::after{background:radial-gradient(circle var(--gs-wash-radius) at 88% 14%,
+    color-mix(in srgb,var(--turq) var(--gs-dense-wash),transparent) 0%,
+    color-mix(in srgb,var(--turq) calc(var(--gs-dense-wash) * .4),transparent) 45%,transparent 100%)}
+[dir="rtl"] [data-grid-surface]:not([data-experiment="ambient"])::after{background-position:12% 14%}
+@media (max-width:1023px){[data-grid-surface="dense"]:not([data-experiment="ambient"])::before{opacity:1}}
+@media (max-width:767px){
+  [data-grid-surface]:not([data-experiment="ambient"])::before{background-image:repeating-linear-gradient(to right,var(--gs-line) 0 1px,transparent 1px calc(100% / var(--gs-light-cols)));opacity:.6}
+  [data-grid-surface]:not([data-experiment="ambient"])::after{background:radial-gradient(circle calc(var(--gs-wash-radius) * .7) at 85% 10%,
+    color-mix(in srgb,var(--turq) var(--gs-light-wash),transparent) 0%,transparent 70%)}
+}
+/* EXPERIMENT (Awards V2 only, reversible) — data-experiment="ambient" frees this element's
+   ::before/::after so the co-present [data-atmosphere="signature"] rules take over instead.
+   data-grid-surface stays on the element, untouched, so removing data-experiment/
+   data-atmosphere restores the exact approved Structural Grid surface. Rule 05 unchanged. */

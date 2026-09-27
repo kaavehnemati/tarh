@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="responsive.css" />
+<script>window.TA_ASSET_BASE = "../";</script>
+<script src="../site-data.js"></script>
+<script src="../media-utils.js"></script>
+<script src="../projects-data.js"></script>
+<script src="../expertise-data.js"></script>
+<script src="../about-data.js"></script>
+<script src="layout-mode.js"></script>
+<script src="../awards-data.js"></script>
+<style>
+:root{
+  --ink:#121B1B; --turq:#56B1AC; --canvas:#FAF9F7; --turq-dk:#3E9692; --turq-pale:#D9EFED; --grey:#E8E8E4;
+  --rule:rgba(18,27,27,.14); --rule-soft:rgba(18,27,27,.08); --ink-60:rgba(18,27,27,.6); --ink-45:rgba(18,27,27,.45);
+  --canvas-40:rgba(250,249,247,.4); --canvas-rule:rgba(250,249,247,.18);
+  --en:"Schibsted Grotesk",-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --fa:"Vazirmatn","Schibsted Grotesk",Tahoma,sans-serif;
+  /* MOTION SYSTEM V2 — one scale, four families. Do not introduce a literal ms
+     value in a component; if a tempo is missing from this scale, the scale is wrong.
+       instant  micro UI feedback            fast  interaction / hover / state
+       base     reveal — the default tempo   slow  image depth, cinematic settle
+       page     full-screen overlays only */
+  --m-instant:180ms; --m-fast:240ms; --m-standard:420ms; --m-reveal:620ms; --m-slow:900ms; --m-page:1000ms;
+  /* --m-base is the alias every migrated component already points at; it resolves to the
+     reveal tempo because reveal is the site's default content-entry motion. */
+  --m-base:620ms;
+  /* editorial  content entering — the default curve
+     cinematic  image and scene depth
+     standard   micro UI only
+     page       clip / mask / scene wipes */
+  --e-editorial:cubic-bezier(.16,1,.3,1); --e-cinematic:cubic-bezier(.22,1,.36,1);
+  --e-smooth:cubic-bezier(.4,0,.2,1); --e-standard:cubic-bezier(.4,0,.2,1); --e-page:cubic-bezier(.76,0,.24,1);
+  /* legacy alias */
+  --e-enter:cubic-bezier(.16,1,.3,1);
+  --gap:24px; --marg:40px;
+  --plate:repeating-linear-gradient(-45deg,#E8E8E4 0 18px,#E1E1DC 18px 36px);
+}
+*{box-sizing:border-box}
+body{margin:0;background:#FAF9F7;color:#121B1B;font-family:var(--en);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+a{color:inherit;text-decoration:none}
+a:hover{color:#3E9692}
+::selection{background:#D9EFED;color:#121B1B}
+@keyframes aw-lineup{from{clip-path:inset(0 0 105% 0)}to{clip-path:inset(0 0 -25% 0)}}
+@keyframes aw-in{from{opacity:0}to{opacity:1}}
+</style>
+</helmet>
+
+<div data-aw-root="1" style="background:var(--canvas);color:var(--ink);font-family:var(--en);position:relative;overflow-x:clip;min-height:100vh">
+
+  <header data-hd="1" style="position:fixed;top:0;left:0;right:0;z-index:95;padding:24px var(--marg);display:flex;align-items:center;justify-content:space-between;gap:clamp(12px,2vw,24px);color:var(--ink);transition:padding var(--m-standard) var(--e-standard),background var(--m-standard) var(--e-standard)">
+    <a href="{{ hrefHome }}" style="display:flex;align-items:center;gap:12px;flex:none">
+      <span style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:1.5px;width:22px;height:22px;border:1.5px solid currentColor">
+        <i style="background:var(--turq)"></i><i style="background:var(--turq)"></i><i style="background:var(--turq)"></i><i style="background:var(--turq)"></i><i style="background:var(--turq)"></i><i style="background:var(--turq)"></i><i style="background:var(--turq)"></i><i style="background:var(--turq)"></i><i style="background:var(--turq)"></i>
+      </span>
+      <span data-en="1" style="font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;white-space:nowrap">Tarh &amp; Afarinesh</span>
+      <span data-fa="1" style="font-family:var(--fa);font-size:15.5px;font-weight:600;white-space:nowrap;display:none">طرح و آفرینش</span>
+    </a>
+    <nav style="display:flex;align-items:center;flex-wrap:wrap;gap:clamp(12px,1.6vw,30px);flex:0 1 auto;min-width:0;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase">
+      <a href="{{ hrefProjects }}" data-nav="1" style="display:inline-flex;align-items:center;gap:7px;padding:4px 0;transition:transform var(--m-fast) var(--e-standard)"><i data-navsq="1" style="width:5px;height:5px;background:var(--turq);opacity:0;transform:scale(.4);transition:opacity var(--m-fast) var(--e-standard),transform var(--m-fast) var(--e-standard)"></i><span data-en="1">Projects</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:14.5px;display:none">پروژه‌ها</span></a>
+      <a href="{{ hrefExpertise }}" data-nav="1" style="display:inline-flex;align-items:center;gap:7px;padding:4px 0;transition:transform var(--m-fast) var(--e-standard)"><i data-navsq="1" style="width:5px;height:5px;background:var(--turq);opacity:0;transform:scale(.4);transition:opacity var(--m-fast) var(--e-standard),transform var(--m-fast) var(--e-standard)"></i><span data-en="1">Expertise</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:14.5px;display:none">تخصص‌ها</span></a>
+      <a href="#" onClick="{{ stay }}" data-nav="1" style="display:inline-flex;align-items:center;gap:7px;padding:4px 0;transition:transform var(--m-fast) var(--e-standard)"><i style="width:5px;height:5px;background:var(--turq)"></i><span data-en="1">Awards</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:14.5px;display:none">جوایز</span></a>
+      <a href="{{ hrefContact }}" data-nav="1" style="display:inline-flex;align-items:center;gap:7px;padding:4px 0;transition:transform var(--m-fast) var(--e-standard)"><i data-navsq="1" style="width:5px;height:5px;background:var(--turq);opacity:0;transform:scale(.4);transition:opacity var(--m-fast) var(--e-standard),transform var(--m-fast) var(--e-standard)"></i><span data-en="1">Contact</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:14.5px;display:none">تماس</span></a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:18px;flex:none">
+      <div style="display:flex;align-items:center;gap:9px;font-size:12px;letter-spacing:.08em;direction:ltr">
+        <button type="button" onClick="{{ setEn }}" style="appearance:none;background:none;border:none;padding:2px 0;cursor:pointer;font:inherit;letter-spacing:inherit;color:inherit;opacity:{{ enOpacity }};font-weight:{{ enWeight }};transition:opacity var(--m-fast) var(--e-standard)">EN</button>
+        <span style="width:1px;height:11px;background:currentColor;opacity:.3"></span>
+        <button type="button" onClick="{{ setFa }}" style="appearance:none;background:none;border:none;padding:2px 0;cursor:pointer;font-family:var(--fa);font-size:13px;color:inherit;opacity:{{ faOpacity }};font-weight:{{ faWeight }};transition:opacity var(--m-fast) var(--e-standard)">فا</button>
+      </div>
+      <button type="button" onClick="{{ openMenu }}" style="appearance:none;background:none;border:1px solid currentColor;padding:9px 14px;cursor:pointer;font:inherit;color:inherit;font-size:12px;letter-spacing:.12em;text-transform:uppercase;display:flex;align-items:center;gap:10px;transition:opacity var(--m-fast) var(--e-standard)" style-hover="opacity:.65">
+        <span data-en="1">Menu</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:14.5px;display:none">منو</span>
+        <span style="display:block;width:12px;height:1px;background:currentColor;box-shadow:0 4px 0 currentColor,0 -4px 0 currentColor"></span>
+      </button>
+    </div>
+  </header>
+
+  <div data-menu="1" style="position:fixed;inset:0;z-index:100;background:var(--ink);color:var(--canvas);clip-path:{{ menuClip }};transition:clip-path var(--m-page) var(--e-page);pointer-events:{{ menuPointer }};display:flex;flex-direction:column;justify-content:space-between;padding:26px var(--marg) 40px">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:24px">
+      <span data-en="1" style="font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:600">Tarh &amp; Afarinesh</span>
+      <span data-fa="1" style="font-family:var(--fa);font-size:15.5px;font-weight:600;display:none">طرح و آفرینش</span>
+      <button type="button" onClick="{{ closeMenu }}" style="appearance:none;background:none;border:1px solid var(--canvas-rule);color:var(--canvas);padding:9px 14px;cursor:pointer;font:inherit;font-size:12px;letter-spacing:.12em;text-transform:uppercase;transition:background var(--m-fast) var(--e-standard)" style-hover="background:rgba(250,249,247,.12)"><span data-en="1">Close</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:14.5px;display:none">بستن</span></button>
+    </div>
+    <nav style="display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap);align-items:end">
+      <div style="grid-column:1 / span 7;display:grid">
+        <sc-for list="{{ menuLinks }}" as="m" hint-placeholder-count="7">
+          <a href="{{ m.href }}" onClick="{{ m.click }}" data-ml="1" style="border-top:1px solid var(--canvas-rule);padding:13px 0;display:flex;align-items:center;gap:20px;opacity:0;transform:translateY(40%);transition:opacity var(--m-base) var(--e-enter) {{ m.delay }},transform 620ms var(--e-enter) {{ m.delay }},color var(--m-fast) var(--e-standard)">
+            <span style="font-size:12px;letter-spacing:.14em;color:var(--canvas-40);font-variant-numeric:tabular-nums;direction:ltr">{{ m.num }}</span>
+            <span style="font-size:{{ menuSize }};line-height:{{ menuLh }};letter-spacing:{{ menuLs }};font-weight:500">{{ m.label }}</span>
+          </a>
+        </sc-for>
+        <div style="border-top:1px solid var(--canvas-rule)"></div>
+      </div>
+      <div style="grid-column:9 / span 4;font-size:13px;line-height:1.9;color:rgba(250,249,247,.6)">
+        <span data-en="1" style="direction:ltr;display:block">[EMAIL]</span><span data-fa="1" style="font-family:var(--fa);display:none">[ایمیل]</span>
+        <span data-en="1" style="display:block">[CITY] · [OFFICE]</span><span data-fa="1" style="font-family:var(--fa);display:none">[شهر] · [دفتر]</span>
+      </div>
+    </nav>
+  </div>
+
+  <section data-screen-label="Awards opening" style="padding:calc(var(--marg) + 120px) var(--marg) 0">
+    <div style="font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45);display:flex;align-items:center;gap:12px;opacity:0;animation:aw-in var(--m-base) var(--e-standard) 60ms forwards">
+      <i style="width:8px;height:8px;background:var(--turq)"></i>
+      <span data-en="1">Archive of recognition</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:13.5px;display:none">آرشیو افتخارات</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap);margin-top:26px;align-items:end">
+      <div style="grid-column:1 / span 8;overflow:hidden">
+        <h1 data-en="1" style="margin:0;font-size:clamp(54px,7.6vw,132px);line-height:.9;letter-spacing:-.05em;font-weight:500;animation:aw-lineup var(--m-base) var(--e-page) 220ms both">Awards<br />&amp; recognition</h1>
+        <h1 data-fa="1" style="margin:0;font-family:var(--fa);font-size:clamp(44px,6vw,106px);line-height:1.26;font-weight:500;display:none;animation:aw-lineup var(--m-base) var(--e-page) 220ms both">جوایز<br />و افتخارات</h1>
+      </div>
+      <div style="grid-column:10 / span 3;padding-bottom:18px;display:flex;flex-direction:column;gap:10px;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-45)">
+        <span style="color:var(--ink);font-size:13px;direction:ltr;font-variant-numeric:tabular-nums">{{ totalLabel }}</span>
+        <span style="direction:ltr;font-variant-numeric:tabular-nums">{{ rangeLabel }}</span>
+        <span data-en="1">Placeholder recognition data — to be replaced</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:13px;line-height:1.9;display:none">داده‌های جایگزین — بعداً تکمیل می‌شود</span>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:44px;border-top:1px solid var(--rule);padding-top:16px;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:26px;font-size:12px;letter-spacing:.12em;text-transform:uppercase">
+        <button type="button" onClick="{{ sortNewest }}" style="appearance:none;background:none;border:none;padding:0;cursor:pointer;font:inherit;letter-spacing:inherit;text-transform:inherit;color:inherit;display:inline-flex;align-items:center;gap:9px;opacity:{{ newestOpacity }};transition:opacity var(--m-fast) var(--e-standard)"><i style="width:8px;height:8px;background:var(--turq);opacity:{{ newestSq }}"></i><span data-en="1">Newest first</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:14px;display:none">جدیدترین</span></button>
+        <button type="button" onClick="{{ sortOldest }}" style="appearance:none;background:none;border:none;padding:0;cursor:pointer;font:inherit;letter-spacing:inherit;text-transform:inherit;color:inherit;display:inline-flex;align-items:center;gap:9px;opacity:{{ oldestOpacity }};transition:opacity var(--m-fast) var(--e-standard)"><i style="width:8px;height:8px;background:var(--turq);opacity:{{ oldestSq }}"></i><span data-en="1">Oldest first</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:14px;display:none">قدیمی‌ترین</span></button>
+      </div>
+      <div style="display:flex;align-items:center;gap:18px">
+        <button type="button" data-rm="1" onClick="{{ toggleReduced }}" title="{{ rmTitle }}" style="appearance:none;background:{{ rmBg }};color:{{ rmColor }};border:1px solid var(--rule);padding:7px 11px;cursor:pointer;font:inherit;font-size:10px;letter-spacing:.1em;text-transform:uppercase;display:inline-flex;align-items:center;gap:7px"><span style="width:7px;height:7px;background:currentColor;opacity:.7"></span><span style="direction:ltr">RM {{ rmState }}</span></button>
+        <button type="button" onClick="{{ openFilter }}" style="appearance:none;background:none;border:1px solid var(--ink);padding:11px 16px;cursor:pointer;font:inherit;font-size:12px;letter-spacing:.12em;text-transform:uppercase;display:inline-flex;align-items:center;gap:12px;transition:background var(--m-fast) var(--e-standard),color var(--m-fast) var(--e-standard)" style-hover="background:var(--ink);color:var(--canvas)">
+          <span data-en="1">Filter</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:14.5px;display:none">فیلتر</span>
+          <span style="direction:ltr;color:var(--turq-dk);font-variant-numeric:tabular-nums">{{ activeFilterLabel }}</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Recognition index" style="padding:0 var(--marg) 16vh">
+    <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap);align-items:start">
+      <div data-aw-list="1" style="grid-column:1 / span 8;padding-top:40px">
+        <sc-for list="{{ groups }}" as="g" hint-placeholder-count="6">
+          <div data-aw-group="1" data-year="{{ g.year }}" style="display:grid;grid-template-columns:132px minmax(0,1fr);gap:var(--gap);border-top:1px solid var(--ink);padding-top:14px;margin-bottom:56px">
+            <div style="position:sticky;top:calc(var(--marg) + 116px);align-self:start;font-size:clamp(24px,2.4vw,40px);line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums;direction:ltr;color:var(--ink-45)">{{ g.year }}</div>
+            <div>
+              <sc-for list="{{ g.rows }}" as="r" hint-placeholder-count="4">
+                <a href="{{ r.href }}" onClick="{{ r.click }}" onMouseEnter="{{ r.enter }}" onFocus="{{ r.enter }}" onMouseLeave="{{ r.leave }}" data-aw-row="1" data-cursor="{{ r.cursor }}" data-cursor-fa="{{ r.cursorFa }}" style="display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:baseline;border-top:1px solid var(--rule);padding:20px 0;opacity:{{ r.opacity }};transition:opacity var(--m-standard) var(--e-standard),padding var(--m-standard) var(--e-standard),color var(--m-fast) var(--e-standard)">
+                  <span style="display:flex;align-items:baseline;gap:10px;font-size:clamp(16px,1.5vw,21px);line-height:1.34;letter-spacing:-.012em;color:{{ r.color }};transition:color var(--m-fast) var(--e-standard)"><i style="width:7px;height:7px;background:var(--turq);opacity:{{ r.sq }};flex:none;margin-top:8px;transition:opacity var(--m-fast) var(--e-standard)"></i><span style="direction:{{ r.nameDir }}">{{ r.name }}</span></span>
+                  <span style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-60);line-height:1.6">{{ r.cat }} · {{ r.level }}</span>
+                  <span style="font-size:12.5px;line-height:1.6;color:var(--ink-45)">{{ r.subject }}</span>
+                </a>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+        <sc-if value="{{ noResults }}" hint-placeholder-val="{{ false }}">
+          <div style="border-top:1px solid var(--rule);padding:60px 0;font-size:15px;color:var(--ink-60)">
+            <span data-en="1">No recognition matches these filters.</span><span data-fa="1" style="font-family:var(--fa);display:none">افتخاری با این فیلترها یافت نشد.</span>
+          </div>
+        </sc-if>
+      </div>
+
+      <div data-aw-stagecol="1" style="grid-column:10 / span 3;position:sticky;top:calc(var(--marg) + 116px);align-self:start;direction:ltr;opacity:{{ previewOpacity }};transition:opacity var(--m-standard) var(--e-standard)">
+        <div data-aw-stage="1" style="position:relative;overflow:hidden;background:var(--grey);aspect-ratio:3/4">
+          <div data-aw-img="1" style="position:absolute;inset:-4% -2%;background:var(--plate);display:grid;place-items:center;transition:transform var(--m-slow) var(--e-enter)"><span data-aw-imglabel="1" style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45)"></span></div>
+          <div data-aw-mask="1" style="position:absolute;inset:0;background:var(--canvas);clip-path:inset(0 0 100% 0);transition:clip-path var(--m-base) var(--e-page)"></div>
+        </div>
+        <div style="margin-top:12px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-45)"><span data-aw-caption="1"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Awards close" style="padding:0 var(--marg) var(--marg)">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;border-top:1px solid var(--rule);padding-top:22px">
+      <a href="{{ hrefAbout }}" data-arrow="1" style="display:inline-flex;align-items:center;gap:12px;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase"><span style="overflow:hidden;display:block;width:22px;height:9px;position:relative"><i data-arrowline="1" style="position:absolute;inset:0;background:currentColor;height:1px;top:4px;transition:transform var(--m-standard) var(--e-page)"></i></span><span data-en="1">About the studio</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:14.5px;display:none">درباره استودیو</span></a>
+      <span style="font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-45)">Tarh &amp; Afarinesh — طرح و آفرینش</span>
+    </div>
+  </section>
+
+  <div data-filter="1" style="position:fixed;inset:0;z-index:102;background:var(--canvas);clip-path:{{ filterClip }};transition:clip-path var(--m-base) var(--e-page);pointer-events:{{ filterPointer }};padding:26px var(--marg) 40px;display:flex;flex-direction:column;gap:48px;overflow-y:auto">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:24px;flex:none">
+      <span style="font-size:12px;letter-spacing:.14em;text-transform:uppercase"><span data-en="1">Filter recognition</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:14.5px;display:none">فیلتر افتخارات</span></span>
+      <div style="display:flex;align-items:center;gap:14px">
+        <button type="button" onClick="{{ clearFilters }}" style="appearance:none;background:none;border:1px solid var(--rule);padding:9px 14px;cursor:pointer;font:inherit;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-45)"><span data-en="1">Clear</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:13.5px;display:none">پاک کردن</span></button>
+        <button type="button" onClick="{{ closeFilter }}" style="appearance:none;background:var(--ink);color:var(--canvas);border:1px solid var(--ink);padding:9px 14px;cursor:pointer;font:inherit;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase"><span data-en="1">Show {{ countRaw }}</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:13.5px;display:none">نمایش {{ countRaw }}</span></button>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap);margin-top:auto">
+      <div style="grid-column:1 / span 2">
+        <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45);border-bottom:1px solid var(--rule);padding-bottom:12px"><span data-en="1">Year</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:13px;display:none">سال</span></div>
+        <sc-for list="{{ fYear }}" as="f" hint-placeholder-count="7">
+          <button type="button" onClick="{{ f.toggle }}" style="appearance:none;background:none;border:none;border-top:1px solid var(--rule-soft);width:100%;text-align:start;padding:12px 0;cursor:pointer;font:inherit;display:flex;align-items:center;gap:10px;color:inherit;opacity:{{ f.opacity }};transition:opacity var(--m-fast) var(--e-standard)">
+            <i style="width:9px;height:9px;background:var(--turq);opacity:{{ f.sq }};flex:none"></i>
+            <span style="font-size:17px;font-variant-numeric:tabular-nums;direction:ltr">{{ f.label }}</span>
+          </button>
+        </sc-for>
+      </div>
+      <div style="grid-column:4 / span 4">
+        <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45);border-bottom:1px solid var(--rule);padding-bottom:12px"><span data-en="1">Expertise</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:13px;display:none">تخصص</span></div>
+        <sc-for list="{{ fCat }}" as="f" hint-placeholder-count="8">
+          <button type="button" onClick="{{ f.toggle }}" style="appearance:none;background:none;border:none;border-top:1px solid var(--rule-soft);width:100%;text-align:start;padding:12px 0;cursor:pointer;font:inherit;display:flex;align-items:center;gap:12px;color:inherit;opacity:{{ f.opacity }};transition:opacity var(--m-fast) var(--e-standard)">
+            <i style="width:10px;height:10px;background:var(--turq);opacity:{{ f.sq }};flex:none"></i>
+            <span style="font-size:clamp(17px,1.5vw,23px);line-height:1.3;letter-spacing:-.012em">{{ f.label }}</span>
+          </button>
+        </sc-for>
+      </div>
+      <div style="grid-column:9 / span 4">
+        <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45);border-bottom:1px solid var(--rule);padding-bottom:12px"><span data-en="1">Recognition</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:13px;display:none">نوع</span></div>
+        <sc-for list="{{ fLevel }}" as="f" hint-placeholder-count="6">
+          <button type="button" onClick="{{ f.toggle }}" style="appearance:none;background:none;border:none;border-top:1px solid var(--rule-soft);width:100%;text-align:start;padding:12px 0;cursor:pointer;font:inherit;display:flex;align-items:center;gap:12px;color:inherit;opacity:{{ f.opacity }};transition:opacity var(--m-fast) var(--e-standard)">
+            <i style="width:10px;height:10px;background:var(--turq);opacity:{{ f.sq }};flex:none"></i>
+            <span style="font-size:clamp(16px,1.4vw,21px);line-height:1.3">{{ f.label }}</span>
+          </button>
+        </sc-for>
+      </div>
+      <div style="grid-column:1 / span 12;margin-top:30px;border-top:1px solid var(--rule);padding-top:14px;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-45);direction:ltr;font-variant-numeric:tabular-nums">{{ countRaw }} / {{ totalRaw }}</div>
+    </div>
+  </div>
+
+  <div data-shared="1" style="position:fixed;z-index:104;left:0;top:0;width:0;height:0;overflow:hidden;opacity:0;pointer-events:none;background:var(--grey);direction:ltr"><div data-shared-inner="1" style="position:absolute;inset:-4% -2%;background:var(--plate)"></div></div>
+
+  <div data-prog="1" style="position:fixed;right:14px;bottom:var(--marg);z-index:90;direction:ltr;pointer-events:none;display:flex;align-items:center;gap:10px;opacity:0;transition:opacity var(--m-standard) var(--e-standard)">
+    <span data-prog-num="1" style="font-size:10.5px;letter-spacing:.1em;color:var(--ink-45);font-variant-numeric:tabular-nums">000</span>
+    <span style="position:relative;display:block;width:9px;height:120px"><i style="position:absolute;left:4px;top:0;bottom:0;width:1px;background:var(--rule)"></i><i data-prog-sq="1" style="position:absolute;left:0;top:0;width:9px;height:9px;background:var(--turq)"></i></span>
+  </div>
+
+  <div data-cursor-el="1" style="position:fixed;left:0;top:0;z-index:130;width:78px;height:78px;border-radius:50%;background:var(--turq);color:var(--ink);display:grid;place-items:center;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;pointer-events:none;opacity:0;transform:translate(-50%,-50%) scale(.4);transition:opacity var(--m-fast) var(--e-standard),transform var(--m-fast) var(--e-standard);text-align:center"><span data-cursor-label="1">View</span></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440},&quot;startLang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;en&quot;,&quot;options&quot;:[&quot;en&quot;,&quot;fa&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Bilingual&quot;},&quot;forceReducedMotion&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Motion&quot;},&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#56B1AC&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#56B1AC&quot;,&quot;#3E9692&quot;,&quot;#121B1B&quot;],&quot;section&quot;:&quot;Brand&quot;}}">
+const clamp = (v, a, b) => v < a ? a : v > b ? b : v;
+const PLATES = [
+  "repeating-linear-gradient(-45deg,#E8E8E4 0 18px,#E1E1DC 18px 36px)",
+  "repeating-linear-gradient(-45deg,#DEDED8 0 18px,#D7D7D1 18px 36px)",
+  "repeating-linear-gradient(-45deg,#E4E7E6 0 18px,#DCE1E0 18px 36px)",
+  "repeating-linear-gradient(-45deg,#D9EFED 0 18px,#CFE8E5 18px 36px)"
+];
+const parseHash = () => {
+  const out = {};
+  (window.location.hash || "").replace(/^#/, "").split("&").forEach(part => {
+    if(!part) return;
+    const eq = part.indexOf("=");
+    if(eq < 0) out[part] = true; else out[part.slice(0, eq)] = part.slice(eq + 1);
+  });
+  return out;
+};
+const LATIN = /[A-Za-z]/;
+/* generic visual capture — identical principle to Projects/Expertise: works for an <img>,
+   a background-image, or a placeholder plate, and carries the live crop/transform across. */
+const captureVisual = (src) => {
+  if(!src) return null;
+  const img = src.querySelector ? src.querySelector("img") : null;
+  const host = img || src;
+  const cs = getComputedStyle(host);
+  const cap = { transform:(host.style && host.style.transform) || "none" };
+  if(img){
+    cap.backgroundImage = "url(" + (img.currentSrc || img.src) + ")";
+    cap.backgroundSize = cs.objectFit === "contain" ? "contain" : "cover";
+    cap.backgroundPosition = cs.objectPosition || "50% 50%";
+    cap.backgroundRepeat = "no-repeat";
+  } else {
+    cap.backgroundImage = cs.backgroundImage !== "none" ? cs.backgroundImage : "";
+    cap.backgroundSize = cs.backgroundSize;
+    cap.backgroundPosition = cs.backgroundPosition;
+    cap.backgroundRepeat = cs.backgroundRepeat;
+  }
+  return cap;
+};
+/* paint the preview from a project's media model; plate is only the fallback */
+const paintMedia = (el, p) => {
+  if(!el || !p) return;
+  if(p.src){
+    el.style.backgroundImage = "url(" + p.src + ")";
+    el.style.backgroundSize = p.crop === "contain" ? "contain" : "cover";
+    el.style.backgroundPosition = p.objectPosition || "50% 50%";
+    el.style.backgroundRepeat = "no-repeat";
+  } else {
+    el.style.backgroundImage = PLATES[(p.plate || 0) % 4];
+    el.style.backgroundSize = "";
+    el.style.backgroundPosition = "";
+    el.style.backgroundRepeat = "";
+  }
+};
+const MENU = [
+  ["Home","خانه","Homepage.dc.html"], ["Projects","پروژه‌ها","Projects.dc.html"], ["Expertise","تخصص‌ها","Expertise.dc.html"],
+  ["Awards","جوایز و افتخارات",""], ["About","درباره ما","About.dc.html"],
+  ["Journal","مجله","Journal.dc.html"], ["Contact","تماس با ما","Contact.dc.html"]
+];
+
+/* MOTION V2 — SCENE tempo. Every shared-element expansion and scene hand-off on the
+   site runs at this one duration so a click in Projects, Awards or Journal feels like the
+   same gesture. Paired with --e-page. SCENE_RM is the reduced-motion equivalent. */
+const SCENE = 900, SCENE_RM = 200;
+
+class Component extends DCLogic {
+  state = { lang:"en", sort:"newest", hover:null, filterOpen:false, filters:{ year:[], cat:[], level:[] }, reduced:false };
+
+  componentDidMount(){
+    this.root = document.querySelector("[data-aw-root]");
+    if(!this.root) return;
+    try{ this.state.reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches; }catch(e){}
+    if(this.props.forceReducedMotion) this.state.reduced = true;
+    if(this.props.startLang === "fa") this.state.lang = "fa";
+    const hq = parseHash();
+    if(hq.lang === "fa") this.state.lang = "fa";
+    if(this.props.accent) this.root.style.setProperty("--turq", this.props.accent);
+    this.cx = 0; this.cy = 0; this.cxs = 0; this.cys = 0;
+    this.onMove = (e) => { this.cx = e.clientX; this.cy = e.clientY; this.requestTick(); };
+    this.bindPointer = () => {
+      const fine = !(window.TA_LAYOUT && window.TA_LAYOUT.coarsePointer);
+      if(fine && !this._moveBound){ window.addEventListener("mousemove", this.onMove, { passive:true }); this._moveBound = true; }
+      if(!fine && this._moveBound){
+        window.removeEventListener("mousemove", this.onMove); this._moveBound = false;
+        const c = this.n && this.n.cursor; if(c){ c.style.opacity = "0"; c.style.transform = "translate(-50%,-50%) scale(.4)"; }
+        this.fine = false;
+      }
+    };
+    this.bindPointer();
+    this.q(); this.bind(); this.applyLang();
+    window.__awOwner = this;
+    if(window.TA_LAYOUT && window.TA_LAYOUT.onChange){
+      window.TA_LAYOUT.onChange((L, info) => {
+        /* a virtual keyboard only changes height — never a reason to re-initialise */
+        if(info && info.keyboardLikely){ this.requestTick(); return; }
+        if(info && info.pointerChanged && this.bindPointer) this.bindPointer();
+        if(info && info.reducedMotionChanged){ this.requestTick(); return; }
+        if(!info || info.layoutChanged){ this.q(); this.bind(); this.applyLang(); }
+        this.requestTick();
+      });
+    }
+    this.onScroll = () => this.requestTick();
+    window.addEventListener("scroll", this.onScroll, { passive:true });
+    /* scroll events are unreliable in this runtime — native scroll events drive the scheduler */
+    if(window.TA_LAYOUT && window.TA_LAYOUT.onScrollChange) window.TA_LAYOUT.onScrollChange(this.onScroll);
+    window.addEventListener("resize", this.onScroll);
+    this.onKey = (e) => {
+      if(e.key !== "Escape") return;
+      if(this.state.filterOpen) this.setState({ filterOpen:false }, () => this.syncModal());
+      else if(this.state.menu) this.setState({ menu:false });
+    };
+    this.onVis = () => { if(document.visibilityState === "visible") this.requestTick(); else this.stopTicking(); };
+    document.addEventListener("visibilitychange", this.onVis);
+    window.addEventListener("keydown", this.onKey);
+    this._pLang = this.state.lang; this._pMenu = false; this._pFilter = false; this._sig = "";
+    this.tick();
+  }
+
+  componentWillUnmount(){
+    if(window.__awOwner === this) window.__awOwner = null;
+    window.removeEventListener("mousemove", this.onMove);
+    window.removeEventListener("scroll", this.onScroll);
+    window.removeEventListener("resize", this.onScroll);
+    document.removeEventListener("visibilitychange", this.onVis);
+    this.stopTicking();
+    window.removeEventListener("keydown", this.onKey);
+    document.body.style.overflow = "";
+  }
+
+  componentDidUpdate(){
+    if(this._pLang !== this.state.lang){
+      this._pLang = this.state.lang;
+      this.applyLang();
+      try{ window.location.hash = this.state.lang === "fa" ? "lang=fa" : ""; }catch(e){}
+    }
+    if(this._pMenu !== this.state.menu){ this._pMenu = this.state.menu; this.animateMenu(); }
+    if(this._pFilter !== this.state.filterOpen){ this._pFilter = this.state.filterOpen; this.syncModal(); }
+    const sig = JSON.stringify(this.state.filters) + this.state.sort;
+    if(sig !== this._sig){
+      this._sig = sig;
+      this.q(); this.bind(); this.applyLang();
+      /* no stale project image may represent an award that is no longer listed */
+      if(this.state.hover != null) this.setState({ hover:null });
+      this.showPreview(null);
+      this.revealRows();
+    }
+  }
+
+  q(){
+    const r = this.root, all = (s) => Array.prototype.slice.call(r.querySelectorAll(s));
+    this.n = {
+      header: r.querySelector("[data-hd]"),
+      list: r.querySelector("[data-aw-list]"),
+      groups: all("[data-aw-group]"),
+      stageCol: r.querySelector("[data-aw-stagecol]"),
+      stage: r.querySelector("[data-aw-stage]"),
+      img: r.querySelector("[data-aw-img]"),
+      imgLabel: r.querySelector("[data-aw-imglabel]"),
+      caption: r.querySelector("[data-aw-caption]"),
+      mask: r.querySelector("[data-aw-mask]"),
+      shared: r.querySelector("[data-shared]"),
+      sharedInner: r.querySelector("[data-shared-inner]"),
+      prog: r.querySelector("[data-prog]"),
+      progNum: r.querySelector("[data-prog-num]"),
+      progSq: r.querySelector("[data-prog-sq]"),
+      cursor: r.querySelector("[data-cursor-el]"),
+      cursorLabel: r.querySelector("[data-cursor-label]")
+    };
+  }
+
+  applyLang(){
+    const fa = this.state.lang === "fa", n = this.n;
+    this.root.setAttribute("dir", fa ? "rtl" : "ltr");
+    this.root.querySelectorAll("[data-en]").forEach(el => { el.style.display = fa ? "none" : ""; });
+    this.root.querySelectorAll("[data-fa]").forEach(el => { el.style.display = fa ? "" : "none"; });
+    this.root.style.fontFamily = fa ? 'Vazirmatn,"Schibsted Grotesk",Tahoma,sans-serif' : '"Schibsted Grotesk",Helvetica,Arial,sans-serif';
+    /* reading register keeps the reading side; the project preview sits opposite */
+    if(n.list) n.list.style.gridColumn = "1 / span 8";
+    if(n.stageCol) n.stageCol.style.gridColumn = "10 / span 3";
+    if(n.prog){ n.prog.style.right = fa ? "auto" : "14px"; n.prog.style.left = fa ? "14px" : "auto"; }
+  }
+
+  animateMenu(){
+    const open = !!this.state.menu;
+    this.root.querySelectorAll("[data-ml]").forEach(a => {
+      a.style.opacity = open ? "1" : "0";
+      a.style.transform = open ? "translateY(0)" : "translateY(40%)";
+    });
+    this.syncModal();
+  }
+
+  /* single modal-state calculation so Menu and Filter never fight over body overflow */
+  syncModal(){
+    const open = !!this.state.menu || !!this.state.filterOpen;
+    document.body.style.overflow = open ? "hidden" : "";
+  }
+
+  /* calm result update: rows settle in, no page flash, no scroll reset */
+  revealRows(){
+    if(this.state.reduced) return;
+    const rows = Array.prototype.slice.call(this.root.querySelectorAll("[data-aw-row]"));
+    rows.forEach((r, i) => {
+      r.style.transition = "none";
+      r.style.opacity = "0";
+      r.style.transform = "translateY(8px)";
+      void r.offsetWidth;
+      const d = Math.min(i * 14, 180);
+      r.style.transition = "opacity var(--m-fast) cubic-bezier(.4,0,.2,1) " + d + "ms,transform 340ms cubic-bezier(.16,1,.3,1) " + d + "ms";
+      r.style.opacity = "1";
+      r.style.transform = "translateY(0)";
+    });
+  }
+
+  /* keyed guard: the same behaviour is never attached twice, but one element may
+     own several independent behaviours (its own hover AND the custom cursor). */
+  bindOnce(el, key){
+    if(!el) return false;
+    if(!el.__taBindings) el.__taBindings = {};
+    if(el.__taBindings[key]) return false;
+    el.__taBindings[key] = true;
+    return true;
+  }
+
+  bind(){
+    const n = this.n;
+    this.root.querySelectorAll("[data-nav]").forEach(a => {
+      if(!this.bindOnce(a, "nav-hover")) return;
+      const sq = a.querySelector("[data-navsq]");
+      a.addEventListener("mouseenter", () => { a.style.transform = "translateY(-3px)"; if(sq){ sq.style.opacity = "1"; sq.style.transform = "scale(1)"; } });
+      a.addEventListener("mouseleave", () => { a.style.transform = "translateY(0)"; });
+    });
+    this.root.querySelectorAll("[data-arrow]").forEach(a => {
+      if(!this.bindOnce(a, "arrow-hover")) return;
+      const l = a.querySelector("[data-arrowline]");
+      a.addEventListener("mouseenter", () => { if(l) l.style.transform = "translateX(8px)"; });
+      a.addEventListener("mouseleave", () => { if(l) l.style.transform = "translateX(0)"; });
+    });
+    this.root.querySelectorAll("[data-aw-row]").forEach(a => {
+      if(!this.bindOnce(a, "row-hover")) return;
+      a.addEventListener("mouseenter", () => { a.style.paddingInlineStart = "12px"; });
+      a.addEventListener("mouseleave", () => { a.style.paddingInlineStart = "0px"; });
+      a.addEventListener("focus", () => { a.style.paddingInlineStart = "12px"; });
+      a.addEventListener("blur", () => {
+        a.style.paddingInlineStart = "0px";
+        /* focus leaving the archive must not leave every other row dimmed */
+        clearTimeout(this._blurT);
+        this._blurT = setTimeout(() => {
+          const f = document.activeElement;
+          if(!f || !f.getAttribute || f.getAttribute("data-aw-row") == null){
+            this.setState({ hover:null });
+            this.showPreview(null);
+          }
+        }, 40);
+      });
+    });
+    this.root.querySelectorAll("[data-ml]").forEach(a => {
+      if(!this.bindOnce(a, "menu-link-hover")) return;
+      a.addEventListener("mouseenter", () => { a.style.color = "#56B1AC"; });
+      a.addEventListener("mouseleave", () => { a.style.color = ""; });
+    });
+    const cur = n.cursor, lab = n.cursorLabel;
+    if(cur && window.matchMedia("(hover:hover) and (pointer:fine)").matches){
+      this.fine = true;
+      this.root.querySelectorAll("[data-cursor]").forEach(el => {
+      if(!this.bindOnce(el, "cursor")) return;
+        const txt = () => {
+          const fa = this.state.lang === "fa";
+          return (fa && el.getAttribute("data-cursor-fa")) || el.getAttribute("data-cursor");
+        };
+        el.addEventListener("mouseenter", () => {
+          const t = txt();
+          if(!t) return;
+          if(lab) lab.textContent = t;
+          cur.style.opacity = "1"; cur.style.transform = "translate(-50%,-50%) scale(1)";
+        });
+        el.addEventListener("mouseleave", () => { cur.style.opacity = "0"; cur.style.transform = "translate(-50%,-50%) scale(.4)"; });
+      });
+    }
+  }
+
+  /* one shared project preview, driven by the hovered row */
+  showPreview(projectId){
+    const n = this.n, red = this.state.reduced, D = window.TA_AWARDS;
+    if(!n.stageCol) return;
+    if(!projectId || !D) return;
+    const p = D.project(projectId);
+    if(!p) return;
+    if(n.img){
+      paintMedia(n.img, p);
+      if(n.imgLabel) n.imgLabel.textContent = this.state.lang === "fa" ? p.fa : p.en;
+      if(!red){
+        n.img.style.transition = "none"; n.img.style.transform = "scale(1.05)";
+        void n.img.offsetWidth;
+        n.img.style.transition = "transform var(--m-slow) cubic-bezier(.16,1,.3,1)";
+        n.img.style.transform = "scale(1)";
+      }
+    }
+    if(n.caption) n.caption.textContent = this.state.lang === "fa" ? p.fa : p.en;
+    if(n.mask && !red){
+      n.mask.style.transition = "none"; n.mask.style.clipPath = "inset(0 0 0 0)";
+      void n.mask.offsetWidth;
+      n.mask.style.transition = "clip-path var(--m-base) cubic-bezier(.76,0,.24,1)";
+      n.mask.style.clipPath = "inset(0 0 100% 0)";
+    }
+  }
+
+  /* shared-element hand-off into Project Detail, same principle as the other pages */
+  openProject(projectId, href, e){
+    const n = this.n, red = this.state.reduced;
+    if(red || !n.shared || !n.stage || !projectId) return;
+    if(e && e.preventDefault) e.preventDefault();
+    const from = n.stage.getBoundingClientRect();
+    const vw = window.innerWidth, vh = window.innerHeight;
+    const cap = captureVisual(n.img);
+    if(cap){
+      if(cap.backgroundImage) n.sharedInner.style.backgroundImage = cap.backgroundImage;
+      n.sharedInner.style.backgroundSize = cap.backgroundSize;
+      n.sharedInner.style.backgroundPosition = cap.backgroundPosition;
+      n.sharedInner.style.backgroundRepeat = cap.backgroundRepeat;
+      n.sharedInner.style.transition = "none";
+      n.sharedInner.style.transform = cap.transform;
+    }
+    /* the archive quiets while the preview takes over */
+    if(n.list){ n.list.style.transition = "opacity var(--m-fast) cubic-bezier(.4,0,.2,1)"; n.list.style.opacity = "0.25"; }
+    n.shared.style.transition = "none";
+    n.shared.style.left = from.left + "px"; n.shared.style.top = from.top + "px";
+    n.shared.style.width = from.width + "px"; n.shared.style.height = from.height + "px";
+    n.shared.style.opacity = "1";
+    void n.shared.offsetWidth;
+    const dur = SCENE;
+    n.shared.style.transition = ["left","top","width","height"].map(k => k + " " + dur + "ms cubic-bezier(.76,0,.24,1)").join(",");
+    n.shared.style.left = "0px"; n.shared.style.top = "0px";
+    n.shared.style.width = vw + "px"; n.shared.style.height = (vh * 0.88) + "px";
+    setTimeout(() => { window.location.href = href; }, dur - 60);
+    setTimeout(() => { if(n.list) n.list.style.opacity = "1"; }, dur + 400);
+  }
+
+
+  /* event-driven scheduler: one pending frame at most, idle when nothing moves */
+  requestTick(){
+    if(this._pending != null || document.visibilityState === "hidden") return;
+    const run = () => { this._pending = null; this._raf = null; this.tick(); };
+    if(typeof requestAnimationFrame === "function"){
+      this._raf = requestAnimationFrame(run);
+      /* rAF does not fire in every host, so a short timer guarantees the frame */
+      this._pending = setTimeout(() => { if(this._raf != null && typeof cancelAnimationFrame === "function") cancelAnimationFrame(this._raf); run(); }, 24);
+    } else {
+      this._pending = setTimeout(run, 16);
+    }
+  }
+  stopTicking(){
+    if(this._pending != null){ clearTimeout(this._pending); this._pending = null; }
+    if(this._raf != null && typeof cancelAnimationFrame === "function"){ cancelAnimationFrame(this._raf); this._raf = null; }
+  }
+
+  tick(){
+    try{ this.frame(); }
+    catch(err){ if(!this._logged){ this._logged = true; console.error("aw tick error", err); } }
+    /* keep frames coming only while the custom cursor is still catching up */
+    if(this.fine && (Math.abs(this.cx - this.cxs) > 0.6 || Math.abs(this.cy - this.cys) > 0.6)) this.requestTick();
+  }
+
+  frame(){
+    if(!this.n || !this.n.header || !this.n.header.isConnected){
+      const live = document.querySelector("[data-aw-root]");
+      if(!live) return;
+      this.root = live; this.q(); this.bind(); this.applyLang();
+    }
+    const n = this.n, vh = window.innerHeight, y = window.scrollY || 0;
+    if(n.header){
+      const compact = y > 110;
+      n.header.style.paddingTop = compact ? "14px" : "24px";
+      n.header.style.paddingBottom = compact ? "14px" : "24px";
+      n.header.style.background = compact ? "rgba(250,249,247,.92)" : "transparent";
+    }
+    if(n.prog){
+      const doc = Math.max(1, document.documentElement.scrollHeight - vh);
+      const gp = clamp(y / doc, 0, 1);
+      n.prog.style.opacity = y > vh * 0.5 ? "1" : "0";
+      if(n.progSq) n.progSq.style.top = (gp * 111).toFixed(1) + "px";
+      if(n.progNum) n.progNum.textContent = String(Math.round(gp * 100)).padStart(3, "0");
+    }
+    if(this.fine && n.cursor){
+      const k = this.state.reduced ? 1 : 0.18;
+      this.cxs += (this.cx - this.cxs) * k;
+      this.cys += (this.cy - this.cys) * k;
+      n.cursor.style.left = this.cxs.toFixed(1) + "px";
+      n.cursor.style.top = this.cys.toFixed(1) + "px";
+    }
+  }
+
+  visible(){
+    const D = window.TA_AWARDS;
+    if(!D) return [];
+    const f = this.state.filters;
+    let out = D.awards.filter(a => {
+      if(f.year.length && f.year.indexOf(a.year) < 0) return false;
+      if(f.cat.length && f.cat.indexOf(a.cat) < 0) return false;
+      if(f.level.length && f.level.indexOf(a.level) < 0) return false;
+      return true;
+    });
+    const idx = {};
+    D.awards.forEach((a, i) => { idx[a.id] = i; });
+    const dir = this.state.sort === "newest" ? -1 : 1;
+    out = out.slice().sort((a, b) => {
+      const dy = (a.year - b.year) * dir;
+      return dy !== 0 ? dy : (idx[a.id] - idx[b.id]);
+    });
+    return out;
+  }
+
+  toggle(group, key){
+    this.setState(s => {
+      const f = { year:s.filters.year.slice(), cat:s.filters.cat.slice(), level:s.filters.level.slice() };
+      const at = f[group].indexOf(key);
+      if(at < 0) f[group].push(key); else f[group].splice(at, 1);
+      return { filters:f, hover:null };
+    });
+  }
+
+  renderVals(){
+    const st = this.state, fa = st.lang === "fa", red = st.reduced;
+    const D = window.TA_AWARDS;
+    const sfxHash = fa ? "#lang=fa" : "";
+    const sfxAmp = fa ? "&lang=fa" : "";
+    const lab = (map, k) => (D && map && map[k]) ? map[k][fa ? 1 : 0] : k;
+    const vis = this.visible();
+
+    /* group by year, preserving sort order */
+    const order = [];
+    const byYear = {};
+    vis.forEach(a => {
+      if(!byYear[a.year]){ byYear[a.year] = []; order.push(a.year); }
+      byYear[a.year].push(a);
+    });
+
+    const rowFor = (a) => {
+      const p = (D && a.projectId != null) ? D.project(a.projectId) : null;
+      const name = fa ? a.nameFa : a.name;
+      return {
+        name: name,
+        /* Latin award names stay LTR inside an RTL row */
+        nameDir: (fa && LATIN.test(name)) ? "ltr" : (fa ? "rtl" : "ltr"),
+        cat: lab(D && D.categories, a.cat),
+        level: lab(D && D.levels, a.level),
+        subject: p ? (fa ? p.fa : p.en) : (fa ? ("— " + lab(D && D.scopes, a.scope || "studio")) : ("— " + lab(D && D.scopes, a.scope || "studio"))),
+        href: p ? ("Projects.dc.html#p=" + (p ? p.routeIndex : 0) + sfxAmp) : "#",
+        cursor: p ? "View" : "",
+        cursorFa: p ? "مشاهده" : "",
+        opacity: st.hover == null ? "1" : (st.hover === a.id ? "1" : "0.42"),
+        sq: st.hover === a.id ? "1" : "0",
+        color: st.hover === a.id ? "#3E9692" : "#121B1B",
+        enter: () => { this.setState({ hover:a.id }); this.showPreview(a.projectId); },
+        leave: () => { this.setState({ hover:null }); this.showPreview(null); },
+        click: (e) => {
+          if(a.projectId == null){ if(e && e.preventDefault) e.preventDefault(); return; }
+          this.openProject(a.projectId, "Projects.dc.html#p=" + (p ? p.routeIndex : 0) + sfxAmp, e);
+        }
+      };
+    };
+
+    const groups = order.map(yr => ({ year:yr, rows: byYear[yr].map(rowFor) }));
+    const years = D ? D.years().slice().sort((a, b) => b - a) : [];
+    const total = D ? D.awards.length : 0;
+
+    const mk = (group, keys, map) => keys.map(k => {
+      const on = st.filters[group].indexOf(k) >= 0;
+      return { label: map ? lab(map, k) : k, sq: on ? "1" : "0", opacity: on ? "1" : "0.5", toggle: () => this.toggle(group, k) };
+    });
+    const activeCount = st.filters.year.length + st.filters.cat.length + st.filters.level.length;
+
+    return {
+      setEn: () => this.setState({ lang:"en" }),
+      setFa: () => this.setState({ lang:"fa" }),
+      enOpacity: fa ? "0.5" : "1", faOpacity: fa ? "1" : "0.5",
+      enWeight: fa ? "400" : "600", faWeight: fa ? "600" : "400",
+      stay: (e) => { if(e && e.preventDefault) e.preventDefault(); window.scrollTo(0, 0); },
+
+      hrefHome: "Homepage.dc.html" + sfxHash,
+      hrefProjects: "Projects.dc.html" + sfxHash,
+      hrefExpertise: "Expertise.dc.html" + sfxHash,
+      hrefAbout: "About.dc.html" + sfxHash,
+      hrefContact: "Contact.dc.html" + sfxHash,
+
+      openMenu: () => this.setState({ menu:true }),
+      closeMenu: () => this.setState({ menu:false }),
+      menuClip: st.menu ? "polygon(0 0,100% 0,100% 100%,0 100%)" : "polygon(0 0,0 0,0 0,0 0)",
+      menuPointer: st.menu ? "auto" : "none",
+      menuSize: fa ? "clamp(26px,3.4vw,48px)" : "clamp(30px,4.2vw,58px)",
+      menuLh: fa ? "1.5" : "1.04",
+      menuLs: fa ? "0" : "-.03em",
+      menuLinks: MENU.map((m, i) => ({
+        num: String(i + 1).padStart(2, "0"),
+        label: fa ? m[1] : m[0],
+        href: m[2] ? (m[2].indexOf("#") >= 0 ? m[2] + sfxAmp : m[2] + sfxHash) : "#",
+        delay: (120 + i * 60) + "ms",
+        click: (e) => {
+          if(!m[2]){ if(e && e.preventDefault) e.preventDefault(); this.setState({ menu:false }, () => window.scrollTo(0, 0)); }
+          else this.setState({ menu:false });
+        }
+      })),
+
+      totalLabel: fa ? ("XX افتخار") : "XX recognitions",
+      rangeLabel: years.length ? (years[years.length - 1] + "—" + years[0]) : "20XX—2026",
+      groups: groups,
+      previewOpacity: (() => {
+        if(st.hover == null) return "0";
+        for(let i = 0; i < vis.length; i++) if(vis[i].id === st.hover) return vis[i].projectId ? "1" : "0";
+        return "0";
+      })(),
+      noResults: vis.length === 0,
+      countRaw: String(vis.length).padStart(2, "0"),
+      totalRaw: String(total).padStart(2, "0"),
+
+      sortNewest: () => this.setState({ sort:"newest", hover:null }),
+      sortOldest: () => this.setState({ sort:"oldest", hover:null }),
+      newestOpacity: st.sort === "newest" ? "1" : "0.45",
+      oldestOpacity: st.sort === "oldest" ? "1" : "0.45",
+      newestSq: st.sort === "newest" ? "1" : "0",
+      oldestSq: st.sort === "oldest" ? "1" : "0",
+
+      openFilter: () => this.setState({ filterOpen:true }),
+      closeFilter: () => this.setState({ filterOpen:false }),
+      clearFilters: () => this.setState({ filters:{ year:[], cat:[], level:[] }, hover:null }),
+      filterClip: st.filterOpen ? "polygon(0 0,100% 0,100% 100%,0 100%)" : (fa ? "polygon(0 0,0 0,0 100%,0 100%)" : "polygon(100% 0,100% 0,100% 100%,100% 100%)"),
+      filterPointer: st.filterOpen ? "auto" : "none",
+      activeFilterLabel: activeCount ? String(activeCount).padStart(2, "0") + (fa ? " فعال" : " active") : (fa ? "همه" : "All"),
+      fYear: mk("year", years, null),
+      fCat: mk("cat", D ? Object.keys(D.categories) : [], D && D.categories),
+      fLevel: mk("level", D ? Object.keys(D.levels) : [], D && D.levels),
+
+      toggleReduced: () => this.setState(s => ({ reduced: !s.reduced })),
+      rmState: red ? "on" : "off",
+      rmTitle: fa ? "حرکت کاهش‌یافته" : "Reduced motion",
+      rmBg: red ? "#56B1AC" : "transparent",
+      rmColor: red ? "#121B1B" : "rgba(18,27,27,.45)"
+    };
+  }
+}
+</script>
+</body>
+</html>

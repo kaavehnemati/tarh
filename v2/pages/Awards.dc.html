@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet" />
+<script>window.TA_ASSET_BASE = "../../";</script>
+<link rel="stylesheet" href="../design-system/tokens-v2.css" />
+<link rel="stylesheet" href="../design-system/base-v2.css" />
+<link rel="stylesheet" href="../design-system/responsive-v2.css" />
+<script src="../runtime/layout-mode.js"></script>
+<script src="../runtime/bidi.js"></script>
+<script src="../../site-data.js"></script>
+<script src="../../media-utils.js"></script>
+<script src="../../projects-data.js"></script>
+<script src="../../awards-data.js"></script>
+<script src="../runtime/scroll-coordinator.js"></script>
+<script src="../runtime/ambient.js"></script>
+<script src="../runtime/reveal.js"></script>
+<script src="../runtime/ui-strings.js"></script>
+<script src="../runtime/cursor.js"></script>
+<script src="../runtime/motif.js"></script>
+<script src="../runtime/media-handoff.js"></script>
+</helmet>
+
+<div data-aw2-root="1" data-v2-shell="1" dir="{{ dir }}" style="color:var(--ink);min-height:100svh;overflow-x:clip">
+
+  <dc-import name="../components/HeaderNav" dir="{{ dir }}" upper="{{ upper }}" brand="{{ brand }}" nav="{{ nav }}" drawer-links="{{ drawerLinks }}" href-home="{{ hrefHome }}" lang="{{ lang }}" on-set-en="{{ setEn }}" on-set-fa="{{ setFa }}" menu-id="aw" hint-size="100%,64px"></dc-import>
+
+  <section data-screen-label="01 Awards opening" data-ambient-zone="full" style="position:relative;padding:var(--space-section-lg) var(--grid-margin) var(--space-section)">
+    <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter);align-items:end">
+      <div style="grid-column:var(--span-wide)">
+        <div data-v2-in="1" style="display:flex;align-items:center;gap:var(--space-3);font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45)">
+          <i style="width:var(--c-indicator);height:var(--c-indicator);background:var(--turq)"></i>{{ eyebrow }}
+        </div>
+        <h1 data-v2-rise="1" style="margin:var(--rel-eyebrow-heading) 0 0;font-size:var(--t-dl);line-height:var(--t-dl-lh);letter-spacing:var(--t-dl-ls);font-weight:var(--t-dl-w)"><sc-for list="{{ openLines }}" as="l" hint-placeholder-count="2"><span style="display:block">{{ l }}</span></sc-for></h1>
+        <p style="margin:var(--space-content) 0 0;font-size:var(--t-bl);line-height:var(--t-bl-lh);color:var(--ink-60);max-width:var(--measure)">{{ intro }}</p>
+      </div>
+      <span data-grid-motif="static" data-grid-motif-size="anchor" data-motif-active="7" aria-hidden="true" style="grid-column:var(--span-support);justify-self:end;align-self:end"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+    </div>
+  </section>
+
+  <sc-if value="{{ hasFeatured }}" hint-placeholder-val="{{ true }}">
+    <section data-screen-label="02 Selected recognition" data-ambient-zone="soft" data-grid-surface="light" style="padding:0 var(--grid-margin) var(--space-section-lg)">
+      <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter);border-top:1px solid var(--ink);padding-top:var(--space-5)">
+        <div data-reveal="content" style="grid-column:var(--span-label);display:flex;flex-direction:column;gap:var(--space-3)">
+          <span style="font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45)">{{ featuredLabel }}</span>
+          <span data-grid-motif="static" data-grid-motif-size="standard" data-motif-active="{{ recogMotifCell }}" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+          <div style="border-top:1px solid var(--rule);padding-top:var(--space-4)">
+            <div class="text-number" style="font-size:var(--t-fact);line-height:var(--t-fact-lh);letter-spacing:var(--t-fact-ls);font-weight:var(--t-fact-w);color:var(--turq-dk);transition:opacity var(--m-fast) var(--e-smooth)">{{ recogPreview.year }}</div>
+            <div style="margin-top:var(--space-3);font-size:var(--t-hs);line-height:var(--t-hs-lh);font-weight:var(--t-hs-w);transition:opacity var(--m-fast) var(--e-smooth)" class="text-mixed"><sc-for list="{{ recogPreview.nameParts }}" as="p" hint-placeholder-count="1"><span class="{{ p.cls }}">{{ p.t }}</span></sc-for></div>
+            <div style="margin-top:var(--space-2);font-size:var(--t-bs);line-height:var(--t-bs-lh);color:var(--ink-60)" class="text-mixed"><sc-for list="{{ recogPreview.subjectParts }}" as="p" hint-placeholder-count="1"><span class="{{ p.cls }}">{{ p.t }}</span></sc-for></div>
+          </div>
+        </div>
+        <div data-reveal="group" style="grid-column:var(--span-body);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:var(--space-block) var(--grid-gutter)">
+          <sc-for list="{{ featured }}" as="f" hint-placeholder-count="3">
+            <a href="{{ f.href }}" onMouseEnter="{{ f.enter }}" onFocus="{{ f.enter }}" onMouseLeave="{{ f.leave }}" onBlur="{{ f.leave }}" data-v2-cursor="view" style="display:block;opacity:{{ f.op }};transition:opacity var(--m-standard) var(--e-editorial)">
+              <div style="font-size:var(--t-fact);line-height:var(--t-fact-lh);letter-spacing:var(--t-fact-ls);font-weight:var(--t-fact-w)"><span class="text-number">{{ f.year }}</span></div>
+              <div style="margin-top:var(--rel-fact-label);font-size:var(--t-hs);line-height:var(--t-hs-lh);letter-spacing:var(--t-hs-ls);font-weight:var(--t-hs-w)"><span class="{{ f.nameCls }}"><sc-for list="{{ f.nameParts }}" as="p" hint-placeholder-count="1"><span class="{{ p.cls }}">{{ p.t }}</span></sc-for></span></div>
+              <div style="margin-top:var(--space-tight);font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--turq-dk)">{{ f.level }}</div>
+              <div style="margin-top:var(--space-micro);font-size:var(--t-bs);line-height:var(--t-bs-lh);color:var(--ink-45)" class="text-mixed"><sc-for list="{{ f.subjectParts }}" as="p" hint-placeholder-count="1"><span class="{{ p.cls }}">{{ p.t }}</span></sc-for></div>
+            </a>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <section data-screen-label="03 Recognition archive" data-ambient-zone="minimal" style="position:relative;padding:var(--space-section) var(--grid-margin) var(--space-section-lg);background:transparent;--ambient-rest-y:74%">
+    <div style="position:relative;z-index:1;display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter)">
+      <div style="grid-column:1 / span 6">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--space-4) var(--space-6);border-bottom:1px solid var(--ink);padding-bottom:var(--space-4)">
+          <h2 data-motif-wake="1" style="margin:0;display:flex;align-items:center;gap:var(--space-3);font-size:var(--t-hl);line-height:var(--t-hl-lh);letter-spacing:var(--t-hl-ls);font-weight:var(--t-hl-w);outline-offset:6px"><span data-grid-motif="interactive" data-motif-active="4" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>{{ archiveLabel }}<span class="text-number" style="font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);color:var(--ink-45);font-weight:400">{{ rangeLabel }} · {{ countLabel }}</span></h2>
+          <div style="display:flex;align-items:center;gap:var(--space-6);font-size:var(--t-cta);letter-spacing:var(--t-cta-ls);text-transform:{{ upper }}">
+            <sc-for list="{{ sorts }}" as="s" hint-placeholder-count="2">
+              <button type="button" onClick="{{ s.pick }}" aria-pressed="{{ s.pressed }}" style="appearance:none;background:none;border:none;cursor:pointer;min-height:var(--c-control-h);padding:0;display:inline-flex;align-items:center;gap:var(--space-tight);font:inherit;letter-spacing:inherit;text-transform:inherit;color:inherit;opacity:{{ s.op }};transition:opacity var(--m-fast) var(--e-smooth)">
+                <i style="width:var(--c-indicator-sm);height:var(--c-indicator-sm);background:var(--turq);opacity:{{ s.sq }}"></i>{{ s.label }}
+              </button>
+            </sc-for>
+            <button type="button" onClick="{{ toggleFilter }}" aria-expanded="{{ filterExpanded }}" aria-controls="aw2-filter-panel" style="appearance:none;background:none;border:1px solid currentColor;cursor:pointer;min-height:var(--c-control-h);padding:0 var(--space-3);display:inline-flex;align-items:center;gap:var(--space-tight);font:inherit;letter-spacing:inherit;text-transform:inherit;color:inherit">
+              {{ filterLabel }}<span class="text-number" style="opacity:{{ filterCountOp }}">{{ filterCount }}</span>
+            </button>
+          </div>
+        </div>
+
+        <div id="aw2-filter-panel" style="display:grid;grid-template-rows:{{ filterRows }};transition:grid-template-rows var(--m-standard) var(--e-editorial)" {{ filterInertAttr }}><div style="overflow:hidden">
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:0 var(--space-5);padding:var(--space-3) 0;border-bottom:1px solid var(--rule)">
+            <sc-for list="{{ filters }}" as="f" hint-placeholder-count="8">
+              <button type="button" onClick="{{ f.toggle }}" aria-pressed="{{ f.pressed }}" style="appearance:none;background:none;border:none;cursor:pointer;min-height:var(--c-control-h);padding:0;display:inline-flex;align-items:center;gap:var(--space-tight);font:inherit;font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:inherit;opacity:{{ f.op }};transition:opacity var(--m-fast) var(--e-smooth)">
+                <i style="width:var(--c-indicator-sm);height:var(--c-indicator-sm);border:1px solid var(--turq);background:{{ f.fill }}"></i>{{ f.label }}
+              </button>
+            </sc-for>
+            <sc-if value="{{ hasActiveFilters }}" hint-placeholder-val="{{ false }}">
+              <button type="button" onClick="{{ resetFilters }}" style="appearance:none;background:none;border:none;cursor:pointer;min-height:var(--c-control-h);padding:0;font:inherit;font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--ink-45)">{{ resetLabel }}</button>
+            </sc-if>
+          </div>
+        </div></div>
+
+        <div style="display:flex;justify-content:flex-end;padding:var(--space-2) 0">
+          <span style="display:inline-flex;align-items:center;min-height:var(--c-control-h);font-size:var(--t-meta);color:var(--ink-45)"><span class="text-number">{{ shownLabel }}</span></span>
+        </div>
+
+        <sc-for list="{{ groups }}" as="g" hint-placeholder-count="5">
+          <div style="display:grid;grid-template-columns:minmax(64px,.22fr) minmax(0,1fr);gap:var(--grid-gutter);border-top:1px solid var(--rule);padding-top:var(--space-4);margin-top:var(--space-block)">
+            <div style="position:sticky;top:96px;align-self:start;font-size:var(--t-hm);line-height:var(--t-hm-lh);letter-spacing:var(--t-hm-ls);font-weight:var(--t-hm-w);color:var(--ink-45)"><span class="text-number">{{ g.year }}</span></div>
+            <div>
+              <sc-for list="{{ g.rows }}" as="r" hint-placeholder-count="4">
+                <a href="{{ r.href }}" onMouseEnter="{{ r.enter }}" onFocus="{{ r.enter }}" onMouseLeave="{{ r.leave }}" onBlur="{{ r.leave }}" data-v2-cursor="view" style="display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:var(--space-tight) var(--grid-gutter);align-items:baseline;border-bottom:1px solid var(--rule-soft);padding:var(--space-4) 0;padding-inline-start:{{ r.indent }};opacity:{{ r.op }};transition:opacity var(--m-standard) var(--e-editorial),padding var(--m-standard) var(--e-editorial)">
+                  <span style="display:flex;align-items:baseline;gap:var(--space-3);font-size:var(--t-hs);line-height:var(--t-hs-lh);letter-spacing:var(--t-hs-ls);font-weight:var(--t-hs-w);color:{{ r.color }};transition:color var(--m-fast) var(--e-smooth)">
+                    <i style="width:var(--c-indicator-sm);height:var(--c-indicator-sm);background:var(--turq);flex:none;align-self:center;opacity:{{ r.sq }};transition:opacity var(--m-fast) var(--e-smooth)"></i>
+                    <span class="{{ r.nameCls }}"><sc-for list="{{ r.nameParts }}" as="p" hint-placeholder-count="1"><span class="{{ p.cls }}">{{ p.t }}</span></sc-for></span>
+                  </span>
+                  <span style="display:flex;flex-direction:column;gap:var(--space-micro);font-size:var(--t-bs);line-height:var(--t-bs-lh)">
+                    <span style="font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--ink-60)" class="text-mixed"><sc-for list="{{ r.metaParts }}" as="p" hint-placeholder-count="1"><span class="{{ p.cls }}">{{ p.t }}</span></sc-for></span>
+                    <span style="color:var(--ink-45)" class="text-mixed"><sc-for list="{{ r.subjectParts }}" as="p" hint-placeholder-count="1"><span class="{{ p.cls }}">{{ p.t }}</span></sc-for></span>
+                  </span>
+                </a>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+        <sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
+          <div style="padding:var(--space-block) 0;font-size:var(--t-bm);line-height:var(--t-bm-lh);color:var(--ink-60)">{{ emptyLabel }}</div>
+        </sc-if>
+      </div>
+
+      <div data-aw2-preview="1" style="grid-column:7 / span 6;position:sticky;top:96px;align-self:start;display:{{ previewDisplay }}">
+        <div data-aw2-mhstage="1" style="position:relative;aspect-ratio:var(--c-media-portrait);width:min(100%,max(320px,calc((100dvh - 200px) * 0.75)));margin-inline-start:auto;overflow:hidden;background:var(--surface-0)"></div>
+        <div style="margin-top:var(--rel-image-caption);width:min(100%,max(320px,calc((100dvh - 200px) * 0.75)));margin-inline-start:auto;font-size:var(--t-caption);line-height:var(--t-caption-lh);color:var(--ink-60);min-height:2em">{{ pv.caption }}</div>
+      </div>
+    </div>
+  </section>
+
+  <sc-if value="{{ hasWork }}" hint-placeholder-val="{{ true }}">
+    <section data-screen-label="04 Recognised work" data-ambient-zone="soft" data-grid-surface="standard" style="padding:var(--space-section-lg) var(--grid-margin) var(--space-section)">
+      <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter)">
+        <div style="grid-column:var(--span-label);font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45)">{{ workLabel }}</div>
+        <div style="grid-column:var(--span-body)">
+          <sc-for list="{{ work }}" as="w" hint-placeholder-count="3">
+            <a href="{{ w.href }}" style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:var(--grid-gutter);align-items:baseline;border-top:1px solid var(--rule);padding:var(--space-5) 0;transition:color var(--m-fast) var(--e-smooth)">
+              <span style="font-size:var(--t-hm);line-height:var(--t-hm-lh);letter-spacing:var(--t-hm-ls);font-weight:var(--t-hm-w)" class="text-mixed"><sc-for list="{{ w.titleParts }}" as="p" hint-placeholder-count="1"><span class="{{ p.cls }}">{{ p.t }}</span></sc-for></span>
+              <span style="font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--turq-dk);white-space:nowrap"><span class="text-number">{{ w.n }}</span> {{ w.countWord }}</span>
+            </a>
+          </sc-for>
+          <div style="border-top:1px solid var(--rule)"></div>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <section data-screen-label="05 Closing" data-ambient-zone="full" style="position:relative;padding:var(--space-section-xl) var(--grid-margin) var(--space-block);--ambient-rest-y:70%;overflow:hidden">
+    <svg aria-hidden="true" viewBox="0 0 340 340" style="position:absolute;top:50%;inset-inline-end:var(--grid-margin);transform:translateY(-50%) scaleX({{ motifFlip }});width:clamp(200px,26vw,380px);height:clamp(200px,26vw,380px);opacity:.4;pointer-events:none" fill="none">
+      <rect x="10" y="10" width="90" height="90" stroke="var(--turq)" stroke-width="1" /><rect x="120" y="10" width="90" height="90" stroke="var(--turq)" stroke-width="1" /><rect x="230" y="10" width="90" height="90" stroke="var(--turq)" stroke-width="1" />
+      <rect x="10" y="120" width="90" height="90" stroke="var(--turq)" stroke-width="1" /><rect x="120" y="120" width="90" height="90" stroke="var(--turq)" stroke-width="1" /><rect x="230" y="120" width="90" height="90" stroke="var(--turq)" stroke-width="1" />
+      <rect x="10" y="230" width="90" height="90" stroke="var(--turq)" stroke-width="1" /><rect x="120" y="230" width="90" height="90" stroke="var(--turq)" stroke-width="1" /><rect x="230" y="230" width="90" height="90" stroke="var(--turq)" stroke-width="1" />
+      <line x1="0" y1="340" x2="340" y2="0" stroke="var(--turq)" stroke-width="1" /><line x1="60" y1="340" x2="340" y2="60" stroke="var(--turq)" stroke-width="1" />
+    </svg>
+    <div style="position:relative;z-index:1;display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter)">
+      <div style="grid-column:var(--span-lead)">
+        <p style="margin:0;font-size:var(--t-hl);line-height:var(--t-hl-lh);letter-spacing:var(--t-hl-ls);font-weight:var(--t-hl-w);max-width:var(--grid-title-max)" data-reveal="content"><sc-for list="{{ closingLines }}" as="l" hint-placeholder-count="3"><span style="display:block">{{ l }}</span></sc-for></p>
+        <a href="{{ hrefAbout }}" data-v2-cursor="explore" style="margin-top:var(--space-5);display:inline-flex;align-items:baseline;gap:var(--space-4);font-size:var(--t-cta);letter-spacing:var(--t-cta-ls);text-transform:{{ upper }};min-height:var(--c-control-h)"><i style="width:var(--c-indicator-sm);height:var(--c-indicator-sm);background:var(--turq)"></i>{{ aboutLink }}<span aria-hidden="true">↗</span></a>
+      </div>
+      <div style="grid-column:var(--span-full);margin-top:var(--space-section);display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--space-4);border-top:1px solid var(--rule);padding-top:var(--space-5);font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--ink-45)">
+        <span style="display:inline-flex;align-items:center;min-height:var(--c-control-h)">{{ eyebrow }}</span>
+        <span style="display:inline-flex;align-items:center;min-height:var(--c-control-h)">Tarh &amp; Afarinesh — طرح و آفرینش</span>
+      </div>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;startLang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;en&quot;,&quot;options&quot;:[&quot;en&quot;,&quot;fa&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Bilingual&quot;}}">
+const B = () => window.TA_BIDI;
+const parts = (s, l) => B() ? B().parts(s, l) : [{ t: String(s || ""), cls: "" }];
+const V1 = "../../";
+
+class Component extends DCLogic {
+  state = { lang:"en", sort:"newest", cats:[], levels:[], hover:null, filterOpen:false, hoverFeatured:null };
+
+  componentDidMount(){
+    this.ensureMh();
+    if(this._mh && this._pendingPaint) this._mh.show(this._pendingPaint);
+    const h = (window.location.hash || "");
+    if(/lang=fa/.test(h) || this.props.startLang === "fa") this.setState({ lang:"fa" });
+    /* the shared preview is a desktop/tablet device; on mobile the register stands alone */
+    this.onMq = (info) => { if(!info || info.modeChanged) this.setState({ compact: window.TA_LAYOUT.isMobile }); };
+    this.onMq();
+    window.TA_LAYOUT.onChange(this.onMq);
+  }
+
+  setLang(l){
+    this.setState({ lang:l });
+    try{ window.history.replaceState(null, "", l === "fa" ? "#lang=fa" : window.location.pathname); }catch(e){}
+  }
+
+  /* row hover drives the shared Architectural Media Handoff engine (media-handoff.js) — one
+     continuous two-layer stage, never an instant background swap. Debouncing the clear (cancelled
+     by the next enter) keeps the last award visible instead of blanking between adjacent rows. */
+  hoverRow(id, all){
+    clearTimeout(this._hoverClear);
+    this.setState({ hover:id });
+    this.ensureMh();
+    const a = all.find(x => x.id === id);
+    if(a && a.image && this._mh) this._mh.show({ src: V1 + a.image, size:"contain", index: all.indexOf(a) });
+  }
+  leaveRow(){
+    clearTimeout(this._hoverClear);
+    this._hoverClear = setTimeout(() => this.setState({ hover:null }), 140);
+  }
+  ensureMh(){
+    if(this._mh) return;
+    const el = document.querySelector("[data-aw2-mhstage]");
+    if(el && window.TA_MEDIA_HANDOFF) this._mh = window.TA_MEDIA_HANDOFF.mount(el, { intensity:"medium" });
+  }
+  componentWillUnmount(){ clearTimeout(this._hoverClear); if(this._mh) this._mh.destroy(); }
+
+  toggle(key, v){
+    this.setState(s => {
+      const a = s[key].slice(), i = a.indexOf(v);
+      if(i < 0) a.push(v); else a.splice(i, 1);
+      return { [key]: a, hover:null };
+    });
+  }
+
+  renderVals(){
+    const st = this.state, fa = st.lang === "fa";
+    const D = window.TA_AWARDS;
+    const all = D ? D.awards : [];
+    const lab = (map, k) => (map && map[k]) ? map[k][fa ? 1 : 0] : k;
+    const amp = fa ? "&lang=fa" : "", hsh = fa ? "#lang=fa" : "";
+    const proj = (a) => (D && a.projectId) ? D.project(a.projectId) : null;
+    const nameOf = (a) => fa ? (a.nameFa || a.name) : a.name;
+    const subjectOf = (a, p) => a.award ? (fa ? (a.awardFa || a.award) : a.award) : (p ? (fa ? p.fa : p.en) : "— " + lab(D && D.scopes, a.scope || "studio"));
+    const hrefOf = (p) => p && p.routeIndex >= 0 ? "Projects.dc.html#p=" + p.routeIndex + amp : "#";
+
+    const vis = all.filter(a =>
+      (!st.cats.length || st.cats.indexOf(a.cat) >= 0) &&
+      (!st.levels.length || st.levels.indexOf(a.level) >= 0)
+    ).slice().sort((a, b) => st.sort === "newest" ? (Number(b.year) - Number(a.year)) : (Number(a.year) - Number(b.year)));
+
+    const order = [], by = {};
+    vis.forEach(a => { if(!by[a.year]){ by[a.year] = []; order.push(a.year); } by[a.year].push(a); });
+
+    const groups = order.map(y => ({ year:y, rows: by[y].map(a => {
+      const p = proj(a), on = st.hover === a.id, name = nameOf(a);
+      return {
+        name, nameCls: B() ? B().cls(name, st.lang) : "text-mixed", nameParts: parts(name, st.lang),
+        meta: lab(D && D.categories, a.cat) + " · " + lab(D && D.levels, a.level),
+        metaParts: parts(lab(D && D.categories, a.cat) + " · " + lab(D && D.levels, a.level), st.lang),
+        subject: subjectOf(a, p), subjectParts: parts(subjectOf(a, p), st.lang), href: hrefOf(p),
+        op: st.hover == null || on ? "1" : "0.42",
+        sq: on ? "1" : "0", color: on ? "var(--turq-dk)" : "inherit",
+        indent: on ? "var(--space-3)" : "0px",
+        enter: () => this.hoverRow(a.id, all),
+        leave: () => this.leaveRow()
+      };
+    }) }));
+
+    /* one shared preview, driven by the active row's own award photograph.
+       Real <img> (not CSS background) so we get object-fit + native lazy/async decode.
+       All source photographs share one 1086×1448 export, so width/height avoid layout shift
+       even before the image itself loads. */
+    const active = st.hover ? all.find(a => a.id === st.hover) : null;
+    const hasImage = !!(active && active.image);
+    const pv = {
+      caption: active ? (fa ? (active.awardFa || active.award || "") : (active.award || "")) : ""
+    };
+    this._pendingPaint = hasImage ? { src: V1 + active.image, size:"contain", index: all.indexOf(active) } : null;
+
+    const P = window.TA_PROJECTS;
+    const isReal = (a) => !!(a.projectId && P && P.byId(a.projectId) && P.byId(a.projectId).contentState === "real");
+    /* selected recognition: explicit curation flag on the real, client-confirmed records */
+    const featured = all.filter(a => a.featured)
+      .sort((a, b) => Number(b.year) - Number(a.year)).slice(0, 3).map((a, i) => {
+        const p = proj(a), name = nameOf(a);
+        return { year:a.year, name, nameCls: B() ? B().cls(name, st.lang) : "text-mixed", nameParts: parts(name, st.lang),
+          level: lab(D && D.levels, a.level), subject: subjectOf(a, p), subjectParts: parts(subjectOf(a, p), st.lang), href: hrefOf(p),
+          op: st.hoverFeatured == null || st.hoverFeatured === i ? "1" : "0.5",
+          enter: () => this.setState({ hoverFeatured:i }), leave: () => this.setState({ hoverFeatured:null }) };
+      });
+    const activeFeatured = featured[st.hoverFeatured != null ? st.hoverFeatured : 0];
+    const recogPreview = activeFeatured
+      ? { year: activeFeatured.year, nameParts: activeFeatured.nameParts, subjectParts: activeFeatured.subjectParts }
+      : { year:"", nameParts:[], subjectParts:[] };
+
+    /* recognised work: projects ranked by how often they were recognised */
+    const tally = {};
+    all.forEach(a => { if(isReal(a)) tally[a.projectId] = (tally[a.projectId] || 0) + 1; });
+    const work = Object.keys(tally).map(id => ({ id, n: tally[id], p: D ? D.project(id) : null }))
+      .filter(x => x.p).sort((a, b) => b.n - a.n).slice(0, 4).map(x => ({
+        title: fa ? x.p.fa : x.p.en, titleParts: parts(fa ? x.p.fa : x.p.en, st.lang), href: hrefOf(x.p),
+        n: x.n, countWord: fa ? "افتخار" : (x.n === 1 ? "recognition" : "recognitions")
+      }));
+
+    const years = all.map(a => Number(a.year)).filter(Boolean);
+    const mk = (key, map) => Object.keys(map || {}).filter(k => all.some(a => a[key === "cats" ? "cat" : "level"] === k))
+      .map(k => { const on = st[key].indexOf(k) >= 0;
+        return { label: lab(map, k), pressed: on ? "true" : "false", op: on ? "1" : "0.55",
+                 fill: on ? "var(--turq)" : "transparent", toggle: () => this.toggle(key, k) }; });
+
+    const nav = [["Projects","پروژه‌ها","Projects.dc.html"],["Expertise","تخصص‌ها","Expertise.dc.html"],
+                 ["Awards","جوایز",""],["Contact","تماس","Contact.dc.html"]]
+      .map(n => ({ label: fa ? n[1] : n[0], href: n[2] ? n[2] + hsh : "#", on: n[2] ? "0" : "1" }));
+
+    return {
+      dir: fa ? "rtl" : "ltr", upper: fa ? "none" : "uppercase",
+      brand: fa ? "طرح و آفرینش" : "Tarh & Afarinesh",
+      lang: st.lang,
+      nav, drawerLinks: nav, hrefHome: "Homepage.dc.html" + hsh, hrefAbout: "About.dc.html" + hsh,
+      setEn: () => this.setLang("en"), setFa: () => this.setLang("fa"),
+      eyebrow: fa ? "جوایز — افتخارات" : "Awards — recognition",
+      openLines: fa ? ["اول، خودِ اثر است.", "اعتبار پس از آن می‌آید."] : ["The work comes first.", "Recognition follows."],
+      intro: fa
+        ? "افتخار، بخشی از کار معماری است نه پایان آن. این فهرست، رد دیده‌شدن پروژه‌ها را در طول زمان نگه می‌دارد."
+        : "Recognition is part of architectural practice, not its conclusion. This register keeps a record of how the work has been seen over time.",
+      rangeLabel: (() => { const g = years.filter(y => y >= 1900); return g.length && B() ? B().range(Math.min.apply(null, g), Math.max.apply(null, g)) : ""; })(),
+      countLabel: fa ? String(all.length) + " افتخار ثبت‌شده" : String(all.length) + " recognitions on record",
+      hasFeatured: featured.length > 0, featured, recogPreview,
+      recogMotifCell: String(window.TA_MOTIF ? window.TA_MOTIF.cellForIndex(st.hoverFeatured) : 5),
+      featuredLabel: fa ? "افتخارات برگزیده" : "Selected recognition",
+      archiveLabel: fa ? "آرشیو" : "Archive",
+      sorts: [["newest", fa ? "جدیدترین" : "Newest"], ["oldest", fa ? "قدیمی‌ترین" : "Oldest"]].map(([k, l]) => ({
+        label:l, pressed: st.sort === k ? "true" : "false", op: st.sort === k ? "1" : "0.45",
+        sq: st.sort === k ? "1" : "0", pick: () => this.setState({ sort:k, hover:null }) })),
+      filters: mk("cats", D && D.categories).concat(mk("levels", D && D.levels)),
+      toggleFilter: () => this.setState(s => ({ filterOpen: !s.filterOpen })),
+      filterOpen: st.filterOpen, filterExpanded: st.filterOpen ? "true" : "false",
+      /* inert must be absent when open — a present-but-empty attribute still applies */
+      filterInertAttr: st.filterOpen ? "" : "inert",
+      /* grid-rows 0fr→1fr measures real content height, no arbitrary cap */
+      filterRows: st.filterOpen ? "1fr" : "0fr",
+      filterLabel: fa ? "فیلتر" : "Filter",
+      filterCount: (st.cats.length + st.levels.length) ? String(st.cats.length + st.levels.length) : "",
+      filterCountOp: (st.cats.length + st.levels.length) ? "1" : "0",
+      hasActiveFilters: (st.cats.length + st.levels.length) > 0,
+      resetLabel: fa ? "پاک کردن" : "Reset",
+      resetFilters: () => this.setState({ cats:[], levels:[] }),
+      shownLabel: vis.length + " / " + all.length,
+      groups, empty: vis.length === 0,
+      emptyLabel: fa ? "افتخاری با این فیلترها یافت نشد." : "No recognition matches these filters.",
+      pv, previewDisplay: st.compact ? "none" : "block",
+      hasWork: work.length > 0, work, workLabel: fa ? "پروژه‌های دیده‌شده" : "Recognised work",
+      motifFlip: fa ? "-1" : "1",
+      closingLines: fa ? ["کار، پیش از هر جایزه‌ای","خودش سخن می‌گوید؛","اعتبار تنها بازتابی از آن است."]
+        : ["The work speaks first.", "Recognition is only its echo —", "a record of what was already true."],
+      aboutLink: fa ? "درباره استودیو" : "About the studio"
+    };
+  }
+}
+</script>
+</body>
+</html>

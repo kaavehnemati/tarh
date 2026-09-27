@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet" />
+<script>window.TA_ASSET_BASE = "../../";</script>
+<link rel="stylesheet" href="../design-system/tokens-v2.css" />
+<link rel="stylesheet" href="../design-system/base-v2.css" />
+<link rel="stylesheet" href="../design-system/responsive-v2.css" />
+<script src="../runtime/layout-mode.js"></script>
+<script src="../runtime/bidi.js"></script>
+<script src="../../site-data.js"></script>
+<script src="../../media-utils.js"></script>
+<script src="../../projects-data.js"></script>
+<script src="../../awards-data.js"></script>
+<script src="../../about-data.js"></script>
+<script src="../runtime/scroll-coordinator.js"></script>
+<script src="../runtime/ambient.js"></script>
+<script src="../runtime/reveal.js"></script>
+<script src="../runtime/ui-strings.js"></script>
+<script src="../runtime/motif.js"></script>
+<script src="../runtime/section-tracker.js"></script>
+<script src="../runtime/media-handoff.js"></script>
+<style>
+[data-ab2-people]{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--grid-gutter);grid-template-areas:"media media media media media lead lead lead lead lead lead lead" "media media media media media team team team team team team team";align-items:start}
+[data-ab2-lead]{grid-area:lead}
+[data-ab2-media]{grid-area:media;position:sticky;top:96px;align-self:start}
+[data-ab2-teamwrap]{grid-area:team;margin-top:var(--space-block)}
+[data-ab2-team]{columns:2;column-gap:var(--grid-gutter)}
+[data-ab2-team-row]{break-inside:avoid;padding:var(--space-4) 0;border-bottom:1px solid var(--rule-soft)}
+@media (max-width:1023px){
+  [data-ab2-people]{grid-template-columns:minmax(0,1fr);grid-template-areas:"lead" "media" "team";row-gap:var(--space-block)}
+  [data-ab2-media]{position:static;max-width:520px}
+  [data-ab2-teamwrap]{margin-top:var(--space-content)}
+}
+@media (max-width:767px){
+  [data-ab2-team]{columns:1}
+  [data-ab2-media]{max-width:none}
+}
+</style>
+</helmet>
+
+<div data-ab2-root="1" data-v2-shell="1" dir="{{ dir }}" style="color:var(--ink);min-height:100svh;overflow-x:clip">
+
+  <dc-import name="../components/HeaderNav" dir="{{ dir }}" upper="{{ upper }}" brand="{{ brand }}" nav="{{ nav }}" drawer-links="{{ nav }}" href-home="{{ hrefHome }}" lang="{{ lang }}" on-set-en="{{ setEn }}" on-set-fa="{{ setFa }}" menu-id="ab" hint-size="100%,64px"></dc-import>
+
+  <section data-screen-label="01 Opening" data-ambient-zone="full" style="padding:var(--space-section-lg) var(--grid-margin) var(--space-section)">
+    <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter);align-items:end">
+      <div style="grid-column:var(--span-wide)">
+        <div data-v2-in="1" style="display:flex;align-items:center;gap:var(--space-3);font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45)">
+          <i style="width:var(--c-indicator);height:var(--c-indicator);background:var(--turq)"></i>{{ eyebrow }}
+        </div>
+        <h1 data-v2-rise="1" style="margin:var(--rel-eyebrow-heading) 0 0;font-size:var(--t-dl);line-height:var(--t-dl-lh);letter-spacing:var(--t-dl-ls);font-weight:var(--t-dl-w)">
+          <sc-for list="{{ openLines }}" as="l" hint-placeholder-count="3"><span style="display:block">{{ l }}</span></sc-for>
+        </h1>
+        <p style="margin:var(--space-content) 0 0;font-size:var(--t-bl);line-height:var(--t-bl-lh);color:var(--ink-60);max-width:var(--measure)">{{ openIntro }}</p>
+      </div>
+      <span data-grid-motif="static" data-grid-motif-size="anchor" data-motif-active="5" aria-hidden="true" style="grid-column:var(--span-support);justify-self:end;align-self:end"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+    </div>
+  </section>
+
+  <!-- full-bleed: breaks out of the section's grid-margin so the photograph reads as a wide
+       editorial feature rather than a framed box floating inside the page padding. -->
+  <section data-screen-label="01b Studio media" data-ambient-zone="off" style="padding:0">
+    <div data-ab2-studiomedia="1" data-reveal="media" style="position:relative;aspect-ratio:1600 / 712;width:100vw;margin-inline-start:calc(50% - 50vw);overflow:hidden;background:var(--surface-0)">
+      <div data-ab2-studioimg="1" data-reveal-img="1" style="position:absolute;inset:0;background-image:{{ studioBg.backgroundImage }};background-size:{{ studioBg.backgroundSize }};background-position:{{ studioBg.backgroundPosition }};background-repeat:{{ studioBg.backgroundRepeat }}"></div>
+      <div data-reveal-mask="1"></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;gap:var(--space-4);margin:var(--rel-image-caption) var(--grid-margin) 0;padding-bottom:var(--space-section);font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--ink-60)">
+      <span>{{ studioCaption }}</span>
+      <span class="text-number">{{ studioYear }}</span>
+    </div>
+  </section>
+
+  <section data-screen-label="02 Practice" data-ambient-zone="soft" style="padding:var(--space-section) var(--grid-margin);background:color-mix(in srgb,var(--surface-1) 55%,transparent)">
+    <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter)">
+      <div data-reveal="content" style="grid-column:var(--span-label);font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45)">{{ practiceLabel }}</div>
+      <div style="grid-column:var(--span-body)">
+        <p data-reveal="content" style="margin:0;font-size:var(--t-hm);line-height:var(--t-hm-lh);letter-spacing:var(--t-hm-ls);font-weight:var(--t-hm-w);max-width:28ch">{{ practiceLead }}</p>
+        <div data-reveal="group" style="margin-top:var(--space-block);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:var(--space-content) var(--grid-gutter)">
+          <sc-for list="{{ practiceBody }}" as="b" hint-placeholder-count="2">
+            <p style="margin:0;font-size:var(--t-bm);line-height:var(--t-bm-lh);color:var(--ink-60);max-width:var(--measure)">{{ b }}</p>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="03 Philosophy" data-ambient-zone="off" style="padding:var(--space-section-xl) var(--grid-margin) var(--space-section-lg);background:var(--surface-4);color:var(--canvas)">
+    <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter)">
+      <div style="grid-column:var(--span-lead)">
+        <div data-reveal="content" style="font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:rgba(250,249,247,.4);display:flex;align-items:center;gap:var(--space-3)"><span data-grid-motif="inverse" data-motif-active="4" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>{{ philLabel }}</div>
+        <p data-reveal="content" style="margin:var(--rel-eyebrow-heading) 0 0;font-size:var(--t-dm);line-height:var(--t-dm-lh);letter-spacing:var(--t-dm-ls);font-weight:var(--t-dm-w)">
+          <sc-for list="{{ philLines }}" as="l" hint-placeholder-count="3"><span style="display:block">{{ l }}</span></sc-for>
+        </p>
+      </div>
+      <div data-reveal="group" style="grid-column:var(--span-full);margin-top:var(--space-section);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:var(--space-block) var(--grid-gutter);border-top:1px solid rgba(250,249,247,.18);padding-top:var(--space-5)">
+        <sc-for list="{{ themes }}" as="t" hint-placeholder-count="3">
+          <div>
+            <div style="font-size:var(--t-hl);line-height:var(--t-hl-lh);letter-spacing:var(--t-hl-ls);font-weight:var(--t-hl-w);color:{{ t.color }}">{{ t.word }}</div>
+            <p style="margin:var(--rel-heading-body) 0 0;font-size:var(--t-bm);line-height:var(--t-bm-lh);color:rgba(250,249,247,.62);max-width:var(--measure)">{{ t.body }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="04 People" data-ambient-zone="minimal" style="padding:var(--space-section-lg) var(--grid-margin) var(--space-section)">
+    <div data-ab2-people="1">
+      <div data-ab2-lead="1">
+        <h2 style="margin:0;display:flex;align-items:center;gap:var(--space-3);font-size:var(--t-hl);line-height:var(--t-hl-lh);letter-spacing:var(--t-hl-ls);font-weight:var(--t-hl-w)"><span data-grid-motif="static" data-grid-motif-size="micro" data-motif-active="5" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>{{ peopleLabel }}</h2>
+        <div style="margin-top:var(--space-block);border-top:1px solid var(--ink)">
+          <sc-for list="{{ leads }}" as="p" hint-placeholder-count="4">
+            <button type="button" onClick="{{ p.pick }}" onFocus="{{ p.pick }}" onMouseEnter="{{ p.pick }}" aria-pressed="{{ p.pressed }}" style="appearance:none;background:none;border:none;border-bottom:1px solid var(--rule);width:100%;min-height:var(--c-control-h);padding:var(--space-4) 0;padding-inline-start:{{ p.indent }};cursor:pointer;font:inherit;color:inherit;text-align:start;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--grid-gutter);align-items:baseline;opacity:{{ p.op }};transition:opacity var(--m-standard) var(--e-editorial),padding var(--m-standard) var(--e-editorial)">
+              <span style="display:flex;align-items:baseline;gap:var(--space-3);font-size:var(--t-hs);line-height:var(--t-hs-lh);font-weight:var(--t-hs-w)">
+                <i style="width:var(--c-indicator-sm);height:var(--c-indicator-sm);background:var(--turq);flex:none;align-self:center;opacity:{{ p.sq }}"></i>
+                <span class="text-mixed"><sc-for list="{{ p.nameParts }}" as="x" hint-placeholder-count="1"><span class="{{ x.cls }}">{{ x.t }}</span></sc-for></span>
+              </span>
+              <span style="font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--ink-45)">{{ p.role }}</span>
+            </button>
+          </sc-for>
+        </div>
+      </div>
+      <figure data-ab2-media="1" style="margin:0">
+        <div data-ab2-mhstage="1" data-reveal="media" style="position:relative;aspect-ratio:4 / 5;width:min(100%,440px,max(240px,calc((100dvh - 260px) * 0.8)));overflow:hidden;background:var(--surface-0);direction:ltr">
+          <div data-reveal-img="1" style="position:absolute;inset:0;background-image:{{ pv.bg }};background-size:{{ pv.size }};background-position:{{ pv.pos }};background-repeat:{{ pv.repeat }}"></div>
+          <div data-reveal-mask="1"></div>
+        </div>
+        <figcaption style="margin-top:var(--rel-image-caption)">
+          <div style="font-size:var(--t-hs);line-height:var(--t-hs-lh);font-weight:var(--t-hs-w)" class="text-mixed"><sc-for list="{{ pv.nameParts }}" as="x" hint-placeholder-count="1"><span class="{{ x.cls }}">{{ x.t }}</span></sc-for></div>
+          <p style="margin:var(--space-tight) 0 0;font-size:var(--t-bs);line-height:var(--t-bs-lh);color:var(--ink-60);max-width:var(--measure)">{{ pv.bio }}</p>
+        </figcaption>
+      </figure>
+      <div data-ab2-teamwrap="1">
+        <div style="font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45);border-bottom:1px solid var(--rule);padding-bottom:var(--space-3)">{{ teamLabel }}</div>
+        <div data-ab2-team="1">
+          <sc-for list="{{ team }}" as="m" hint-placeholder-count="10">
+            <div data-ab2-team-row="1">
+              <span class="text-mixed" style="display:block;font-size:var(--t-bm);line-height:var(--t-bs-lh);font-weight:500;color:var(--ink)"><sc-for list="{{ m.nameParts }}" as="x" hint-placeholder-count="1"><span class="{{ x.cls }}">{{ x.t }}</span></sc-for></span>
+              <span style="display:block;margin-top:var(--space-micro);font-size:var(--t-bs);line-height:var(--t-bs-lh);color:var(--ink-60)">{{ m.role }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="05 History" data-ambient-zone="minimal" style="padding:var(--space-section) var(--grid-margin);background:color-mix(in srgb,var(--surface-1) 55%,transparent)">
+    <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter);align-items:start">
+      <div style="grid-column:var(--span-label);position:sticky;top:96px">
+        <div style="font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45);display:flex;align-items:center;gap:var(--space-3)"><span data-grid-motif="static" data-grid-motif-size="standard" data-motif-active="{{ historyMotifCell }}" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>{{ historyLabel }}</div>
+        <div data-ab2-year="1" style="margin-top:var(--space-3);font-size:var(--t-dm);line-height:1;letter-spacing:var(--t-dm-ls);font-weight:var(--t-dm-w);transition:opacity var(--m-standard) var(--e-editorial);direction:ltr"><span class="{{ activeHistory.yearCls }}">{{ activeHistory.year }}</span></div>
+        <p style="margin:var(--space-3) 0 0;font-size:var(--t-bs);line-height:var(--t-bs-lh);color:var(--ink-60);max-width:26ch">{{ activeHistory.tag }} — {{ activeHistory.title }}</p>
+      </div>
+      <div style="grid-column:var(--span-body)">
+        <sc-for list="{{ history }}" as="h" hint-placeholder-count="5">
+          <button type="button" data-hs2-row="1" onMouseEnter="{{ h.activate }}" onFocus="{{ h.activate }}" onClick="{{ h.activate }}" style="appearance:none;background:none;border:none;border-top:1px solid var(--rule);width:100%;text-align:{{ startAlign }};font:inherit;color:inherit;cursor:default;display:grid;grid-template-columns:minmax(72px,.22fr) minmax(0,1fr);gap:var(--grid-gutter);padding:var(--space-5) 0;opacity:{{ h.opacity }};transition:opacity var(--m-standard) var(--e-editorial)">
+            <span style="font-size:var(--t-hm);line-height:var(--t-hm-lh);font-weight:var(--t-hm-w);color:var(--turq-dk)"><span class="{{ h.yearCls }}">{{ h.year }}</span></span>
+            <div>
+              <div style="font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--ink-45)">{{ h.tag }}</div>
+              <div style="margin-top:var(--space-micro);font-size:var(--t-hs);line-height:var(--t-hs-lh);font-weight:var(--t-hs-w)">{{ h.title }}</div>
+              <p style="margin:var(--space-tight) 0 0;font-size:var(--t-bs);line-height:var(--t-bs-lh);color:var(--ink-60);max-width:var(--measure)">{{ h.body }}</p>
+            </div>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <sc-if value="{{ hasRecognition }}" hint-placeholder-val="{{ true }}">
+    <section data-screen-label="06 Recognition" data-ambient-zone="soft" style="padding:var(--space-section-lg) var(--grid-margin) var(--space-section)">
+      <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter)">
+        <div data-reveal="content" style="grid-column:var(--span-label);font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45)">{{ recogLabel }}</div>
+        <div data-reveal="group" style="grid-column:var(--span-body)">
+          <sc-for list="{{ recognition }}" as="r" hint-placeholder-count="3">
+            <a href="{{ r.href }}" style="display:grid;grid-template-columns:minmax(64px,.18fr) minmax(0,1fr) minmax(0,.8fr);gap:var(--grid-gutter);align-items:baseline;border-top:1px solid var(--rule);padding:var(--space-4) 0">
+              <span style="font-size:var(--t-hs);font-weight:var(--t-hs-w);color:var(--ink-45)"><span class="text-number">{{ r.year }}</span></span>
+              <span style="font-size:var(--t-hs);line-height:var(--t-hs-lh);font-weight:var(--t-hs-w)" class="text-mixed"><sc-for list="{{ r.nameParts }}" as="x" hint-placeholder-count="1"><span class="{{ x.cls }}">{{ x.t }}</span></sc-for></span>
+              <span style="font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--turq-dk)">{{ r.level }}</span>
+            </a>
+          </sc-for>
+          <a href="{{ hrefAwards }}" style="display:inline-flex;align-items:center;gap:var(--space-3);min-height:var(--c-control-h);margin-top:var(--space-content);font-size:var(--t-cta);letter-spacing:var(--t-cta-ls);text-transform:{{ upper }}">{{ allAwards }}</a>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <section data-screen-label="07 Closing" data-ambient-zone="full" style="position:relative;padding:var(--space-section-xl) var(--grid-margin) var(--space-block);overflow:hidden">
+    <svg aria-hidden="true" viewBox="0 0 340 340" style="position:absolute;top:50%;inset-inline-end:var(--grid-margin);transform:translateY(-50%) scaleX({{ motifFlip }});width:clamp(200px,26vw,380px);height:clamp(200px,26vw,380px);opacity:.4;pointer-events:none" fill="none">
+      <rect x="10" y="10" width="90" height="90" stroke="var(--turq)" stroke-width="1" /><rect x="120" y="10" width="90" height="90" stroke="var(--turq)" stroke-width="1" /><rect x="230" y="10" width="90" height="90" stroke="var(--turq)" stroke-width="1" />
+      <rect x="10" y="120" width="90" height="90" stroke="var(--turq)" stroke-width="1" /><rect x="120" y="120" width="90" height="90" stroke="var(--turq)" stroke-width="1" /><rect x="230" y="120" width="90" height="90" stroke="var(--turq)" stroke-width="1" />
+      <rect x="10" y="230" width="90" height="90" stroke="var(--turq)" stroke-width="1" /><rect x="120" y="230" width="90" height="90" stroke="var(--turq)" stroke-width="1" /><rect x="230" y="230" width="90" height="90" stroke="var(--turq)" stroke-width="1" />
+      <line x1="0" y1="340" x2="340" y2="0" stroke="var(--turq)" stroke-width="1" /><line x1="60" y1="340" x2="340" y2="60" stroke="var(--turq)" stroke-width="1" />
+    </svg>
+    <div style="position:relative;z-index:1;display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter)">
+      <div style="grid-column:var(--span-lead)">
+        <p data-reveal="content" style="margin:0;font-size:var(--t-hl);line-height:var(--t-hl-lh);letter-spacing:var(--t-hl-ls);font-weight:var(--t-hl-w);max-width:var(--grid-title-max)">{{ closing }}</p>
+        <a href="{{ hrefContact }}" data-v2-cursor="select" style="margin-top:var(--space-5);display:inline-flex;align-items:baseline;gap:var(--space-4);font-size:var(--t-cta);letter-spacing:var(--t-cta-ls);text-transform:{{ upper }};min-height:var(--c-control-h)"><i style="width:var(--c-indicator-sm);height:var(--c-indicator-sm);background:var(--turq)"></i>{{ contactLink }}<span aria-hidden="true">↗</span></a>
+      </div>
+      <div style="grid-column:var(--span-full);margin-top:var(--space-section);display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--space-4);border-top:1px solid var(--rule);padding-top:var(--space-5);font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--ink-45)">
+        <span style="display:inline-flex;align-items:center;min-height:var(--c-control-h)">{{ eyebrow }}</span>
+        <span style="display:inline-flex;align-items:center;min-height:var(--c-control-h)">Tarh &amp; Afarinesh — طرح و آفرینش</span>
+      </div>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;startLang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;en&quot;,&quot;options&quot;:[&quot;en&quot;,&quot;fa&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Bilingual&quot;}}">
+const B = () => window.TA_BIDI;
+const parts = (s, l) => B() ? B().parts(s, l) : [{ t: String(s || ""), cls: "" }];
+const pick = (v, fa) => v == null ? "" : (typeof v === "object" ? (fa ? (v.fa || v.en) : (v.en || v.fa)) : String(v));
+/* the two statements are typographic compositions whose line breaks differ per language;
+   their single source is here, mirroring V1's markup */
+const OPEN = { en: ["Architecture is shaped", "through relationships."], fa: ["معماری از دل", "رابطه‌ها شکل می‌گیرد."] };
+const PHIL = { en: ["Design begins", "with the question,", "not the answer."], fa: ["طراحی با پرسش", "آغاز می‌شود،", "نه با پاسخ."] };
+const reducedQ2 = () => window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+class Component extends DCLogic {
+  state = { lang:"en", person:0, compact:false, activeHistory:0 };
+
+  componentDidMount(){
+    if(/lang=fa/.test(window.location.hash || "") || this.props.startLang === "fa") this.setState({ lang:"fa" });
+    this.ensureMh();
+    if(this._mh){ const p = (window.TA_ABOUT ? window.TA_ABOUT.leadership() : [])[0]; if(p) this.showPortrait(p, 0); }
+    this.mq = window.matchMedia("(max-width:767px)");
+    this.onMq = () => this.setState({ compact: this.mq.matches });
+    this.mq.addEventListener("change", this.onMq); this.onMq();
+    if(window.TA_SECTION_TRACKER){
+      this.stopTrack = window.TA_SECTION_TRACKER.track({
+        root: () => document.querySelector('[data-ab2-root]'),
+        selector: '[data-hs2-row]',
+        onChange: (s) => {
+          if(s.index === this.state.activeHistory) return;
+          if(reducedQ2()) { this.setState({ activeHistory:s.index }); return; }
+          const yearEl = document.querySelector('[data-ab2-year]');
+          if(yearEl){ yearEl.style.transition = "none"; yearEl.style.transform = "translateY(-4px)"; yearEl.style.opacity = "0"; }
+          this.setState({ activeHistory:s.index }, () => {
+            if(yearEl) setTimeout(() => { yearEl.style.transition = "transform var(--m-fast) var(--e-smooth), opacity var(--m-fast) var(--e-smooth)"; yearEl.style.transform = "translateY(0)"; yearEl.style.opacity = "1"; }, 20);
+          });
+        }
+      });
+    }
+    this.unsubScroll = window.TA_SCROLL ? window.TA_SCROLL.subscribe(() => this.requestTick(), { root:window }) : null;
+  }
+  requestTick(){
+    if(this._raf) return;
+    this._raf = setTimeout(() => { this._raf = null; try{ this.tick(); }catch(e){} }, 16);
+  }
+  /* History gets its own LOCAL section awareness — not a page-wide progress rail — so the
+     active milestone can advance on scroll, not only on hover/click, matching the read-only
+     scanning most visitors do. Reuses Projects' proven scroll+setTimeout tick (IntersectionObserver
+     and requestAnimationFrame do not fire reliably in this preview environment). */
+  tick(){
+    if(reducedQ2()) return;
+    const media = document.querySelector('[data-ab2-studiomedia]'), img = document.querySelector('[data-ab2-studioimg]');
+    if(media && img){
+      const r = media.getBoundingClientRect();
+      const p = Math.max(0, Math.min(1, -r.top / Math.max(1, r.height)));
+      img.style.transform = "translateY(" + (p * 3).toFixed(2) + "%) scale(" + (1 + p * 0.015).toFixed(3) + ")";
+    }
+  }
+  ensureMh(){
+    if(this._mh) return;
+    const el = document.querySelector("[data-ab2-mhstage]");
+    if(!el || !window.TA_MEDIA_HANDOFF) return;
+    const mask = el.querySelector("[data-reveal-mask]");
+    this._mh = window.TA_MEDIA_HANDOFF.mount(el, { intensity:"calm", before: mask });
+  }
+  showPortrait(p, i){
+    this.ensureMh();
+    if(!this._mh || !p || !p.portrait || !p.portrait.src) return;
+    const M = window.TA_MEDIA, L = this.state.lang;
+    const pm = M ? M.resolve(p.portrait, { lang:L }) : null;
+    if(!pm) return;
+    const url = (pm.backgroundImage || "").replace(/^url\((['"]?)(.*?)\1\)$/, "$2");
+    if(url && pm.backgroundImage !== "none") this._mh.show({ src: url, pos: pm.backgroundPosition, size:"contain", repeat: pm.backgroundRepeat, index: i });
+  }
+  componentWillUnmount(){
+    if(this._mh) this._mh.destroy();
+    if(this.mq) this.mq.removeEventListener("change", this.onMq);
+    if(this.unsubScroll) this.unsubScroll();
+    if(this._raf) clearTimeout(this._raf);
+    if(this.stopTrack) this.stopTrack();
+  }
+  setLang(l){
+    this.setState({ lang:l });
+    try{ window.history.replaceState(null, "", l === "fa" ? "#lang=fa" : window.location.pathname); }catch(e){}
+  }
+
+  renderVals(){
+    const st = this.state, fa = st.lang === "fa", L = st.lang;
+    const A = window.TA_ABOUT, D = A ? A.data : {}, W = window.TA_AWARDS, P = window.TA_PROJECTS, M = window.TA_MEDIA;
+    const hsh = fa ? "#lang=fa" : "";
+
+    const leadsRaw = A ? A.leadership() : [];
+    const cur = leadsRaw[st.person] || leadsRaw[0];
+    const leads = leadsRaw.map((p, i) => { const on = i === st.person;
+      return { nameParts: parts(pick(p.name, fa), L), role: pick(p.role, fa), pressed: on ? "true" : "false",
+        op: on ? "1" : "0.45", sq: on ? "1" : "0", indent: on ? "var(--space-3)" : "0px",
+        pick: () => { this.setState({ person:i }); this.showPortrait(p, i); } }; });
+    const studioM = D.opening && D.opening.media && D.opening.media.src && M ? M.resolve(D.opening.media, { lang:L }) : null;
+    const pm = (cur && cur.portrait && cur.portrait.src && M) ? M.resolve(cur.portrait, { lang:L }) : (studioM || (cur && cur.portrait && M ? M.resolve(cur.portrait, { lang:L }) : null));
+    /* portraits are vertical editorial photographs — contain, never cover, so the full person
+       is always visible inside the 4:5 stage instead of being cropped to fill it. */
+    const pv = { bg: pm ? pm.backgroundImage : "none", size: "contain",
+      pos: pm ? pm.backgroundPosition : "50% 50%", repeat: pm ? pm.backgroundRepeat : "no-repeat",
+      nameParts: parts(cur ? pick(cur.name, fa) : "", L), bio: cur ? pick(cur.bio, fa) : "" };
+
+    const theme = (D.philosophy && D.philosophy.themes) || [];
+    const isReal = (a) => !!(a.projectId && P && P.byId(a.projectId) && P.byId(a.projectId).contentState === "real");
+    const recognition = (W ? W.awards : []).filter(a => a.level === "Winner" && isReal(a))
+      .sort((a, b) => b.year - a.year).slice(0, 3).map(a => ({
+        year:a.year, nameParts: parts(fa ? (a.nameFa || a.name) : a.name, L),
+        level: W.levels && W.levels[a.level] ? W.levels[a.level][fa ? 1 : 0] : a.level, href: "Awards.dc.html" + hsh }));
+
+    return {
+      dir: fa ? "rtl" : "ltr", upper: fa ? "none" : "uppercase", startAlign: fa ? "right" : "left",
+      brand: fa ? "طرح و آفرینش" : "Tarh & Afarinesh",
+      nav: [["Projects","پروژه‌ها","Projects.dc.html"],["Expertise","تخصص‌ها","Expertise.dc.html"],
+            ["Awards","جوایز","Awards.dc.html"],["Contact","تماس","Contact.dc.html"]]
+        .map(n => ({ label: fa ? n[1] : n[0], href: n[2] + hsh, on: "0" })),
+      hrefHome: "Homepage.dc.html" + hsh, hrefAwards: "Awards.dc.html" + hsh, hrefContact: "Contact.dc.html" + hsh,
+      lang: st.lang,
+      setEn: () => this.setLang("en"), setFa: () => this.setLang("fa"),
+      eyebrow: fa ? "درباره ما — رویکرد استودیو" : "About — the practice",
+      openIntro: fa ? "طرح و آفرینش، معماری، مهندسی و اندیشه فضایی را در یک فرایند طراحی یکپارچه به هم پیوند می‌دهد."
+        : "Tarh & Afarinesh brings architecture, engineering and spatial thinking into one integrated practice.",
+      openLines: OPEN[L],
+      /* full-composition editorial photograph, not a hero crop — contain, not cover, so the whole
+         frame (both people, the full desk) stays visible instead of an overscanned crop. */
+      studioBg: (function () { const m = D.opening && D.opening.media; const r = m ? M.resolve(m, { lang:L }) : { backgroundImage:"none" }; r.backgroundSize = "contain"; return r; })(),
+      studioCaption: D.opening && D.opening.media ? pick(D.opening.media.caption, fa) : "",
+      studioYear: "",
+      practiceLabel: fa ? "استودیو" : "The practice",
+      practiceLead: D.practice ? pick(D.practice.lead, fa) : "",
+      practiceBody: D.practice && D.practice.body ? D.practice.body.map(b => pick(b, fa)) : [],
+      philLabel: fa ? "نگرش" : "Philosophy", philLines: PHIL[L],
+      themes: theme.map(t => ({ word: pick(t.word, fa), body: pick(t.body, fa),
+        color: t.presentation && t.presentation.accent ? "var(--turq)" : "inherit" })),
+      peopleLabel: fa ? "افراد" : "People", leads, pv, portraitDisplay: st.compact ? "none" : "block",
+      teamLabel: fa ? "تیم استودیو" : "Studio team",
+      team: (A ? A.team() : []).map(m => ({ nameParts: parts(pick(m.name, fa), L), role: pick(m.role, fa) })),
+      historyLabel: fa ? "تاریخ" : "History",
+      historyMotifCell: String(window.TA_MOTIF ? window.TA_MOTIF.cellForIndex(st.activeHistory || 0) : 5),
+      history: (A ? A.history() : []).map((h, i) => { const y = fa ? (h.yearFa || pick(h.year, fa)) : pick(h.year, fa);
+        const on = i === (st.activeHistory || 0);
+        return { year:y, yearCls: B() ? B().cls(y, L) : "text-number", tag: pick(h.tag, fa),
+                 title: pick(h.title, fa), body: pick(h.body, fa),
+                 opacity: on ? "1" : "0.55", activate: () => this.setState({ activeHistory:i }) }; }),
+      activeHistory: (function () {
+        const list = A ? A.history() : []; const h = list[st.activeHistory || 0];
+        if (!h) return { year:"", yearCls:"", tag:"", title:"" };
+        const y = fa ? (h.yearFa || pick(h.year, fa)) : pick(h.year, fa);
+        return { year:y, yearCls: B() ? B().cls(y, L) : "text-number", tag: pick(h.tag, fa), title: pick(h.title, fa) };
+      })(),
+      hasRecognition: recognition.length > 0, recognition,
+      recogLabel: fa ? "افتخارات برگزیده" : "Selected recognition",
+      allAwards: fa ? "همه جوایز" : "All awards",
+      motifFlip: fa ? "-1" : "1",
+      closing: D.thinking ? pick(D.thinking.lead, fa) : "",
+      contactLink: fa ? "با ما کار کنید" : "Work with us"
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="responsive.css" />
+<script>window.TA_ASSET_BASE = "../";</script>
+<script src="../site-data.js"></script>
+<script src="../media-utils.js"></script>
+<script src="../projects-data.js"></script>
+<script src="../expertise-data.js"></script>
+<script src="../about-data.js"></script>
+<script src="layout-mode.js"></script>
+<script src="../awards-data.js"></script>
+<style>
+:root{
+  --ink:#121B1B; --turq:#56B1AC; --canvas:#FAF9F7; --turq-dk:#3E9692; --turq-pale:#D9EFED; --grey:#E8E8E4;
+  --rule:rgba(18,27,27,.14); --rule-soft:rgba(18,27,27,.08); --ink-60:rgba(18,27,27,.6); --ink-45:rgba(18,27,27,.45);
+  --canvas-40:rgba(250,249,247,.4); --canvas-rule:rgba(250,249,247,.18);
+  --en:"Schibsted Grotesk",-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --fa:"Vazirmatn","Schibsted Grotesk",Tahoma,sans-serif;
+  /* MOTION SYSTEM V2 — one scale, four families. Do not introduce a literal ms
+     value in a component; if a tempo is missing from this scale, the scale is wrong.
+       instant  micro UI feedback            fast  interaction / hover / state
+       base     reveal — the default tempo   slow  image depth, cinematic settle
+       page     full-screen overlays only */
+  --m-instant:180ms; --m-fast:240ms; --m-standard:420ms; --m-reveal:620ms; --m-slow:900ms; --m-page:1000ms;
+  /* --m-base is the alias every migrated component already points at; it resolves to the
+     reveal tempo because reveal is the site's default content-entry motion. */
+  --m-base:620ms;
+  /* editorial  content entering — the default curve
+     cinematic  image and scene depth
+     standard   micro UI only
+     page       clip / mask / scene wipes */
+  --e-editorial:cubic-bezier(.16,1,.3,1); --e-cinematic:cubic-bezier(.22,1,.36,1);
+  --e-smooth:cubic-bezier(.4,0,.2,1); --e-standard:cubic-bezier(.4,0,.2,1); --e-page:cubic-bezier(.76,0,.24,1);
+  /* legacy alias */
+  --e-enter:cubic-bezier(.16,1,.3,1);
+  --gap:24px; --marg:40px;
+  --plate:repeating-linear-gradient(-45deg,#E8E8E4 0 18px,#E1E1DC 18px 36px);
+  --plate-2:repeating-linear-gradient(-45deg,#DEDED8 0 18px,#D7D7D1 18px 36px);
+  --plate-3:repeating-linear-gradient(-45deg,#E4E7E6 0 18px,#DCE1E0 18px 36px);
+  --plate-4:repeating-linear-gradient(-45deg,#D9EFED 0 18px,#CFE8E5 18px 36px);
+}
+*{box-sizing:border-box}
+body{margin:0;background:#FAF9F7;color:#121B1B;font-family:var(--en);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+a{color:inherit;text-decoration:none}
+a:hover{color:#3E9692}
+::selection{background:#D9EFED;color:#121B1B}
+@keyframes ab-lineup{from{clip-path:inset(0 0 105% 0)}to{clip-path:inset(0 0 -25% 0)}}
+@keyframes ab-in{from{opacity:0}to{opacity:1}}
+</style>
+</helmet>
+
+<div data-ab-root="1" style="background:var(--canvas);color:var(--ink);font-family:var(--en);position:relative;overflow-x:clip;min-height:100vh">
+
+  <header data-hd="1" style="position:fixed;top:0;left:0;right:0;z-index:95;padding:24px var(--marg);display:flex;align-items:center;justify-content:space-between;gap:clamp(12px,2vw,24px);color:var(--ink);transition:padding var(--m-standard) var(--e-standard),background var(--m-standard) var(--e-standard)">
+    <a href="{{ hrefHome }}" style="display:flex;align-items:center;gap:12px;flex:none">
+      <span style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:1.5px;width:22px;height:22px;border:1.5px solid currentColor">
+        <i style="background:var(--turq)"></i><i style="background:var(--turq)"></i><i style="background:var(--turq)"></i><i style="background:var(--turq)"></i><i style="background:var(--turq)"></i><i style="background:var(--turq)"></i><i style="background:var(--turq)"></i><i style="background:var(--turq)"></i><i style="background:var(--turq)"></i>
+      </span>
+      <span data-en="1" style="font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;white-space:nowrap">Tarh &amp; Afarinesh</span>
+      <span data-fa="1" style="font-family:var(--fa);font-size:15.5px;font-weight:600;white-space:nowrap;display:none">طرح و آفرینش</span>
+    </a>
+    <nav style="display:flex;align-items:center;flex-wrap:wrap;gap:clamp(12px,1.6vw,30px);flex:0 1 auto;min-width:0;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase">
+      <a href="{{ hrefProjects }}" data-nav="1" style="display:inline-flex;align-items:center;gap:7px;padding:4px 0;transition:transform var(--m-fast) var(--e-standard)"><i data-navsq="1" style="width:5px;height:5px;background:var(--turq);opacity:0;transform:scale(.4);transition:opacity var(--m-fast) var(--e-standard),transform var(--m-fast) var(--e-standard)"></i><span data-en="1">Projects</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:14.5px;display:none">پروژه‌ها</span></a>
+      <a href="{{ hrefExpertise }}" data-nav="1" style="display:inline-flex;align-items:center;gap:7px;padding:4px 0;transition:transform var(--m-fast) var(--e-standard)"><i data-navsq="1" style="width:5px;height:5px;background:var(--turq);opacity:0;transform:scale(.4);transition:opacity var(--m-fast) var(--e-standard),transform var(--m-fast) var(--e-standard)"></i><span data-en="1">Expertise</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:14.5px;display:none">تخصص‌ها</span></a>
+      <a href="{{ hrefAwards }}" data-nav="1" style="display:inline-flex;align-items:center;gap:7px;padding:4px 0;transition:transform var(--m-fast) var(--e-standard)"><i data-navsq="1" style="width:5px;height:5px;background:var(--turq);opacity:0;transform:scale(.4);transition:opacity var(--m-fast) var(--e-standard),transform var(--m-fast) var(--e-standard)"></i><span data-en="1">Awards</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:14.5px;display:none">جوایز</span></a>
+      <a href="{{ hrefContact }}" data-nav="1" style="display:inline-flex;align-items:center;gap:7px;padding:4px 0;transition:transform var(--m-fast) var(--e-standard)"><i data-navsq="1" style="width:5px;height:5px;background:var(--turq);opacity:0;transform:scale(.4);transition:opacity var(--m-fast) var(--e-standard),transform var(--m-fast) var(--e-standard)"></i><span data-en="1">Contact</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:14.5px;display:none">تماس</span></a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:18px;flex:none">
+      <div style="display:flex;align-items:center;gap:9px;font-size:12px;letter-spacing:.08em;direction:ltr">
+        <button type="button" onClick="{{ setEn }}" style="appearance:none;background:none;border:none;padding:2px 0;cursor:pointer;font:inherit;letter-spacing:inherit;color:inherit;opacity:{{ enOpacity }};font-weight:{{ enWeight }};transition:opacity var(--m-fast) var(--e-standard)">EN</button>
+        <span style="width:1px;height:11px;background:currentColor;opacity:.3"></span>
+        <button type="button" onClick="{{ setFa }}" style="appearance:none;background:none;border:none;padding:2px 0;cursor:pointer;font-family:var(--fa);font-size:13px;color:inherit;opacity:{{ faOpacity }};font-weight:{{ faWeight }};transition:opacity var(--m-fast) var(--e-standard)">فا</button>
+      </div>
+      <button type="button" onClick="{{ openMenu }}" style="appearance:none;background:none;border:1px solid currentColor;padding:9px 14px;cursor:pointer;font:inherit;color:inherit;font-size:12px;letter-spacing:.12em;text-transform:uppercase;display:flex;align-items:center;gap:10px;transition:opacity var(--m-fast) var(--e-standard)" style-hover="opacity:.65">
+        <span data-en="1">Menu</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:14.5px;display:none">منو</span>
+        <span style="display:block;width:12px;height:1px;background:currentColor;box-shadow:0 4px 0 currentColor,0 -4px 0 currentColor"></span>
+      </button>
+    </div>
+  </header>
+
+  <div data-menu="1" style="position:fixed;inset:0;z-index:100;background:var(--ink);color:var(--canvas);clip-path:{{ menuClip }};transition:clip-path var(--m-page) var(--e-page);pointer-events:{{ menuPointer }};display:flex;flex-direction:column;justify-content:space-between;padding:26px var(--marg) 40px">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:24px">
+      <span data-en="1" style="font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:600">Tarh &amp; Afarinesh</span>
+      <span data-fa="1" style="font-family:var(--fa);font-size:15.5px;font-weight:600;display:none">طرح و آفرینش</span>
+      <button type="button" onClick="{{ closeMenu }}" style="appearance:none;background:none;border:1px solid var(--canvas-rule);color:var(--canvas);padding:9px 14px;cursor:pointer;font:inherit;font-size:12px;letter-spacing:.12em;text-transform:uppercase;transition:background var(--m-fast) var(--e-standard)" style-hover="background:rgba(250,249,247,.12)"><span data-en="1">Close</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:14.5px;display:none">بستن</span></button>
+    </div>
+    <nav style="display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap);align-items:end">
+      <div style="grid-column:1 / span 7;display:grid">
+        <sc-for list="{{ menuLinks }}" as="m" hint-placeholder-count="7">
+          <a href="{{ m.href }}" onClick="{{ m.click }}" data-ml="1" style="border-top:1px solid var(--canvas-rule);padding:13px 0;display:flex;align-items:center;gap:20px;opacity:0;transform:translateY(40%);transition:opacity var(--m-base) var(--e-enter) {{ m.delay }},transform 620ms var(--e-enter) {{ m.delay }},color var(--m-fast) var(--e-standard)">
+            <span style="font-size:12px;letter-spacing:.14em;color:var(--canvas-40);font-variant-numeric:tabular-nums;direction:ltr">{{ m.num }}</span>
+            <span style="font-size:{{ menuSize }};line-height:{{ menuLh }};letter-spacing:{{ menuLs }};font-weight:500">{{ m.label }}</span>
+          </a>
+        </sc-for>
+        <div style="border-top:1px solid var(--canvas-rule)"></div>
+      </div>
+      <div style="grid-column:9 / span 4;font-size:13px;line-height:1.9;color:rgba(250,249,247,.6)">
+        <span data-en="1" style="display:block;direction:ltr">[EMAIL]</span><span data-fa="1" style="font-family:var(--fa);display:none">[ایمیل]</span>
+        <span data-en="1" style="display:block">[CITY]</span><span data-fa="1" style="font-family:var(--fa);display:none">[شهر]</span>
+      </div>
+    </nav>
+  </div>
+
+  <!-- opening: space and type first -->
+  <section data-ab-section="overview" data-screen-label="About opening" style="padding:calc(var(--marg) + 120px) var(--marg) 0">
+    <div style="font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45);display:flex;align-items:center;gap:12px;opacity:0;animation:ab-in var(--m-base) var(--e-standard) 80ms forwards">
+      <i style="width:8px;height:8px;background:var(--turq)"></i>
+      <span data-en="1">About the studio</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:13.5px;display:none">درباره استودیو</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap);margin-top:30px">
+      <div style="grid-column:1 / span 9;overflow:hidden">
+        <h1 data-en="1" style="margin:0;font-size:clamp(44px,5.8vw,108px);line-height:1;letter-spacing:-.042em;font-weight:500;animation:ab-lineup var(--m-base) var(--e-page) 260ms both">We design the<br />relationship between<br />people and place.</h1>
+        <h1 data-fa="1" style="margin:0;font-family:var(--fa);font-size:clamp(36px,4.6vw,86px);line-height:1.44;font-weight:500;display:none;animation:ab-lineup var(--m-base) var(--e-page) 260ms both">ما رابطه‌ی میان<br />انسان و فضا را<br />طراحی می‌کنیم.</h1>
+      </div>
+      <div style="grid-column:11 / span 2;align-self:end;display:flex;flex-direction:column;gap:8px;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-45);opacity:0;animation:ab-in var(--m-base) var(--e-standard) 720ms forwards">
+        <span data-en="1">Founded [YEAR]</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:13px;display:none">تأسیس [سال]</span>
+        <span data-en="1">Based in [CITY]</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:13px;display:none">مستقر در [شهر]</span>
+        <span data-en="1">[DISCIPLINES]</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:13px;display:none">[تخصص‌ها]</span>
+      </div>
+    </div>
+
+    <div data-rv="img" style="position:relative;margin-top:11vh;height:74vh;overflow:hidden;background:var(--grey);direction:ltr">
+      <div data-rv-inner="1" data-ab-portrait="1" style="position:absolute;inset:-5% -2%;background:{{ studioBg }};display:grid;place-items:center"><span style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45)">Studio at work — placeholder media</span></div>
+      <div data-rv-mask="1" style="position:absolute;inset:0;background:var(--canvas)"></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;gap:24px;margin-top:14px;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-45)">
+      <span data-en="1">Drawing review, studio — placeholder</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:13px;display:none">بازبینی نقشه‌ها در استودیو — جایگزین</span>
+      <span style="direction:ltr">[YEAR]</span>
+    </div>
+  </section>
+
+  <!-- the practice -->
+  <section data-ab-section="practice" data-screen-label="The practice" style="padding:16vh var(--marg) 0">
+    <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap)">
+      <div style="grid-column:1 / span 2;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45)"><span data-en="1">The practice</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:13px;display:none">استودیو</span></div>
+      <div style="grid-column:3 / span 7;font-size:clamp(26px,2.7vw,46px);line-height:{{ leadLh }};letter-spacing:-.022em">{{ practiceLead }}</div>
+      <div style="grid-column:3 / span 4;margin-top:48px"><p style="margin:0;font-size:{{ bodySize }};line-height:{{ bodyLh }};color:var(--ink-60);max-width:{{ measure }}">{{ practiceA }}</p></div>
+      <div style="grid-column:8 / span 4;margin-top:48px"><p style="margin:0;font-size:{{ bodySize }};line-height:{{ bodyLh }};color:var(--ink-60);max-width:{{ measure }}">{{ practiceB }}</p></div>
+    </div>
+  </section>
+
+  <!-- history: oversized sticky year, 3x3 coordinate travels across time -->
+  <section data-ab-section="history" data-screen-label="History" style="padding:16vh var(--marg) 0">
+    <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap);align-items:start">
+      <div data-hs-col="1" style="grid-column:1 / span 5;position:sticky;top:calc(var(--marg) + 130px);align-self:start">
+        <div style="font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45)"><span data-en="1">History</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:13px;display:none">تاریخ</span></div>
+        <div style="margin-top:16px;height:{{ yearBox }};overflow:hidden;direction:ltr">
+          <div data-hs-years="1" style="transition:transform var(--m-base) var(--e-page)">
+            <sc-for list="{{ milestones }}" as="ms" hint-placeholder-count="4">
+              <div style="height:{{ yearBox }};display:flex;align-items:center;font-size:{{ yearSize }};line-height:1;letter-spacing:-.05em;font-weight:500;font-variant-numeric:tabular-nums">{{ ms.year }}</div>
+            </sc-for>
+          </div>
+        </div>
+        <div style="margin-top:28px;display:flex;align-items:center;gap:16px">
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:5px;width:64px;height:64px;position:relative;direction:ltr;flex:none">
+            <i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i>
+            <i data-hs-sq="1" style="position:absolute;left:0;top:0;width:18px;height:18px;background:var(--turq);transition:transform var(--m-base) var(--e-page)"></i>
+          </div>
+          <div style="font-size:11.5px;line-height:1.7;color:var(--ink-45);max-width:26ch"><span data-en="1">One system, moving through time.</span><span data-fa="1" style="font-family:var(--fa);font-size:13px;line-height:1.9;display:none">یک دستگاه، در گذر زمان.</span></div>
+        </div>
+      </div>
+      <div data-hs-list="1" style="grid-column:7 / span 6">
+        <sc-for list="{{ milestones }}" as="ms" hint-placeholder-count="4">
+          <div data-hs-item="1" style="border-top:1px solid var(--rule);padding:44px 0 56px">
+            <div style="display:flex;align-items:baseline;gap:16px;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-45)"><span style="direction:ltr;font-variant-numeric:tabular-nums">{{ ms.year }}</span><span>{{ ms.tag }}</span></div>
+            <h3 style="margin:14px 0 0;font-size:clamp(22px,2.1vw,34px);line-height:{{ msLh }};letter-spacing:-.02em;font-weight:500">{{ ms.title }}</h3>
+            <p style="margin:14px 0 0;font-size:{{ bodySize }};line-height:{{ bodyLh }};color:var(--ink-60);max-width:{{ measure }}">{{ ms.text }}</p>
+            <sc-if value="{{ ms.hasImage }}" hint-placeholder-val="{{ true }}">
+              <div data-rv="img" style="position:relative;margin-top:28px;aspect-ratio:16/10;overflow:hidden;background:var(--grey);direction:ltr">
+                <div data-rv-inner="1" style="position:absolute;inset:-4% 0;background:{{ ms.plate }}"></div>
+                <div data-rv-mask="1" style="position:absolute;inset:0;background:var(--canvas)"></div>
+              </div>
+            </sc-if>
+          </div>
+        </sc-for>
+        <div style="border-top:1px solid var(--rule)"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- philosophy: thinking, not portfolio output -->
+  <section data-ab-section="philosophy" data-screen-label="Philosophy" style="padding:18vh var(--marg) 0">
+    <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap);align-items:end">
+      <div style="grid-column:1 / span 7">
+        <div data-en="1" style="font-size:clamp(40px,4.8vw,92px);line-height:1;letter-spacing:-.04em;font-weight:500">Design begins<br />with the question,<br />not the answer.</div>
+        <div data-fa="1" style="font-family:var(--fa);font-size:clamp(34px,3.8vw,72px);line-height:1.44;font-weight:500;display:none">طراحی با پرسش<br />آغاز می‌شود،<br />نه با پاسخ.</div>
+      </div>
+      <figure data-rv="img" style="grid-column:9 / span 4;margin:0;position:relative;aspect-ratio:3/4;overflow:hidden;background:#fff;border:1px solid var(--rule);direction:ltr">
+        <div style="position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(18,27,27,.05) 0 1px,transparent 1px 34px),repeating-linear-gradient(90deg,rgba(18,27,27,.05) 0 1px,transparent 1px 34px)"></div>
+        <div data-rv-inner="1" style="position:absolute;inset:18% 20%;border:1.5px solid var(--ink)">
+          <i style="position:absolute;left:0;top:40%;width:56%;height:1.5px;background:var(--ink)"></i>
+          <i style="position:absolute;left:56%;top:40%;bottom:0;width:1.5px;background:var(--ink)"></i>
+          <i style="position:absolute;left:18%;top:40%;width:10px;height:10px;background:var(--turq);transform:translate(-50%,-50%)"></i>
+          <i style="position:absolute;left:-10%;bottom:-12%;width:62%;height:2px;background:var(--ink);transform:rotate(-45deg);transform-origin:0 50%"></i>
+        </div>
+        <div data-rv-mask="1" style="position:absolute;inset:0;background:var(--canvas)"></div>
+      </figure>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap);margin-top:14vh">
+      <sc-for list="{{ themes }}" as="t" hint-placeholder-count="3">
+        <div style="grid-column:{{ t.col }}">
+          <div style="font-size:clamp(30px,3vw,52px);line-height:{{ themeLh }};letter-spacing:-.03em;font-weight:500;color:{{ t.color }}">{{ t.word }}</div>
+          <p style="margin:16px 0 0;font-size:{{ bodySize }};line-height:{{ bodyLh }};color:var(--ink-60);max-width:{{ measure }}">{{ t.text }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- people: one shared portrait stage + typographic index -->
+  <section data-ab-section="people" data-screen-label="People" style="padding:18vh var(--marg) 0">
+    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:24px;border-top:1px solid var(--ink);padding-top:16px;flex-wrap:wrap">
+      <span style="font-size:11.5px;letter-spacing:.14em;text-transform:uppercase"><span data-en="1">People</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:13.5px;display:none">افراد</span></span>
+      <span style="font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-45)"><span data-en="1">Placeholder personnel — to be replaced</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:13px;display:none">اطلاعات جایگزین — بعداً تکمیل می‌شود</span></span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap);margin-top:40px;align-items:start">
+      <div data-pp-stagecol="1" style="grid-column:1 / span 4;position:sticky;top:calc(var(--marg) + 120px);align-self:start;direction:ltr">
+        <div style="position:relative;overflow:hidden;background:var(--grey);aspect-ratio:4/5">
+          <div data-pp-img="1" style="position:absolute;inset:-4% -2%;background:var(--plate);display:grid;place-items:center;transition:transform var(--m-slow) var(--e-enter)"><span style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45)">Portrait</span></div>
+          <div data-pp-mask="1" style="position:absolute;inset:0;background:var(--canvas);clip-path:inset(0 0 100% 0);transition:clip-path var(--m-base) var(--e-page)"></div>
+        </div>
+        <div style="margin-top:16px">
+          <div data-pp-name="1" style="font-size:clamp(19px,1.8vw,26px);line-height:1.28;letter-spacing:-.018em">{{ activeName }}</div>
+          <div data-pp-role="1" style="margin-top:6px;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-45)">{{ activeRole }}</div>
+          <p data-pp-bio="1" style="margin:14px 0 0;font-size:13.5px;line-height:1.8;color:var(--ink-60);max-width:{{ measure }}">{{ activeBio }}</p>
+        </div>
+      </div>
+      <div data-pp-list="1" style="grid-column:6 / span 7">
+        <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45);padding-bottom:12px"><span data-en="1">Founders &amp; leadership</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:13px;display:none">بنیان‌گذاران و مدیریت</span></div>
+        <sc-for list="{{ leads }}" as="p" hint-placeholder-count="4">
+          <a href="#" onClick="{{ p.noop }}" onMouseEnter="{{ p.enter }}" onFocus="{{ p.enter }}" data-pp-row="1" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:baseline;border-top:1px solid var(--rule);padding:20px 0;opacity:{{ p.opacity }};transition:opacity var(--m-standard) var(--e-standard),padding var(--m-standard) var(--e-standard),color var(--m-fast) var(--e-standard)">
+            <span style="display:flex;align-items:baseline;gap:10px;font-size:clamp(20px,1.9vw,30px);line-height:1.24;letter-spacing:-.02em;color:{{ p.color }};transition:color var(--m-fast) var(--e-standard)"><i style="width:7px;height:7px;background:var(--turq);opacity:{{ p.sq }};flex:none;margin-top:10px;transition:opacity var(--m-fast) var(--e-standard)"></i>{{ p.name }}</span>
+            <span style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-60);line-height:1.6">{{ p.role }}</span>
+          </a>
+        </sc-for>
+        <div style="border-top:1px solid var(--rule)"></div>
+
+        <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45);padding:44px 0 12px"><span data-en="1">Studio team</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:13px;display:none">تیم استودیو</span></div>
+        <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 var(--gap);border-top:1px solid var(--rule)">
+          <sc-for list="{{ team }}" as="t" hint-placeholder-count="8">
+            <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;border-bottom:1px solid var(--rule-soft);padding:13px 0;font-size:14.5px">
+              <span>{{ t.name }}</span>
+              <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-45);flex:none">{{ t.role }}</span>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45);padding:44px 0 12px"><span data-en="1">External collaborators</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:13px;display:none">همکاران بیرونی</span></div>
+        <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 var(--gap);border-top:1px solid var(--rule)">
+          <sc-for list="{{ collaborators }}" as="c" hint-placeholder-count="6">
+            <div style="border-bottom:1px solid var(--rule-soft);padding:13px 0;font-size:14.5px;color:var(--ink-60)">{{ c.label }}</div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- studio in numbers (placeholders only) + clients matrix -->
+  <section data-ab-section="evidence" data-screen-label="Numbers and clients" style="padding:16vh var(--marg) 0">
+    <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:48px var(--gap)">
+      <sc-for list="{{ numbers }}" as="nm" hint-placeholder-count="4">
+        <div style="grid-column:{{ nm.col }}">
+          <div style="overflow:hidden"><div data-rv="fact" style="font-size:clamp(40px,4.6vw,88px);line-height:.94;letter-spacing:-.04em;font-weight:500;font-variant-numeric:tabular-nums;direction:ltr">{{ nm.value }}</div></div>
+          <div style="margin-top:12px;font-size:12.5px;line-height:1.6;color:var(--ink-60);max-width:22ch">{{ nm.note }}</div>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap);margin-top:14vh">
+      <div style="grid-column:1 / span 2;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45)"><span data-en="1">We have worked with</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:13px;line-height:1.8;display:none">همکاری داشته‌ایم با</span></div>
+      <div data-r-two-up="1" style="grid-column:3 / span 10;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0 var(--gap);border-top:1px solid var(--rule)">
+        <sc-for list="{{ clients }}" as="c" hint-placeholder-count="12">
+          <div style="border-bottom:1px solid var(--rule-soft);padding:16px 0;font-size:14.5px;color:var(--ink-60)">{{ c.label }}</div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- thinking → expertise / journal -->
+  <section data-ab-section="thinking" data-screen-label="Thinking" style="padding:16vh var(--marg) 0">
+    <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap);border-top:1px solid var(--rule);padding-top:22px">
+      <div style="grid-column:1 / span 5;font-size:clamp(24px,2.3vw,38px);line-height:{{ themeLh }};letter-spacing:-.02em">{{ thinkingLead }}</div>
+      <div style="grid-column:7 / span 3">
+        <a href="{{ hrefExpertise }}" data-arrow="1" style="display:inline-flex;align-items:center;gap:12px;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase"><span style="overflow:hidden;display:block;width:22px;height:9px;position:relative"><i data-arrowline="1" style="position:absolute;inset:0;background:currentColor;height:1px;top:4px;transition:transform var(--m-standard) var(--e-page)"></i></span><span data-en="1">How we work</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:14.5px;display:none">شیوه کار ما</span></a>
+      </div>
+      <div style="grid-column:10 / span 3">
+        <a href="{{ hrefJournal }}" data-arrow="1" style="display:inline-flex;align-items:center;gap:12px;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-45)"><span style="overflow:hidden;display:block;width:22px;height:9px;position:relative"><i data-arrowline="1" style="position:absolute;inset:0;background:currentColor;height:1px;top:4px;transition:transform var(--m-standard) var(--e-page)"></i></span><span data-en="1">Read the journal</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:14.5px;display:none">مجله را بخوانید</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- selected recognition, from the shared dataset -->
+  <section data-ab-section="recognition" data-screen-label="Selected recognition" style="padding:16vh var(--marg) 0">
+    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:24px;border-top:1px solid var(--ink);padding-top:16px;flex-wrap:wrap">
+      <span style="font-size:11.5px;letter-spacing:.14em;text-transform:uppercase"><span data-en="1">Selected recognition</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:13.5px;display:none">افتخارات منتخب</span></span>
+      <a href="{{ hrefAwards }}" data-arrow="1" style="display:inline-flex;align-items:center;gap:12px;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase"><span style="overflow:hidden;display:block;width:22px;height:9px;position:relative"><i data-arrowline="1" style="position:absolute;inset:0;background:currentColor;height:1px;top:4px;transition:transform var(--m-standard) var(--e-page)"></i></span><span data-en="1">View all awards</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:14.5px;display:none">همه جوایز</span></a>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap);margin-top:34px">
+      <div style="grid-column:1 / span 9">
+        <sc-for list="{{ recognition }}" as="r" hint-placeholder-count="5">
+          <a href="{{ r.href }}" onClick="{{ r.click }}" data-aw-row="1" style="display:grid;grid-template-columns:82px minmax(0,1.4fr) minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:baseline;border-top:1px solid var(--rule);padding:20px 0;transition:padding var(--m-standard) var(--e-standard),color var(--m-fast) var(--e-standard)">
+            <span style="font-size:12px;letter-spacing:.1em;color:var(--ink-45);font-variant-numeric:tabular-nums;direction:ltr">{{ r.year }}</span>
+            <span style="font-size:clamp(16px,1.5vw,21px);line-height:1.34;letter-spacing:-.012em;direction:{{ r.nameDir }}">{{ r.name }}</span>
+            <span style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-60);line-height:1.6">{{ r.cat }}</span>
+            <span style="font-size:12.5px;line-height:1.6;color:var(--ink-45)">{{ r.subject }}</span>
+          </a>
+        </sc-for>
+        <div style="border-top:1px solid var(--rule)"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ending: one primary direction, one quiet secondary -->
+  <section data-screen-label="About close" style="padding:20vh var(--marg) var(--marg)">
+    <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap)">
+      <div style="grid-column:1 / span 9">
+        <div data-en="1" style="font-size:clamp(50px,6.4vw,124px);line-height:.96;letter-spacing:-.045em;font-weight:500">Work with us.</div>
+        <div data-fa="1" style="font-family:var(--fa);font-size:clamp(42px,5.2vw,102px);line-height:1.36;font-weight:500;display:none">با ما کار کنید.</div>
+        <a href="{{ hrefContact }}" data-arrow="1" style="display:inline-flex;align-items:center;gap:12px;font-size:13px;letter-spacing:.12em;text-transform:uppercase;margin-top:36px"><span style="overflow:hidden;display:block;width:22px;height:9px;position:relative"><i data-arrowline="1" style="position:absolute;inset:0;background:currentColor;height:1px;top:4px;transition:transform var(--m-standard) var(--e-page)"></i></span><span data-en="1" style="direction:ltr">[EMAIL] — to be provided</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:15px;display:none">[ایمیل] — بعداً ارائه می‌شود</span></a>
+      </div>
+      <div style="grid-column:11 / span 2;align-self:end;display:flex;flex-direction:column;gap:14px;align-items:flex-start">
+        <a href="{{ hrefProjects }}" style="font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-45)"><span data-en="1">See our work</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:13px;display:none">دیدن پروژه‌ها</span></a>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:3px;width:46px;height:46px;direction:ltr">
+          <i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="background:var(--turq)"></i><i style="border:1px solid var(--rule)"></i><i style="background:var(--turq-pale)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i>
+        </div>
+      </div>
+      <div style="grid-column:1 / span 12;margin-top:12vh;border-top:1px solid var(--rule);padding-top:22px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap">
+        <button type="button" data-rm="1" onClick="{{ toggleReduced }}" title="{{ rmTitle }}" style="appearance:none;background:{{ rmBg }};color:{{ rmColor }};border:1px solid var(--rule);padding:7px 11px;cursor:pointer;font:inherit;font-size:10px;letter-spacing:.1em;text-transform:uppercase;display:inline-flex;align-items:center;gap:7px"><span style="width:7px;height:7px;background:currentColor;opacity:.7"></span><span style="direction:ltr">RM {{ rmState }}</span></button>
+        <span style="font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-45)">Tarh &amp; Afarinesh — طرح و آفرینش</span>
+      </div>
+    </div>
+  </section>
+
+  <div data-secnav="1" style="position:fixed;left:var(--marg);bottom:var(--marg);z-index:90;display:flex;align-items:center;gap:12px;opacity:0;pointer-events:none;transition:opacity var(--m-standard) var(--e-standard);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-45)">
+    <i style="width:7px;height:7px;background:var(--turq)"></i><span data-secnav-label="1">Overview</span>
+  </div>
+
+  <div data-prog="1" style="position:fixed;right:14px;bottom:var(--marg);z-index:90;direction:ltr;pointer-events:none;display:flex;align-items:center;gap:10px;opacity:0;transition:opacity var(--m-standard) var(--e-standard)">
+    <span data-prog-num="1" style="font-size:10.5px;letter-spacing:.1em;color:var(--ink-45);font-variant-numeric:tabular-nums">000</span>
+    <span style="position:relative;display:block;width:9px;height:120px"><i style="position:absolute;left:4px;top:0;bottom:0;width:1px;background:var(--rule)"></i><i data-prog-sq="1" style="position:absolute;left:0;top:0;width:9px;height:9px;background:var(--turq)"></i></span>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440},&quot;startLang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;en&quot;,&quot;options&quot;:[&quot;en&quot;,&quot;fa&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Bilingual&quot;},&quot;forceReducedMotion&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Motion&quot;},&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#56B1AC&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#56B1AC&quot;,&quot;#3E9692&quot;,&quot;#121B1B&quot;],&quot;section&quot;:&quot;Brand&quot;}}">
+const clamp = (v, a, b) => v < a ? a : v > b ? b : v;
+const PLATES = [
+  "repeating-linear-gradient(-45deg,#E8E8E4 0 18px,#E1E1DC 18px 36px)",
+  "repeating-linear-gradient(-45deg,#DEDED8 0 18px,#D7D7D1 18px 36px)",
+  "repeating-linear-gradient(-45deg,#E4E7E6 0 18px,#DCE1E0 18px 36px)",
+  "repeating-linear-gradient(-45deg,#D9EFED 0 18px,#CFE8E5 18px 36px)"
+];
+const LATIN = /[A-Za-z]/;
+const SECTION_LABELS = {
+  overview:["Overview","نمای کلی"], practice:["Practice","استودیو"], history:["History","تاریخ"],
+  philosophy:["Philosophy","نگرش"], people:["People","افراد"], evidence:["Evidence","شواهد"],
+  thinking:["Thinking","پژوهش"], recognition:["Recognition","افتخارات"]
+};
+const MENU = [
+  ["Home","خانه","Homepage.dc.html"], ["Projects","پروژه‌ها","Projects.dc.html"], ["Expertise","تخصص‌ها","Expertise.dc.html"],
+  ["Awards","جوایز و افتخارات","Awards.dc.html"], ["About","درباره ما",""],
+  ["Journal","مجله","Journal.dc.html"], ["Contact","تماس با ما","Contact.dc.html"]
+];
+/* milestone coordinates walk the 3x3 field across time */
+/* About content comes from about-data.js: practice, philosophy themes, history,
+   people, team, clients, collaborators, numbers and the thinking lead all resolve
+   from data. The two display statements (opening, philosophy) are typographic
+   compositions whose per-language line breaks live in the markup — that is their
+   single source, and they are deliberately absent from the data module. */
+const AB = () => window.TA_ABOUT || null;
+const MV = (m) => window.TA_MEDIA ? window.TA_MEDIA.resolve(m, { context:"about" }) : { backgroundImage:"", backgroundSize:"auto", backgroundPosition:"0 0", backgroundRepeat:"repeat" };
+const MILESTONES_OF = () => (AB() ? AB().history() : []).map(m => ({
+  year: m.year, coord: m.coord, vis: m.media ? MV(m.media) : null, plate: m.media ? m.media.plate : 0,
+  tag: [m.tag.en, m.tag.fa], t: [m.title.en, m.title.fa], x: [m.body.en, m.body.fa],
+  img: !!m.media
+}));
+const LEADS_OF = () => (AB() ? AB().leadership() : []).map(p => ({
+  n: [p.name.en, p.name.fa], r: [p.role.en, p.role.fa],
+  vis: p.portrait ? MV(p.portrait) : null, plate: p.portrait ? p.portrait.plate : 0,
+  b: [p.bio.en, p.bio.fa]
+}));
+const TEAM_OF = () => (AB() ? AB().team() : []).map(t => ({ n: [t.name.en, t.name.fa], r: [t.role.en, t.role.fa] }));
+
+class Component extends DCLogic {
+  state = { lang:"en", person:0, menu:false, reduced:false };
+
+  componentDidMount(){
+    this.root = document.querySelector("[data-ab-root]");
+    if(!this.root) return;
+    try{ this.state.reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches; }catch(e){}
+    if(this.props.forceReducedMotion) this.state.reduced = true;
+    if(this.props.startLang === "fa") this.state.lang = "fa";
+    (window.location.hash || "").replace(/^#/, "").split("&").forEach(p => { if(p === "lang=fa") this.state.lang = "fa"; });
+    if(this.props.accent) this.root.style.setProperty("--turq", this.props.accent);
+    this.bindPointer = () => {};
+    this.q(); this.bind(); this.armReveals(); this.applyLang();
+    window.__abOwner = this;
+    if(window.TA_LAYOUT && window.TA_LAYOUT.onChange){
+      window.TA_LAYOUT.onChange((L, info) => {
+        /* a virtual keyboard only changes height — never a reason to re-initialise */
+        if(info && info.keyboardLikely){ this.requestTick(); return; }
+        if(info && info.pointerChanged && this.bindPointer) this.bindPointer();
+        if(info && info.reducedMotionChanged){ this.requestTick(); return; }
+        if(!info || info.layoutChanged){ this.q(); this.bind(); this.applyLang(); }
+        this.requestTick();
+      });
+    }
+    this.onScroll = () => this.requestTick();
+    window.addEventListener("scroll", this.onScroll, { passive:true });
+    /* scroll events are unreliable in this runtime — native scroll events drive the scheduler */
+    if(window.TA_LAYOUT && window.TA_LAYOUT.onScrollChange) window.TA_LAYOUT.onScrollChange(this.onScroll);
+    window.addEventListener("resize", this.onScroll);
+    this.onKey = (e) => { if(e.key === "Escape" && this.state.menu) this.setState({ menu:false }); };
+    this.onVis = () => { if(document.visibilityState === "visible") this.requestTick(); else this.stopTicking(); };
+    document.addEventListener("visibilitychange", this.onVis);
+    window.addEventListener("keydown", this.onKey);
+    this._pLang = this.state.lang; this._pMenu = false;
+    this.tick();
+  }
+
+  componentWillUnmount(){
+    if(window.__abOwner === this) window.__abOwner = null;
+    window.removeEventListener("scroll", this.onScroll);
+    window.removeEventListener("resize", this.onScroll);
+    document.removeEventListener("visibilitychange", this.onVis);
+    this.stopTicking();
+    window.removeEventListener("keydown", this.onKey);
+    document.body.style.overflow = "";
+  }
+
+  componentDidUpdate(){
+    if(this._pLang !== this.state.lang){
+      this._pLang = this.state.lang;
+      this.bindPointer = () => {};
+    this.q(); this.bind(); this.armReveals(); this.applyLang();
+      try{ window.location.hash = this.state.lang === "fa" ? "lang=fa" : ""; }catch(e){}
+    }
+    if(this._pMenu !== this.state.menu){ this._pMenu = this.state.menu; this.animateMenu(); }
+  }
+
+  q(){
+    const r = this.root, all = (s) => Array.prototype.slice.call(r.querySelectorAll(s));
+    this.n = {
+      header: r.querySelector("[data-hd]"),
+      revealImgs: all('[data-rv="img"]'),
+      facts: all('[data-rv="fact"]'),
+      hsCol: r.querySelector("[data-hs-col]"),
+      hsList: r.querySelector("[data-hs-list]"),
+      hsItems: all("[data-hs-item]"),
+      hsYears: r.querySelector("[data-hs-years]"),
+      hsSq: r.querySelector("[data-hs-sq]"),
+      ppList: r.querySelector("[data-pp-list]"),
+      ppStageCol: r.querySelector("[data-pp-stagecol]"),
+      ppImg: r.querySelector("[data-pp-img]"),
+      ppMask: r.querySelector("[data-pp-mask]"),
+      secnav: r.querySelector("[data-secnav]"),
+      secnavLabel: r.querySelector("[data-secnav-label]"),
+      prog: r.querySelector("[data-prog]"),
+      progNum: r.querySelector("[data-prog-num]"),
+      progSq: r.querySelector("[data-prog-sq]")
+    };
+  }
+
+  armReveals(){
+    const red = this.state.reduced;
+    this.revealSet = (this.n.revealImgs || []).map(el => ({ el:el, done:false }));
+    (this.n.revealImgs || []).forEach(el => {
+      const mask = el.querySelector("[data-rv-mask]"), inner = el.querySelector("[data-rv-inner]");
+      if(mask){ mask.style.transition = red ? "opacity 200ms linear" : "clip-path 1000ms cubic-bezier(.76,0,.24,1)"; mask.style.clipPath = "inset(0 0 0 0)"; mask.style.opacity = "1"; }
+      if(inner){ inner.style.transition = red ? "none" : "transform 1200ms cubic-bezier(.16,1,.3,1)"; inner.style.transform = red ? "none" : "scale(1.05)"; }
+    });
+    this.factSet = (this.n.facts || []).map(el => ({ el:el, done:false }));
+    (this.n.facts || []).forEach(el => {
+      el.style.transition = red ? "opacity 200ms linear" : "clip-path 820ms cubic-bezier(.76,0,.24,1),transform 820ms cubic-bezier(.16,1,.3,1)";
+      el.style.clipPath = red ? "none" : "inset(0 0 105% 0)";
+      el.style.transform = red ? "none" : "translateY(12px)";
+    });
+  }
+
+  applyLang(){
+    const fa = this.state.lang === "fa", n = this.n;
+    this.root.setAttribute("dir", fa ? "rtl" : "ltr");
+    this.root.querySelectorAll("[data-en]").forEach(el => { el.style.display = fa ? "none" : ""; });
+    this.root.querySelectorAll("[data-fa]").forEach(el => { el.style.display = fa ? "" : "none"; });
+    this.root.style.fontFamily = fa ? 'Vazirmatn,"Schibsted Grotesk",Tahoma,sans-serif' : '"Schibsted Grotesk",Helvetica,Arial,sans-serif';
+    /* people: the reading register stays on the reading side, the portrait stage opposite */
+    if(n.ppList) n.ppList.style.gridColumn = fa ? "1 / span 7" : "6 / span 7";
+    if(n.ppStageCol) n.ppStageCol.style.gridColumn = fa ? "9 / span 4" : "1 / span 4";
+    /* history: the narrative is the reading content, the oversized year is its anchor opposite */
+    if(n.hsList) n.hsList.style.gridColumn = fa ? "1 / span 6" : "7 / span 6";
+    if(n.hsCol) n.hsCol.style.gridColumn = fa ? "8 / span 5" : "1 / span 5";
+    if(n.prog){ n.prog.style.right = fa ? "auto" : "14px"; n.prog.style.left = fa ? "14px" : "auto"; }
+    if(n.secnav){ n.secnav.style.left = fa ? "auto" : "var(--marg)"; n.secnav.style.right = fa ? "var(--marg)" : "auto"; }
+  }
+
+  animateMenu(){
+    const open = !!this.state.menu;
+    this.root.querySelectorAll("[data-ml]").forEach(a => {
+      a.style.opacity = open ? "1" : "0";
+      a.style.transform = open ? "translateY(0)" : "translateY(40%)";
+    });
+    document.body.style.overflow = open ? "hidden" : "";
+  }
+
+  /* keyed guard: the same behaviour is never attached twice, but one element may
+     own several independent behaviours (its own hover AND the custom cursor). */
+  bindOnce(el, key){
+    if(!el) return false;
+    if(!el.__taBindings) el.__taBindings = {};
+    if(el.__taBindings[key]) return false;
+    el.__taBindings[key] = true;
+    return true;
+  }
+
+  bind(){
+    this.root.querySelectorAll("[data-nav]").forEach(a => {
+      if(!this.bindOnce(a, "nav-hover")) return;
+      const sq = a.querySelector("[data-navsq]");
+      a.addEventListener("mouseenter", () => { a.style.transform = "translateY(-3px)"; if(sq){ sq.style.opacity = "1"; sq.style.transform = "scale(1)"; } });
+      a.addEventListener("mouseleave", () => { a.style.transform = "translateY(0)"; });
+    });
+    this.root.querySelectorAll("[data-arrow]").forEach(a => {
+      if(!this.bindOnce(a, "arrow-hover")) return;
+      const l = a.querySelector("[data-arrowline]");
+      a.addEventListener("mouseenter", () => { if(l) l.style.transform = "translateX(8px)"; });
+      a.addEventListener("mouseleave", () => { if(l) l.style.transform = "translateX(0)"; });
+    });
+    this.root.querySelectorAll("[data-pp-row]").forEach(a => {
+      if(!this.bindOnce(a, "row-hover")) return;
+      a.addEventListener("mouseenter", () => { a.style.paddingInlineStart = "12px"; });
+      a.addEventListener("mouseleave", () => { a.style.paddingInlineStart = "0px"; });
+    });
+    this.root.querySelectorAll("[data-aw-row]").forEach(a => {
+      if(!this.bindOnce(a, "row-hover")) return;
+      a.addEventListener("mouseenter", () => { a.style.paddingInlineStart = "12px"; a.style.color = "#3E9692"; });
+      a.addEventListener("mouseleave", () => { a.style.paddingInlineStart = "0px"; a.style.color = ""; });
+    });
+    this.root.querySelectorAll("[data-ml]").forEach(a => {
+      if(!this.bindOnce(a, "menu-link-hover")) return;
+      a.addEventListener("mouseenter", () => { a.style.color = "#56B1AC"; });
+      a.addEventListener("mouseleave", () => { a.style.color = ""; });
+    });
+  }
+
+  showPerson(i){
+    const n = this.n, red = this.state.reduced, p = LEADS_OF()[i];
+    if(!p) return;
+    this.setState({ person:i });
+    if(n.ppImg){
+      const v = p.vis || { backgroundImage: PLATES[p.plate % 4], backgroundSize:"auto", backgroundPosition:"0 0", backgroundRepeat:"repeat" };
+      n.ppImg.style.background = v.backgroundImage;
+      n.ppImg.style.backgroundSize = v.backgroundSize;
+      n.ppImg.style.backgroundPosition = v.backgroundPosition;
+      n.ppImg.style.backgroundRepeat = v.backgroundRepeat;
+      if(!red){
+        n.ppImg.style.transition = "none"; n.ppImg.style.transform = "scale(1.04)";
+        void n.ppImg.offsetWidth;
+        n.ppImg.style.transition = "transform var(--m-slow) cubic-bezier(.16,1,.3,1)";
+        n.ppImg.style.transform = "scale(1)";
+      }
+    }
+    if(n.ppMask && !red){
+      n.ppMask.style.transition = "none"; n.ppMask.style.clipPath = "inset(0 0 0 0)";
+      void n.ppMask.offsetWidth;
+      n.ppMask.style.transition = "clip-path var(--m-base) cubic-bezier(.76,0,.24,1)";
+      n.ppMask.style.clipPath = "inset(0 0 100% 0)";
+    }
+  }
+
+
+  /* event-driven scheduler: one pending frame at most, idle when nothing moves */
+  requestTick(){
+    if(this._pending != null || document.visibilityState === "hidden") return;
+    const run = () => { this._pending = null; this._raf = null; this.tick(); };
+    if(typeof requestAnimationFrame === "function"){
+      this._raf = requestAnimationFrame(run);
+      /* rAF does not fire in every host, so a short timer guarantees the frame */
+      this._pending = setTimeout(() => { if(this._raf != null && typeof cancelAnimationFrame === "function") cancelAnimationFrame(this._raf); run(); }, 24);
+    } else {
+      this._pending = setTimeout(run, 16);
+    }
+  }
+  stopTicking(){
+    if(this._pending != null){ clearTimeout(this._pending); this._pending = null; }
+    if(this._raf != null && typeof cancelAnimationFrame === "function"){ cancelAnimationFrame(this._raf); this._raf = null; }
+  }
+
+  tick(){
+    try{ this.frame(); }
+    catch(err){ if(!this._logged){ this._logged = true; console.error("ab tick error", err); } }
+  }
+
+  frame(){
+    if(!this.n || !this.n.header || !this.n.header.isConnected){
+      const live = document.querySelector("[data-ab-root]");
+      if(!live) return;
+      this.root = live; this.q(); this.bind(); this.armReveals(); this.applyLang();
+    }
+    const n = this.n, red = this.state.reduced, vh = window.innerHeight, y = window.scrollY || 0;
+
+    if(n.header){
+      const compact = y > 110;
+      n.header.style.paddingTop = compact ? "14px" : "24px";
+      n.header.style.paddingBottom = compact ? "14px" : "24px";
+      n.header.style.background = compact ? "rgba(250,249,247,.92)" : "transparent";
+    }
+
+    if(this.revealSet){
+      this.revealSet.forEach(t => {
+        if(t.done || !t.el.isConnected) return;
+        const r = t.el.getBoundingClientRect();
+        if(r.top < vh * 0.9 && r.bottom > 0){
+          t.done = true;
+          const mask = t.el.querySelector("[data-rv-mask]"), inner = t.el.querySelector("[data-rv-inner]");
+          if(mask){ if(red) mask.style.opacity = "0"; else mask.style.clipPath = "inset(0 0 100% 0)"; }
+          if(inner && !red) inner.style.transform = "scale(1)";
+        }
+      });
+    }
+    if(this.factSet){
+      this.factSet.forEach(t => {
+        if(t.done || !t.el.isConnected) return;
+        const r = t.el.getBoundingClientRect();
+        if(r.top < vh * 0.88 && r.bottom > 0){
+          t.done = true;
+          t.el.style.clipPath = "inset(0 0 -20% 0)";
+          t.el.style.transform = "translateY(0)";
+        }
+      });
+    }
+
+    /* history: the year that owns the reading zone drives both the clipped year and the coordinate */
+    if(n.hsItems && n.hsItems.length && n.hsYears){
+      const zone = vh * 0.42;
+      let idx = 0;
+      n.hsItems.forEach((it, i) => {
+        const r = it.getBoundingClientRect();
+        if(r.top <= zone) idx = i;
+      });
+      const box = this.yearBoxPx();
+      n.hsYears.style.transform = "translateY(" + (-idx * box) + "px)";
+      if(n.hsSq){
+        const c = MILESTONES[idx] ? MILESTONES[idx].coord : [0,0];
+        n.hsSq.style.transform = "translate(" + (c[0] * 23) + "px," + (c[1] * 23) + "px)";
+      }
+    }
+
+    if(n.secnav){
+      n.secnav.style.opacity = y > vh * 0.7 ? "1" : "0";
+      const fa = this.state.lang === "fa";
+      const zone = vh * 0.4;
+      const secs = Array.prototype.slice.call(this.root.querySelectorAll("[data-ab-section]"));
+      let active = secs[0] || null;
+      secs.forEach(s => { if(s.getBoundingClientRect().top <= zone) active = s; });
+      if(active && n.secnavLabel){
+        const key = active.getAttribute("data-ab-section");
+        const i = secs.indexOf(active);
+        n.secnavLabel.textContent = String(i + 1).padStart(2, "0") + " " + (SECTION_LABELS[key] ? SECTION_LABELS[key][fa ? 1 : 0] : key);
+      }
+    }
+
+    if(n.prog){
+      const doc = Math.max(1, document.documentElement.scrollHeight - vh);
+      const gp = clamp(y / doc, 0, 1);
+      n.prog.style.opacity = y > vh * 0.5 ? "1" : "0";
+      if(n.progSq) n.progSq.style.top = (gp * 111).toFixed(1) + "px";
+      if(n.progNum) n.progNum.textContent = String(Math.round(gp * 100)).padStart(3, "0");
+    }
+  }
+
+  yearBoxPx(){
+    return Math.round(clamp(window.innerWidth * 0.062, 62, 112));
+  }
+
+  renderVals(){
+    const st = this.state, fa = st.lang === "fa", red = st.reduced;
+    const D = window.TA_AWARDS;
+    const sfxHash = fa ? "#lang=fa" : "";
+    const sfxAmp = fa ? "&lang=fa" : "";
+    const box = this.yearBoxPx ? this.yearBoxPx() : 90;
+    const MILESTONES = MILESTONES_OF(), LEADS = LEADS_OF(), TEAM = TEAM_OF();
+    const PRACTICE = (AB() && AB().data.practice) || {}, THINKING = (AB() && AB().data.thinking) || {};
+
+    const milestones = MILESTONES.map(m => ({
+      year:m.year, tag: fa ? m.tag[1] : m.tag[0], title: fa ? m.t[1] : m.t[0], text: fa ? m.x[1] : m.x[0],
+      hasImage:m.img,
+      /* one composed shorthand: mixing it with size/repeat holes drops them */
+      plate: m.vis ? m.vis.background : PLATES[m.plate % 4]
+    }));
+
+    const leads = LEADS.map((p, i) => {
+      const on = i === st.person;
+      return {
+        name: fa ? p.n[1] : p.n[0], role: fa ? p.r[1] : p.r[0],
+        opacity: on ? "1" : "0.44", sq: on ? "1" : "0", color: on ? "#3E9692" : "#121B1B",
+        /* hover/focus on a mouse, tap on touch — the row is a selector, never a destination */
+        enter: () => { if(!(window.TA_LAYOUT && window.TA_LAYOUT.coarsePointer)) this.showPerson(i); },
+        noop: (e) => { if(e && e.preventDefault) e.preventDefault(); this.showPerson(i); }
+      };
+    });
+    const act = LEADS[st.person] || LEADS[0] || { n:[null,null], r:[null,null], b:[null,null] };
+
+    const team = TEAM.map(t => ({ name: fa ? t.n[1] : t.n[0], role: fa ? t.r[1] : t.r[0] }));
+    const collaborators = (AB() ? AB().collaborators() : []).map(c => ({ label: fa ? c.name.fa : c.name.en }));
+    const clients = (AB() ? AB().clients() : []).map(c => ({ label: fa ? c.name.fa : c.name.en }));
+
+    const lab = (map, k) => (map && map[k]) ? map[k][fa ? 1 : 0] : k;
+    const recognition = (D ? D.featured() : []).map(a => {
+      const p = a.projectId ? D.project(a.projectId) : null;
+      const routeIndex = (p && window.TA_PROJECTS) ? window.TA_PROJECTS.indexOf(a.projectId) : -1;
+      const name = fa ? a.nameFa : a.name;
+      return {
+        year:a.year, name:name,
+        nameDir: (fa && LATIN.test(name)) ? "ltr" : (fa ? "rtl" : "ltr"),
+        cat: lab(D.categories, a.cat),
+        subject: p ? (fa ? p.fa : p.en) : ("— " + lab(D.scopes, a.scope || "studio")),
+        href: (p && routeIndex >= 0) ? ("Projects.dc.html#p=" + routeIndex + sfxAmp) : ("Awards.dc.html" + sfxHash),
+        click: () => {}
+      };
+    });
+
+    return {
+      setEn: () => this.setState({ lang:"en" }),
+      setFa: () => this.setState({ lang:"fa" }),
+      enOpacity: fa ? "0.5" : "1", faOpacity: fa ? "1" : "0.5",
+      enWeight: fa ? "400" : "600", faWeight: fa ? "600" : "400",
+
+      hrefHome: "Homepage.dc.html" + sfxHash,
+      hrefProjects: "Projects.dc.html" + sfxHash,
+      hrefExpertise: "Expertise.dc.html" + sfxHash,
+      hrefAwards: "Awards.dc.html" + sfxHash,
+      hrefJournal: "Journal.dc.html" + sfxHash,
+      hrefContact: "Contact.dc.html" + sfxHash,
+
+      openMenu: () => this.setState({ menu:true }),
+      closeMenu: () => this.setState({ menu:false }),
+      menuClip: st.menu ? "polygon(0 0,100% 0,100% 100%,0 100%)" : "polygon(0 0,0 0,0 0,0 0)",
+      menuPointer: st.menu ? "auto" : "none",
+      menuSize: fa ? "clamp(26px,3.4vw,48px)" : "clamp(30px,4.2vw,58px)",
+      menuLh: fa ? "1.5" : "1.04",
+      menuLs: fa ? "0" : "-.03em",
+      menuLinks: MENU.map((m, i) => ({
+        num: String(i + 1).padStart(2, "0"),
+        label: fa ? m[1] : m[0],
+        href: m[2] ? (m[2].indexOf("#") >= 0 ? m[2] + sfxAmp : m[2] + sfxHash) : "#",
+        delay: (120 + i * 60) + "ms",
+        click: (e) => {
+          if(!m[2]){ if(e && e.preventDefault) e.preventDefault(); this.setState({ menu:false }, () => window.scrollTo(0, 0)); }
+          else this.setState({ menu:false });
+        }
+      })),
+
+      studioBg: (function(){ const m = AB() && AB().data.opening.media; return m ? MV(m).background : PLATES[1]; })(),
+      practiceLead: PRACTICE.lead ? (fa ? PRACTICE.lead.fa : PRACTICE.lead.en) : null,
+      practiceA: PRACTICE.body && PRACTICE.body[0] ? (fa ? PRACTICE.body[0].fa : PRACTICE.body[0].en) : null,
+      practiceB: PRACTICE.body && PRACTICE.body[1] ? (fa ? PRACTICE.body[1].fa : PRACTICE.body[1].en) : null,
+
+      milestones: milestones,
+      yearBox: box + "px",
+      yearSize: fa ? "clamp(34px,4vw,74px)" : "clamp(40px,5vw,92px)",
+      msLh: fa ? "1.46" : "1.1",
+
+      themes: (AB() ? AB().data.philosophy.themes : []).map(t => ({
+        word: fa ? t.word.fa : t.word.en,
+        text: fa ? t.body.fa : t.body.en,
+        col: t.presentation.col,
+        color: t.presentation.accent ? "#3E9692" : "#121B1B"
+      })),
+      themeLh: fa ? "1.5" : "1.1",
+
+      leads: leads, team: team, collaborators: collaborators, clients: clients,
+      activeName: fa ? act.n[1] : act.n[0],
+      activeRole: fa ? act.r[1] : act.r[0],
+      activeBio: fa ? act.b[1] : act.b[0],
+
+      numbers: (AB() ? AB().numbers() : []).map(n => ({
+        value: n.value, col: n.presentation.col,
+        note: fa ? n.note.fa : n.note.en
+      })),
+
+      thinkingLead: THINKING.lead ? (fa ? THINKING.lead.fa : THINKING.lead.en) : null,
+
+      recognition: recognition,
+
+      bodySize: fa ? "16.5px" : "17px",
+      bodyLh: fa ? "2" : "1.62",
+      measure: fa ? "38ch" : "60ch",
+      leadLh: fa ? "1.6" : "1.16",
+
+      toggleReduced: () => this.setState(s => ({ reduced: !s.reduced }), () => this.armReveals()),
+      rmState: red ? "on" : "off",
+      rmTitle: fa ? "حرکت کاهش‌یافته" : "Reduced motion",
+      rmBg: red ? "#56B1AC" : "transparent",
+      rmColor: red ? "#121B1B" : "rgba(18,27,27,.45)"
+    };
+  }
+}
+</script>
+</body>
+</html>

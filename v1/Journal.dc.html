@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="responsive.css" />
+<script>window.TA_ASSET_BASE = "../";</script>
+<script src="../site-data.js"></script>
+<script src="../media-utils.js"></script>
+<script src="../projects-data.js"></script>
+<script src="../expertise-data.js"></script>
+<script src="../about-data.js"></script>
+<script src="layout-mode.js"></script>
+<script src="../journal-data.js"></script>
+<style>
+:root{
+  --ink:#121B1B; --turq:#56B1AC; --canvas:#FAF9F7; --turq-dk:#3E9692; --turq-pale:#D9EFED; --grey:#E8E8E4;
+  --rule:rgba(18,27,27,.14); --rule-soft:rgba(18,27,27,.08); --ink-60:rgba(18,27,27,.6); --ink-45:rgba(18,27,27,.45);
+  --canvas-40:rgba(250,249,247,.4); --canvas-60:rgba(250,249,247,.6); --canvas-rule:rgba(250,249,247,.18);
+  --en:"Schibsted Grotesk",-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --fa:"Vazirmatn","Schibsted Grotesk",Tahoma,sans-serif;
+  /* MOTION SYSTEM V2 — one scale, four families. Do not introduce a literal ms
+     value in a component; if a tempo is missing from this scale, the scale is wrong.
+       instant  micro UI feedback            fast  interaction / hover / state
+       base     reveal — the default tempo   slow  image depth, cinematic settle
+       page     full-screen overlays only */
+  --m-instant:180ms; --m-fast:240ms; --m-standard:420ms; --m-reveal:620ms; --m-slow:900ms; --m-page:1000ms;
+  /* --m-base is the alias every migrated component already points at; it resolves to the
+     reveal tempo because reveal is the site's default content-entry motion. */
+  --m-base:620ms;
+  /* editorial  content entering — the default curve
+     cinematic  image and scene depth
+     standard   micro UI only
+     page       clip / mask / scene wipes */
+  --e-editorial:cubic-bezier(.16,1,.3,1); --e-cinematic:cubic-bezier(.22,1,.36,1);
+  --e-smooth:cubic-bezier(.4,0,.2,1); --e-standard:cubic-bezier(.4,0,.2,1); --e-page:cubic-bezier(.76,0,.24,1);
+  /* legacy alias */
+  --e-enter:cubic-bezier(.16,1,.3,1);
+  --gap:24px; --marg:40px;
+  --plate:repeating-linear-gradient(-45deg,#E8E8E4 0 18px,#E1E1DC 18px 36px);
+}
+*{box-sizing:border-box}
+body{margin:0;background:#FAF9F7;color:#121B1B;font-family:var(--en);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+a{color:inherit;text-decoration:none}
+a:hover{color:#3E9692}
+a:focus-visible,button:focus-visible{outline:2px solid #3E9692;outline-offset:3px}
+::selection{background:#D9EFED;color:#121B1B}
+@keyframes jr-lineup{from{clip-path:inset(0 0 105% 0)}to{clip-path:inset(0 0 -25% 0)}}
+@keyframes jr-in{from{opacity:0}to{opacity:1}}
+</style>
+</helmet>
+
+<div data-jr-root="1" style="background:var(--canvas);color:var(--ink);font-family:var(--en);position:relative;overflow-x:clip;min-height:100vh">
+
+  <header data-hd="1" style="position:fixed;top:0;left:0;right:0;z-index:95;padding:24px var(--marg);display:flex;align-items:center;justify-content:space-between;gap:clamp(12px,2vw,24px);color:{{ headerColor }};transition:padding var(--m-standard) var(--e-standard),background var(--m-standard) var(--e-standard),color var(--m-base) var(--e-standard)">
+    <a href="{{ hrefHome }}" style="display:flex;align-items:center;gap:12px;flex:none">
+      <span style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:1.5px;width:22px;height:22px;border:1.5px solid currentColor">
+        <i style="background:var(--turq)"></i><i style="background:var(--turq)"></i><i style="background:var(--turq)"></i><i style="background:var(--turq)"></i><i style="background:var(--turq)"></i><i style="background:var(--turq)"></i><i style="background:var(--turq)"></i><i style="background:var(--turq)"></i><i style="background:var(--turq)"></i>
+      </span>
+      <span data-en="1" style="font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;white-space:nowrap">Tarh &amp; Afarinesh</span>
+      <span data-fa="1" style="font-family:var(--fa);font-size:15.5px;font-weight:600;white-space:nowrap;display:none">طرح و آفرینش</span>
+    </a>
+    <nav style="display:flex;align-items:center;flex-wrap:wrap;gap:clamp(12px,1.6vw,30px);flex:0 1 auto;min-width:0;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase">
+      <a href="{{ hrefProjects }}" data-nav="1" style="display:inline-flex;align-items:center;gap:7px;padding:4px 0;transition:transform var(--m-fast) var(--e-standard)"><i data-navsq="1" style="width:5px;height:5px;background:var(--turq);opacity:0;transform:scale(.4);transition:opacity var(--m-fast) var(--e-standard),transform var(--m-fast) var(--e-standard)"></i><span data-en="1">Projects</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:14.5px;display:none">پروژه‌ها</span></a>
+      <a href="{{ hrefExpertise }}" data-nav="1" style="display:inline-flex;align-items:center;gap:7px;padding:4px 0;transition:transform var(--m-fast) var(--e-standard)"><i data-navsq="1" style="width:5px;height:5px;background:var(--turq);opacity:0;transform:scale(.4);transition:opacity var(--m-fast) var(--e-standard),transform var(--m-fast) var(--e-standard)"></i><span data-en="1">Expertise</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:14.5px;display:none">تخصص‌ها</span></a>
+      <a href="{{ hrefAwards }}" data-nav="1" style="display:inline-flex;align-items:center;gap:7px;padding:4px 0;transition:transform var(--m-fast) var(--e-standard)"><i data-navsq="1" style="width:5px;height:5px;background:var(--turq);opacity:0;transform:scale(.4);transition:opacity var(--m-fast) var(--e-standard),transform var(--m-fast) var(--e-standard)"></i><span data-en="1">Awards</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:14.5px;display:none">جوایز</span></a>
+      <a href="{{ hrefContact }}" data-nav="1" style="display:inline-flex;align-items:center;gap:7px;padding:4px 0;transition:transform var(--m-fast) var(--e-standard)"><i data-navsq="1" style="width:5px;height:5px;background:var(--turq);opacity:0;transform:scale(.4);transition:opacity var(--m-fast) var(--e-standard),transform var(--m-fast) var(--e-standard)"></i><span data-en="1">Contact</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:14.5px;display:none">تماس</span></a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:18px;flex:none">
+      <div style="display:flex;align-items:center;gap:9px;font-size:12px;letter-spacing:.08em;direction:ltr">
+        <button type="button" onClick="{{ setEn }}" style="appearance:none;background:none;border:none;padding:2px 0;cursor:pointer;font:inherit;letter-spacing:inherit;color:inherit;opacity:{{ enOpacity }};font-weight:{{ enWeight }};transition:opacity var(--m-fast) var(--e-standard)">EN</button>
+        <span style="width:1px;height:11px;background:currentColor;opacity:.3"></span>
+        <button type="button" onClick="{{ setFa }}" style="appearance:none;background:none;border:none;padding:2px 0;cursor:pointer;font-family:var(--fa);font-size:13px;color:inherit;opacity:{{ faOpacity }};font-weight:{{ faWeight }};transition:opacity var(--m-fast) var(--e-standard)">فا</button>
+      </div>
+      <button type="button" onClick="{{ openMenu }}" style="appearance:none;background:none;border:1px solid currentColor;padding:9px 14px;cursor:pointer;font:inherit;color:inherit;font-size:12px;letter-spacing:.12em;text-transform:uppercase;display:flex;align-items:center;gap:10px;transition:opacity var(--m-fast) var(--e-standard)" style-hover="opacity:.65">
+        <span data-en="1">Menu</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:14.5px;display:none">منو</span>
+        <span style="display:block;width:12px;height:1px;background:currentColor;box-shadow:0 4px 0 currentColor,0 -4px 0 currentColor"></span>
+      </button>
+    </div>
+  </header>
+
+  <div data-menu="1" style="position:fixed;inset:0;z-index:100;background:var(--ink);color:var(--canvas);clip-path:{{ menuClip }};transition:clip-path var(--m-page) var(--e-page);pointer-events:{{ menuPointer }};display:flex;flex-direction:column;justify-content:space-between;padding:26px var(--marg) 40px">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:24px">
+      <span data-en="1" style="font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:600">Tarh &amp; Afarinesh</span>
+      <span data-fa="1" style="font-family:var(--fa);font-size:15.5px;font-weight:600;display:none">طرح و آفرینش</span>
+      <button type="button" onClick="{{ closeMenu }}" style="appearance:none;background:none;border:1px solid var(--canvas-rule);color:var(--canvas);padding:9px 14px;cursor:pointer;font:inherit;font-size:12px;letter-spacing:.12em;text-transform:uppercase;transition:background var(--m-fast) var(--e-standard)" style-hover="background:rgba(250,249,247,.12)"><span data-en="1">Close</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:14.5px;display:none">بستن</span></button>
+    </div>
+    <nav style="display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap);align-items:end">
+      <div style="grid-column:1 / span 7;display:grid">
+        <sc-for list="{{ menuLinks }}" as="m" hint-placeholder-count="7">
+          <a href="{{ m.href }}" onClick="{{ m.click }}" data-ml="1" style="border-top:1px solid var(--canvas-rule);padding:13px 0;display:flex;align-items:center;gap:20px;opacity:0;transform:translateY(40%);transition:opacity var(--m-base) var(--e-enter) {{ m.delay }},transform 620ms var(--e-enter) {{ m.delay }},color var(--m-fast) var(--e-standard)">
+            <span style="font-size:12px;letter-spacing:.14em;color:var(--canvas-40);font-variant-numeric:tabular-nums;direction:ltr">{{ m.num }}</span>
+            <span style="font-size:{{ menuSize }};line-height:{{ menuLh }};letter-spacing:{{ menuLs }};font-weight:500">{{ m.label }}</span>
+            <i style="width:7px;height:7px;background:var(--turq);opacity:{{ m.activeSq }};flex:none"></i>
+          </a>
+        </sc-for>
+        <div style="border-top:1px solid var(--canvas-rule)"></div>
+      </div>
+      <div style="grid-column:9 / span 4;font-size:13px;line-height:1.9;color:var(--canvas-60)">
+        <span data-en="1" style="display:block;direction:ltr">[EMAIL]</span><span data-fa="1" style="font-family:var(--fa);display:none">[ایمیل]</span>
+        <span data-en="1" style="display:block">[CITY] · [OFFICE]</span><span data-fa="1" style="font-family:var(--fa);display:none">[شهر] · [دفتر]</span>
+      </div>
+    </nav>
+  </div>
+
+  <!-- ================= ARCHIVE ================= -->
+  <div data-view="archive" style="position:relative">
+    <section data-screen-label="Journal opening" style="padding:calc(var(--marg) + 120px) var(--marg) 0">
+      <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap);align-items:end">
+        <div style="grid-column:1 / span 7;overflow:hidden">
+          <h1 data-en="1" style="margin:0;font-size:clamp(58px,8.6vw,150px);line-height:.88;letter-spacing:-.05em;font-weight:500;animation:jr-lineup var(--m-base) var(--e-page) 120ms both">Journal</h1>
+          <h1 data-fa="1" style="margin:0;font-family:var(--fa);font-size:clamp(50px,7.2vw,126px);line-height:1.2;font-weight:500;display:none;animation:jr-lineup var(--m-base) var(--e-page) 120ms both">مجله</h1>
+        </div>
+        <div style="grid-column:10 / span 3;padding-bottom:18px;display:flex;flex-direction:column;gap:9px;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-45);opacity:0;animation:jr-in var(--m-base) var(--e-standard) 460ms forwards">
+          <span style="color:var(--ink);font-size:13px;direction:ltr;font-variant-numeric:tabular-nums">{{ countLabel }}</span>
+          <span data-en="1">Ideas, research and project reporting</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:13px;line-height:1.9;display:none">ایده‌ها، پژوهش و گزارش پروژه‌ها</span>
+          <span data-en="1">Placeholder editorial content — to be replaced</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:13px;line-height:1.9;display:none">محتوای جایگزین — بعداً تکمیل می‌شود</span>
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:40px;border-top:1px solid var(--rule);padding-top:16px;flex-wrap:wrap">
+        <div data-jr-filters="1" style="display:flex;align-items:center;flex-wrap:wrap;gap:8px 22px;font-size:12px;letter-spacing:.12em;text-transform:uppercase">
+          <sc-for list="{{ types }}" as="t" hint-placeholder-count="7">
+            <button type="button" onClick="{{ t.pick }}" style="appearance:none;background:none;border:none;padding:4px 0;cursor:pointer;font:inherit;letter-spacing:inherit;text-transform:inherit;color:inherit;display:inline-flex;align-items:center;gap:8px;opacity:{{ t.opacity }};transition:opacity var(--m-fast) var(--e-standard)">
+              <i style="width:7px;height:7px;background:var(--turq);opacity:{{ t.sq }};transition:opacity var(--m-fast) var(--e-standard)"></i>
+              <span style="font-family:{{ t.font }};font-size:{{ t.size }};letter-spacing:{{ t.ls }};text-transform:{{ t.tt }}">{{ t.label }}</span>
+            </button>
+          </sc-for>
+        </div>
+        <button type="button" data-rm="1" onClick="{{ toggleReduced }}" title="{{ rmTitle }}" style="appearance:none;background:{{ rmBg }};color:{{ rmColor }};border:1px solid var(--rule);padding:7px 11px;cursor:pointer;font:inherit;font-size:10px;letter-spacing:.1em;text-transform:uppercase;display:inline-flex;align-items:center;gap:7px"><span style="width:7px;height:7px;background:currentColor;opacity:.7"></span><span style="direction:ltr">RM {{ rmState }}</span></button>
+      </div>
+    </section>
+
+    <!-- featured story -->
+    <sc-if value="{{ showFeatured }}" hint-placeholder-val="{{ true }}">
+      <section data-screen-label="Featured story" style="padding:44px var(--marg) 0">
+        <a href="#" onClick="{{ feature.open }}" data-jr-card="1" data-cursor="Read" data-cursor-fa="مطالعه" style="display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap);align-items:end">
+          <div data-jr-featmedia="1" style="grid-column:{{ featMediaCol }};grid-row:1;position:relative;overflow:hidden;background:var(--grey);aspect-ratio:{{ feature.ratio }};direction:ltr">
+            <div data-jr-img="1" data-jr-transition-media="1" style="position:absolute;inset:0;background-image:{{ feature.bg }};background-size:{{ feature.bgSize }};background-position:{{ feature.bgPos }};background-repeat:{{ feature.bgRepeat }};transition:transform var(--m-slow) var(--e-enter)"></div>
+            <div data-rv-mask="1" style="position:absolute;inset:0;background:var(--canvas);transition:clip-path var(--m-page) var(--e-page)"></div>
+            <i data-jr-sq="1" style="position:absolute;left:0;top:0;width:16px;height:16px;background:var(--turq);transform:scale(0);transform-origin:0 0;transition:transform var(--m-standard) var(--e-page)"></i>
+          </div>
+          <div style="grid-column:{{ featTextCol }};grid-row:1;padding-bottom:6px">
+            <div style="display:flex;align-items:center;gap:14px;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-45)">
+              <i style="width:7px;height:7px;background:var(--turq)"></i><span>{{ feature.typeLabel }}</span><span style="direction:ltr">{{ feature.date }}</span>
+            </div>
+            <h2 style="margin:16px 0 0;font-size:{{ featTitleSize }};line-height:{{ featTitleLh }};letter-spacing:{{ featTitleLs }};font-weight:500">{{ feature.title }}</h2>
+            <p style="margin:18px 0 0;font-size:{{ bodySize }};line-height:{{ bodyLh }};color:var(--ink-60);max-width:{{ measure }}">{{ feature.excerpt }}</p>
+          </div>
+        </a>
+      </section>
+    </sc-if>
+
+    <!-- editorial field -->
+    <section data-screen-label="Journal archive" style="padding:12vh var(--marg) 16vh">
+      <div data-jr-grid="1" style="display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap)">
+        <sc-for list="{{ items }}" as="it" hint-placeholder-count="12">
+          <a href="#" onClick="{{ it.open }}" data-jr-card="1" data-cursor="Read" data-cursor-fa="مطالعه" style="grid-column:{{ it.col }};margin-top:{{ it.mt }};display:block;border-top:{{ it.rule }};padding-top:{{ it.pt }}">
+            <sc-if value="{{ it.hasMedia }}" hint-placeholder-val="{{ true }}">
+              <div style="position:relative;overflow:hidden;background:var(--grey);aspect-ratio:{{ it.ratio }};direction:ltr;margin-bottom:16px">
+                <div data-jr-img="1" data-jr-transition-media="1" style="position:absolute;inset:0;background-image:{{ it.bg }};background-size:{{ it.bgSize }};background-position:{{ it.bgPos }};background-repeat:{{ it.bgRepeat }};transition:transform var(--m-slow) var(--e-enter)"></div>
+                <div data-rv-mask="1" style="position:absolute;inset:0;background:var(--canvas);transition:clip-path var(--m-page) var(--e-page)"></div>
+                <i data-jr-sq="1" style="position:absolute;left:0;top:0;width:14px;height:14px;background:var(--turq);transform:scale(0);transform-origin:0 0;transition:transform var(--m-standard) var(--e-page)"></i>
+              </div>
+            </sc-if>
+            <div style="display:flex;align-items:center;gap:12px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-45)">
+              <span>{{ it.typeLabel }}</span><span style="direction:ltr">{{ it.date }}</span>
+            </div>
+            <h3 data-jr-title="1" style="margin:10px 0 0;font-size:{{ it.titleSize }};line-height:{{ it.titleLh }};letter-spacing:{{ it.titleLs }};font-weight:500;transition:transform var(--m-standard) var(--e-page)">{{ it.title }}</h3>
+            <sc-if value="{{ it.showExcerpt }}" hint-placeholder-val="{{ false }}">
+              <p style="margin:12px 0 0;font-size:{{ bodySize }};line-height:{{ bodyLh }};color:var(--ink-60);max-width:{{ measure }}">{{ it.excerpt }}</p>
+            </sc-if>
+            <sc-if value="{{ it.hasProject }}" hint-placeholder-val="{{ false }}">
+              <div style="margin-top:12px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--turq-dk)">{{ it.projectLabel }}</div>
+            </sc-if>
+          </a>
+        </sc-for>
+      </div>
+      <sc-if value="{{ noResults }}" hint-placeholder-val="{{ false }}">
+        <div style="border-top:1px solid var(--rule);padding:60px 0;font-size:15px;color:var(--ink-60)">
+          <span data-en="1">No entries match this filter.</span><span data-fa="1" style="font-family:var(--fa);display:none">موردی با این فیلتر یافت نشد.</span>
+        </div>
+      </sc-if>
+    </section>
+  </div>
+
+  <!-- ================= DETAIL ================= -->
+  <div data-view="detail" style="position:relative;display:none">
+    <section data-jr-section="hero" data-screen-label="Article hero" style="padding:calc(var(--marg) + 120px) var(--marg) 0">
+      <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap)">
+        <div style="grid-column:1 / span 2;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-45);display:flex;flex-direction:column;gap:10px">
+          <span style="display:flex;align-items:center;gap:8px"><i style="width:7px;height:7px;background:var(--turq)"></i>{{ d.typeLabel }}</span>
+          <span style="direction:ltr">{{ d.date }}</span>
+        </div>
+        <div style="grid-column:3 / span 9">
+          <h1 data-jr-dtitle="1" style="margin:0;font-size:{{ dTitleSize }};line-height:{{ dTitleLh }};letter-spacing:{{ dTitleLs }};font-weight:500;max-width:{{ dTitleMeasure }}">{{ d.title }}</h1>
+          <div style="margin-top:26px;display:flex;flex-wrap:wrap;gap:12px 28px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-60)">
+            <span>{{ d.authorLabel }}</span>
+            <sc-if value="{{ d.hasRole }}" hint-placeholder-val="{{ true }}"><span>{{ d.role }}</span></sc-if>
+            <sc-if value="{{ d.hasExp }}" hint-placeholder-val="{{ true }}">
+              <span style="display:flex;flex-wrap:wrap;gap:12px">
+                <sc-for list="{{ d.expertise }}" as="x" hint-placeholder-count="2">
+                  <a href="{{ x.href }}" style="border-bottom:1px solid var(--rule);padding-bottom:2px">{{ x.label }}</a>
+                </sc-for>
+              </span>
+            </sc-if>
+          </div>
+        </div>
+      </div>
+      <sc-if value="{{ d.hasHero }}" hint-placeholder-val="{{ true }}">
+        <div data-jr-heromedia="1" data-rv="img" style="position:relative;margin-top:7vh;overflow:hidden;background:var(--grey);aspect-ratio:{{ d.heroRatio }};direction:ltr">
+          <div data-jr-heroimg="1" data-jr-transition-media="1" style="position:absolute;inset:-4% -2%;background-image:{{ d.heroBg }};background-size:{{ d.heroBgSize }};background-position:{{ d.heroBgPos }};background-repeat:{{ d.heroBgRepeat }}"></div>
+          <div data-rv-mask="1" style="position:absolute;inset:0;background:var(--canvas)"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;gap:24px;margin-top:12px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-45)">
+          <span data-en="1">Placeholder caption — photography credit to follow</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:13px;display:none">شرح جایگزین — نام عکاس بعداً اضافه می‌شود</span>
+          <span style="direction:ltr">{{ d.num }}</span>
+        </div>
+      </sc-if>
+    </section>
+
+    <section data-jr-section="lead" data-screen-label="Lead" style="padding:12vh var(--marg) 0">
+      <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap)">
+        <div data-jr-lead="1" style="grid-column:3 / span 7;font-size:{{ leadSize }};line-height:{{ leadLh }};letter-spacing:-.018em">{{ d.lead }}</div>
+      </div>
+    </section>
+
+    <!-- body: real editorial reading measure -->
+    <section data-jr-section="body" data-screen-label="Article body" style="padding:8vh var(--marg) 0">
+      <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap)">
+        <div data-jr-toc="1" style="grid-column:1 / span 2;position:sticky;top:calc(var(--marg) + 120px);align-self:start;display:{{ tocDisplay }};flex-direction:column;gap:10px">
+          <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-45)"><span data-en="1">Contents</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:13px;display:none">فهرست</span></div>
+          <sc-for list="{{ d.toc }}" as="h" hint-placeholder-count="4">
+            <a href="#" onClick="{{ h.go }}" style="display:flex;align-items:baseline;gap:9px;font-size:12.5px;line-height:1.5;color:var(--ink-60)"><span style="direction:ltr;font-variant-numeric:tabular-nums;color:var(--ink-45)">{{ h.num }}</span>{{ h.label }}</a>
+          </sc-for>
+        </div>
+        <div data-jr-prose="1" style="grid-column:3 / span 6;display:flex;flex-direction:column;gap:26px">
+          <sc-for list="{{ d.blocks }}" as="b" hint-placeholder-count="6">
+            <div data-jr-block="1" data-heading="{{ b.isHeading }}">
+              <sc-if value="{{ b.isHeading }}" hint-placeholder-val="{{ false }}">
+                <h2 data-jr-h="1" style="margin:34px 0 0;font-size:{{ h2Size }};line-height:{{ h2Lh }};letter-spacing:-.02em;font-weight:500">{{ b.text }}</h2>
+              </sc-if>
+              <sc-if value="{{ b.isText }}" hint-placeholder-val="{{ true }}">
+                <p style="margin:0;font-size:{{ bodySize }};line-height:{{ bodyLh }};color:var(--ink-60);max-width:{{ measure }}">{{ b.text }}</p>
+              </sc-if>
+              <sc-if value="{{ b.isQuote }}" hint-placeholder-val="{{ false }}">
+                <blockquote style="margin:24px 0;padding:0;border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);padding:26px 0">
+                  <div style="font-size:{{ quoteSize }};line-height:{{ quoteLh }};letter-spacing:-.02em">{{ b.text }}</div>
+                  <div style="margin-top:14px;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-45)">{{ b.by }}</div>
+                </blockquote>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <!-- media modules, only those the entry activates -->
+      <sc-if value="{{ d.hasWide }}" hint-placeholder-val="{{ true }}">
+        <figure data-rv="img" style="margin:12vh 0 0;position:relative;overflow:hidden;background:var(--grey);aspect-ratio:16/9;direction:ltr">
+          <div data-rv-inner="1" style="position:absolute;inset:-4% -2%;background-image:{{ d.wideBg }};background-size:{{ d.wideBgSize }};background-position:{{ d.wideBgPos }};background-repeat:{{ d.wideBgRepeat }}"></div>
+          <div data-rv-mask="1" style="position:absolute;inset:0;background:var(--canvas)"></div>
+        </figure>
+        <figcaption style="margin-top:12px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-45)">{{ d.wideCaption }}</figcaption>
+      </sc-if>
+
+      <sc-if value="{{ d.hasPair }}" hint-placeholder-val="{{ true }}">
+        <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap);margin-top:10vh;align-items:end">
+          <figure data-rv="img" style="grid-column:3 / span 4;margin:0;position:relative;overflow:hidden;background:var(--grey);aspect-ratio:3/4;direction:ltr">
+            <div data-rv-inner="1" style="position:absolute;inset:-4% 0;background-image:{{ d.pairABg }};background-size:{{ d.pairABgSize }};background-position:{{ d.pairABgPos }};background-repeat:{{ d.pairABgRepeat }}"></div>
+            <div data-rv-mask="1" style="position:absolute;inset:0;background:var(--canvas)"></div>
+          </figure>
+          <figure data-rv="img" style="grid-column:8 / span 3;margin:0;position:relative;overflow:hidden;background:var(--grey);aspect-ratio:1/1;direction:ltr">
+            <div data-rv-inner="1" style="position:absolute;inset:-4% 0;background-image:{{ d.pairBBg }};background-size:{{ d.pairBBgSize }};background-position:{{ d.pairBBgPos }};background-repeat:{{ d.pairBBgRepeat }}"></div>
+            <div data-rv-mask="1" style="position:absolute;inset:0;background:var(--canvas)"></div>
+          </figure>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ d.hasVideo }}" hint-placeholder-val="{{ true }}">
+        <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap);margin-top:12vh">
+          <div data-cursor="Play" data-cursor-fa="پخش" style="grid-column:3 / span 8;position:relative;overflow:hidden;background:var(--ink);aspect-ratio:16/9;direction:ltr">
+            <div style="position:absolute;inset:0;background-image:{{ d.videoBg }};background-size:{{ d.videoBgSize }};background-position:{{ d.videoBgPos }};background-repeat:{{ d.videoBgRepeat }}"></div>
+            <button type="button" onClick="{{ togglePlay }}" style="position:absolute;inset:0;appearance:none;background:none;border:none;cursor:pointer;display:grid;place-items:center;color:var(--canvas);font:inherit">
+              <span style="display:flex;align-items:center;gap:12px;border:1px solid var(--canvas-rule);padding:14px 20px;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase"><i style="width:8px;height:8px;background:var(--turq)"></i>{{ playLabel }}</span>
+            </button>
+            <div style="position:absolute;left:20px;bottom:18px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--canvas-40)">{{ d.videoCaption }}</div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ d.hasAudio }}" hint-placeholder-val="{{ false }}">
+        <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap);margin-top:12vh">
+          <div style="grid-column:3 / span 6;border-top:1px solid var(--ink);padding-top:18px">
+            <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-45)"><span data-en="1">Audio</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:13px;display:none">صوت</span></div>
+            <div style="margin-top:12px;font-size:clamp(19px,1.8vw,26px);line-height:1.3;letter-spacing:-.018em">{{ d.audioTitle }}</div>
+            <div style="margin-top:18px;display:flex;align-items:center;gap:18px">
+              <button type="button" onClick="{{ toggleAudio }}" style="appearance:none;background:none;border:1px solid var(--ink);padding:10px 15px;cursor:pointer;font:inherit;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;display:inline-flex;align-items:center;gap:10px"><i style="width:8px;height:8px;background:var(--turq)"></i>{{ audioLabel }}</button>
+              <span style="font-size:11.5px;letter-spacing:.1em;color:var(--ink-45);direction:ltr;font-variant-numeric:tabular-nums">00:00 / {{ d.audioDuration }}</span>
+              <span style="flex:1;position:relative;height:1px;background:var(--rule)"><i style="position:absolute;inset-inline-start:0;top:-1px;width:{{ audioProgress }};height:3px;background:var(--turq);transition:width var(--m-standard) var(--e-standard)"></i></span>
+            </div>
+            <div style="margin-top:14px;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-45)">{{ d.audioTranscript }}</div>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- paper / publication metadata -->
+      <sc-if value="{{ d.hasDoc }}" hint-placeholder-val="{{ false }}">
+        <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap);margin-top:12vh;align-items:start">
+          <div style="grid-column:3 / span 3;position:relative;overflow:hidden;background:var(--grey);aspect-ratio:3/4;direction:ltr">
+            <div style="position:absolute;inset:0;background-image:{{ d.heroBg }};background-size:{{ d.heroBgSize }};background-position:{{ d.heroBgPos }};background-repeat:{{ d.heroBgRepeat }};display:grid;place-items:center"><span style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45)">{{ d.docKind }}</span></div>
+          </div>
+          <div style="grid-column:7 / span 5">
+            <sc-for list="{{ d.docMeta }}" as="row" hint-placeholder-count="5">
+              <div style="display:grid;grid-template-columns:minmax(0,150px) minmax(0,1fr);gap:20px;border-top:1px solid var(--rule);padding:14px 0">
+                <span style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-45)">{{ row.label }}</span>
+                <span style="font-size:14.5px;direction:{{ row.dir }}">{{ row.value }}</span>
+              </div>
+            </sc-for>
+            <button type="button" onClick="{{ download }}" title="{{ downloadLabel }}" style="margin-top:26px;appearance:none;background:none;border:1px solid var(--ink);padding:12px 18px;cursor:pointer;font:inherit;font-size:12px;letter-spacing:.12em;text-transform:uppercase;display:inline-flex;align-items:center;gap:12px;transition:background var(--m-fast) var(--e-standard),color var(--m-fast) var(--e-standard)" style-hover="background:var(--ink);color:var(--canvas)"><i style="width:8px;height:8px;background:var(--turq)"></i>{{ downloadLabel }}</button>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- inline project reference -->
+      <sc-if value="{{ d.hasProject }}" hint-placeholder-val="{{ true }}">
+        <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap);margin-top:12vh">
+          <a href="{{ d.projectHref }}" onClick="{{ openProject }}" data-arrow="1" style="grid-column:3 / span 6;display:grid;grid-template-columns:minmax(0,1fr) 110px;gap:24px;align-items:center;border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);padding:22px 0">
+            <span>
+              <span style="display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-45)"><span data-en="1">Project</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:13px;display:none">پروژه</span></span>
+              <span style="display:block;margin-top:8px;font-size:clamp(20px,1.9vw,30px);line-height:1.24;letter-spacing:-.02em">{{ d.projectTitle }}</span>
+              <span style="display:block;margin-top:6px;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-45)">{{ d.projectMeta }}</span>
+            </span>
+            <span data-jr-projmedia="1" style="position:relative;overflow:hidden;background:var(--grey);aspect-ratio:4/3;direction:ltr"><i data-jr-transition-media="1" style="position:absolute;inset:0;background-image:{{ d.projectBg }};background-size:{{ d.projectBgSize }};background-position:{{ d.projectBgPos }};background-repeat:{{ d.projectBgRepeat }}"></i></span>
+          </a>
+        </div>
+      </sc-if>
+    </section>
+
+    <!-- share -->
+    <section data-screen-label="Share" style="padding:10vh var(--marg) 0">
+      <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap)">
+        <div style="grid-column:3 / span 6;display:flex;align-items:center;gap:26px;border-top:1px solid var(--rule);padding-top:16px;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-45)">
+          <span data-en="1">Share</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:13.5px;display:none">اشتراک</span>
+          <button type="button" onClick="{{ copyLink }}" style="appearance:none;background:none;border:none;padding:4px 0;cursor:pointer;font:inherit;letter-spacing:inherit;text-transform:inherit;color:var(--ink);display:inline-flex;align-items:center;gap:9px"><i style="width:7px;height:7px;background:var(--turq);opacity:{{ copiedSq }};transition:opacity var(--m-fast) var(--e-standard)"></i>{{ copyLabel }}</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- related -->
+    <section data-jr-section="related" data-screen-label="Related stories" style="padding:14vh var(--marg) 0">
+      <div style="font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45);margin-bottom:30px"><span data-en="1">Related stories</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:13.5px;display:none">مطالب مرتبط</span></div>
+      <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap)">
+        <sc-for list="{{ related }}" as="r" hint-placeholder-count="3">
+          <a href="#" onClick="{{ r.open }}" data-jr-card="1" data-cursor="Read" data-cursor-fa="مطالعه" style="grid-column:{{ r.col }};margin-top:{{ r.mt }};display:block">
+            <sc-if value="{{ r.hasMedia }}" hint-placeholder-val="{{ true }}">
+              <div style="position:relative;overflow:hidden;background:var(--grey);aspect-ratio:{{ r.ratio }};direction:ltr;margin-bottom:14px">
+                <div data-jr-img="1" data-jr-transition-media="1" style="position:absolute;inset:0;background-image:{{ r.bg }};background-size:{{ r.bgSize }};background-position:{{ r.bgPos }};background-repeat:{{ r.bgRepeat }};transition:transform var(--m-slow) var(--e-enter)"></div>
+                <i data-jr-sq="1" style="position:absolute;left:0;top:0;width:14px;height:14px;background:var(--turq);transform:scale(0);transform-origin:0 0;transition:transform var(--m-standard) var(--e-page)"></i>
+              </div>
+            </sc-if>
+            <div style="display:flex;align-items:center;gap:12px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-45)"><span>{{ r.typeLabel }}</span><span style="direction:ltr">{{ r.date }}</span></div>
+            <div data-jr-title="1" style="margin-top:10px;font-size:{{ r.titleSize }};line-height:{{ r.titleLh }};letter-spacing:-.018em;transition:transform var(--m-standard) var(--e-page)">{{ r.title }}</div>
+          </a>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- next story + back -->
+    <section data-screen-label="Next story" style="padding:14vh var(--marg) var(--marg)">
+      <a href="#" onClick="{{ goNext }}" data-jr-next="1" style="display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap);border-top:1px solid var(--ink);padding-top:24px;align-items:end">
+        <div style="grid-column:1 / span 8">
+          <div style="display:flex;align-items:center;gap:14px;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-45)">
+            <span data-en="1">Next story</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:13.5px;display:none">مطلب بعدی</span>
+            <span>{{ next.typeLabel }}</span>
+          </div>
+          <div data-jr-nexttitle="1" style="margin-top:14px;font-size:{{ nextSize }};line-height:{{ nextLh }};letter-spacing:-.032em;font-weight:500;transition:transform var(--m-standard) var(--e-page);max-width:22ch">{{ next.title }}</div>
+        </div>
+        <div style="grid-column:10 / span 3;position:relative;overflow:hidden;background:var(--grey);aspect-ratio:16/10;direction:ltr;display:{{ next.mediaDisplay }}">
+          <div data-jr-nextimg="1" data-jr-transition-media="1" style="position:absolute;inset:-5% -2%;background-image:{{ next.bg }};background-size:{{ next.bgSize }};background-position:{{ next.bgPos }};background-repeat:{{ next.bgRepeat }};transition:transform var(--m-slow) var(--e-enter)"></div>
+        </div>
+      </a>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-top:10vh;border-top:1px solid var(--rule);padding-top:22px">
+        <a href="#" onClick="{{ backToArchive }}" data-arrow="1" style="display:inline-flex;align-items:center;gap:12px;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase"><span style="overflow:hidden;display:block;width:22px;height:9px;position:relative"><i data-arrowline="1" style="position:absolute;inset:0;background:currentColor;height:1px;top:4px;transition:transform var(--m-standard) var(--e-page)"></i></span><span data-en="1">Back to journal</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:14.5px;display:none">بازگشت به مجله</span></a>
+        <div style="display:flex;align-items:center;gap:18px">
+          <button type="button" onClick="{{ toggleReduced }}" title="{{ rmTitle }}" style="appearance:none;background:{{ rmBg }};color:{{ rmColor }};border:1px solid var(--rule);padding:7px 11px;cursor:pointer;font:inherit;font-size:10px;letter-spacing:.1em;text-transform:uppercase;display:inline-flex;align-items:center;gap:7px"><span style="width:7px;height:7px;background:currentColor;opacity:.7"></span><span style="direction:ltr">RM {{ rmState }}</span></button>
+          <span style="font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-45)">Tarh &amp; Afarinesh — طرح و آفرینش</span>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div data-shared="1" style="position:fixed;z-index:104;left:0;top:0;width:0;height:0;overflow:hidden;opacity:0;pointer-events:none;background:var(--grey);direction:ltr"><div data-shared-inner="1" style="position:absolute;inset:-4% -2%;background:var(--plate)"></div></div>
+
+  <div data-prog="1" style="position:fixed;right:14px;bottom:var(--marg);z-index:90;direction:ltr;pointer-events:none;display:flex;align-items:center;gap:10px;opacity:0;transition:opacity var(--m-standard) var(--e-standard)">
+    <span data-prog-num="1" style="font-size:10.5px;letter-spacing:.1em;color:var(--ink-45);font-variant-numeric:tabular-nums">000</span>
+    <span style="position:relative;display:block;width:9px;height:120px"><i style="position:absolute;left:4px;top:0;bottom:0;width:1px;background:var(--rule)"></i><i data-prog-sq="1" style="position:absolute;left:0;top:0;width:9px;height:9px;background:var(--turq)"></i></span>
+  </div>
+
+  <div data-cursor-el="1" style="position:fixed;left:0;top:0;z-index:130;width:78px;height:78px;border-radius:50%;background:var(--turq);color:var(--ink);display:grid;place-items:center;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;pointer-events:none;opacity:0;transform:translate(-50%,-50%) scale(.4);transition:opacity var(--m-fast) var(--e-standard),transform var(--m-fast) var(--e-standard);text-align:center"><span data-cursor-label="1">Read</span></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440},&quot;startLang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;en&quot;,&quot;options&quot;:[&quot;en&quot;,&quot;fa&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Bilingual&quot;},&quot;startView&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;archive&quot;,&quot;options&quot;:[&quot;archive&quot;,&quot;detail&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Router&quot;},&quot;forceReducedMotion&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Motion&quot;},&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#56B1AC&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#56B1AC&quot;,&quot;#3E9692&quot;,&quot;#121B1B&quot;],&quot;section&quot;:&quot;Brand&quot;}}">
+const clamp = (v, a, b) => v < a ? a : v > b ? b : v;
+const PLATES = [
+  "repeating-linear-gradient(-45deg,#E8E8E4 0 18px,#E1E1DC 18px 36px)",
+  "repeating-linear-gradient(-45deg,#DEDED8 0 18px,#D7D7D1 18px 36px)",
+  "repeating-linear-gradient(-45deg,#E4E7E6 0 18px,#DCE1E0 18px 36px)",
+  "repeating-linear-gradient(-45deg,#D9EFED 0 18px,#CFE8E5 18px 36px)"
+];
+/* expertise labels resolve from the canonical taxonomy */
+const EXP_LABEL_OF = (slug, fa) => {
+  const e = window.TA_EXPERTISE ? window.TA_EXPERTISE.bySlug(slug) : null;
+  return e ? (fa ? e.title.fa : e.title.en) : slug;
+};
+/* the editorial field: a deliberate rhythm, reused in order rather than tiled */
+const FIELD = [
+  { col:"1 / span 7", mt:"0px", ratio:"16/9", excerpt:true },
+  { col:"9 / span 4", mt:"20px", ratio:null, excerpt:false, rule:true },
+  { col:"1 / span 4", mt:"110px", ratio:"3/4", excerpt:false },
+  { col:"6 / span 6", mt:"150px", ratio:"16/10", excerpt:true },
+  { col:"2 / span 3", mt:"90px", ratio:null, excerpt:false, rule:true },
+  { col:"6 / span 3", mt:"90px", ratio:null, excerpt:false, rule:true },
+  { col:"10 / span 3", mt:"90px", ratio:null, excerpt:false, rule:true },
+  { col:"1 / span 5", mt:"110px", ratio:"4/3", excerpt:true },
+  { col:"7 / span 5", mt:"180px", ratio:"3/4", excerpt:false },
+  { col:"2 / span 6", mt:"120px", ratio:"16/9", excerpt:true },
+  { col:"9 / span 3", mt:"60px", ratio:"1/1", excerpt:false },
+  { col:"1 / span 4", mt:"110px", ratio:null, excerpt:false, rule:true }
+];
+const parseHash = () => {
+  const out = {};
+  (window.location.hash || "").replace(/^#/, "").split("&").forEach(part => {
+    if(!part) return;
+    const eq = part.indexOf("=");
+    if(eq < 0) out[part] = true; else out[part.slice(0, eq)] = part.slice(eq + 1);
+  });
+  return out;
+};
+/* one shared capture utility, same principle as Projects / Expertise / Awards */
+const captureVisual = (src) => {
+  if(!src) return null;
+  const img = src.querySelector ? src.querySelector("img") : null;
+  const host = img || src;
+  const cs = getComputedStyle(host);
+  const cap = { transform:(host.style && host.style.transform) || "none" };
+  if(img){
+    cap.backgroundImage = "url(" + (img.currentSrc || img.src) + ")";
+    cap.backgroundSize = cs.objectFit === "contain" ? "contain" : "cover";
+    cap.backgroundPosition = cs.objectPosition || "50% 50%";
+    cap.backgroundRepeat = "no-repeat";
+  } else {
+    cap.backgroundImage = cs.backgroundImage !== "none" ? cs.backgroundImage : "";
+    cap.backgroundSize = cs.backgroundSize;
+    cap.backgroundPosition = cs.backgroundPosition;
+    cap.backgroundRepeat = cs.backgroundRepeat;
+  }
+  return cap;
+};
+const rm = (media, ratio, pos) => {
+  const D = window.TA_JOURNAL;
+  if(D && D.resolveMedia) return D.resolveMedia(media, ratio, pos);
+  return { backgroundImage:PLATES[(media && media.plate) || 0], backgroundSize:"auto", backgroundPosition:"0% 0%",
+           backgroundRepeat:"repeat", ratio:ratio || "16/9", isRealMedia:false, theme:"light" };
+};
+/* spread a resolved visual state into template holes under one prefix */
+const bg = (v, prefix) => {
+  const o = {};
+  o[prefix] = v.backgroundImage;
+  o[prefix + "Size"] = v.backgroundSize;
+  o[prefix + "Pos"] = v.backgroundPosition;
+  o[prefix + "Repeat"] = v.backgroundRepeat;
+  return o;
+};
+/* the inline project reference resolves the canonical project asset, so a real
+   photograph added to projects-data.js appears inside the Journal automatically */
+const projectVisual = (p) => {
+  const D = window.TA_PROJECTS;
+  if (p && p.id && D) {
+    const v = D.visual(p.id, "archive", "archive");
+    return { ratio: v.ratio || "4/3", backgroundImage: v.backgroundImage, backgroundSize: v.backgroundSize,
+             backgroundPosition: v.backgroundPosition, backgroundRepeat: v.backgroundRepeat,
+             isRealMedia: v.isRealMedia };
+  }
+  return rm(p ? (p.media || { plate: p.plate, ratio: "4/3" }) : null, "4/3");
+};
+
+/* MOTION V2 — SCENE tempo. Every shared-element expansion and scene hand-off on the
+   site runs at this one duration so a click in Projects, Awards or Journal feels like the
+   same gesture. Paired with --e-page. SCENE_RM is the reduced-motion equivalent. */
+const SCENE = 900, SCENE_RM = 200;
+
+class Component extends DCLogic {
+  state = { lang:"en", view:"archive", type:"all", id:null, menu:false, copied:false, playing:false, reduced:false };
+
+  componentDidMount(){
+    this.root = document.querySelector("[data-jr-root]");
+    if(!this.root) return;
+    try{ this.state.reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches; }catch(e){}
+    if(this.props.forceReducedMotion) this.state.reduced = true;
+    if(this.props.startLang === "fa") this.state.lang = "fa";
+    const hq = parseHash();
+    if(hq.lang === "fa") this.state.lang = "fa";
+    if(hq.type) this.state.type = hq.type;
+    if(hq.article){
+      const D = window.TA_JOURNAL;
+      const e = D ? (D.bySlug(hq.article) || D.byId(hq.article)) : null;
+      if(e){ this.state.view = "detail"; this.state.id = e.id; }
+    }
+    if(this.props.startView === "detail" && !this.state.id){
+      const D = window.TA_JOURNAL;
+      if(D){ this.state.view = "detail"; this.state.id = D.featured().id; }
+    }
+    if(this.props.accent) this.root.style.setProperty("--turq", this.props.accent);
+    this.archiveY = 0;
+    this.cx = 0; this.cy = 0; this.cxs = 0; this.cys = 0;
+    this.onMove = (e) => { this.cx = e.clientX; this.cy = e.clientY; this.requestTick(); };
+    this.bindPointer = () => {
+      const fine = !(window.TA_LAYOUT && window.TA_LAYOUT.coarsePointer);
+      if(fine && !this._moveBound){ window.addEventListener("mousemove", this.onMove, { passive:true }); this._moveBound = true; }
+      if(!fine && this._moveBound){
+        window.removeEventListener("mousemove", this.onMove); this._moveBound = false;
+        const c = this.n && this.n.cursor; if(c){ c.style.opacity = "0"; c.style.transform = "translate(-50%,-50%) scale(.4)"; }
+        this.fine = false;
+      }
+    };
+    this.bindPointer();
+    this.q(); this.bind(); this.armReveals(); this.applyView(); this.applyLang();
+    window.__jrOwner = this;
+    if(window.TA_LAYOUT && window.TA_LAYOUT.onChange){
+      window.TA_LAYOUT.onChange((L, info) => {
+        /* a virtual keyboard only changes height — never a reason to re-initialise */
+        if(info && info.keyboardLikely){ this.requestTick(); return; }
+        if(info && info.pointerChanged && this.bindPointer) this.bindPointer();
+        if(info && info.reducedMotionChanged){ this.requestTick(); return; }
+        if(!info || info.layoutChanged){ this.q(); this.bind(); this.applyLang(); }
+        this.requestTick();
+      });
+    }
+    this.onScroll = () => this.requestTick();
+    window.addEventListener("scroll", this.onScroll, { passive:true });
+    /* scroll events are unreliable in this runtime — native scroll events drive the scheduler */
+    if(window.TA_LAYOUT && window.TA_LAYOUT.onScrollChange) window.TA_LAYOUT.onScrollChange(this.onScroll);
+    window.addEventListener("resize", this.onScroll);
+    this.onKey = (e) => { if(e.key === "Escape" && this.state.menu) this.setState({ menu:false }); };
+    this.onVis = () => { if(document.visibilityState === "visible") this.requestTick(); else this.stopTicking(); };
+    document.addEventListener("visibilitychange", this.onVis);
+    window.addEventListener("keydown", this.onKey);
+    this._pLang = this.state.lang; this._pView = this.state.view; this._pId = this.state.id;
+    this._pType = this.state.type; this._pMenu = false;
+    this.tick();
+  }
+
+  componentWillUnmount(){
+    if(window.__jrOwner === this) window.__jrOwner = null;
+    window.removeEventListener("mousemove", this.onMove);
+    window.removeEventListener("scroll", this.onScroll);
+    window.removeEventListener("resize", this.onScroll);
+    document.removeEventListener("visibilitychange", this.onVis);
+    this.stopTicking();
+    window.removeEventListener("keydown", this.onKey);
+    document.body.style.overflow = "";
+  }
+
+  componentDidUpdate(){
+    const st = this.state;
+    if(this._pLang !== st.lang){ this._pLang = st.lang; this.q(); this.bind(); this.armReveals(); this.applyLang(); this.syncHash(); }
+    if(this._pView !== st.view || this._pId !== st.id){
+      this._pView = st.view; this._pId = st.id;
+      this.q(); this.bind(); this.armReveals(); this.applyView(); this.applyLang();
+    }
+    if(this._pType !== st.type){
+      this._pType = st.type;
+      this.q(); this.bind(); this.armReveals(); this.applyLang();
+      this.syncHash();
+      this.revealItems();
+    }
+    if(this._pMenu !== st.menu){
+      this._pMenu = st.menu;
+      this.animateMenu();
+    }
+  }
+
+  q(){
+    const r = this.root, all = (s) => Array.prototype.slice.call(r.querySelectorAll(s));
+    this.n = {
+      header: r.querySelector("[data-hd]"),
+      archive: r.querySelector('[data-view="archive"]'),
+      detail: r.querySelector('[data-view="detail"]'),
+      grid: r.querySelector("[data-jr-grid]"),
+      cards: all("[data-jr-card]"),
+      featMedia: r.querySelector("[data-jr-featmedia]"),
+      heroMedia: r.querySelector("[data-jr-heromedia]"),
+      heroImg: r.querySelector("[data-jr-heroimg]"),
+      dTitle: r.querySelector("[data-jr-dtitle]"),
+      lead: r.querySelector("[data-jr-lead]"),
+      headings: all("[data-jr-h]"),
+      revealImgs: all('[data-rv="img"]'),
+      nextTitle: r.querySelector("[data-jr-nexttitle]"),
+      nextImg: r.querySelector("[data-jr-nextimg]"),
+      shared: r.querySelector("[data-shared]"),
+      sharedInner: r.querySelector("[data-shared-inner]"),
+      prog: r.querySelector("[data-prog]"),
+      progNum: r.querySelector("[data-prog-num]"),
+      progSq: r.querySelector("[data-prog-sq]"),
+      cursor: r.querySelector("[data-cursor-el]"),
+      cursorLabel: r.querySelector("[data-cursor-label]")
+    };
+  }
+
+  applyView(){
+    const d = this.state.view === "detail";
+    if(this.n.archive) this.n.archive.style.display = d ? "none" : "";
+    if(this.n.detail) this.n.detail.style.display = d ? "" : "none";
+  }
+
+  armReveals(){
+    const red = this.state.reduced;
+    /* archive card masks + detail media masks share one reveal set */
+    const set = [];
+    (this.n.revealImgs || []).forEach(el => set.push(el));
+    this.root.querySelectorAll("[data-rv-mask]").forEach(mask => {
+      mask.style.transition = red ? "opacity 200ms linear" : "clip-path 1000ms cubic-bezier(.76,0,.24,1)";
+      mask.style.clipPath = "inset(0 0 0 0)";
+      mask.style.opacity = "1";
+      const host = mask.parentElement;
+      if(host && set.indexOf(host) < 0) set.push(host);
+    });
+    this.revealSet = set.map(el => ({ el:el, done:false }));
+    (this.n.revealImgs || []).forEach(el => {
+      const inner = el.querySelector("[data-rv-inner]");
+      if(inner){ inner.style.transition = red ? "none" : "transform 1200ms cubic-bezier(.16,1,.3,1)"; inner.style.transform = red ? "none" : "scale(1.05)"; }
+    });
+  }
+
+  applyLang(){
+    const fa = this.state.lang === "fa", n = this.n;
+    this.root.setAttribute("dir", fa ? "rtl" : "ltr");
+    this.root.querySelectorAll("[data-en]").forEach(el => { el.style.display = fa ? "none" : ""; });
+    this.root.querySelectorAll("[data-fa]").forEach(el => { el.style.display = fa ? "" : "none"; });
+    this.root.style.fontFamily = fa ? 'Vazirmatn,"Schibsted Grotesk",Tahoma,sans-serif' : '"Schibsted Grotesk",Helvetica,Arial,sans-serif';
+    if(n.prog){ n.prog.style.right = fa ? "auto" : "14px"; n.prog.style.left = fa ? "14px" : "auto"; }
+  }
+
+  animateMenu(){
+    const open = !!this.state.menu;
+    this.root.querySelectorAll("[data-ml]").forEach(a => {
+      a.style.opacity = open ? "1" : "0";
+      a.style.transform = open ? "translateY(0)" : "translateY(40%)";
+    });
+    document.body.style.overflow = open ? "hidden" : "";
+  }
+
+  /* keyed guard: the same behaviour is never attached twice, but one element may
+     own several independent behaviours (its own hover AND the custom cursor). */
+  bindOnce(el, key){
+    if(!el) return false;
+    if(!el.__taBindings) el.__taBindings = {};
+    if(el.__taBindings[key]) return false;
+    el.__taBindings[key] = true;
+    return true;
+  }
+
+  bind(){
+    const n = this.n;
+    this.root.querySelectorAll("[data-nav]").forEach(a => {
+      if(!this.bindOnce(a, "nav-hover")) return;
+      const sq = a.querySelector("[data-navsq]");
+      a.addEventListener("mouseenter", () => { a.style.transform = "translateY(-3px)"; if(sq){ sq.style.opacity = "1"; sq.style.transform = "scale(1)"; } });
+      a.addEventListener("mouseleave", () => { a.style.transform = "translateY(0)"; });
+    });
+    this.root.querySelectorAll("[data-arrow]").forEach(a => {
+      if(!this.bindOnce(a, "arrow-hover")) return;
+      const l = a.querySelector("[data-arrowline]");
+      a.addEventListener("mouseenter", () => { if(l) l.style.transform = "translateX(8px)"; });
+      a.addEventListener("mouseleave", () => { if(l) l.style.transform = "translateX(0)"; });
+    });
+    const cardOn = (c) => {
+      const img = c.querySelector("[data-jr-img]"), sq = c.querySelector("[data-jr-sq]"), t = c.querySelector("[data-jr-title]");
+      if(img && !this.state.reduced) img.style.transform = "scale(1.018)";
+      if(sq) sq.style.transform = "scale(1)";
+      if(t) t.style.transform = this.state.lang === "fa" ? "translateX(-4px)" : "translateX(4px)";
+    };
+    const cardOff = (c) => {
+      const img = c.querySelector("[data-jr-img]"), sq = c.querySelector("[data-jr-sq]"), t = c.querySelector("[data-jr-title]");
+      if(img) img.style.transform = "scale(1)";
+      if(sq) sq.style.transform = "scale(0)";
+      if(t) t.style.transform = "translateX(0)";
+    };
+    this.root.querySelectorAll("[data-jr-card]").forEach(c => {
+      if(!this.bindOnce(c, "card-hover")) return;
+      c.addEventListener("mouseenter", () => cardOn(c));
+      c.addEventListener("mouseleave", () => cardOff(c));
+      c.addEventListener("focus", () => cardOn(c));
+      c.addEventListener("blur", () => cardOff(c));
+    });
+    const nx = this.root.querySelector("[data-jr-next]");
+    if(nx && this.bindOnce(nx, "next-hover")){
+      nx.addEventListener("mouseenter", () => {
+        if(n.nextTitle) n.nextTitle.style.transform = this.state.lang === "fa" ? "translateX(-10px)" : "translateX(10px)";
+        if(n.nextImg && !this.state.reduced) n.nextImg.style.transform = "scale(1.03)";
+      });
+      nx.addEventListener("mouseleave", () => {
+        if(n.nextTitle) n.nextTitle.style.transform = "translateX(0)";
+        if(n.nextImg) n.nextImg.style.transform = "scale(1)";
+      });
+    }
+    this.root.querySelectorAll("[data-ml]").forEach(a => {
+      if(!this.bindOnce(a, "menu-link-hover")) return;
+      a.addEventListener("mouseenter", () => { a.style.color = "#56B1AC"; });
+      a.addEventListener("mouseleave", () => { a.style.color = ""; });
+    });
+    const cur = n.cursor, lab = n.cursorLabel;
+    if(cur && window.matchMedia("(hover:hover) and (pointer:fine)").matches){
+      this.fine = true;
+      this.root.querySelectorAll("[data-cursor]").forEach(el => {
+      if(!this.bindOnce(el, "cursor")) return;
+        el.addEventListener("mouseenter", () => {
+          const fa = this.state.lang === "fa";
+          const t = (fa && el.getAttribute("data-cursor-fa")) || el.getAttribute("data-cursor");
+          if(!t) return;
+          if(lab) lab.textContent = t;
+          cur.style.opacity = "1"; cur.style.transform = "translate(-50%,-50%) scale(1)";
+        });
+        el.addEventListener("mouseleave", () => { cur.style.opacity = "0"; cur.style.transform = "translate(-50%,-50%) scale(.4)"; });
+      });
+    }
+  }
+
+  syncHash(){
+    try{
+      const parts = [];
+      if(this.state.view === "detail" && this.state.id){
+        const D = window.TA_JOURNAL, e = D ? D.byId(this.state.id) : null;
+        parts.push("article=" + (e ? e.slug : this.state.id));
+      } else if(this.state.type !== "all"){
+        parts.push("type=" + this.state.type);
+      }
+      if(this.state.lang === "fa") parts.push("lang=fa");
+      window.location.hash = parts.join("&");
+    }catch(e){}
+  }
+
+  /* calm filter transition — entries settle into new positions, no page flash */
+  revealItems(){
+    if(this.state.reduced) return;
+    const cards = Array.prototype.slice.call(this.root.querySelectorAll("[data-jr-card]"));
+    cards.forEach((c, i) => {
+      c.style.transition = "none";
+      c.style.opacity = "0";
+      c.style.transform = "translateY(10px)";
+      void c.offsetWidth;
+      const d = Math.min(i * 22, 260);
+      c.style.transition = "opacity var(--m-fast) cubic-bezier(.4,0,.2,1) " + d + "ms,transform 420ms cubic-bezier(.16,1,.3,1) " + d + "ms";
+      c.style.opacity = "1";
+      c.style.transform = "translateY(0)";
+    });
+  }
+
+  place(el, r){
+    el.style.left = r.left + "px"; el.style.top = r.top + "px";
+    el.style.width = r.width + "px"; el.style.height = r.height + "px";
+  }
+
+  /* image stories carry their media across; text-only stories use title continuity */
+  openEntry(id, e, srcEl){
+    if(e && e.preventDefault) e.preventDefault();
+    const n = this.n, red = this.state.reduced;
+    const finish = () => {
+      window.scrollTo(0, 0);
+      this.setState({ view:"detail", id:id, copied:false, playing:false }, () => { this.syncHash(); this.enterDetail(); });
+    };
+    if(this.state.view === "archive") this.archiveY = window.scrollY || 0;
+    const media = srcEl ? (srcEl.querySelector("[data-jr-transition-media]") || srcEl.querySelector("[data-jr-img]")) : null;
+    if(red || !n.shared){ finish(); return; }
+    /* text-only stories navigate by title continuity instead of inventing media */
+    if(!media){ this.titleContinuity(srcEl, finish); return; }
+    const cap = captureVisual(media);
+    const from = media.getBoundingClientRect();
+    const vw = window.innerWidth, vh = window.innerHeight;
+    if(cap){
+      if(cap.backgroundImage) n.sharedInner.style.backgroundImage = cap.backgroundImage;
+      n.sharedInner.style.backgroundSize = cap.backgroundSize;
+      n.sharedInner.style.backgroundPosition = cap.backgroundPosition;
+      n.sharedInner.style.backgroundRepeat = cap.backgroundRepeat;
+      n.sharedInner.style.transition = "none";
+      n.sharedInner.style.transform = cap.transform;
+    }
+    n.shared.style.transition = "none";
+    this.place(n.shared, { left:from.left, top:from.top, width:from.width, height:from.height });
+    n.shared.style.opacity = "1";
+    void n.shared.offsetWidth;
+    const dur = SCENE;
+    n.shared.style.transition = ["left","top","width","height"].map(k => k + " " + dur + "ms cubic-bezier(.76,0,.24,1)").join(",");
+    this.place(n.shared, { left:vw * 0.04, top:vh * 0.34, width:vw * 0.92, height:vh * 0.52 });
+    const leaving = this.state.view === "detail" ? n.detail : n.archive;
+    if(leaving){ leaving.style.transition = "opacity var(--m-fast) cubic-bezier(.4,0,.2,1)"; leaving.style.opacity = "0"; }
+    clearTimeout(this._t);
+    this._t = setTimeout(() => {
+      if(leaving){ leaving.style.transition = "none"; leaving.style.opacity = ""; }
+      finish();
+      const s = n.shared;
+      s.style.transition = "opacity var(--m-fast) linear";
+      s.style.opacity = "0";
+      setTimeout(() => { s.style.transition = "none"; s.style.width = "0px"; s.style.height = "0px"; }, 260);
+    }, dur + 20);
+  }
+
+  /* clone the clicked title and move it toward the hero title position */
+  titleContinuity(srcEl, finish){
+    const src = srcEl ? (srcEl.querySelector("[data-jr-title]") || srcEl.querySelector("[data-jr-nexttitle]")) : null;
+    if(!src || this.state.reduced){ finish(); return; }
+    const r = src.getBoundingClientRect();
+    const cs = getComputedStyle(src);
+    const clone = document.createElement("div");
+    clone.textContent = src.textContent;
+    clone.setAttribute("aria-hidden", "true");
+    clone.style.cssText = [
+      "position:fixed", "z-index:105", "margin:0", "pointer-events:none",
+      "left:" + r.left + "px", "top:" + r.top + "px", "width:" + r.width + "px",
+      "font-family:" + cs.fontFamily, "font-size:" + cs.fontSize, "font-weight:" + cs.fontWeight,
+      "line-height:" + cs.lineHeight, "letter-spacing:" + cs.letterSpacing, "color:" + cs.color,
+      "direction:" + cs.direction, "text-align:" + cs.textAlign
+    ].join(";");
+    document.body.appendChild(clone);
+    const leaving = this.state.view === "detail" ? this.n.detail : this.n.archive;
+    if(leaving){ leaving.style.transition = "opacity var(--m-fast) cubic-bezier(.4,0,.2,1)"; leaving.style.opacity = "0"; }
+    const marg = 40, vw = window.innerWidth;
+    const targetLeft = this.state.lang === "fa" ? marg : (vw * 0.1667 + marg * 0.2);
+    void clone.offsetWidth;
+    const dur = SCENE;
+    clone.style.transition = ["left","top","width","font-size","opacity"].map(k => k + " " + dur + "ms cubic-bezier(.76,0,.24,1)").join(",");
+    clone.style.left = targetLeft + "px";
+    clone.style.top = (window.innerHeight * 0.26) + "px";
+    clone.style.width = Math.min(vw * 0.62, 760) + "px";
+    clone.style.fontSize = "clamp(34px,4.2vw,76px)";
+    clearTimeout(this._tcT);
+    this._tcT = setTimeout(() => {
+      if(leaving){ leaving.style.transition = "none"; leaving.style.opacity = ""; }
+      finish();
+      clone.style.transition = "opacity var(--m-instant) linear";
+      clone.style.opacity = "0";
+      setTimeout(() => { if(clone.parentNode) clone.parentNode.removeChild(clone); }, 220);
+    }, dur + 20);
+  }
+
+  /* inline project reference: expand the visible thumbnail, then hand off to Project Detail */
+  openProjectRef(href, e){
+    const n = this.n;
+    if(this.state.reduced || !n.shared) return;
+    const holder = this.root.querySelector("[data-jr-projmedia]");
+    const media = holder ? holder.querySelector("[data-jr-transition-media]") : null;
+    if(!media) return;
+    if(e && e.preventDefault) e.preventDefault();
+    const cap = captureVisual(media);
+    const from = media.getBoundingClientRect();
+    const vw = window.innerWidth, vh = window.innerHeight;
+    if(cap){
+      if(cap.backgroundImage) n.sharedInner.style.backgroundImage = cap.backgroundImage;
+      n.sharedInner.style.backgroundSize = cap.backgroundSize;
+      n.sharedInner.style.backgroundPosition = cap.backgroundPosition;
+      n.sharedInner.style.backgroundRepeat = cap.backgroundRepeat;
+      n.sharedInner.style.transition = "none";
+      n.sharedInner.style.transform = cap.transform;
+    }
+    n.shared.style.transition = "none";
+    this.place(n.shared, { left:from.left, top:from.top, width:from.width, height:from.height });
+    n.shared.style.opacity = "1";
+    void n.shared.offsetWidth;
+    const dur = SCENE;
+    n.shared.style.transition = ["left","top","width","height"].map(k => k + " " + dur + "ms cubic-bezier(.76,0,.24,1)").join(",");
+    this.place(n.shared, { left:0, top:0, width:vw, height:vh * 0.88 });
+    if(n.detail){ n.detail.style.transition = "opacity var(--m-fast) cubic-bezier(.4,0,.2,1)"; n.detail.style.opacity = "0.2"; }
+    setTimeout(() => { window.location.href = href; }, dur - 60);
+  }
+
+  enterDetail(){
+    if(this.state.reduced) return;
+    [this.n.dTitle, this.n.lead].forEach((el, i) => {
+      if(!el) return;
+      el.style.transition = "none";
+      el.style.opacity = "0"; el.style.transform = "translateY(20px)";
+      setTimeout(() => {
+        el.style.transition = "opacity var(--m-base) cubic-bezier(.16,1,.3,1),transform var(--m-base) cubic-bezier(.16,1,.3,1)";
+        el.style.opacity = "1"; el.style.transform = "translateY(0)";
+      }, 40 + i * 110);
+    });
+  }
+
+  backToArchive(e){
+    if(e && e.preventDefault) e.preventDefault();
+    /* restore the filter and scroll context the reader came from */
+    this.setState({ view:"archive", id:null }, () => {
+      this.syncHash();
+      const y = this.archiveY || 0;
+      if(this.state.reduced) window.scrollTo(0, y);
+      else setTimeout(() => window.scrollTo(0, y), 16);
+    });
+  }
+
+  goNextEntry(e){
+    if(e && e.preventDefault) e.preventDefault();
+    const D = window.TA_JOURNAL;
+    if(!D) return;
+    const nx = D.next(this.state.id);
+    const n = this.n;
+    if(!this.state.reduced && n.nextTitle) n.nextTitle.style.transform = "translateY(-12px)";
+    this.openEntry(nx.id, e, this.root.querySelector("[data-jr-next]"));
+  }
+
+
+  /* event-driven scheduler: one pending frame at most, idle when nothing moves */
+  requestTick(){
+    if(this._pending != null || document.visibilityState === "hidden") return;
+    const run = () => { this._pending = null; this._raf = null; this.tick(); };
+    if(typeof requestAnimationFrame === "function"){
+      this._raf = requestAnimationFrame(run);
+      /* rAF does not fire in every host, so a short timer guarantees the frame */
+      this._pending = setTimeout(() => { if(this._raf != null && typeof cancelAnimationFrame === "function") cancelAnimationFrame(this._raf); run(); }, 24);
+    } else {
+      this._pending = setTimeout(run, 16);
+    }
+  }
+  stopTicking(){
+    if(this._pending != null){ clearTimeout(this._pending); this._pending = null; }
+    if(this._raf != null && typeof cancelAnimationFrame === "function"){ cancelAnimationFrame(this._raf); this._raf = null; }
+  }
+
+  tick(){
+    try{ this.frame(); }
+    catch(err){ if(!this._logged){ this._logged = true; console.error("jr tick error", err); } }
+    /* keep frames coming only while the custom cursor is still catching up */
+    if(this.fine && (Math.abs(this.cx - this.cxs) > 0.6 || Math.abs(this.cy - this.cys) > 0.6)) this.requestTick();
+  }
+
+  frame(){
+    if(!this.n || !this.n.header || !this.n.header.isConnected){
+      const live = document.querySelector("[data-jr-root]");
+      if(!live) return;
+      this.root = live; this.q(); this.bind(); this.armReveals(); this.applyLang();
+    }
+    const n = this.n, red = this.state.reduced, vh = window.innerHeight, y = window.scrollY || 0;
+
+    if(n.header){
+      const compact = y > 110;
+      n.header.style.paddingTop = compact ? "14px" : "24px";
+      n.header.style.paddingBottom = compact ? "14px" : "24px";
+      n.header.style.background = compact ? "rgba(250,249,247,.92)" : "transparent";
+    }
+
+    if(this.revealSet){
+      this.revealSet.forEach(t => {
+        if(t.done || !t.el.isConnected) return;
+        const r = t.el.getBoundingClientRect();
+        if(r.top < vh * 0.92 && r.bottom > 0){
+          t.done = true;
+          const mask = t.el.querySelector("[data-rv-mask]"), inner = t.el.querySelector("[data-rv-inner]");
+          if(mask){ if(red) mask.style.opacity = "0"; else mask.style.clipPath = "inset(0 0 100% 0)"; }
+          if(inner && !red) inner.style.transform = "scale(1)";
+        }
+      });
+    }
+
+    if(n.prog){
+      const doc = Math.max(1, document.documentElement.scrollHeight - vh);
+      const gp = clamp(y / doc, 0, 1);
+      n.prog.style.opacity = y > vh * 0.5 ? "1" : "0";
+      if(n.progSq) n.progSq.style.top = (gp * 111).toFixed(1) + "px";
+      if(n.progNum) n.progNum.textContent = String(Math.round(gp * 100)).padStart(3, "0");
+    }
+
+    if(this.fine && n.cursor){
+      const k = red ? 1 : 0.18;
+      this.cxs += (this.cx - this.cxs) * k;
+      this.cys += (this.cy - this.cys) * k;
+      n.cursor.style.left = this.cxs.toFixed(1) + "px";
+      n.cursor.style.top = this.cys.toFixed(1) + "px";
+    }
+  }
+
+  copy(){
+    const url = window.location.href;
+    const settle = (ok) => {
+      this.setState({ copied: ok ? "yes" : "manual" });
+      clearTimeout(this._copyT);
+      this._copyT = setTimeout(() => this.setState({ copied:false }), 1500);
+    };
+    try{
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(url).then(() => settle(true), () => settle(false));
+        return;
+      }
+    }catch(e){}
+    settle(false);
+  }
+
+  renderVals(){
+    const st = this.state, fa = st.lang === "fa", red = st.reduced;
+    const D = window.TA_JOURNAL;
+    const sfxHash = fa ? "#lang=fa" : "";
+    const sfxAmp = fa ? "&lang=fa" : "";
+    const tOne = (t) => (D && D.typeOne[t]) ? D.typeOne[t][fa ? 1 : 0] : t;
+    const author = (k) => (D && D.authors[k]) ? D.authors[k][fa ? 1 : 0] : k;
+    /* the canonical source resolves the entry's project; unpublished yields null */
+    const project = (projectId) => (D && projectId) ? D.project(projectId) : null;
+
+    const all = D ? D.entries : [];
+    const feature = D ? D.featured() : null;
+    const filtered = all.filter(e => st.type === "all" ? true : e.type === st.type);
+    const listed = (st.type === "all" && feature) ? filtered.filter(e => e.id !== feature.id) : filtered;
+
+    const types = (D ? D.types : []).map(t => ({
+      label: fa ? t.fa : t.en,
+      opacity: st.type === t.id ? "1" : "0.45",
+      sq: st.type === t.id ? "1" : "0",
+      font: fa ? "var(--fa)" : "inherit",
+      size: fa ? "14px" : "inherit",
+      ls: fa ? "0" : "inherit",
+      tt: fa ? "none" : "inherit",
+      pick: () => this.setState({ type:t.id })
+    }));
+
+    const cardFor = (e, lay) => {
+      const p = e.projectId ? project(e.projectId) : null;
+      const small = !lay.ratio;
+      const v = rm(e.hero, lay.ratio || "16/9");
+      return {
+        bg:v.backgroundImage, bgSize:v.backgroundSize, bgPos:v.backgroundPosition, bgRepeat:v.backgroundRepeat,
+        typeLabel: tOne(e.type),
+        date: e.date,
+        title: fa ? e.fa : e.en,
+        excerpt: fa ? e.excerptFa : e.excerptEn,
+        hasMedia: !!(e.hero && lay.ratio),
+        ratio: lay.ratio || "16/9",
+        col: lay.col, mt: lay.mt,
+        rule: lay.rule ? "1px solid var(--ink)" : "none",
+        pt: lay.rule ? "14px" : "0px",
+        showExcerpt: !!lay.excerpt,
+        hasProject: !!p,
+        projectLabel: p ? (fa ? p.fa : p.en) : "",
+        titleSize: small ? (fa ? "clamp(19px,1.8vw,26px)" : "clamp(20px,1.9vw,28px)") : (fa ? "clamp(22px,2.2vw,34px)" : "clamp(24px,2.4vw,38px)"),
+        titleLh: fa ? "1.5" : "1.16",
+        titleLs: fa ? "0" : "-.022em",
+        open: (ev) => this.openEntry(e.id, ev, ev && ev.currentTarget)
+      };
+    };
+
+    const items = listed.map((e, i) => cardFor(e, FIELD[i % FIELD.length]));
+
+    /* ---- detail ---- */
+    const e = (D && st.id) ? D.byId(st.id) : (feature || null);
+    const ep = (e && e.projectId) ? project(e.projectId) : null;
+    const rich = !!(e && e.rich), isPaper = !!(e && (e.paper || e.book)), short = !!(e && e.short);
+    const em = (e && e.media) || {};
+    const heroV = rm(e ? e.hero : null, e && e.hero ? e.hero.ratio : "16/9");
+    const wideV = rm(em.wide ? em.wide.media : null, "16/9");
+    const pairAV = rm(em.pair ? em.pair.a : null, "3/4");
+    const pairBV = rm(em.pair ? em.pair.b : null, "1/1");
+    const videoV = rm(e && e.video ? e.video.poster : null, "16/9");
+    const self = this;
+
+    const blocks = [];
+    /* data-driven body when the entry supplies one */
+    if(e && e.body && e.body.length){
+      e.body.forEach(b => blocks.push({
+        isHeading: b.type === "heading", isText: b.type === "paragraph", isQuote: b.type === "quote",
+        text: fa ? b.fa : b.en, by: b.byEn ? (fa ? b.byFa : b.byEn) : ""
+      }));
+    }
+    const push = (kind, text, by) => blocks.push({
+      isHeading: kind === "h", isText: kind === "p", isQuote: kind === "q",
+      text:text, by: by || ""
+    });
+    if(e && !(e.body && e.body.length)){
+      push("p", fa
+        ? "بند نخست متن جایگزین. طول این بند به‌گونه‌ای انتخاب شده که طول سطر و فاصله سطرها در متن بلند فارسی سنجیده شود و خوانش آرام بماند."
+        : "First placeholder paragraph. Its length is chosen so the reading measure and leading of long-form English copy can be judged at a genuine density rather than with filler.");
+      if(!short){
+        push("h", fa ? "زمینه" : "Context");
+        push("p", fa
+          ? "بند دوم جایگزین درباره زمینه شهری و پرسشی که این نوشته از آن آغاز می‌شود."
+          : "Second placeholder paragraph on the urban context and the question this piece begins from.");
+        push("q", fa ? "«حیاط، خصوصی‌ترین فضای عمومی شهر است.»" : "\u201cThe courtyard is the city's most private public space.\u201d",
+          fa ? "فرد ۰۱ — جایگزین" : "Person 01 — placeholder");
+        push("h", fa ? "روش" : "Method");
+        push("p", fa
+          ? "بند سوم جایگزین: شرح روش کار، نمونه‌ها و آنچه اندازه‌گیری شد."
+          : "Third placeholder paragraph: how the work was done, what was sampled and what was measured.");
+      }
+      if(rich){
+        push("h", fa ? "یافته‌ها" : "Findings");
+        push("p", fa
+          ? "بند چهارم جایگزین با نتایج مقدماتی و ارجاع به پروژه مرتبط."
+          : "Fourth placeholder paragraph with preliminary findings and a reference to the related project.");
+        push("h", fa ? "کاربرد" : "Application");
+        push("p", fa
+          ? "بند پایانی جایگزین: چگونه این یافته‌ها به تصمیم‌های طراحی بازمی‌گردند."
+          : "Closing placeholder paragraph: how the findings return to design decisions.");
+      }
+    }
+    const headingBlocks = blocks.filter(b => b.isHeading);
+    const toc = headingBlocks.map((b, i) => ({
+      num: String(i + 1).padStart(2, "0"), label: b.text,
+      go: (ev) => {
+        if(ev && ev.preventDefault) ev.preventDefault();
+        const hs = Array.prototype.slice.call(this.root.querySelectorAll("[data-jr-h]"));
+        const el = hs[i];
+        if(el){
+          const top = el.getBoundingClientRect().top + (window.scrollY || 0) - window.innerHeight * 0.22;
+          window.scrollTo({ top:top, behavior: this.state.reduced ? "auto" : "smooth" });
+        }
+      }
+    }));
+
+    const related = (D && e) ? D.related(e.id, 3).map((r, i) => {
+      const lay = [{ col:"1 / span 6", mt:"0px", ratio:"16/9" }, { col:"8 / span 3", mt:"40px", ratio:"3/4" }, { col:"8 / span 3", mt:"40px", ratio:"1/1" }][i] || { col:"1 / span 4", mt:"0px", ratio:"16/9" };
+      const v = rm(r.hero, lay.ratio);
+      return {
+        typeLabel: tOne(r.type), date:r.date, title: fa ? r.fa : r.en,
+        hasMedia: !!r.hero, ratio:lay.ratio, col:lay.col, mt:lay.mt,
+        bg:v.backgroundImage, bgSize:v.backgroundSize, bgPos:v.backgroundPosition, bgRepeat:v.backgroundRepeat,
+        titleSize: i === 0 ? (fa ? "clamp(22px,2.1vw,32px)" : "clamp(23px,2.2vw,34px)") : (fa ? "17px" : "18px"),
+        titleLh: fa ? "1.5" : "1.2",
+        open: (ev) => this.openEntry(r.id, ev, ev && ev.currentTarget)
+      };
+    }) : [];
+    const pv = projectVisual(ep);
+    const nx = (D && e) ? D.next(e.id) : null;
+
+    return {
+      setEn: () => this.setState({ lang:"en" }),
+      setFa: () => this.setState({ lang:"fa" }),
+      enOpacity: fa ? "0.5" : "1", faOpacity: fa ? "1" : "0.5",
+      enWeight: fa ? "400" : "600", faWeight: fa ? "600" : "400",
+      headerColor: "#121B1B",
+
+      hrefHome: "Homepage.dc.html" + sfxHash,
+      hrefProjects: "Projects.dc.html" + sfxHash,
+      hrefExpertise: "Expertise.dc.html" + sfxHash,
+      hrefAwards: "Awards.dc.html" + sfxHash,
+      hrefContact: "Contact.dc.html" + sfxHash,
+
+      openMenu: () => this.setState({ menu:true }),
+      closeMenu: () => this.setState({ menu:false }),
+      menuClip: st.menu ? "polygon(0 0,100% 0,100% 100%,0 100%)" : "polygon(0 0,0 0,0 0,0 0)",
+      menuPointer: st.menu ? "auto" : "none",
+      menuSize: fa ? "clamp(26px,3.4vw,48px)" : "clamp(30px,4.2vw,58px)",
+      menuLh: fa ? "1.5" : "1.04",
+      menuLs: fa ? "0" : "-.03em",
+      menuLinks: [
+        ["Home","خانه","Homepage.dc.html"], ["Projects","پروژه‌ها","Projects.dc.html"], ["Expertise","تخصص‌ها","Expertise.dc.html"],
+        ["Awards","جوایز و افتخارات","Awards.dc.html"], ["About","درباره ما","About.dc.html"],
+        ["Journal","مجله",""], ["Contact","تماس با ما","Contact.dc.html"]
+      ].map((m, i) => ({
+        num: String(i + 1).padStart(2, "0"),
+        label: fa ? m[1] : m[0],
+        href: m[2] ? (m[2].indexOf("#") >= 0 ? m[2] + sfxAmp : m[2] + sfxHash) : "#",
+        delay: (120 + i * 60) + "ms",
+        activeSq: m[2] ? "0" : "1",
+        click: (ev) => {
+          if(!m[2]){
+            if(ev && ev.preventDefault) ev.preventDefault();
+            this.setState({ menu:false, view:"archive", id:null }, () => { this.syncHash(); window.scrollTo(0, 0); });
+          } else this.setState({ menu:false });
+        }
+      })),
+
+      /* archive */
+      countLabel: (fa ? (all.length + " مطلب") : (all.length + " entries")),
+      types: types,
+      items: items,
+      noResults: listed.length === 0 && !(st.type === "all"),
+      showFeatured: st.type === "all" && !!feature,
+      /* register on the reading-start side; the media sits opposite in both languages */
+      featMediaCol: fa ? "6 / span 7" : "1 / span 7",
+      featTextCol: fa ? "1 / span 4" : "9 / span 4",
+      featTitleSize: fa ? "clamp(28px,3.2vw,52px)" : "clamp(30px,3.4vw,58px)",
+      featTitleLh: fa ? "1.46" : "1.06",
+      featTitleLs: fa ? "0" : "-.03em",
+      feature: feature ? (function(){
+        const v = rm(feature.hero, "16/9");
+        return {
+          typeLabel: tOne(feature.type), date:feature.date,
+          title: fa ? feature.fa : feature.en,
+          excerpt: fa ? feature.excerptFa : feature.excerptEn,
+          ratio:v.ratio, bg:v.backgroundImage, bgSize:v.backgroundSize, bgPos:v.backgroundPosition, bgRepeat:v.backgroundRepeat,
+          open: (ev) => self.openEntry(feature.id, ev, ev && ev.currentTarget)
+        };
+      })() : { typeLabel:"", date:"", title:"", excerpt:"", ratio:"16/9", bg:PLATES[0], bgSize:"auto", bgPos:"0% 0%", bgRepeat:"repeat", open:() => {} },
+
+      /* detail */
+      d: e ? {
+        typeLabel: tOne(e.type), date:e.date, num:e.id,
+        title: fa ? e.fa : e.en,
+        authorLabel: author(e.author) + (e.coAuthor ? (fa ? " و " : " & ") + author(e.coAuthor) : ""),
+        hasRole: !!e.roleEn,
+        role: fa ? (e.roleFa || "") : (e.roleEn || ""),
+        hasExp: !!(e.exp && e.exp.length),
+        expertise: (e.exp || []).map(s => ({
+          label: EXP_LABEL_OF(s, fa),
+          href: "Expertise.dc.html#expertise=" + s + sfxAmp
+        })),
+        hasHero: !!e.hero,
+        heroRatio: heroV.ratio,
+        heroTheme: e.heroTheme || heroV.theme || "light",
+        heroBg:heroV.backgroundImage, heroBgSize:heroV.backgroundSize, heroBgPos:heroV.backgroundPosition, heroBgRepeat:heroV.backgroundRepeat,
+        lead: fa
+          ? "بند راهنمای جایگزین که پرسش اصلی نوشته را باز می‌کند و خواننده را به متن اصلی می‌رساند — و چکیده آرشیو را تکرار نمی‌کند."
+          : "Placeholder standfirst that opens the question this piece pursues and hands the reader into the body — not a repeat of the archive excerpt.",
+        blocks: blocks,
+        toc: toc,
+        hasWide: !!em.wide,
+        wideBg:wideV.backgroundImage, wideBgSize:wideV.backgroundSize, wideBgPos:wideV.backgroundPosition, wideBgRepeat:wideV.backgroundRepeat,
+        wideCaption: em.wide ? ((fa ? em.wide.captionFa : em.wide.captionEn) + " · " + (fa ? (em.wide.creditFa || "") : (em.wide.creditEn || ""))) : "",
+        hasPair: !!em.pair,
+        pairABg:pairAV.backgroundImage, pairABgSize:pairAV.backgroundSize, pairABgPos:pairAV.backgroundPosition, pairABgRepeat:pairAV.backgroundRepeat,
+        pairBBg:pairBV.backgroundImage, pairBBgSize:pairBV.backgroundSize, pairBBgPos:pairBV.backgroundPosition, pairBBgRepeat:pairBV.backgroundRepeat,
+        hasVideo: !!(e && e.video),
+        videoBg:videoV.backgroundImage, videoBgSize:videoV.backgroundSize, videoBgPos:videoV.backgroundPosition, videoBgRepeat:videoV.backgroundRepeat,
+        videoCaption: (e && e.video) ? ((fa ? "ویدیو — " : "Video — ") + (e.video.duration || "[DURATION]")) : "",
+        hasAudio: !!(e && e.audio),
+        audioTitle: (e && e.audio) ? (fa ? e.audio.titleFa : e.audio.titleEn) : "",
+        audioDuration: (e && e.audio) ? (e.audio.duration || "[DURATION]") : "",
+        audioTranscript: (e && e.audio && !e.audio.transcript) ? (fa ? "[متن گفتار بعداً ارائه می‌شود]" : "[TRANSCRIPT TO BE PROVIDED]") : "",
+        hasDoc: isPaper,
+        docKind: (e.doc ? (fa ? e.doc.kindFa : e.doc.kindEn) : (e.book ? (fa ? "جلد" : "Cover") : (fa ? "سند" : "Document"))),
+        docMeta: [
+          { label: fa ? "نویسندگان" : "Authors", value: author(e.author) + (e.coAuthor ? (fa ? " و " : " & ") + author(e.coAuthor) : ""), dir: fa ? "rtl" : "ltr" },
+          { label: fa ? "سال" : "Year", value:"[YEAR]", dir:"ltr" },
+          { label: e.book ? (fa ? "ناشر" : "Publisher") : (fa ? "موضوع" : "Topic"),
+            value: e.book ? ((e.doc && e.doc.publisher) || "[PUBLISHER]") : (e.doc ? (fa ? e.doc.topicFa : e.doc.topicEn) : "[TOPIC]"), dir: fa ? "rtl" : "ltr" },
+          { label: fa ? "زبان" : "Language", value: fa ? "فارسی / انگلیسی" : "Persian / English", dir: fa ? "rtl" : "ltr" },
+          { label: fa ? "شناسه" : "Reference", value:e.id, dir:"ltr" }
+        ],
+        hasProject: !!ep,
+        projectTitle: ep ? (fa ? ep.fa : ep.en) : "",
+        projectMeta: ep ? ((fa ? ep.locFa : ep.locEn) + " · " + ep.year) : "",
+        projectBg:pv.backgroundImage, projectBgSize:pv.backgroundSize, projectBgPos:pv.backgroundPosition, projectBgRepeat:pv.backgroundRepeat,
+        projectHref: ep ? ("Projects.dc.html#p=" + ep.routeIndex + sfxAmp) : "#"
+      } : { typeLabel:"", date:"", title:"", authorLabel:"", hasRole:false, role:"", hasExp:false, expertise:[],
+            hasHero:false, heroRatio:"16/9", heroTheme:"light",
+            heroBg:PLATES[0], heroBgSize:"auto", heroBgPos:"0% 0%", heroBgRepeat:"repeat",
+            lead:"", blocks:[], toc:[],
+            hasWide:false, wideBg:PLATES[0], wideBgSize:"auto", wideBgPos:"0% 0%", wideBgRepeat:"repeat", wideCaption:"",
+            hasPair:false, pairABg:PLATES[0], pairABgSize:"auto", pairABgPos:"0% 0%", pairABgRepeat:"repeat",
+            pairBBg:PLATES[0], pairBBgSize:"auto", pairBBgPos:"0% 0%", pairBBgRepeat:"repeat",
+            hasVideo:false, videoBg:PLATES[0], videoBgSize:"auto", videoBgPos:"0% 0%", videoBgRepeat:"repeat", videoCaption:"",
+            hasAudio:false, audioTitle:"", audioDuration:"", audioTranscript:"",
+            hasDoc:false, docKind:"", docMeta:[], hasProject:false,
+            projectTitle:"", projectMeta:"", projectBg:PLATES[0], projectBgSize:"auto", projectBgPos:"0% 0%", projectBgRepeat:"repeat",
+            projectHref:"#", num:"" },
+
+      dTitleSize: fa ? "clamp(30px,3.6vw,64px)" : "clamp(34px,4.2vw,76px)",
+      dTitleLh: fa ? "1.42" : "1.04",
+      dTitleLs: fa ? "0" : "-.035em",
+      dTitleMeasure: fa ? "22ch" : "26ch",
+      leadSize: fa ? "clamp(20px,1.9vw,27px)" : "clamp(22px,2.1vw,31px)",
+      leadLh: fa ? "1.86" : "1.34",
+      h2Size: fa ? "clamp(20px,1.8vw,26px)" : "clamp(21px,1.9vw,28px)",
+      h2Lh: fa ? "1.5" : "1.18",
+      quoteSize: fa ? "clamp(21px,2vw,30px)" : "clamp(22px,2.1vw,33px)",
+      quoteLh: fa ? "1.72" : "1.24",
+      bodySize: fa ? "16.5px" : "17px",
+      bodyLh: fa ? "2.05" : "1.66",
+      /* long-form measure: ~62 characters EN, narrower for Persian */
+      measure: fa ? "36ch" : "62ch",
+      tocDisplay: headingBlocks.length >= 3 ? "flex" : "none",
+
+      related: related,
+      next: nx ? (function(){
+        const v = rm(nx.hero, "16/10");
+        return { typeLabel: tOne(nx.type), title: fa ? nx.fa : nx.en, mediaDisplay: nx.hero ? "block" : "none",
+                 bg:v.backgroundImage, bgSize:v.backgroundSize, bgPos:v.backgroundPosition, bgRepeat:v.backgroundRepeat };
+      })() : { typeLabel:"", title:"", mediaDisplay:"none", bg:PLATES[0], bgSize:"auto", bgPos:"0% 0%", bgRepeat:"repeat" },
+      nextSize: fa ? "clamp(26px,2.8vw,48px)" : "clamp(28px,3.2vw,56px)",
+      nextLh: fa ? "1.4" : "1.04",
+      goNext: (ev) => this.goNextEntry(ev),
+      backToArchive: (ev) => this.backToArchive(ev),
+
+      copyLink: () => this.copy(),
+      copyLabel: st.copied === "yes" ? (fa ? "کپی شد" : "Copied")
+        : st.copied === "manual" ? (fa ? "دستی کپی کنید" : "Copy manually")
+        : (fa ? "کپی لینک" : "Copy link"),
+      copiedSq: st.copied ? "1" : "0",
+      openProject: (ev) => this.openProjectRef(ep ? ("Projects.dc.html#p=" + ep.routeIndex + sfxAmp) : "#", ev),
+      toggleAudio: () => this.setState(s => ({ audioPlaying: !s.audioPlaying })),
+      audioLabel: st.audioPlaying ? (fa ? "توقف" : "Pause") : (fa ? "پخش" : "Play"),
+      audioProgress: st.audioPlaying ? "38%" : "0%",
+      togglePlay: () => this.setState(s => ({ playing: !s.playing })),
+      playLabel: st.playing ? (fa ? "توقف" : "Pause") : (fa ? "پخش" : "Play"),
+      download: () => {
+        this.setState({ dl:true });
+        clearTimeout(this._dlT);
+        this._dlT = setTimeout(() => this.setState({ dl:false }), 1500);
+      },
+      downloadLabel: st.dl ? (fa ? "PDF بعداً ارائه می‌شود" : "PDF to be provided") : (fa ? "دانلود PDF" : "Download PDF"),
+
+      toggleReduced: () => this.setState(s => ({ reduced: !s.reduced }), () => this.armReveals()),
+      rmState: red ? "on" : "off",
+      rmTitle: fa ? "حرکت کاهش‌یافته" : "Reduced motion",
+      rmBg: red ? "#56B1AC" : "transparent",
+      rmColor: red ? "#121B1B" : "rgba(18,27,27,.45)"
+    };
+  }
+}
+</script>
+</body>
+</html>

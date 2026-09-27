@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="responsive.css" />
+<script>window.TA_ASSET_BASE = "../";</script>
+<script src="../site-data.js"></script>
+<script src="../media-utils.js"></script>
+<script src="../projects-data.js"></script>
+<script src="../expertise-data.js"></script>
+<script src="../about-data.js"></script>
+<script src="layout-mode.js"></script>
+<script src="../journal-data.js"></script>
+<style>
+:root{
+  --ink:#121B1B; --turq:#56B1AC; --canvas:#FAF9F7; --turq-dk:#3E9692; --turq-pale:#D9EFED; --grey:#E8E8E4;
+  --rule:rgba(18,27,27,.14); --rule-soft:rgba(18,27,27,.08); --ink-60:rgba(18,27,27,.6); --ink-45:rgba(18,27,27,.45);
+  --canvas-40:rgba(250,249,247,.4);
+  --en:"Schibsted Grotesk",-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --fa:"Vazirmatn","Schibsted Grotesk",Tahoma,sans-serif;
+  /* MOTION SYSTEM V2 — one scale, four families. Do not introduce a literal ms
+     value in a component; if a tempo is missing from this scale, the scale is wrong.
+       instant  micro UI feedback            fast  interaction / hover / state
+       base     reveal — the default tempo   slow  image depth, cinematic settle
+       page     full-screen overlays only */
+  --m-instant:180ms; --m-fast:240ms; --m-standard:420ms; --m-reveal:620ms; --m-slow:900ms; --m-page:1000ms;
+  /* --m-base is the alias every migrated component already points at; it resolves to the
+     reveal tempo because reveal is the site's default content-entry motion. */
+  --m-base:620ms;
+  /* editorial  content entering — the default curve
+     cinematic  image and scene depth
+     standard   micro UI only
+     page       clip / mask / scene wipes */
+  --e-editorial:cubic-bezier(.16,1,.3,1); --e-cinematic:cubic-bezier(.22,1,.36,1);
+  --e-smooth:cubic-bezier(.4,0,.2,1); --e-standard:cubic-bezier(.4,0,.2,1); --e-page:cubic-bezier(.76,0,.24,1);
+  /* legacy alias */
+  --e-enter:cubic-bezier(.16,1,.3,1);
+  --gap:24px; --marg:40px;
+  --plate:repeating-linear-gradient(-45deg,#E8E8E4 0 18px,#E1E1DC 18px 36px);
+  --plate-2:repeating-linear-gradient(-45deg,#DEDED8 0 18px,#D7D7D1 18px 36px);
+  --plate-3:repeating-linear-gradient(-45deg,#E4E7E6 0 18px,#DCE1E0 18px 36px);
+  --plate-4:repeating-linear-gradient(-45deg,#D9EFED 0 18px,#CFE8E5 18px 36px);
+  --plate-draw:linear-gradient(#fff,#fff);
+}
+*{box-sizing:border-box}
+body{margin:0;background:#FAF9F7;color:#121B1B;font-family:var(--en);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+a{color:inherit;text-decoration:none}
+a:hover{color:#3E9692}
+::selection{background:#D9EFED;color:#121B1B}
+@keyframes ex-lineup{from{clip-path:inset(0 0 105% 0)}to{clip-path:inset(0 0 -25% 0)}}
+@keyframes ex-in{from{opacity:0}to{opacity:1}}
+@keyframes ex-sq{from{opacity:0;transform:scale(.3)}to{opacity:1;transform:scale(1)}}
+</style>
+</helmet>
+
+<div data-ex-root="1" style="background:var(--canvas);color:var(--ink);font-family:var(--en);position:relative;overflow-x:clip;min-height:100vh">
+
+  <header data-hd="1" style="position:fixed;top:0;left:0;right:0;z-index:95;padding:24px var(--marg);display:flex;align-items:center;justify-content:space-between;gap:clamp(12px,2vw,24px);color:var(--ink);transition:padding var(--m-standard) var(--e-standard),background var(--m-standard) var(--e-standard),color var(--m-base) var(--e-standard)">
+    <a href="{{ hrefHome }}" style="display:flex;align-items:center;gap:12px;flex:none">
+      <span style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:1.5px;width:22px;height:22px;border:1.5px solid currentColor">
+        <i style="background:var(--turq)"></i><i style="background:var(--turq)"></i><i style="background:var(--turq)"></i><i style="background:var(--turq)"></i><i style="background:var(--turq)"></i><i style="background:var(--turq)"></i><i style="background:var(--turq)"></i><i style="background:var(--turq)"></i><i style="background:var(--turq)"></i>
+      </span>
+      <span data-en="1" style="font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;white-space:nowrap">Tarh &amp; Afarinesh</span>
+      <span data-fa="1" style="font-family:var(--fa);font-size:15.5px;font-weight:600;white-space:nowrap;display:none">طرح و آفرینش</span>
+    </a>
+    <nav style="display:flex;align-items:center;flex-wrap:wrap;gap:clamp(12px,1.6vw,30px);flex:0 1 auto;min-width:0;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase">
+      <a href="{{ hrefProjects }}" data-nav="1" style="display:inline-flex;align-items:center;gap:7px;padding:4px 0;transition:transform var(--m-fast) var(--e-standard)"><i data-navsq="1" style="width:5px;height:5px;background:var(--turq);opacity:0;transform:scale(.4);transition:opacity var(--m-fast) var(--e-standard),transform var(--m-fast) var(--e-standard)"></i><span data-en="1">Projects</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:14.5px;display:none">پروژه‌ها</span></a>
+      <a href="#" onClick="{{ goOverview }}" data-nav="1" style="display:inline-flex;align-items:center;gap:7px;padding:4px 0;transition:transform var(--m-fast) var(--e-standard)"><i style="width:5px;height:5px;background:var(--turq)"></i><span data-en="1">Expertise</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:14.5px;display:none">تخصص‌ها</span></a>
+      <a href="{{ hrefAwards }}" data-nav="1" style="display:inline-flex;align-items:center;gap:7px;padding:4px 0;transition:transform var(--m-fast) var(--e-standard)"><i data-navsq="1" style="width:5px;height:5px;background:var(--turq);opacity:0;transform:scale(.4);transition:opacity var(--m-fast) var(--e-standard),transform var(--m-fast) var(--e-standard)"></i><span data-en="1">Awards</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:14.5px;display:none">جوایز</span></a>
+      <a href="{{ hrefContact }}" data-nav="1" style="display:inline-flex;align-items:center;gap:7px;padding:4px 0;transition:transform var(--m-fast) var(--e-standard)"><i data-navsq="1" style="width:5px;height:5px;background:var(--turq);opacity:0;transform:scale(.4);transition:opacity var(--m-fast) var(--e-standard),transform var(--m-fast) var(--e-standard)"></i><span data-en="1">Contact</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:14.5px;display:none">تماس</span></a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:18px;flex:none">
+      <div style="display:flex;align-items:center;gap:9px;font-size:12px;letter-spacing:.08em;direction:ltr">
+        <button type="button" onClick="{{ setEn }}" style="appearance:none;background:none;border:none;padding:2px 0;cursor:pointer;font:inherit;letter-spacing:inherit;color:inherit;opacity:{{ enOpacity }};font-weight:{{ enWeight }};transition:opacity var(--m-fast) var(--e-standard)">EN</button>
+        <span style="width:1px;height:11px;background:currentColor;opacity:.3"></span>
+        <button type="button" onClick="{{ setFa }}" style="appearance:none;background:none;border:none;padding:2px 0;cursor:pointer;font-family:var(--fa);font-size:13px;color:inherit;opacity:{{ faOpacity }};font-weight:{{ faWeight }};transition:opacity var(--m-fast) var(--e-standard)">فا</button>
+      </div>
+      <button type="button" onClick="{{ openMenu }}" style="appearance:none;background:none;border:1px solid currentColor;padding:9px 14px;cursor:pointer;font:inherit;color:inherit;font-size:12px;letter-spacing:.12em;text-transform:uppercase;display:flex;align-items:center;gap:10px;transition:opacity var(--m-fast) var(--e-standard)" style-hover="opacity:.65">
+        <span data-en="1">Menu</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:14.5px;display:none">منو</span>
+        <span style="display:block;width:12px;height:1px;background:currentColor;box-shadow:0 4px 0 currentColor,0 -4px 0 currentColor"></span>
+      </button>
+    </div>
+  </header>
+
+  <div data-menu="1" style="position:fixed;inset:0;z-index:100;background:var(--ink);color:var(--canvas);clip-path:{{ menuClip }};transition:clip-path var(--m-page) var(--e-page);pointer-events:{{ menuPointer }};display:flex;flex-direction:column;justify-content:space-between;padding:26px var(--marg) 40px">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:24px">
+      <span data-en="1" style="font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:600">Tarh &amp; Afarinesh</span>
+      <span data-fa="1" style="font-family:var(--fa);font-size:15.5px;font-weight:600;display:none">طرح و آفرینش</span>
+      <button type="button" onClick="{{ closeMenu }}" style="appearance:none;background:none;border:1px solid rgba(250,249,247,.18);color:var(--canvas);padding:9px 14px;cursor:pointer;font:inherit;font-size:12px;letter-spacing:.12em;text-transform:uppercase;transition:background var(--m-fast) var(--e-standard)" style-hover="background:rgba(250,249,247,.12)"><span data-en="1">Close</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:14.5px;display:none">بستن</span></button>
+    </div>
+    <nav style="display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap);align-items:end">
+      <div style="grid-column:1 / span 7;display:grid">
+        <sc-for list="{{ menuLinks }}" as="m" hint-placeholder-count="7">
+          <a href="{{ m.href }}" onClick="{{ m.click }}" data-ml="1" style="border-top:1px solid rgba(250,249,247,.18);padding:13px 0;display:flex;align-items:center;gap:20px;opacity:0;transform:translateY(40%);transition:opacity var(--m-base) var(--e-enter) {{ m.delay }},transform 620ms var(--e-enter) {{ m.delay }},color var(--m-fast) var(--e-standard)">
+            <span style="font-size:12px;letter-spacing:.14em;color:var(--canvas-40);font-variant-numeric:tabular-nums;direction:ltr">{{ m.num }}</span>
+            <span style="font-size:{{ menuSize }};line-height:{{ menuLh }};letter-spacing:{{ menuLs }};font-weight:500">{{ m.label }}</span>
+          </a>
+        </sc-for>
+        <div style="border-top:1px solid rgba(250,249,247,.18)"></div>
+      </div>
+      <div style="grid-column:9 / span 4;display:grid;gap:26px">
+        <div data-menu-prev="1" style="position:relative;overflow:hidden;aspect-ratio:4/3;background:rgba(250,249,247,.06);opacity:0;transition:opacity var(--m-base) var(--e-enter) 520ms;direction:ltr">
+          <div style="position:absolute;inset:0;background:repeating-linear-gradient(-45deg,rgba(250,249,247,.08) 0 16px,rgba(250,249,247,.03) 16px 32px);display:grid;place-items:center"><span style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--canvas-40)">Hover preview</span></div>
+        </div>
+        <div style="font-size:13px;line-height:1.9;color:rgba(250,249,247,.6)">
+          <span data-en="1" style="direction:ltr;display:block">[EMAIL]</span><span data-fa="1" style="font-family:var(--fa);display:none">[ایمیل]</span>
+          <span data-en="1" style="display:block">[CITY] · [OFFICE]</span><span data-fa="1" style="font-family:var(--fa);display:none">[شهر] · [دفتر]</span>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <!-- ================= OVERVIEW ================= -->
+  <div data-view="overview" style="position:relative">
+    <section data-screen-label="Expertise opening" style="padding:calc(var(--marg) + 120px) var(--marg) 0">
+      <div data-ov-id="1" style="font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45);display:flex;align-items:center;gap:12px;opacity:0;animation:ex-in var(--m-base) var(--e-standard) 60ms forwards">
+        <i style="width:8px;height:8px;background:var(--turq);opacity:0;animation:ex-sq var(--m-fast) var(--e-enter) 180ms forwards"></i>
+        <span data-en="1">Expertise — how we work</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:13.5px;display:none">تخصص‌ها — شیوه کار ما</span>
+        <button type="button" onClick="{{ toggleReduced }}" title="{{ rmTitle }}" style="appearance:none;background:{{ rmBg }};color:{{ rmColor }};border:1px solid var(--rule);padding:6px 10px;margin-inline-start:6px;cursor:pointer;font:inherit;font-size:10px;letter-spacing:.1em;text-transform:uppercase;display:inline-flex;align-items:center;gap:7px;transition:background var(--m-fast) var(--e-standard),color var(--m-fast) var(--e-standard)"><span style="width:7px;height:7px;background:currentColor;opacity:.7"></span><span style="direction:ltr">RM {{ rmState }}</span></button>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap);margin-top:26px;align-items:end">
+        <div style="grid-column:1 / span 7;overflow:hidden">
+          <h1 data-en="1" style="margin:0;font-size:clamp(62px,9.4vw,164px);line-height:.88;letter-spacing:-.05em;font-weight:500;animation:ex-lineup var(--m-base) var(--e-page) 260ms both">Expertise</h1>
+          <h1 data-fa="1" style="margin:0;font-family:var(--fa);font-size:clamp(52px,7.6vw,132px);line-height:1.2;font-weight:500;display:none;animation:ex-lineup var(--m-base) var(--e-page) 260ms both">تخصص‌ها</h1>
+        </div>
+        <div style="grid-column:9 / span 4;padding-bottom:20px;overflow:hidden">
+          <div data-en="1" style="font-size:clamp(24px,2.3vw,38px);line-height:1.14;letter-spacing:-.022em;animation:ex-lineup var(--m-base) var(--e-page) 480ms both">Design is never<br />one discipline.</div>
+          <div data-fa="1" style="font-family:var(--fa);font-size:clamp(21px,2vw,32px);line-height:1.62;display:none;animation:ex-lineup var(--m-base) var(--e-page) 480ms both">طراحی هرگز فقط<br />یک تخصص نیست.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- expertise index + shared conceptual field -->
+    <section data-screen-label="Expertise index" style="padding:12vh var(--marg) 0">
+      <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap);align-items:start">
+        <div data-ov-list="1" style="grid-column:1 / span 6">
+          <sc-for list="{{ items }}" as="it" hint-placeholder-count="5">
+            <a href="#" onClick="{{ it.open }}" onMouseEnter="{{ it.enter }}" onMouseLeave="{{ it.leave }}" data-ov-row="1" data-cursor="Explore" data-cursor-fa="کاوش" style="display:block;border-top:1px solid var(--rule);padding:{{ it.pad }};opacity:{{ it.opacity }};transition:opacity var(--m-standard) var(--e-standard),padding var(--m-standard) var(--e-standard)">
+              <div style="display:flex;align-items:baseline;gap:20px">
+                <span style="font-size:11.5px;letter-spacing:.12em;color:var(--ink-45);font-variant-numeric:tabular-nums;direction:ltr;flex:none">{{ it.num }}</span>
+                <span style="font-size:{{ it.size }};line-height:{{ it.lh }};letter-spacing:{{ it.ls }};font-weight:500;color:{{ it.color }};transition:color var(--m-fast) var(--e-standard)">{{ it.title }}</span>
+              </div>
+              <div style="margin-top:12px;margin-inline-start:44px;font-size:13px;line-height:1.7;color:var(--ink-45);max-width:{{ measure }};opacity:{{ it.subOpacity }};transition:opacity var(--m-standard) var(--e-standard)">{{ it.strap }}</div>
+            </a>
+          </sc-for>
+          <div style="border-top:1px solid var(--rule)"></div>
+        </div>
+
+        <div data-ov-stagecol="1" style="grid-column:8 / span 5;position:sticky;top:calc(var(--marg) + 120px);align-self:start;direction:ltr">
+          <div data-ov-stage="1" style="position:relative;overflow:hidden;background:var(--grey);width:100%;height:52vh;transition:height var(--m-base) var(--e-page)">
+            <div data-ov-img="1" style="position:absolute;inset:-4% -2%;background:var(--plate);display:grid;place-items:center;transition:transform var(--m-slow) var(--e-enter)">
+              <span data-ov-imglabel="1" style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45)">Architecture</span>
+            </div>
+            <div data-ov-drawing="1" style="position:absolute;inset:0;background:#fff;opacity:0;transition:opacity var(--m-standard) var(--e-standard)">
+              <div style="position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(18,27,27,.06) 0 1px,transparent 1px 34px),repeating-linear-gradient(90deg,rgba(18,27,27,.06) 0 1px,transparent 1px 34px)"></div>
+              <div style="position:absolute;inset:16% 18%;border:1.5px solid var(--ink)">
+                <i style="position:absolute;left:0;top:38%;width:54%;height:1.5px;background:var(--ink)"></i>
+                <i style="position:absolute;left:54%;top:38%;bottom:0;width:1.5px;background:var(--ink)"></i>
+                <i style="position:absolute;left:18%;top:38%;width:10px;height:10px;background:var(--turq);transform:translate(-50%,-50%)"></i>
+              </div>
+            </div>
+            <div data-ov-mask="1" style="position:absolute;inset:0;background:var(--canvas);clip-path:inset(0 0 100% 0);transition:clip-path var(--m-base) var(--e-page)"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;gap:16px;margin-top:14px;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-45)">
+            <span data-ov-caption="1">{{ activeMedia }}</span>
+            <span style="direction:ltr;font-variant-numeric:tabular-nums">{{ activeNum }} / 05</span>
+          </div>
+          <div style="margin-top:26px;display:flex;align-items:center;gap:16px">
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:5px;width:64px;height:64px;position:relative;direction:ltr;flex:none">
+              <i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i>
+              <i data-ov-sq="1" style="position:absolute;left:0;top:0;width:18px;height:18px;background:var(--turq);transition:transform var(--m-base) var(--e-page)"></i>
+            </div>
+            <div style="font-size:11.5px;line-height:1.7;color:var(--ink-45);max-width:26ch"><span data-en="1">Five disciplines, one coordinate system.</span><span data-fa="1" style="font-family:var(--fa);font-size:13px;line-height:1.9;display:none">پنج تخصص، یک دستگاه مختصات.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- intersections -->
+    <section data-screen-label="Between disciplines" style="padding:18vh var(--marg) 0">
+      <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap)">
+        <div style="grid-column:1 / span 5;overflow:hidden">
+          <div data-en="1" style="font-size:clamp(38px,4.4vw,80px);line-height:1;letter-spacing:-.035em;font-weight:500">Between<br />disciplines is<br />where new<br />ideas begin.</div>
+          <div data-fa="1" style="font-family:var(--fa);font-size:clamp(32px,3.6vw,64px);line-height:1.46;font-weight:500;display:none">میانِ تخصص‌ها،<br />جایی است که<br />ایده‌های تازه<br />آغاز می‌شوند.</div>
+        </div>
+        <div data-ov-inter="1" style="grid-column:7 / span 6;position:relative;aspect-ratio:1/1;direction:ltr">
+          <div style="position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr)">
+            <i style="border-right:1px solid var(--rule-soft);border-bottom:1px solid var(--rule-soft)"></i><i style="border-right:1px solid var(--rule-soft);border-bottom:1px solid var(--rule-soft)"></i><i style="border-bottom:1px solid var(--rule-soft)"></i>
+            <i style="border-right:1px solid var(--rule-soft);border-bottom:1px solid var(--rule-soft)"></i><i style="border-right:1px solid var(--rule-soft);border-bottom:1px solid var(--rule-soft)"></i><i style="border-bottom:1px solid var(--rule-soft)"></i>
+            <i style="border-right:1px solid var(--rule-soft)"></i><i style="border-right:1px solid var(--rule-soft)"></i><i></i>
+          </div>
+          <svg data-ov-links="1" viewBox="0 0 100 100" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible">
+            <line data-ov-link="0" x1="16.6" y1="16.6" x2="50" y2="50" stroke="#121B1B" stroke-width="0.4" stroke-dasharray="120" stroke-dashoffset="120" style="transition:stroke-dashoffset var(--m-base) cubic-bezier(.76,0,.24,1)"></line>
+            <line data-ov-link="1" x1="50" y1="50" x2="16.6" y2="50" stroke="#121B1B" stroke-width="0.4" stroke-dasharray="120" stroke-dashoffset="120" style="transition:stroke-dashoffset var(--m-base) cubic-bezier(.76,0,.24,1) var(--m-instant)"></line>
+            <line data-ov-link="2" x1="50" y1="50" x2="83.3" y2="16.6" stroke="#56B1AC" stroke-width="0.6" stroke-dasharray="120" stroke-dashoffset="120" style="transition:stroke-dashoffset var(--m-base) cubic-bezier(.76,0,.24,1) var(--m-fast)"></line>
+            <line data-ov-link="3" x1="50" y1="50" x2="83.3" y2="83.3" stroke="#121B1B" stroke-width="0.4" stroke-dasharray="120" stroke-dashoffset="120" style="transition:stroke-dashoffset var(--m-base) cubic-bezier(.76,0,.24,1) var(--m-fast)"></line>
+          </svg>
+          <sc-for list="{{ nodes }}" as="nd" hint-placeholder-count="5">
+            <div data-ov-node="1" style="position:absolute;left:{{ nd.x }};top:{{ nd.y }};transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;transition:opacity var(--m-base) var(--e-standard) {{ nd.delay }}">
+              <i style="width:{{ nd.dot }};height:{{ nd.dot }};background:{{ nd.fill }}"></i>
+              <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-60);white-space:nowrap">{{ nd.label }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <!-- selected work -->
+    <section data-screen-label="Selected work" style="padding:16vh var(--marg) 0">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:24px;border-top:1px solid var(--rule);padding-top:16px;flex-wrap:wrap">
+        <span style="font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45)"><span data-en="1">Selected work — across disciplines</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:13.5px;display:none">کارهای منتخب — میان‌رشته‌ای</span></span>
+        <a href="{{ hrefProjects }}" data-arrow="1" style="display:inline-flex;align-items:center;gap:12px;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase"><span style="overflow:hidden;display:block;width:22px;height:9px;position:relative"><i data-arrowline="1" style="position:absolute;inset:0;background:currentColor;height:1px;top:4px;transition:transform var(--m-standard) var(--e-page)"></i></span><span data-en="1">All projects</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:14.5px;display:none">همه پروژه‌ها</span></a>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap);margin-top:40px">
+        <sc-for list="{{ work }}" as="w" hint-placeholder-count="3">
+          <a href="{{ w.href }}" data-card="1" data-cursor="View" data-cursor-fa="مشاهده" style="grid-column:{{ w.col }};margin-top:{{ w.mt }};display:block">
+            <div style="position:relative;overflow:hidden;background:var(--grey);aspect-ratio:{{ w.ratio }};direction:ltr">
+              <div data-card-img="1" style="position:absolute;inset:0;background:{{ w.plate }};display:grid;place-items:center;transition:transform var(--m-slow) var(--e-enter)"><span style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:{{ w.ink }}">{{ w.num }}</span></div>
+              <i data-card-sq="1" style="position:absolute;left:0;top:0;width:16px;height:16px;background:var(--turq);transform:scale(0);transform-origin:0 0;transition:transform var(--m-standard) var(--e-page)"></i>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-top:14px"><span style="font-size:clamp(17px,1.5vw,23px);line-height:1.2;letter-spacing:-.015em">{{ w.title }}</span><span style="font-size:11.5px;letter-spacing:.1em;color:var(--ink-45);direction:ltr;flex:none">{{ w.year }}</span></div>
+            <div style="font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-45);margin-top:4px">{{ w.disciplines }}</div>
+          </a>
+        </sc-for>
+      </div>
+    </section>
+
+    <section data-screen-label="Overview close" style="padding:20vh var(--marg) var(--marg)">
+      <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap)">
+        <div style="grid-column:1 / span 8">
+          <div data-en="1" style="font-size:clamp(44px,5.6vw,104px);line-height:.98;letter-spacing:-.04em;font-weight:500">Start a<br />conversation.</div>
+          <div data-fa="1" style="font-family:var(--fa);font-size:clamp(38px,4.6vw,86px);line-height:1.36;font-weight:500;display:none">گفت‌وگو را<br />آغاز کنیم.</div>
+          <a href="{{ hrefContact }}" data-arrow="1" style="display:inline-flex;align-items:center;gap:12px;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;margin-top:34px"><span style="overflow:hidden;display:block;width:22px;height:9px;position:relative"><i data-arrowline="1" style="position:absolute;inset:0;background:currentColor;height:1px;top:4px;transition:transform var(--m-standard) var(--e-page)"></i></span><span data-en="1" style="direction:ltr">[EMAIL]</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:14.5px;display:none">[ایمیل]</span></a>
+        </div>
+        <div style="grid-column:11 / span 2;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:3px;width:46px;height:46px;align-self:end;direction:ltr">
+          <i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="background:var(--turq)"></i><i style="border:1px solid var(--rule)"></i><i style="background:var(--turq-pale)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ================= DETAIL ================= -->
+  <div data-view="detail" style="position:relative;display:none">
+    <section data-screen-label="Expertise hero" style="padding:calc(var(--marg) + 120px) var(--marg) 0">
+      <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap);align-items:start">
+        <div data-dt-num="1" style="grid-column:1 / span 2;font-size:clamp(28px,2.8vw,46px);line-height:1;letter-spacing:-.02em;color:var(--turq-dk);font-variant-numeric:tabular-nums;direction:ltr;position:sticky;top:calc(var(--marg) + 120px)">{{ e.num }}</div>
+        <div style="grid-column:3 / span 9">
+          <h1 data-dt-title="1" style="margin:0;font-size:{{ dtTitleSize }};line-height:{{ dtTitleLh }};letter-spacing:{{ dtTitleLs }};font-weight:500">{{ e.title }}</h1>
+          <div data-dt-prop="1" style="margin-top:28px;font-size:clamp(26px,2.7vw,46px);line-height:{{ propLh }};letter-spacing:-.022em;max-width:30ch;color:var(--ink)">{{ e.proposition }}</div>
+        </div>
+      </div>
+      <div data-dt-hero="1" style="position:relative;margin-top:8vh;height:62vh;overflow:hidden;background:var(--grey);direction:ltr">
+        <div data-dt-heroimg="1" style="position:absolute;inset:-6% -2%;background:{{ e.plate }};display:grid;place-items:center"><span style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:{{ e.ink }}">{{ e.heroMedia }}</span></div>
+      </div>
+    </section>
+
+    <section data-exp-section="overview" data-screen-label="Approach" style="padding:14vh var(--marg) 0">
+      <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap)">
+        <div style="grid-column:1 / span 2;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45)"><span data-en="1">Our approach</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:13px;display:none">رویکرد ما</span></div>
+        <div style="grid-column:3 / span 7;font-size:clamp(24px,2.4vw,40px);line-height:{{ leadLh }};letter-spacing:-.02em">{{ e.lead }}</div>
+        <div style="grid-column:3 / span 4;margin-top:44px">
+          <p style="margin:0;font-size:{{ bodySize }};line-height:{{ bodyLh }};color:var(--ink-60);max-width:{{ measure }}">{{ e.body }}</p>
+        </div>
+        <div style="grid-column:8 / span 4;margin-top:44px">
+          <p style="margin:0;font-size:{{ bodySize }};line-height:{{ bodyLh }};color:var(--ink-60);max-width:{{ measure }}">{{ e.body2 }}</p>
+        </div>
+      </div>
+    </section>
+
+    <section data-exp-section="capabilities" data-screen-label="Capabilities" style="padding:14vh var(--marg) 0">
+      <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap)">
+        <div style="grid-column:1 / span 2;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45);position:sticky;top:calc(var(--marg) + 120px);align-self:start"><span data-en="1">Capabilities</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:13px;display:none">توانمندی‌ها</span></div>
+        <div style="grid-column:3 / span 9">
+          <sc-for list="{{ e.capabilities }}" as="c" hint-placeholder-count="6">
+            <div data-cap="1" style="border-top:1px solid var(--rule);padding:18px 0;display:grid;grid-template-columns:44px minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:baseline;transition:padding var(--m-standard) var(--e-standard)">
+              <span style="display:flex;align-items:center;gap:8px;font-size:11.5px;letter-spacing:.1em;color:var(--ink-45);font-variant-numeric:tabular-nums;direction:ltr"><i data-cap-sq="1" style="width:7px;height:7px;background:var(--turq);opacity:0;transition:opacity var(--m-fast) var(--e-standard)"></i>{{ c.num }}</span>
+              <span style="font-size:clamp(20px,1.9vw,30px);line-height:1.2;letter-spacing:-.018em">{{ c.title }}</span>
+              <span data-cap-note="1" style="font-size:13.5px;line-height:1.7;color:var(--ink-45);opacity:0;transform:translateY(6px);transition:opacity var(--m-standard) var(--e-standard),transform var(--m-standard) var(--e-enter)">{{ c.note }}</span>
+            </div>
+          </sc-for>
+          <div style="border-top:1px solid var(--rule)"></div>
+        </div>
+      </div>
+    </section>
+
+    <sc-if value="{{ e.hasProcess }}" hint-placeholder-val="{{ true }}">
+      <section data-exp-section="process" data-screen-label="Process" style="padding:16vh var(--marg) 0">
+        <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap)">
+          <div data-pc-col="1" style="grid-column:1 / span 4;position:sticky;top:calc(var(--marg) + 130px);align-self:start">
+            <div style="font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45)"><span data-en="1">Method</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:13px;display:none">روش</span></div>
+            <div data-pc-title="1" style="margin-top:14px;font-size:clamp(34px,3.4vw,62px);line-height:{{ pcLh }};letter-spacing:-.03em;font-weight:500">{{ phaseTitle }}</div>
+            <p data-pc-body="1" style="margin:20px 0 0;font-size:{{ bodySize }};line-height:{{ bodyLh }};color:var(--ink-60);max-width:{{ measure }}">{{ phaseBody }}</p>
+            <div style="margin-top:28px;display:flex;align-items:center;gap:12px;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-45)">
+              <span style="display:block;height:13px;overflow:hidden"><span data-pc-count="1" style="display:block;transition:transform var(--m-base) var(--e-page);font-variant-numeric:tabular-nums;direction:ltr"><span style="display:block;height:13px">01</span><span style="display:block;height:13px">02</span><span style="display:block;height:13px">03</span><span style="display:block;height:13px">04</span></span></span>
+              <span style="direction:ltr">/ 0{{ phaseCount }}</span>
+            </div>
+          </div>
+          <div data-pc-media="1" style="grid-column:6 / span 7;display:grid;gap:var(--gap);direction:ltr">
+            <sc-for list="{{ e.phases }}" as="ph" hint-placeholder-count="4">
+              <div data-pc-panel="1" style="position:relative;aspect-ratio:{{ ph.ratio }};overflow:hidden;background:#fff;border:1px solid var(--rule);margin-inline-start:{{ ph.indent }}">
+                <div style="position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(18,27,27,.05) 0 1px,transparent 1px 34px),repeating-linear-gradient(90deg,rgba(18,27,27,.05) 0 1px,transparent 1px 34px)"></div>
+                <div data-pc-plate="1" style="position:absolute;inset:0;background:{{ ph.plate }};opacity:{{ ph.plateOpacity }}"></div>
+                <div style="position:absolute;left:22px;bottom:18px;display:flex;align-items:center;gap:10px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45)"><i style="width:8px;height:8px;background:var(--turq)"></i>{{ ph.label }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+    </sc-if>
+
+    <section data-exp-section="work" data-screen-label="Work in this field" style="padding:16vh var(--marg) 0">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:24px;border-top:1px solid var(--rule);padding-top:16px;flex-wrap:wrap">
+        <span style="font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45)"><span data-en="1">Work in this field</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:13.5px;display:none">پروژه‌ها در این حوزه</span></span>
+        <a href="{{ e.filterHref }}" data-arrow="1" style="display:inline-flex;align-items:center;gap:12px;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase"><span style="overflow:hidden;display:block;width:22px;height:9px;position:relative"><i data-arrowline="1" style="position:absolute;inset:0;background:currentColor;height:1px;top:4px;transition:transform var(--m-standard) var(--e-page)"></i></span><span>{{ e.filterLabel }}</span></a>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap);margin-top:40px">
+        <sc-for list="{{ e.projects }}" as="w" hint-placeholder-count="3">
+          <a href="{{ w.href }}" data-card="1" data-cursor="View" data-cursor-fa="مشاهده" style="grid-column:{{ w.col }};margin-top:{{ w.mt }};display:block">
+            <div style="position:relative;overflow:hidden;background:var(--grey);aspect-ratio:{{ w.ratio }};direction:ltr">
+              <div data-card-img="1" style="position:absolute;inset:0;background:{{ w.plate }};display:grid;place-items:center;transition:transform var(--m-slow) var(--e-enter)"><span style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:{{ w.ink }}">{{ w.num }}</span></div>
+              <i data-card-sq="1" style="position:absolute;left:0;top:0;width:16px;height:16px;background:var(--turq);transform:scale(0);transform-origin:0 0;transition:transform var(--m-standard) var(--e-page)"></i>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-top:14px"><span style="font-size:clamp(17px,1.5vw,23px);line-height:1.2;letter-spacing:-.015em">{{ w.title }}</span><span style="font-size:11.5px;letter-spacing:.1em;color:var(--ink-45);direction:ltr;flex:none">{{ w.year }}</span></div>
+            <div style="font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-45);margin-top:4px">{{ w.location }}</div>
+          </a>
+        </sc-for>
+      </div>
+    </section>
+
+    <sc-if value="{{ e.hasKnowledge }}" hint-placeholder-val="{{ true }}">
+      <section data-exp-section="knowledge" data-screen-label="Knowledge" style="padding:16vh var(--marg) 0">
+        <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap)">
+          <div style="grid-column:1 / span 2;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45)"><span data-en="1">Knowledge</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:13px;display:none">دانش</span></div>
+          <div style="grid-column:3 / span 6;border-top:1px solid var(--ink);padding-top:22px">
+            <sc-for list="{{ e.knowledge }}" as="k" hint-placeholder-count="3">
+              <a href="{{ k.href }}" style="display:block;border-bottom:1px solid var(--rule);padding:20px 0">
+                <div style="display:flex;align-items:baseline;gap:16px;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-45)"><span style="direction:ltr">{{ k.year }}</span><span>{{ k.kind }}</span></div>
+                <div style="margin-top:10px;font-size:clamp(19px,1.8vw,27px);line-height:1.28;letter-spacing:-.018em">{{ k.title }}</div>
+                <div style="margin-top:10px;font-size:13.5px;line-height:1.7;color:var(--ink-60);max-width:{{ measure }}">{{ k.excerpt }}</div>
+              </a>
+            </sc-for>
+          </div>
+          <sc-if value="{{ e.hasMetrics }}" hint-placeholder-val="{{ true }}">
+            <div style="grid-column:10 / span 3;display:grid;gap:40px;align-content:start;padding-top:22px">
+              <sc-for list="{{ e.metrics }}" as="m" hint-placeholder-count="3">
+                <div>
+                  <div style="font-size:clamp(34px,3.4vw,58px);line-height:1;letter-spacing:-.035em;font-weight:500;font-variant-numeric:tabular-nums;direction:ltr">{{ m.value }}</div>
+                  <div style="margin-top:10px;font-size:12px;line-height:1.6;color:var(--ink-45);max-width:20ch">{{ m.note }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
+      </section>
+    </sc-if>
+
+    <section data-exp-section="related" data-screen-label="Related expertise" style="padding:16vh var(--marg) 0">
+      <div style="font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45);margin-bottom:30px"><span data-en="1">Related expertise</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:13.5px;display:none">تخصص‌های مرتبط</span></div>
+      <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap);align-items:start">
+        <div style="grid-column:1 / span 6">
+          <sc-for list="{{ related }}" as="r" hint-placeholder-count="3">
+            <a href="#" onClick="{{ r.open }}" onMouseEnter="{{ r.enter }}" data-rel="1" data-cursor="Explore" data-cursor-fa="کاوش" style="display:flex;align-items:baseline;gap:20px;border-top:1px solid var(--rule);padding:22px 0;transition:padding var(--m-standard) var(--e-standard),color var(--m-fast) var(--e-standard)">
+              <span style="font-size:11.5px;letter-spacing:.1em;color:var(--ink-45);direction:ltr;font-variant-numeric:tabular-nums">{{ r.num }}</span>
+              <span style="font-size:clamp(24px,2.4vw,40px);line-height:1.2;letter-spacing:-.022em;font-weight:500">{{ r.title }}</span>
+            </a>
+          </sc-for>
+          <div style="border-top:1px solid var(--rule)"></div>
+        </div>
+        <div style="grid-column:8 / span 5;position:relative;overflow:hidden;background:var(--grey);aspect-ratio:4/3;direction:ltr">
+          <div data-rel-img="1" style="position:absolute;inset:-4% -2%;background:var(--plate-2);display:grid;place-items:center;transition:transform var(--m-slow) var(--e-enter)"><span data-rel-label="1" style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45)">{{ relFirst }}</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section data-screen-label="Next expertise" style="padding:16vh var(--marg) var(--marg)">
+      <a href="#" onClick="{{ goNext }}" data-next="1" style="display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap);border-top:1px solid var(--ink);padding-top:26px;align-items:end">
+        <div style="grid-column:1 / span 8">
+          <div style="font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45)"><span data-en="1">Next expertise</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:13.5px;display:none">تخصص بعدی</span></div>
+          <div style="margin-top:14px;display:flex;align-items:baseline;gap:22px">
+            <span style="font-size:clamp(20px,1.8vw,30px);color:var(--turq-dk);direction:ltr;font-variant-numeric:tabular-nums">{{ next.num }}</span>
+            <span data-next-title="1" style="font-size:{{ nextSize }};line-height:{{ nextLh }};letter-spacing:-.035em;font-weight:500;transition:transform var(--m-standard) var(--e-page)">{{ next.title }}</span>
+          </div>
+        </div>
+        <div style="grid-column:10 / span 3;position:relative;overflow:hidden;background:var(--grey);aspect-ratio:16/10;direction:ltr">
+          <div data-next-img="1" style="position:absolute;inset:-5% -2%;background:{{ next.plate }};transition:transform var(--m-slow) var(--e-enter)"></div>
+        </div>
+      </a>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-top:12vh;border-top:1px solid var(--rule);padding-top:22px">
+        <a href="#" onClick="{{ goOverview }}" data-arrow="1" style="display:inline-flex;align-items:center;gap:12px;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase"><span style="overflow:hidden;display:block;width:22px;height:9px;position:relative"><i data-arrowline="1" style="position:absolute;inset:0;background:currentColor;height:1px;top:4px;transition:transform var(--m-standard) var(--e-page)"></i></span><span data-en="1">All expertise</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:14.5px;display:none">همه تخصص‌ها</span></a>
+        <div style="display:flex;align-items:center;gap:18px">
+          <button type="button" data-rm="1" onClick="{{ toggleReduced }}" title="{{ rmTitle }}" style="appearance:none;background:{{ rmBg }};color:{{ rmColor }};border:1px solid var(--rule);padding:7px 11px;cursor:pointer;font:inherit;font-size:10px;letter-spacing:.1em;text-transform:uppercase;display:inline-flex;align-items:center;gap:7px"><span style="width:7px;height:7px;background:currentColor;opacity:.7"></span><span style="direction:ltr">RM {{ rmState }}</span></button>
+          <span style="font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-45)">Tarh &amp; Afarinesh — طرح و آفرینش</span>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div data-shared="1" style="position:fixed;z-index:104;left:0;top:0;width:0;height:0;overflow:hidden;opacity:0;pointer-events:none;background:var(--grey);direction:ltr"><div data-shared-inner="1" style="position:absolute;inset:-4% -2%;background:var(--plate)"></div></div>
+
+  <div data-secnav="1" style="position:fixed;left:var(--marg);bottom:var(--marg);z-index:90;display:flex;align-items:center;gap:12px;opacity:0;pointer-events:none;transition:opacity var(--m-standard) var(--e-standard);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-45)">
+    <i style="width:7px;height:7px;background:var(--turq)"></i><span data-secnav-label="1">Overview</span>
+  </div>
+
+  <div data-prog="1" style="position:fixed;right:14px;bottom:var(--marg);z-index:90;direction:ltr;pointer-events:none;display:flex;align-items:center;gap:10px;opacity:0;transition:opacity var(--m-standard) var(--e-standard)">
+    <span data-prog-num="1" style="font-size:10.5px;letter-spacing:.1em;color:var(--ink-45);font-variant-numeric:tabular-nums">000</span>
+    <span style="position:relative;display:block;width:9px;height:120px"><i style="position:absolute;left:4px;top:0;bottom:0;width:1px;background:var(--rule)"></i><i data-prog-sq="1" style="position:absolute;left:0;top:0;width:9px;height:9px;background:var(--turq)"></i></span>
+  </div>
+
+  <div data-cursor-el="1" style="position:fixed;left:0;top:0;z-index:130;width:78px;height:78px;border-radius:50%;background:var(--turq);color:var(--ink);display:grid;place-items:center;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;pointer-events:none;opacity:0;transform:translate(-50%,-50%) scale(.4);transition:opacity var(--m-fast) var(--e-standard),transform var(--m-fast) var(--e-standard);text-align:center"><span data-cursor-label="1">Explore</span></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440},&quot;startLang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;en&quot;,&quot;options&quot;:[&quot;en&quot;,&quot;fa&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Bilingual&quot;},&quot;startView&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;overview&quot;,&quot;options&quot;:[&quot;overview&quot;,&quot;detail&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Router&quot;},&quot;forceReducedMotion&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Motion&quot;},&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#56B1AC&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#56B1AC&quot;,&quot;#3E9692&quot;,&quot;#121B1B&quot;],&quot;section&quot;:&quot;Brand&quot;}}">
+const clamp = (v, a, b) => v < a ? a : v > b ? b : v;
+const PLATES = [
+  "repeating-linear-gradient(-45deg,#E8E8E4 0 18px,#E1E1DC 18px 36px)",
+  "repeating-linear-gradient(-45deg,#DEDED8 0 18px,#D7D7D1 18px 36px)",
+  "repeating-linear-gradient(-45deg,#E4E7E6 0 18px,#DCE1E0 18px 36px)",
+  "repeating-linear-gradient(-45deg,#D9EFED 0 18px,#CFE8E5 18px 36px)"
+];
+const INK = "rgba(18,27,27,.45)";
+/* 3x3 conceptual coordinates — each discipline holds one position in the same system */
+/* EX is DERIVED from expertise-data.js — the taxonomy is data, not code */
+const EX_OF = (function () {
+  let cache = null;
+  return function () {
+    if (cache && cache.length) return cache;
+    cache = (window.TA_EXPERTISE ? window.TA_EXPERTISE.all() : []).map(build);
+    return cache;
+  };
+  function build(e) {
+  const pres = e.presentation || {};
+  return {
+    slug: e.slug, num: e.num, en: e.title.en, fa: e.title.fa,
+    coord: pres.coord || [0, 0], plate: pres.plate != null ? pres.plate : 0,
+    drawing: !!pres.drawing,
+    mediaEn: pres.media ? pres.media.en : null, mediaFa: pres.media ? pres.media.fa : null,
+    strapEn: e.strap ? e.strap.en : null, strapFa: e.strap ? e.strap.fa : null,
+    rich: !!e.hasKnowledge, light: pres.density === "light"
+  };
+  }
+})();
+let EX = EX_OF();
+/* selected work resolves project facts from the canonical project source */
+const PJ_OF = (function () {
+  let cache = null;
+  return function () {
+    const D = window.TA_PROJECTS;
+    if (!D) return [];
+    if (cache && cache.length) return cache;
+    cache = D.published().map(p => {
+      const v = D.visual(p.id, "archive", "archive");
+      return { id:p.id, num: String(p.legacyIndex + 1).padStart(2, "0"),
+               routeIndex: p.legacyIndex, expertise: p.expertise || [],
+               en:p.title.en, fa:p.title.fa,
+               locEn: p.location ? p.location.en : null, locFa: p.location ? p.location.fa : null,
+               year:p.year,
+               /* canonical asset, resolved for the archive role */
+               plate: v.background };
+    });
+    return cache;
+  };
+})();
+let PJ = PJ_OF();
+/* discipline titles resolve from the canonical taxonomy */
+const EXP_TITLE = (slug, fa) => {
+  const e = window.TA_EXPERTISE ? window.TA_EXPERTISE.bySlug(slug) : null;
+  return e ? (fa ? e.title.fa : e.title.en) : slug;
+};
+const WORK_LAYOUT = [
+  { col:"1 / span 7", mt:"0px", ratio:"16/9" },
+  { col:"9 / span 4", mt:"90px", ratio:"3/4" },
+  { col:"3 / span 5", mt:"80px", ratio:"4/3" }
+];
+const SECTION_LABELS = {
+  overview:["Overview","نمای کلی"], capabilities:["Capabilities","توانمندی‌ها"], process:["Process","فرایند"],
+  work:["Work","پروژه‌ها"], knowledge:["Knowledge","دانش"], related:["Related","مرتبط"]
+};
+const MENU = [
+  ["Home","خانه","Homepage.dc.html"], ["Projects","پروژه‌ها","Projects.dc.html"], ["Expertise","تخصص‌ها",""],
+  ["Awards","جوایز و افتخارات","Awards.dc.html"], ["About","درباره ما","About.dc.html"],
+  ["Journal","مجله","Journal.dc.html"], ["Contact","تماس با ما","Contact.dc.html"]
+];
+
+/* key/value hash routing shared across pages: #expertise=slug&lang=fa, #p=0&lang=fa */
+const parseHash = () => {
+  const out = {};
+  (window.location.hash || "").replace(/^#/, "").split("&").forEach(part => {
+    if(!part) return;
+    const eq = part.indexOf("=");
+    if(eq < 0) out[part] = true; else out[part.slice(0, eq)] = part.slice(eq + 1);
+  });
+  return out;
+};
+const langSuffix = (lang) => lang === "fa" ? "&lang=fa" : "";
+/* generic visual capture — placeholder plates today, real media later, no rewrite */
+const captureVisual = (src) => {
+  if(!src) return null;
+  const img = src.querySelector ? src.querySelector("img") : null;
+  const host = img || src;
+  const cs = getComputedStyle(host);
+  const cap = { transform:(host.style && host.style.transform) || "none" };
+  if(img){
+    cap.backgroundImage = "url(" + (img.currentSrc || img.src) + ")";
+    cap.backgroundSize = cs.objectFit === "contain" ? "contain" : "cover";
+    cap.backgroundPosition = cs.objectPosition || "50% 50%";
+    cap.backgroundRepeat = "no-repeat";
+  } else {
+    cap.backgroundImage = cs.backgroundImage !== "none" ? cs.backgroundImage : "";
+    cap.backgroundSize = cs.backgroundSize;
+    cap.backgroundPosition = cs.backgroundPosition;
+    cap.backgroundRepeat = cs.backgroundRepeat;
+  }
+  return cap;
+};
+
+/* MOTION V2 — SCENE tempo. Every shared-element expansion and scene hand-off on the
+   site runs at this one duration so a click in Projects, Awards or Journal feels like the
+   same gesture. Paired with --e-page. SCENE_RM is the reduced-motion equivalent. */
+const SCENE = 900, SCENE_RM = 200;
+
+class Component extends DCLogic {
+  state = { lang:"en", view:"overview", eid:0, hover:null, relHover:null, menu:false, reduced:false };
+
+  componentDidMount(){
+    this.root = document.querySelector("[data-ex-root]");
+    if(!this.root) return;
+    try{ this.state.reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches; }catch(e){}
+    if(this.props.forceReducedMotion) this.state.reduced = true;
+    if(this.props.startLang === "fa") this.state.lang = "fa";
+    if(this.props.accent) this.root.style.setProperty("--turq", this.props.accent);
+    const hq = parseHash();
+    if(hq.lang === "fa") this.state.lang = "fa";
+    const slugs = EX.map(x => x.slug);
+    const slug = hq.expertise || Object.keys(hq).filter(k => slugs.indexOf(k) >= 0)[0];
+    const found = slugs.indexOf(slug);
+    if(found >= 0){ this.state.view = "detail"; this.state.eid = found; }
+    if(this.props.startView === "detail") this.state.view = "detail";
+    this.cx = 0; this.cy = 0; this.cxs = 0; this.cys = 0;
+    this.onMove = (e) => { this.cx = e.clientX; this.cy = e.clientY; this.requestTick(); };
+    this.bindPointer = () => {
+      const fine = !(window.TA_LAYOUT && window.TA_LAYOUT.coarsePointer);
+      if(fine && !this._moveBound){ window.addEventListener("mousemove", this.onMove, { passive:true }); this._moveBound = true; }
+      if(!fine && this._moveBound){
+        window.removeEventListener("mousemove", this.onMove); this._moveBound = false;
+        const c = this.n && this.n.cursor; if(c){ c.style.opacity = "0"; c.style.transform = "translate(-50%,-50%) scale(.4)"; }
+        this.fine = false;
+      }
+    };
+    this.bindPointer();
+    this.q(); this.bind(); this.applyView(); this.applyLang();
+    window.__exOwner = this;
+    if(window.TA_LAYOUT && window.TA_LAYOUT.onChange){
+      window.TA_LAYOUT.onChange((L, info) => {
+        /* a virtual keyboard only changes height — never a reason to re-initialise */
+        if(info && info.keyboardLikely){ this.requestTick(); return; }
+        if(info && info.pointerChanged && this.bindPointer) this.bindPointer();
+        if(info && info.reducedMotionChanged){ this.requestTick(); return; }
+        if(!info || info.layoutChanged){ this.q(); this.bind(); this.applyLang(); }
+        this.requestTick();
+      });
+    }
+    this.onScroll = () => this.requestTick();
+    window.addEventListener("scroll", this.onScroll, { passive:true });
+    /* scroll events are unreliable in this runtime — native scroll events drive the scheduler */
+    if(window.TA_LAYOUT && window.TA_LAYOUT.onScrollChange) window.TA_LAYOUT.onScrollChange(this.onScroll);
+    window.addEventListener("resize", this.onScroll);
+    this._pLang = this.state.lang; this._pView = this.state.view; this._pEid = this.state.eid; this._pMenu = this.state.menu;
+    this.tick();
+  }
+
+  componentWillUnmount(){
+    if(window.__exOwner === this) window.__exOwner = null;
+    window.removeEventListener("mousemove", this.onMove);
+    window.removeEventListener("scroll", this.onScroll);
+    window.removeEventListener("resize", this.onScroll);
+  }
+
+  componentDidUpdate(){
+    if(this._pLang !== this.state.lang){ this._pLang = this.state.lang; this.applyLang(); this.syncHash(); }
+    if(this._pMenu !== this.state.menu){ this._pMenu = this.state.menu; this.animateMenu(); }
+    if(this._pView !== this.state.view || this._pEid !== this.state.eid){
+      this._pView = this.state.view; this._pEid = this.state.eid;
+      this.q(); this.bind(); this.applyView(); this.applyLang();
+    }
+  }
+
+  q(){
+    const r = this.root, all = (s) => Array.prototype.slice.call(r.querySelectorAll(s));
+    this.n = {
+      header: r.querySelector("[data-hd]"),
+      overview: r.querySelector('[data-view="overview"]'),
+      detail: r.querySelector('[data-view="detail"]'),
+      ovList: r.querySelector("[data-ov-list]"),
+      ovStageCol: r.querySelector("[data-ov-stagecol]"),
+      ovStage: r.querySelector("[data-ov-stage]"),
+      ovImg: r.querySelector("[data-ov-img]"),
+      ovDrawing: r.querySelector("[data-ov-drawing]"),
+      ovMask: r.querySelector("[data-ov-mask]"),
+      ovSq: r.querySelector("[data-ov-sq]"),
+      ovInter: r.querySelector("[data-ov-inter]"),
+      ovLinks: all("[data-ov-link]"),
+      ovNodes: all("[data-ov-node]"),
+
+      dtNum: r.querySelector("[data-dt-num]"),
+      dtTitle: r.querySelector("[data-dt-title]"),
+      dtProp: r.querySelector("[data-dt-prop]"),
+      dtHero: r.querySelector("[data-dt-hero]"),
+      dtHeroImg: r.querySelector("[data-dt-heroimg]"),
+      caps: all("[data-cap]"),
+      pcMedia: r.querySelector("[data-pc-media]"),
+      pcPanels: all("[data-pc-panel]"),
+      pcCount: r.querySelector("[data-pc-count]"),
+      pcCol: r.querySelector("[data-pc-col]"),
+      relImg: r.querySelector("[data-rel-img]"),
+      relLabel: r.querySelector("[data-rel-label]"),
+      nextTitle: r.querySelector("[data-next-title]"),
+      nextImg: r.querySelector("[data-next-img]"),
+      shared: r.querySelector("[data-shared]"),
+      sharedInner: r.querySelector("[data-shared-inner]"),
+      secnav: r.querySelector("[data-secnav]"),
+      secnavLabel: r.querySelector("[data-secnav-label]"),
+      prog: r.querySelector("[data-prog]"),
+      progNum: r.querySelector("[data-prog-num]"),
+      progSq: r.querySelector("[data-prog-sq]"),
+      cursor: r.querySelector("[data-cursor-el]"),
+      cursorLabel: r.querySelector("[data-cursor-label]")
+    };
+  }
+
+  applyView(){
+    const d = this.state.view === "detail";
+    if(this.n.overview) this.n.overview.style.display = d ? "none" : "";
+    if(this.n.detail) this.n.detail.style.display = d ? "" : "none";
+    if(this.n.secnav) this.n.secnav.style.opacity = "0";
+    this.interDone = false;
+    this.relSource = null;
+    if(!d) this.applyActive(this.state.eid, true);
+  }
+
+  applyLang(){
+    const fa = this.state.lang === "fa", n = this.n;
+    this.root.setAttribute("dir", fa ? "rtl" : "ltr");
+    this.root.querySelectorAll("[data-en]").forEach(el => { el.style.display = fa ? "none" : ""; });
+    this.root.querySelectorAll("[data-fa]").forEach(el => { el.style.display = fa ? "" : "none"; });
+    this.root.style.fontFamily = fa ? 'Vazirmatn,"Schibsted Grotesk",Tahoma,sans-serif' : '"Schibsted Grotesk",Helvetica,Arial,sans-serif';
+    /* composed, not mirrored: the index keeps the reading side, the conceptual field sits opposite */
+    if(n.ovList) n.ovList.style.gridColumn = fa ? "1 / span 6" : "1 / span 6";
+    if(n.ovStageCol) n.ovStageCol.style.gridColumn = "8 / span 5";
+    if(n.prog){ n.prog.style.right = fa ? "auto" : "14px"; n.prog.style.left = fa ? "14px" : "auto"; }
+    if(n.secnav){ n.secnav.style.left = fa ? "auto" : "var(--marg)"; n.secnav.style.right = fa ? "var(--marg)" : "auto"; }
+    if(n.pcCol) n.pcCol.style.gridColumn = "1 / span 4";
+  }
+
+  /* keyed guard: the same behaviour is never attached twice, but one element may
+     own several independent behaviours (its own hover AND the custom cursor). */
+  bindOnce(el, key){
+    if(!el) return false;
+    if(!el.__taBindings) el.__taBindings = {};
+    if(el.__taBindings[key]) return false;
+    el.__taBindings[key] = true;
+    return true;
+  }
+
+  bind(){
+    const n = this.n;
+    this.root.querySelectorAll("[data-nav]").forEach(a => {
+      if(!this.bindOnce(a, "nav-hover")) return;
+      const sq = a.querySelector("[data-navsq]");
+      a.addEventListener("mouseenter", () => { a.style.transform = "translateY(-3px)"; if(sq){ sq.style.opacity = "1"; sq.style.transform = "scale(1)"; } });
+      a.addEventListener("mouseleave", () => { a.style.transform = "translateY(0)"; });
+    });
+    this.root.querySelectorAll("[data-arrow]").forEach(a => {
+      if(!this.bindOnce(a, "arrow-hover")) return;
+      const l = a.querySelector("[data-arrowline]");
+      a.addEventListener("mouseenter", () => { if(l) l.style.transform = "translateX(8px)"; });
+      a.addEventListener("mouseleave", () => { if(l) l.style.transform = "translateX(0)"; });
+    });
+    this.root.querySelectorAll("[data-card]").forEach(c => {
+      if(!this.bindOnce(c, "card-hover")) return;
+      const img = c.querySelector("[data-card-img]"), sq = c.querySelector("[data-card-sq]");
+      c.addEventListener("mouseenter", () => { if(img && !this.state.reduced) img.style.transform = "scale(1.02)"; if(sq) sq.style.transform = "scale(1)"; });
+      c.addEventListener("mouseleave", () => { if(img) img.style.transform = "scale(1)"; if(sq) sq.style.transform = "scale(0)"; });
+    });
+    n.caps.forEach(c => {
+      if(!this.bindOnce(c, "card-hover")) return;
+      const sq = c.querySelector("[data-cap-sq]"), note = c.querySelector("[data-cap-note]");
+      c.addEventListener("mouseenter", () => {
+        c.style.paddingInlineStart = "14px";
+        if(sq) sq.style.opacity = "1";
+        if(note){ note.style.opacity = "1"; note.style.transform = "translateY(0)"; }
+      });
+      c.addEventListener("mouseleave", () => {
+        c.style.paddingInlineStart = "0px";
+        if(sq) sq.style.opacity = "0";
+        if(note){ note.style.opacity = "0"; note.style.transform = "translateY(6px)"; }
+      });
+    });
+    const relEls = Array.prototype.slice.call(this.root.querySelectorAll("[data-rel]"));
+    if(this.relEnterFns) relEls.forEach((el, i) => { el.__relEnter = this.relEnterFns[i]; });
+    relEls.forEach(a => {
+      if(!this.bindOnce(a, "related-interaction")) return;
+      const on = () => { a.style.paddingInlineStart = "14px"; a.style.color = "#3E9692"; };
+      const off = () => { a.style.paddingInlineStart = "0px"; a.style.color = ""; };
+      a.addEventListener("mouseenter", on);
+      a.addEventListener("mouseleave", off);
+      /* keyboard activation must transition from the same visual as hover */
+      a.addEventListener("focus", () => { on(); if(a.__relEnter) a.__relEnter(); });
+      a.addEventListener("blur", off);
+    });
+    const nx = this.root.querySelector("[data-next]");
+    if(nx && this.bindOnce(nx, "next-hover")){
+      nx.addEventListener("mouseenter", () => {
+        if(n.nextTitle) n.nextTitle.style.transform = this.state.lang === "fa" ? "translateX(-10px)" : "translateX(10px)";
+        if(n.nextImg && !this.state.reduced) n.nextImg.style.transform = "scale(1.03)";
+      });
+      nx.addEventListener("mouseleave", () => {
+        if(n.nextTitle) n.nextTitle.style.transform = "translateX(0)";
+        if(n.nextImg) n.nextImg.style.transform = "scale(1)";
+      });
+    }
+    const cur = n.cursor, lab = n.cursorLabel;
+    if(cur && window.matchMedia("(hover:hover) and (pointer:fine)").matches){
+      this.fine = true;
+      this.root.querySelectorAll("[data-cursor]").forEach(el => {
+      if(!this.bindOnce(el, "cursor")) return;
+        el.addEventListener("mouseenter", () => {
+          const fa = this.state.lang === "fa";
+          if(lab) lab.textContent = (fa && el.getAttribute("data-cursor-fa")) || el.getAttribute("data-cursor");
+          cur.style.opacity = "1"; cur.style.transform = "translate(-50%,-50%) scale(1)";
+        });
+        el.addEventListener("mouseleave", () => { cur.style.opacity = "0"; cur.style.transform = "translate(-50%,-50%) scale(.4)"; });
+      });
+    }
+  }
+
+  /* shared conceptual field responds to the active discipline */
+  applyActive(i, instant){
+    const n = this.n, red = this.state.reduced, e = EX[i];
+    if(!e) return;
+    if(n.ovStage) n.ovStage.style.height = (e.drawing ? 44 : 52) + "vh";
+    if(n.ovDrawing) n.ovDrawing.style.opacity = e.drawing ? "1" : "0";
+    if(n.ovImg){
+      n.ovImg.style.background = PLATES[e.plate];
+      const lbl = n.ovImg.querySelector("[data-ov-imglabel]");
+      if(lbl) lbl.textContent = this.state.lang === "fa" ? e.fa : e.en;
+      if(!red && !instant){
+        n.ovImg.style.transition = "none";
+        n.ovImg.style.transform = "scale(1.05)";
+        void n.ovImg.offsetWidth;
+        n.ovImg.style.transition = "transform var(--m-slow) cubic-bezier(.16,1,.3,1)";
+        n.ovImg.style.transform = "scale(1)";
+      }
+    }
+    if(n.ovMask && !red && !instant){
+      n.ovMask.style.transition = "none";
+      n.ovMask.style.clipPath = "inset(0 0 0 0)";
+      void n.ovMask.offsetWidth;
+      n.ovMask.style.transition = "clip-path var(--m-base) cubic-bezier(.76,0,.24,1)";
+      n.ovMask.style.clipPath = "inset(0 0 100% 0)";
+    }
+    if(n.ovSq){
+      const c = e.coord;
+      n.ovSq.style.transform = "translate(" + (c[0] * 23) + "px," + (c[1] * 23) + "px)";
+    }
+  }
+
+  syncHash(){
+    try{
+      window.location.hash = this.state.view === "detail"
+        ? ("expertise=" + EX[this.state.eid].slug + langSuffix(this.state.lang))
+        : (this.state.lang === "fa" ? "lang=fa" : "");
+    }catch(e){}
+  }
+
+  animateMenu(){
+    const open = this.state.menu;
+    this.root.querySelectorAll("[data-ml]").forEach(a => {
+      a.style.opacity = open ? "1" : "0";
+      a.style.transform = open ? "translateY(0)" : "translateY(40%)";
+    });
+    const p = this.root.querySelector("[data-menu-prev]");
+    if(p) p.style.opacity = open ? "1" : "0";
+    document.body.style.overflow = open ? "hidden" : "";
+  }
+
+  /* one shared-element routine for every expertise transition */
+  runShared(src, to, dur, after){
+    const s = this.n.shared, si = this.n.sharedInner;
+    if(!s || !si || !src){ if(after) after(); return; }
+    const cap = captureVisual(src);
+    if(cap){
+      if(cap.backgroundImage) si.style.backgroundImage = cap.backgroundImage;
+      si.style.backgroundSize = cap.backgroundSize;
+      si.style.backgroundPosition = cap.backgroundPosition;
+      si.style.backgroundRepeat = cap.backgroundRepeat;
+      si.style.transition = "none";
+      si.style.transform = cap.transform;
+    }
+    const from = src.getBoundingClientRect();
+    s.style.transition = "none";
+    this.place(s, { left:from.left, top:from.top, width:from.width, height:from.height });
+    s.style.opacity = "1";
+    void s.offsetWidth;
+    s.style.transition = ["left","top","width","height"].map(k => k + " " + dur + "ms cubic-bezier(.76,0,.24,1)").join(",");
+    this.place(s, to);
+    clearTimeout(this._t);
+    this._t = setTimeout(() => {
+      if(after) after();
+      s.style.transition = "opacity var(--m-fast) linear";
+      s.style.opacity = "0";
+      setTimeout(() => { s.style.transition = "none"; s.style.width = "0px"; s.style.height = "0px"; }, 280);
+    }, dur + 20);
+  }
+
+  heroBox(){
+    const vw = window.innerWidth, vh = window.innerHeight;
+    return { left:0, top:vh * 0.38, width:vw, height:vh * 0.62 };
+  }
+
+  place(el, r){
+    el.style.left = r.left + "px"; el.style.top = r.top + "px";
+    el.style.width = r.width + "px"; el.style.height = r.height + "px";
+  }
+
+  /* src is whatever visual the user was actually looking at when they clicked */
+  openDetail(i, e, srcEl){
+    if(e && e.preventDefault) e.preventDefault();
+    const n = this.n, red = this.state.reduced;
+    const src = srcEl || (this.state.view === "detail" ? n.relImg : n.ovImg) || n.ovStage;
+    const dur = red ? SCENE_RM : SCENE;
+    const leaving = this.state.view === "detail" ? n.detail : n.overview;
+    if(leaving && !red){
+      leaving.style.transition = "opacity var(--m-fast) cubic-bezier(.4,0,.2,1)";
+      leaving.style.opacity = "0";
+    }
+    this.runShared(src, this.heroBox(), dur, () => {
+      if(leaving){ leaving.style.transition = "none"; leaving.style.opacity = ""; }
+      window.scrollTo(0, 0);
+      this.setState({ view:"detail", eid:i, hover:null, relHover:null }, () => { this.syncHash(); this.enterDetail(); });
+    });
+  }
+
+  enterDetail(){
+    if(this.state.reduced) return;
+    [this.n.dtTitle, this.n.dtProp].forEach((el, i) => {
+      if(!el) return;
+      el.style.transition = "none";
+      el.style.opacity = "0"; el.style.transform = "translateY(24px)";
+      setTimeout(() => {
+        el.style.transition = "opacity var(--m-base) cubic-bezier(.16,1,.3,1),transform var(--m-base) cubic-bezier(.16,1,.3,1)";
+        el.style.opacity = "1"; el.style.transform = "translateY(0)";
+      }, 60 + i * 130);
+    });
+  }
+
+  /* the visible Next visual and title participate in the navigation */
+  goNextExpertise(e){
+    if(e && e.preventDefault) e.preventDefault();
+    const i = (this.state.eid + 1) % EX.length;
+    const n = this.n, red = this.state.reduced;
+    const dur = red ? SCENE_RM : SCENE;
+    if(n.nextTitle && !red) n.nextTitle.style.transform = "translateY(-14px)";
+    this.runShared(n.nextImg || n.dtHeroImg, this.heroBox(), dur, () => {
+      if(n.nextTitle) n.nextTitle.style.transform = "translateX(0)";
+      window.scrollTo(0, 0);
+      this.setState({ eid:i, relHover:null }, () => { this.syncHash(); this.enterDetail(); });
+    });
+  }
+
+
+  /* event-driven scheduler: one pending frame at most, idle when nothing moves */
+  requestTick(){
+    if(this._pending != null || document.visibilityState === "hidden") return;
+    const run = () => { this._pending = null; this._raf = null; this.tick(); };
+    if(typeof requestAnimationFrame === "function"){
+      this._raf = requestAnimationFrame(run);
+      /* rAF does not fire in every host, so a short timer guarantees the frame */
+      this._pending = setTimeout(() => { if(this._raf != null && typeof cancelAnimationFrame === "function") cancelAnimationFrame(this._raf); run(); }, 24);
+    } else {
+      this._pending = setTimeout(run, 16);
+    }
+  }
+  stopTicking(){
+    if(this._pending != null){ clearTimeout(this._pending); this._pending = null; }
+    if(this._raf != null && typeof cancelAnimationFrame === "function"){ cancelAnimationFrame(this._raf); this._raf = null; }
+  }
+
+  tick(){
+    try{ this.frame(); }
+    catch(err){ if(!this._logged){ this._logged = true; console.error("ex tick error", err); } }
+    /* keep frames coming only while the custom cursor is still catching up */
+    if(this.fine && (Math.abs(this.cx - this.cxs) > 0.6 || Math.abs(this.cy - this.cys) > 0.6)) this.requestTick();
+  }
+
+  frame(){
+    if(!this.n || !this.n.header || !this.n.header.isConnected){
+      const live = document.querySelector("[data-ex-root]");
+      if(!live) return;
+      this.root = live; this.q(); this.bind(); this.applyLang();
+    }
+    const n = this.n, red = this.state.reduced, vh = window.innerHeight, y = window.scrollY || 0;
+
+    if(n.header){
+      const compact = y > 110;
+      n.header.style.paddingTop = compact ? "14px" : "24px";
+      n.header.style.paddingBottom = compact ? "14px" : "24px";
+      n.header.style.background = compact ? "rgba(250,249,247,.92)" : "transparent";
+    }
+
+    if(this.state.view === "overview"){
+      /* scroll also advances the active discipline when not hovering */
+      if(n.ovList && this.state.hover == null){
+        const r = n.ovList.getBoundingClientRect();
+        const p = clamp((vh * 0.55 - r.top) / Math.max(1, r.height), 0, 0.999);
+        const i = clamp(Math.floor(p * EX.length), 0, EX.length - 1);
+        if(i !== this.state.eid) this.setState({ eid:i }, () => this.applyActive(i));
+      }
+      if(n.ovInter && !this.interDone){
+        const r = n.ovInter.getBoundingClientRect();
+        if(r.top < vh * 0.78 && r.bottom > 0){
+          this.interDone = true;
+          n.ovLinks.forEach(l => { l.style.strokeDashoffset = red ? "0" : "0"; });
+          n.ovNodes.forEach(nd => { nd.style.opacity = "1"; });
+        }
+      }
+    } else {
+      if(n.dtHero && n.dtHeroImg && !red){
+        const r = n.dtHero.getBoundingClientRect();
+        const p = clamp((vh - r.top) / Math.max(1, vh + r.height), 0, 1);
+        n.dtHeroImg.style.transform = "translateY(" + ((0.5 - p) * 5).toFixed(2) + "%) scale(" + (1.02 - p * 0.02).toFixed(3) + ")";
+      }
+      if(n.pcMedia && n.pcCount){
+        const r = n.pcMedia.getBoundingClientRect();
+        const count = n.pcPanels.length || 1;
+        const p = clamp((vh * 0.6 - r.top) / Math.max(1, r.height), 0, 0.999);
+        const i = clamp(Math.floor(p * count), 0, count - 1);
+        n.pcCount.style.transform = "translateY(" + (-i * 13) + "px)";
+        if(i !== this._phase){ this._phase = i; this.setState({ phase:i }); }
+        n.pcPanels.forEach((pn, k) => { pn.style.opacity = k === i ? "1" : "0.42"; pn.style.transition = "opacity var(--m-base) cubic-bezier(.4,0,.2,1)"; });
+      }
+      if(n.secnav){
+        n.secnav.style.opacity = y > vh * 0.7 ? "1" : "0";
+        const fa = this.state.lang === "fa";
+        /* active section from real DOM positions, only sections that exist */
+        const zone = vh * 0.4;
+        const secs = Array.prototype.slice.call(this.root.querySelectorAll("[data-exp-section]"));
+        let active = null;
+        secs.forEach(s => {
+          const r = s.getBoundingClientRect();
+          if(r.top <= zone && r.bottom > zone) active = s;
+        });
+        if(!active && secs.length){
+          active = secs[0];
+          secs.forEach(s => { if(s.getBoundingClientRect().top <= zone) active = s; });
+        }
+        if(active && n.secnavLabel){
+          const key = active.getAttribute("data-exp-section");
+          const i = secs.indexOf(active);
+          n.secnavLabel.textContent = String(i + 1).padStart(2, "0") + " " + (SECTION_LABELS[key] ? SECTION_LABELS[key][fa ? 1 : 0] : key);
+        }
+      }
+    }
+
+    if(n.prog){
+      const doc = Math.max(1, document.documentElement.scrollHeight - vh);
+      const gp = clamp(y / doc, 0, 1);
+      n.prog.style.opacity = y > vh * 0.5 ? "1" : "0";
+      if(n.progSq) n.progSq.style.top = (gp * 111).toFixed(1) + "px";
+      if(n.progNum) n.progNum.textContent = String(Math.round(gp * 100)).padStart(3, "0");
+    }
+
+    if(this.fine && n.cursor){
+      this.cxs += (this.cx - this.cxs) * (red ? 1 : 0.18);
+      this.cys += (this.cy - this.cys) * (red ? 1 : 0.18);
+      n.cursor.style.left = this.cxs.toFixed(1) + "px";
+      n.cursor.style.top = this.cys.toFixed(1) + "px";
+    }
+  }
+
+  sectionKeys(){
+    const e = EX[this.state.eid], rich = !!e.rich, light = !!e.light;
+    const k = [["Overview","نمای کلی"], ["Capabilities","توانمندی‌ها"]];
+    if(!light) k.push(["Process","فرایند"]);
+    k.push(["Work","پروژه‌ها"]);
+    if(rich) k.push(["Knowledge","دانش"]);
+    k.push(["Related","مرتبط"]);
+    return k;
+  }
+
+  renderVals(){
+    const st = this.state, fa = st.lang === "fa", red = st.reduced;
+    EX = EX_OF();
+    PJ = PJ_OF();
+    const e = EX[st.eid] || EX[0] || { slug:null, num:"", en:null, fa:null, coord:[0,0], plate:0,
+      drawing:false, mediaEn:null, mediaFa:null, strapEn:null, strapFa:null, rich:false, light:false };
+    const rich = !!e.rich, light = !!e.light;
+    /* canonical detail content; prototype copy only for prototype records */
+    const REX = (window.TA_EXPERTISE && e.slug) ? window.TA_EXPERTISE.bySlug(e.slug) : null;
+    const PXD = (window.TA_EXPERTISE && e.slug) ? window.TA_EXPERTISE.prototypeDetail(e.slug) : null;
+    const METRICS = (window.TA_EXPERTISE && e.slug) ? window.TA_EXPERTISE.metrics(e.slug) : [];
+    /* §06 — the Journal relationship alone decides Knowledge, never prototype density */
+    const knowledgeEntries = (window.TA_JOURNAL && e.slug) ? window.TA_JOURNAL.forExpertise(e.slug) : [];
+    const activeIdx = st.hover != null ? st.hover : st.eid;
+    const act = EX[activeIdx];
+
+    const items = EX.map((x, i) => {
+      const on = i === activeIdx;
+      return {
+        num:x.num, title: fa ? x.fa : x.en, strap: fa ? x.strapFa : x.strapEn,
+        size: fa ? "clamp(28px,3vw,50px)" : "clamp(32px,3.6vw,62px)",
+        lh: fa ? "1.5" : "1.02",
+        ls: fa ? "0" : "-.03em",
+        pad: fa ? "26px 0" : "28px 0",
+        opacity: st.hover == null ? "1" : (on ? "1" : "0.34"),
+        subOpacity: on ? "1" : "0.42",
+        color: on ? "#3E9692" : "#121B1B",
+        enter: () => { this.setState({ hover:i }); this.applyActive(i); },
+        leave: () => this.setState({ hover:null }),
+        open: (ev) => this.openDetail(i, ev)
+      };
+    });
+
+    /* intersection nodes on the 3x3 field */
+    const nodes = EX.map((x, i) => ({
+      label: fa ? x.fa : x.en,
+      x: (x.coord[0] * 33.3 + 16.6) + "%",
+      y: (x.coord[1] * 33.3 + 16.6) + "%",
+      dot: i === 0 ? "14px" : "9px",
+      fill: i === 0 ? "#56B1AC" : "#121B1B",
+      delay: (i * 110) + "ms"
+    }));
+
+    const sfx = langSuffix(st.lang);
+    const mkWork = (list) => list.map((p, k) => {
+      const lay = WORK_LAYOUT[k % WORK_LAYOUT.length];
+      return {
+        num:p.num, title: fa ? p.fa : p.en, location: fa ? p.locFa : p.locEn, year:p.year,
+        plate:p.plate, ink:INK, ratio:lay.ratio, col:lay.col, mt:lay.mt,
+        disciplines: (p.expertise || []).map(s => EXP_TITLE(s, fa)).join(" · "),
+        /* the legacy numeric index exists only in the URL */
+        href: "Projects.dc.html#p=" + (p.routeIndex != null ? p.routeIndex : (window.TA_PROJECTS ? window.TA_PROJECTS.indexOf(p.id) : 0)) + sfx
+      };
+    });
+
+    const capSrc = (window.TA_EXPERTISE && e.slug) ? (window.TA_EXPERTISE.bySlug(e.slug) || {}).capabilities || [] : [];
+    const capabilities = capSrc.map((c, i) => ({
+      num: String(i + 1).padStart(2, "0"),
+      title: fa ? c.title.fa : c.title.en,
+      note: fa ? c.note.fa : c.note.en
+    }));
+
+    /* the method sequence is canonical content, trimmed per discipline by the data module */
+    const phaseList = (window.TA_EXPERTISE && e.slug) ? window.TA_EXPERTISE.phases(e.slug) : [];
+    const phaseIdx = clamp(this._phase || 0, 0, Math.max(0, phaseList.length - 1));
+    const ph = phaseList[phaseIdx] || { label:{en:null,fa:null}, body:{en:null,fa:null}, presentation:{} };
+
+    /* canonical editorial relationships, not array neighbours */
+    const relRecs = (window.TA_EXPERTISE && e.slug) ? window.TA_EXPERTISE.related(e.slug) : [];
+    const idxOfSlug = (s) => { for(let i = 0; i < EX.length; i++) if(EX[i].slug === s) return i; return 0; };
+    const related = relRecs.slice(0, rich ? 3 : 2).map(r => {
+      const i = idxOfSlug(r.slug);
+      return {
+      num:r.num, title: fa ? r.title.fa : r.title.en,
+      /* transition originates from the Related field the user is actually looking at */
+      open: (ev) => this.openDetail(this.relSource != null ? this.relSource : i, ev, this.n.relImg),
+      enter: () => {
+        const n = this.n;
+        this.relSource = i;
+        if(n.relImg){
+          n.relImg.style.background = PLATES[EX[i].plate];
+          if(!red){
+            n.relImg.style.transition = "none"; n.relImg.style.transform = "scale(1.04)";
+            void n.relImg.offsetWidth;
+            n.relImg.style.transition = "transform var(--m-slow) cubic-bezier(.16,1,.3,1)";
+            n.relImg.style.transform = "scale(1)";
+          }
+        }
+        if(n.relLabel) n.relLabel.textContent = fa ? EX[i].fa : EX[i].en;
+      }
+      };
+    });
+    this.relEnterFns = related.map(r => r.enter);
+    /* canonical next, not an array step */
+    const nxRec = (window.TA_EXPERTISE && e.slug) ? window.TA_EXPERTISE.next(e.slug) : null;
+    const nx = nxRec ? (EX[idxOfSlug(nxRec.slug)] || EX[0]) : EX[0];
+
+    return {
+      setEn: () => this.setState({ lang:"en" }),
+      setFa: () => this.setState({ lang:"fa" }),
+      enOpacity: fa ? "0.5" : "1", faOpacity: fa ? "1" : "0.5",
+      enWeight: fa ? "400" : "600", faWeight: fa ? "600" : "400",
+
+      items: items,
+      nodes: nodes,
+      measure: fa ? "38ch" : "58ch",
+      activeMedia: fa ? act.mediaFa : act.mediaEn,
+      activeNum: act.num,
+      /* §34 — the discipline's own selection, not the first three published */
+      work: mkWork((function () {
+        const sel = (window.TA_EXPERTISE && e.slug) ? window.TA_EXPERTISE.projects(e.slug) : [];
+        const D = window.TA_PROJECTS;
+        return sel.slice(0, 3).map(p => {
+          const v = D.visual(p.id, "archive", "archive");
+          return { id:p.id, num: String(p.legacyIndex + 1).padStart(2, "0"), routeIndex: p.legacyIndex,
+                   expertise: p.expertise || [], en:p.title.en, fa:p.title.fa,
+                   locEn: p.location ? p.location.en : null, locFa: p.location ? p.location.fa : null,
+                   year:p.year, plate: v.background };
+        });
+      })()),
+      hrefProjects: "Projects.dc.html" + (fa ? "#lang=fa" : ""),
+      hrefHome: "Homepage.dc.html" + (fa ? "#lang=fa" : ""),
+      hrefAwards: "Awards.dc.html" + (fa ? "#lang=fa" : ""),
+      hrefAbout: "About.dc.html" + (fa ? "#lang=fa" : ""),
+      hrefContact: "Contact.dc.html" + (fa ? "#lang=fa" : ""),
+      openMenu: () => this.setState({ menu:true }),
+      closeMenu: () => this.setState({ menu:false }),
+      menuClip: st.menu ? "polygon(0 0,100% 0,100% 100%,0 100%)" : "polygon(0 0,0 0,0 0,0 0)",
+      menuPointer: st.menu ? "auto" : "none",
+      menuSize: fa ? "clamp(26px,3.4vw,48px)" : "clamp(30px,4.2vw,58px)",
+      menuLh: fa ? "1.5" : "1.04",
+      menuLs: fa ? "0" : "-.03em",
+      menuLinks: MENU.map((m, i) => ({
+        num: String(i + 1).padStart(2, "0"),
+        label: fa ? m[1] : m[0],
+        href: m[2] ? (m[2].indexOf("#") >= 0 ? m[2] + (fa ? "&lang=fa" : "") : m[2] + (fa ? "#lang=fa" : "")) : "#",
+        delay: (120 + i * 60) + "ms",
+        click: (ev) => {
+          if(!m[2]){
+            if(ev && ev.preventDefault) ev.preventDefault();
+            this.setState({ menu:false, view:"overview", hover:null }, () => { this.syncHash(); window.scrollTo(0, 0); });
+          } else this.setState({ menu:false });
+        }
+      })),
+      goOverview: (ev) => {
+        if(ev && ev.preventDefault) ev.preventDefault();
+        try{ window.location.hash = ""; }catch(err){}
+        this.setState({ view:"overview", hover:null }, () => window.scrollTo(0, 0));
+      },
+
+      e: {
+        num:e.num, title: fa ? e.fa : e.en, plate:PLATES[e.plate], ink:INK,
+        heroMedia: fa ? e.mediaFa : e.mediaEn,
+        proposition: (REX && REX.proposition) ? (fa ? REX.proposition.fa : REX.proposition.en)
+                                                : (fa ? e.strapFa : e.strapEn),
+        lead: PXD ? (fa ? PXD.lead.fa : PXD.lead.en) : (REX && REX.lead ? (fa ? REX.lead.fa : REX.lead.en) : null),
+        body: PXD ? (fa ? PXD.body[0].fa : PXD.body[0].en)
+                  : (REX && REX.body && REX.body[0] ? (fa ? REX.body[0].fa : REX.body[0].en) : null),
+        body2: PXD ? (fa ? PXD.body[1].fa : PXD.body[1].en)
+                   : (REX && REX.body && REX.body[1] ? (fa ? REX.body[1].fa : REX.body[1].en) : null),
+        capabilities: capabilities,
+        hasProcess: !light && phaseList.length > 0,
+        phases: phaseList.map(p => {
+          const pr = p.presentation || {};
+          return { label: fa ? p.label.fa : p.label.en, ratio: pr.ratio, indent: pr.indent,
+                   plate: PLATES[pr.plate != null ? pr.plate : 0], plateOpacity: String(pr.plateOpacity != null ? pr.plateOpacity : 0) };
+        }),
+        hasKnowledge: knowledgeEntries.length > 0,
+        knowledge: (function(){
+          const J = window.TA_JOURNAL;
+          const sfx = fa ? "&lang=fa" : "";
+          const rows = J ? J.forExpertise(e.slug).filter(x => x.type === "research" || x.type === "paper" || x.type === "book" || x.type === "article").slice(0, 3) : [];
+          if(rows.length) return rows.map(r => ({
+            year: r.date, kind: (J.typeOne[r.type] ? J.typeOne[r.type][fa ? 1 : 0] : r.type),
+            title: fa ? r.fa : r.en,
+            excerpt: fa ? r.excerptFa : r.excerptEn,
+            href: "Journal.dc.html#article=" + r.slug + sfx
+          }));
+          return [];
+        })(),
+        hasMetrics: METRICS.length > 0,
+        metrics: METRICS.map(m => ({ value: m.value, note: fa ? m.note.fa : m.note.en })),
+        projects: (function () {
+          const sel = (window.TA_EXPERTISE && e.slug) ? window.TA_EXPERTISE.projects(e.slug) : [];
+          const D = window.TA_PROJECTS;
+          return mkWork(sel.slice(0, 3).map(p => {
+            const v = D.visual(p.id, "archive", "archive");
+            return { id:p.id, num: String(p.legacyIndex + 1).padStart(2, "0"), routeIndex: p.legacyIndex,
+                     expertise: p.expertise || [], en:p.title.en, fa:p.title.fa,
+                     locEn: p.location ? p.location.en : null, locFa: p.location ? p.location.fa : null,
+                     year:p.year, plate: v.background };
+          }));
+        })(),
+        filterHref: "Projects.dc.html#expertise=" + e.slug + sfx,
+        filterLabel: fa ? ("همه پروژه‌های " + e.fa) : ("All " + e.en + " projects")
+      },
+
+      dtTitleSize: fa ? "clamp(38px,4.8vw,88px)" : "clamp(46px,6vw,116px)",
+      dtTitleLh: fa ? "1.3" : "0.94",
+      dtTitleLs: fa ? "0" : "-.045em",
+      propLh: fa ? "1.56" : "1.1",
+      leadLh: fa ? "1.6" : "1.18",
+      bodySize: fa ? "16.5px" : "17px",
+      bodyLh: fa ? "2" : "1.62",
+      pcLh: fa ? "1.4" : "1.02",
+      phaseTitle: ph.label ? (fa ? ph.label.fa : ph.label.en) : null,
+      phaseBody: ph.body ? (fa ? ph.body.fa : ph.body.en) : null,
+      phaseCount: String(phaseList.length),
+
+      related: related,
+      relFirst: related.length ? related[0].title : "",
+      next: { num:nx.num, title: fa ? nx.fa : nx.en, plate:PLATES[nx.plate] },
+      nextSize: fa ? "clamp(32px,3.6vw,64px)" : "clamp(38px,4.4vw,78px)",
+      nextLh: fa ? "1.34" : "0.98",
+      goNext: (ev) => this.goNextExpertise(ev),
+
+      toggleReduced: () => this.setState(s => ({ reduced: !s.reduced })),
+      rmState: red ? "on" : "off",
+      rmTitle: fa ? "حرکت کاهش‌یافته" : "Reduced motion",
+      rmBg: red ? "#56B1AC" : "transparent",
+      rmColor: red ? "#121B1B" : "rgba(18,27,27,.45)"
+    };
+  }
+}
+</script>
+</body>
+</html>
