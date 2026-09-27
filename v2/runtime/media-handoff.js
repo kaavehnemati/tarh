@@ -17,6 +17,8 @@
    API:
      const h = TA_MEDIA_HANDOFF.mount(stageEl, { intensity: "high"|"medium"|"low"|"calm" });
      h.show({ src, pos, size, repeat, index });   // index optional — drives reveal direction
+     h.clear();      // no image for the newly-active item — fades the stage to empty rather
+                      // than leaving the previous item's image frozen on screen
      h.destroy();
 */
 (function () {
@@ -51,7 +53,7 @@
   }
 
   function mount(stage, opts) {
-    if (!stage) return { show: function () {}, destroy: function () {} };
+    if (!stage) return { show: function () {}, clear: function () {}, destroy: function () {} };
     opts = opts || {};
     var preset = PRESETS[opts.intensity] || PRESETS.medium;
 
@@ -178,6 +180,25 @@
       }
     }
 
+    /* the newly-active item has no real image — fade whatever is currently visible (front,
+       or back if a transition was mid-flight) down to empty, revealing the stage's own
+       plate/background, rather than leaving the last real image frozen on screen. curKey is
+       reset to "" (not null) so the NEXT show() still runs the normal wipe-in transition —
+       null is reserved for "never shown anything yet", which paints instantly with no wipe. */
+    function clear() {
+      if (curKey == null) return;
+      gen++;
+      clearTimers();
+      var dur = Math.round(preset.dur * 0.5), ease = EASE;
+      var red = reducedMotion();
+      [front, back].forEach(function (layer) {
+        layer.style.transition = red ? "none" : ("opacity " + dur + "ms " + ease);
+        layer.style.opacity = "0";
+      });
+      if (reg) { reg.style.transition = red ? "none" : ("opacity " + dur + "ms " + ease); reg.style.opacity = "0"; }
+      curKey = ""; curIndex = null; inFlight = false;
+    }
+
     function requestTick(fn) {
       // rAF is unreliable in this preview environment (per the rest of the V2 runtime) — a short
       // timeout still yields one paint before the transition properties are applied.
@@ -191,7 +212,7 @@
       if (reg && reg.parentNode) reg.parentNode.removeChild(reg);
     }
 
-    return { show: show, destroy: destroy };
+    return { show: show, clear: clear, destroy: destroy };
   }
 
   window.TA_MEDIA_HANDOFF = { mount: mount };

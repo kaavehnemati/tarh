@@ -112,32 +112,6 @@
     </div>
   </section>
 
-  <section data-screen-label="03 Between disciplines" data-ambient-zone="soft" style="padding:var(--space-section) var(--grid-margin)">
-    <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter)">
-      <div style="grid-column:var(--span-index)">
-        <p data-reveal="content" style="margin:0;font-size:var(--t-hl);line-height:var(--t-hl-lh);letter-spacing:var(--t-hl-ls);font-weight:var(--t-hl-w);max-width:18ch">{{ interLead }}</p>
-      </div>
-      <div data-ep2-field="1" style="grid-column:var(--span-preview);position:relative;aspect-ratio:1/1;direction:ltr">
-        <div style="position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr)">
-          <i style="border-right:1px solid var(--rule-soft);border-bottom:1px solid var(--rule-soft)"></i><i style="border-right:1px solid var(--rule-soft);border-bottom:1px solid var(--rule-soft)"></i><i style="border-bottom:1px solid var(--rule-soft)"></i>
-          <i style="border-right:1px solid var(--rule-soft);border-bottom:1px solid var(--rule-soft)"></i><i style="border-right:1px solid var(--rule-soft);border-bottom:1px solid var(--rule-soft)"></i><i style="border-bottom:1px solid var(--rule-soft)"></i>
-          <i style="border-right:1px solid var(--rule-soft)"></i><i style="border-right:1px solid var(--rule-soft)"></i><i></i>
-        </div>
-        <svg aria-hidden="true" viewBox="0 0 100 100" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible">
-          <sc-for list="{{ fieldLines }}" as="ln" hint-placeholder-count="4">
-            <line x1="{{ ln.x1 }}" y1="{{ ln.y1 }}" x2="{{ ln.x2 }}" y2="{{ ln.y2 }}" stroke="{{ ln.stroke }}" stroke-width="{{ ln.width }}" stroke-dasharray="120" stroke-dashoffset="{{ ln.dash }}" style="transition:stroke-dashoffset var(--m-base) var(--e-page) {{ ln.delay }}"></line>
-          </sc-for>
-        </svg>
-        <sc-for list="{{ fieldNodes }}" as="nd" hint-placeholder-count="5">
-          <div style="position:absolute;left:{{ nd.x }};top:{{ nd.y }};transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:{{ nd.op }};transition:opacity var(--m-base) var(--e-editorial) {{ nd.delay }}">
-            <i style="width:{{ nd.dot }};height:{{ nd.dot }};background:{{ nd.fill }}"></i>
-            <span style="font-size:var(--t-caption);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--ink-60);white-space:nowrap">{{ nd.label }}</span>
-          </div>
-        </sc-for>
-      </div>
-    </div>
-  </section>
-
   <sc-if value="{{ hasPlainWork }}" hint-placeholder-val="{{ false }}">
     <section data-screen-label="04 Selected work" data-ambient-zone="soft" style="padding:var(--space-section) var(--grid-margin)">
       <div style="font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45);margin-bottom:var(--space-block);display:flex;justify-content:space-between;border-top:1px solid var(--rule);padding-top:var(--space-4)">
@@ -363,7 +337,7 @@ const scrollToY = (y) => { const el = scroller(); if(el.scrollTo) el.scrollTo({ 
 
 class Component extends DCLogic {
   state = { lang:"en", slug:null, hover:null, relHover:null, chapterKey:"", chapterIdx:0, chapterN:0, chapterVisible:false, phaseActive:0,
-    registerScrollActive:null, interDone:false };
+    registerScrollActive:null };
 
   parseHash(){
     const out = {};
@@ -494,7 +468,7 @@ class Component extends DCLogic {
     this.ensureRelMh();
     if(!this._relMh || !rec) return;
     const pr = rec.presentation, src = pr && (pr.heroImage || pr.registerImage);
-    if(!src) return;
+    if(!src){ this._relMh.clear(); return; }
     this._relMh.show({ src: V1 + src, pos:"50% 50%", size:"cover", repeat:"no-repeat", index: 0 });
   }
   syncRelPreview(){
@@ -521,24 +495,9 @@ class Component extends DCLogic {
         if(s.key !== this.state.registerScrollActive) this.setState({ registerScrollActive:s.key }, () => this.syncPreview());
       }
     });
-    /* the intersection field's connector lines draw in once, the first time it scrolls
-       into view — a one-shot scroll-triggered reveal, shared-coordinator driven (never
-       IO/a self-rescheduling timer) and self-unsubscribing once triggered */
-    if(!this.state.interDone && window.TA_SCROLL){
-      this.stopInterTrack = window.TA_SCROLL.subscribe(() => {
-        const el = document.querySelector("[data-ep2-field]");
-        if(!el) return;
-        const r = el.getBoundingClientRect();
-        if(r.top < window.innerHeight * 0.78 && r.bottom > 0){
-          this.setState({ interDone:true });
-          if(this.stopInterTrack){ this.stopInterTrack(); this.stopInterTrack = null; }
-        }
-      }, { root:window });
-    }
   }
   teardownOverview(){
     if(this.stopRegisterTrack){ this.stopRegisterTrack(); this.stopRegisterTrack = null; }
-    if(this.stopInterTrack){ this.stopInterTrack(); this.stopInterTrack = null; }
     if(this._mh){ this._mh.destroy(); this._mh = null; }
   }
   /* register preview crossfade — the shared V2 media-handoff engine (also powering
@@ -554,7 +513,7 @@ class Component extends DCLogic {
     this.ensureMh();
     if(!this._mh || !e) return;
     const img = e.presentation && e.presentation.registerImage;
-    if(!img) return;
+    if(!img){ this._mh.clear(); return; }
     this._mh.show({ src: V1 + img, pos:"50% 50%", size:"cover", repeat:"no-repeat", index: idx });
   }
   /* recomputes the same hover/scroll/default priority used in renderVals and pushes it
@@ -670,32 +629,6 @@ class Component extends DCLogic {
       coordTransform: "translate(" + (activeCoord[0] * 23) + "px," + (activeCoord[1] * 23) + "px)"
     };
 
-    /* the shared conceptual field — a real coordinate system, not a decorative diagram:
-       every discipline's presentation.coord places it on the same 3x3 field, and the
-       connector lines run from the hub (the discipline sitting at the field's center
-       cell) to every other one, so the diagram stays correct if the taxonomy ever changes */
-    const coordOf = (x) => (x.presentation && x.presentation.coord) || [1, 1];
-    const posOf = (x) => { const c = coordOf(x); return { px: c[0] * 33.3 + 16.6, py: c[1] * 33.3 + 16.6 }; };
-    const hub = all.find(x => { const c = coordOf(x); return c[0] === 1 && c[1] === 1; }) || all[0];
-    const spokes = all.filter(x => x !== hub);
-    const hubPos = hub ? posOf(hub) : { px: 50, py: 50 };
-    const fieldNodes = all.map((x, i) => {
-      const p = posOf(x), isHub = x === hub;
-      return {
-        x: p.px.toFixed(1) + "%", y: p.py.toFixed(1) + "%", label: pick(x.title),
-        dot: isHub ? "14px" : "9px", fill: isHub ? "var(--turq)" : "var(--ink)",
-        op: st.interDone ? "1" : "0", delay: (i * 110) + "ms"
-      };
-    });
-    const fieldLines = spokes.map((x, i) => {
-      const p = posOf(x), isLast = i === spokes.length - 1;
-      return {
-        x1: hubPos.px.toFixed(1), y1: hubPos.py.toFixed(1), x2: p.px.toFixed(1), y2: p.py.toFixed(1),
-        stroke: isLast ? "var(--turq)" : "var(--ink)", width: isLast ? "0.6" : "0.4",
-        dash: st.interDone ? "0" : "120", delay: (i * 90) + "ms"
-      };
-    });
-
     const nav = [["Projects","پروژه‌ها","Projects.dc.html"],["Expertise","تخصص‌ها",""],
       ["Awards","جوایز","Awards.dc.html"],["About","درباره ما","About.dc.html"],["Journal","مجله","Journal.dc.html"],
       ["Contact","تماس","Contact.dc.html"]].map(n => ({ label: fa ? n[1] : n[0], href: n[2] ? (n[2] + hsh) : "#", on: n[2] ? "0" : "1" }));
@@ -737,7 +670,7 @@ class Component extends DCLogic {
         const b2 = PXD ? pick(PXD.body[1]) : (e.body && e.body[1] ? pick(e.body[1]) : null);
         if(b1) bodies.push(b1); if(b2) bodies.push(b2);
         const lead = PXD ? pick(PXD.lead) : (e.lead ? pick(e.lead) : null);
-        const workProj = EX.projects(st.slug) || [];
+        const workProj = (EX.projects(st.slug) || []).slice(0, 2);
         const knowledgeRows = (J ? J.forExpertise(st.slug) : []).slice(0, 3).map(k => ({
           href: "Journal.dc.html#article=" + k.slug + amp,
           year: k.date, kind: J.typeOne && J.typeOne[k.type] ? J.typeOne[k.type][fa ? 1 : 0] : k.type,
@@ -811,12 +744,10 @@ class Component extends DCLogic {
       rows, pv,
       coordCaption: fa ? (all.length + " تخصص، یک دستگاه مختصات.") : (all.length + " disciplines, one coordinate system."),
 
-      interLead: fa ? "میان تخصص‌ها، ایده‌های تازه آغاز می‌شوند." : "Between disciplines is where new ideas begin.",
-      fieldNodes, fieldLines,
       hasPlainWork,
       workLabel: fa ? "کارهای منتخب — میان‌رشته‌ای" : "Selected work — across disciplines",
       allProjectsLabel: fa ? "همه پروژه‌ها" : "All projects",
-      overviewWork: mkWork(overviewProj.slice(0, 3), 0),
+      overviewWork: mkWork(overviewProj.slice(0, 2), 0),
 
       motifFlip: fa ? "-1" : "1",
       closingLines: fa ? ["هر تخصص، لایه‌ای است","از یک کار معمارانه واحد؛","متمایز در روش، یکپارچه در هدف."]

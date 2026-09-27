@@ -176,9 +176,10 @@
     <sc-for list="{{ d.blocks }}" as="b" hint-placeholder-count="2">
       <sc-if value="{{ b.isFull }}" hint-placeholder-val="{{ false }}">
         <section data-sec="{{ b.sec }}" data-ambient-zone="off" style="padding:0 var(--grid-margin) var(--space-section)">
-          <div data-pr2-expand="{{ b.expand }}" data-reveal="media" style="position:relative;aspect-ratio:{{ b.ratio }};overflow:hidden;background:var(--surface-1);direction:ltr;width:{{ b.width }};margin:0 auto;transition:width var(--m-slow) var(--e-cinematic)">
+          <div data-pr2-expand="{{ b.expand }}" data-reveal="media" style="position:relative;aspect-ratio:{{ b.ratio }};overflow:hidden;background:var(--surface-1);direction:ltr;width:{{ b.width }};margin:0 auto">
             <div data-reveal-img="1" style="position:absolute;inset:0;background-image:{{ b.bg }};background-size:{{ b.size }};background-position:{{ b.pos }};background-repeat:{{ b.repeat }}"></div>
             <div data-reveal-mask="1"></div>
+            <a href="#" onClick="{{ b.open }}" data-v2-cursor="open" aria-label="{{ b.openLabel }}" style="position:absolute;inset:0;z-index:2"></a>
           </div>
           <sc-if value="{{ b.hasCaption }}" hint-placeholder-val="{{ false }}">
             <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter);margin-top:var(--space-block)">
@@ -198,6 +199,7 @@
             <div data-reveal="media" style="grid-column:{{ b.mediaCol }};position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--surface-1);direction:ltr">
               <div data-reveal-img="1" style="position:absolute;inset:0;background-image:{{ b.bg }};background-size:{{ b.size }};background-position:{{ b.pos }};background-repeat:{{ b.repeat }}"></div>
               <div data-reveal-mask="1"></div>
+              <a href="#" onClick="{{ b.open }}" data-v2-cursor="open" aria-label="{{ b.openLabel }}" style="position:absolute;inset:0;z-index:2"></a>
             </div>
           </div>
           <sc-if value="{{ b.hasCaption }}" hint-placeholder-val="{{ false }}">
@@ -235,6 +237,7 @@
               <div>
                 <div data-pr2-plan="{{ dw.build }}" style="position:relative;aspect-ratio:16/9;overflow:hidden;background:#fff;border:1px solid var(--rule);direction:ltr;clip-path:{{ dw.clip }};transition:clip-path var(--m-slow) var(--e-page)">
                   <div style="position:absolute;inset:0;background-image:{{ dw.bg }};background-size:{{ dw.size }};background-position:{{ dw.pos }};background-repeat:{{ dw.repeat }}"></div>
+                  <a href="#" onClick="{{ dw.open }}" data-v2-cursor="open" aria-label="{{ dw.openLabel }}" style="position:absolute;inset:0;z-index:2"></a>
                 </div>
                 <div style="margin-top:var(--rel-image-caption);font-size:var(--t-caption);color:var(--ink-45)">{{ dw.caption }}</div>
               </div>
@@ -353,6 +356,21 @@
     <div data-pr2-progress="1" aria-hidden="true" style="position:fixed;{{ progressSide }}:14px;bottom:var(--grid-margin);z-index:40;display:flex;flex-direction:column;align-items:center;gap:var(--space-2);opacity:{{ chapterOpacity }};transition:opacity var(--m-standard) var(--e-smooth)">
       <span style="position:relative;display:block;width:9px;height:120px"><i style="position:absolute;left:4px;top:0;bottom:0;width:1px;background:var(--rule)"></i><i data-pr2-progresssq="1" style="position:absolute;left:1px;width:7px;height:7px;background:var(--turq);top:0;transition:top var(--m-fast) linear"></i></span>
     </div>
+
+    <div data-pr2-viewer="1" role="dialog" aria-modal="true" style="position:fixed;inset:0;z-index:120;background:var(--surface-0);opacity:{{ viewerOpacity }};pointer-events:{{ viewerPointer }};transition:opacity var(--m-standard) var(--e-standard);display:flex;flex-direction:column;padding:22px var(--grid-margin)">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:var(--space-5)">
+        <span class="text-number" style="font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);color:var(--ink-45)">{{ viewerCounter }}</span>
+        <div style="display:flex;align-items:center;gap:var(--space-4);font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }}">
+          <button type="button" onClick="{{ viewerPrev }}" style="appearance:none;background:none;border:none;cursor:pointer;min-height:var(--c-control-h);padding:0 var(--space-2);display:{{ viewerNav }};font:inherit;letter-spacing:inherit;text-transform:inherit;color:inherit">{{ viewerPrevLabel }}</button>
+          <button type="button" onClick="{{ viewerNext }}" style="appearance:none;background:none;border:none;cursor:pointer;min-height:var(--c-control-h);padding:0 var(--space-2);display:{{ viewerNav }};font:inherit;letter-spacing:inherit;text-transform:inherit;color:inherit">{{ viewerNextLabel }}</button>
+          <button type="button" onClick="{{ closeViewer }}" style="appearance:none;background:none;border:1px solid currentColor;cursor:pointer;min-height:var(--c-control-h);padding:0 var(--space-3);font:inherit;letter-spacing:inherit;text-transform:inherit;color:inherit">{{ viewerCloseLabel }}</button>
+        </div>
+      </div>
+      <div style="flex:1;display:grid;place-items:center;padding:var(--space-block) 0">
+        <div style="width:min(78vw,1280px);height:72vh;background-image:{{ viewerBg }};background-size:{{ viewerSize }};background-position:{{ viewerPos }};background-repeat:{{ viewerRepeat }};background-color:var(--surface-1)"></div>
+      </div>
+      <div style="font-size:var(--t-caption);line-height:var(--t-caption-lh);color:var(--ink-45)">{{ viewerCaption }}</div>
+    </div>
   </sc-if>
 </div>
 
@@ -374,7 +392,7 @@ const clamp1 = (v, a, b) => v < a ? a : v > b ? b : v;
 const reducedQ = () => window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 class Component extends DCLogic {
-  state = { lang:"en", index:null, filters:[], hover:null, chapterKey:"", chapterIdx:0, chapterN:0, chapterVisible:false };
+  state = { lang:"en", index:null, filters:[], hover:null, chapterKey:"", chapterIdx:0, chapterN:0, chapterVisible:false, viewer:-1 };
 
   parseHash(){
     const out = {};
@@ -415,7 +433,7 @@ class Component extends DCLogic {
     if(!this._mh || !p) return;
     const P = window.TA_PROJECTS;
     const av = P.visual(p.id, "archive", "archive", { lang });
-    if(!av || !av.isRealMedia) return;
+    if(!av || !av.isRealMedia){ this._mh.clear(); return; }
     this._mh.show({ src: av.backgroundImage.replace(/^url\((['"]?)(.*?)\1\)$/, "$2"), pos: av.backgroundPosition, size: av.backgroundSize, repeat: av.backgroundRepeat, index: idx });
   }
   ensureMh(){
@@ -513,19 +531,21 @@ class Component extends DCLogic {
       });
     }
   }
-  /* media expansion: contained → confident full-bleed once, as the block enters the reading
-     zone. True breakout (not "wider than its padded parent") — width:100vw alone would
-     overflow past the viewport inside a padded section, so the margin-inline breakout trick
-     goes with it, in one step, so there is never a frame where the box is 100vw wide but
-     still inset by the section's padding. */
+  /* media expansion: continuous, scroll-linked grow (matching V1's full-bleed block) — the
+     image keeps widening from its base 92vw up to a true 100vw breakout as the reading
+     position moves through it, not a one-shot toggle. width:100vw alone would overflow past
+     the viewport inside a padded section, so the margin-inline breakout math travels with it
+     at every width, never just at the 100vw endpoint. */
   tickExpand(root){
     if(window.innerWidth < 768) return; /* mobile: deliberate edge-to-edge via CSS, no width interpolation */
+    const vh = window.innerHeight;
     Array.prototype.slice.call(root.querySelectorAll('[data-pr2-expand="1"]')).forEach(el => {
-      if(el.__expanded) return;
       const r = el.getBoundingClientRect();
-      if(r.top < window.innerHeight * 0.6 && r.bottom > 0){
-        el.style.width = "100vw"; el.style.marginInline = "calc(50% - 50vw)"; el.__expanded = true;
-      }
+      const p = clamp1((vh - r.top) / Math.max(1, vh + r.height), 0, 1);
+      const grow = clamp1((p - 0.25) / 0.4, 0, 1);
+      const w = 92 + grow * 8;
+      el.style.width = w.toFixed(2) + "vw";
+      el.style.marginInline = "calc(50% - " + (w / 2).toFixed(2) + "vw)";
     });
   }
   /* the primary drawing builds structurally (clip progression) once; others stay calm */
@@ -557,7 +577,10 @@ class Component extends DCLogic {
     this.requestTick();
   }
   teardownDetail(){
-    if(this.state.chapterKey || this.state.chapterVisible) this.setState({ chapterKey:"", chapterVisible:false, chapterN:0 });
+    const patch = {};
+    if(this.state.chapterKey || this.state.chapterVisible) Object.assign(patch, { chapterKey:"", chapterVisible:false, chapterN:0 });
+    if(this.state.viewer !== -1) patch.viewer = -1;
+    if(Object.keys(patch).length) this.setState(patch);
   }
   /* imperative, not a templated attribute hole \u2014 passing a boolean (or a bare-value
      hole) into inert="{{ x }}" was verified NOT to render the real DOM attribute in this
@@ -589,7 +612,13 @@ class Component extends DCLogic {
     const fromArchive = idx != null && this.state.index == null;
     if(fromArchive) this.archiveY = scroller().scrollTop;
     const previewBox = fromArchive ? document.querySelector("[data-pr2-preview] > div") : null;
-    const previewImg = previewBox ? previewBox.firstElementChild : null;
+    /* the media-handoff stage swaps which of its two layers is "front" without reordering
+       DOM, so the visible layer is whichever currently carries opacity:1 — not necessarily
+       the first child */
+    let previewImg = null;
+    if(previewBox) Array.prototype.forEach.call(previewBox.children, (c) => {
+      if(parseFloat(c.style.opacity) === 1 && c.style.backgroundImage && c.style.backgroundImage !== "none") previewImg = c;
+    });
     const fromRect = previewImg && !reducedQ() ? previewBox.getBoundingClientRect() : null;
     const fromBg = previewImg ? previewImg.style.backgroundImage : null;
     const fromSize = previewImg ? (previewImg.style.backgroundSize || "cover") : "cover";
@@ -691,12 +720,35 @@ class Component extends DCLogic {
     ).map(n => ({ label: fa ? n[1] : n[0], href: n[2] ? (n[2] + hsh) : "#", on: n[2] ? "0" : "1" }));
 
     let d = null;
+    let viewerSet = [];
     const cur = st.index != null ? P.byIndex(st.index) : null;
     if(cur){
       const ED = cur.editorial || {};
       const hv = P.visual(cur.id, "hero", "hero", { lang: st.lang });
       const heroHas = !!(hv && hv.isRealMedia);
       const title = pick(cur.title);
+      const openLabel = fa ? "باز کردن" : "Open";
+
+      /* §gallery — a stable index per visible story/drawing asset, built before the block
+         list so each clickable surface can open the exact asset it renders. Mirrors V1's
+         viewerKey/storyShots/openAt (full-image + image-pair + drawings are wired; the
+         sticky-narrative track is not, matching V1's own scope). */
+      const STORY = P.story(cur.id, { lang: st.lang }) || [];
+      const storyShots = [];
+      const storyKeys = STORY.map(b => (b.media || []).map(() => 0));
+      STORY.forEach((b, i) => (b.media || []).forEach((m, mi) => {
+        storyKeys[i][mi] = storyShots.length;
+        storyShots.push({ cap: pick(m.alt) || "", vis: m });
+      }));
+      const drawList = P.drawingList ? P.drawingList(cur.id, { lang: st.lang }) : [];
+      const drawingViewerBase = storyShots.length;
+      const drawingShots = drawList.map(dw => ({ cap: pick(dw.title) || pick(dw.caption) || "", vis: dw.visual }));
+      viewerSet = storyShots.concat(drawingShots);
+      const openViewerAt = (idx) => (ev) => {
+        if(ev && ev.preventDefault) ev.preventDefault();
+        if(idx != null && idx >= 0 && idx < viewerSet.length) this.setState({ viewer: idx });
+      };
+
       let expandUsed = 0;
       /* ROLE_LABEL covers the optional semantic roles a canonical record may set on a story
          block (context/strategy/experience/material/technical/drawing) — none of the current
@@ -704,7 +756,7 @@ class Component extends DCLogic {
          Strategy(first)/Experience(rest) split; the capability exists for when a content
          editor supplies it. Never inferred from block text. */
       const ROLE_OK = ["context","strategy","experience","material","technical"];
-      const blocks = (P.story(cur.id, { lang: st.lang }) || []).map((b, i) => {
+      const blocks = STORY.map((b, i) => {
         const m0 = b.media[0] || {};
         const sec = (b.role && ROLE_OK.indexOf(b.role) >= 0) ? b.role : (i === 0 ? "strategy" : "experience");
         if(b.type === "full-image"){
@@ -713,14 +765,16 @@ class Component extends DCLogic {
             isFull:true, sec, bg: m0.isRealMedia ? m0.backgroundImage : "none", size: m0.backgroundSize || "cover",
             pos: m0.backgroundPosition || "50% 50%", repeat: m0.backgroundRepeat || "no-repeat",
             ratio: (m0.ratio || "16/9"), hasCaption: !!(b.title), title: pick(b.title), body: pick(b.body),
-            expand: canExpand ? "1" : "0", width: canExpand ? "92vw" : "100%"
+            expand: canExpand ? "1" : "0", width: canExpand ? "92vw" : "100%",
+            open: openViewerAt(storyKeys[i][0]), openLabel
           };
         }
         if(b.type === "image-text") { const flip = i % 2 === 1;
           return { isSplit:true, sec, textCol: flip ? "9 / span 4" : "1 / span 7", mediaCol: flip ? "1 / span 7" : "9 / span 4",
           bg: m0.isRealMedia ? m0.backgroundImage : "none", size: m0.backgroundSize || "cover",
           pos: m0.backgroundPosition || "50% 50%", repeat: m0.backgroundRepeat || "no-repeat",
-          title: pick(b.title), body: pick(b.body), hasCaption: !!b.caption, caption: pick(b.caption) };
+          title: pick(b.title), body: pick(b.body), hasCaption: !!b.caption, caption: pick(b.caption),
+          open: openViewerAt(storyKeys[i][0]), openLabel };
         }
         if(b.type === "sticky-narrative") return {
           isSticky:true, sec, title: pick(b.title), body: pick(b.body), count: String(b.media.length).padStart(2, "0"), activeCount:"01",
@@ -729,7 +783,6 @@ class Component extends DCLogic {
         return { isFull:false, isSplit:false, isSticky:false, sec };
       });
 
-      const drawList = P.drawingList ? P.drawingList(cur.id, { lang: st.lang }) : [];
       const facts = (cur.facts || []).map(f => ({ value: f.value, note: pick(f.note) }));
       const awardsFor = (AW ? AW.forProject(cur.id) : []).map(a => ({
         year: a.year, level: AW.levels && AW.levels[a.level] ? AW.levels[a.level][fa ? 1 : 0] : a.level,
@@ -789,7 +842,8 @@ class Component extends DCLogic {
         drawings: drawList.map((dw, i) => ({
           bg: dw.visual.isRealMedia ? dw.visual.backgroundImage : "none", size: dw.visual.backgroundSize,
           pos: dw.visual.backgroundPosition, repeat: dw.visual.backgroundRepeat, caption: pick(dw.title),
-          build: i === 0 ? "1" : "0", clip: i === 0 ? "inset(0 100% 0 0)" : "inset(0 0 0 0)"
+          build: i === 0 ? "1" : "0", clip: i === 0 ? "inset(0 100% 0 0)" : "inset(0 0 0 0)",
+          open: openViewerAt(drawingViewerBase + i), openLabel
         })),
         info, hasFacts: facts.length > 0, facts,
         hasServices: (cur.serviceList || cur.services || []).length > 0,
@@ -807,6 +861,8 @@ class Component extends DCLogic {
 
     const chapterOn = cur && st.chapterVisible;
     const chapterLbl = CHAPTER_LBL[st.chapterKey] || ["",""];
+    const viewerOn = cur != null && st.viewer >= 0 && viewerSet.length > 0;
+    const vshot = viewerSet.length ? (viewerSet[clamp1(st.viewer, 0, viewerSet.length - 1)] || viewerSet[0]) : { cap:"", vis:null };
 
     return {
       dir: fa ? "rtl" : "ltr", upper: fa ? "none" : "uppercase", lang: st.lang,
@@ -855,7 +911,23 @@ class Component extends DCLogic {
       chapterSide: fa ? "right" : "left", progressSide: fa ? "left" : "right",
       chapterOpacity: chapterOn ? "1" : "0",
       chapterNum: String(st.chapterIdx + 1).padStart(2, "0") + " / " + String(st.chapterN).padStart(2, "0"),
-      chapterLabel: chapterLbl[fa ? 1 : 0]
+      chapterLabel: chapterLbl[fa ? 1 : 0],
+
+      viewerOpacity: viewerOn ? "1" : "0",
+      viewerPointer: viewerOn ? "auto" : "none",
+      viewerNav: viewerSet.length > 1 ? "inline-flex" : "none",
+      viewerBg: vshot.vis && vshot.vis.isRealMedia ? vshot.vis.backgroundImage : "none",
+      viewerSize: vshot.vis ? vshot.vis.backgroundSize : "cover",
+      viewerPos: vshot.vis ? vshot.vis.backgroundPosition : "50% 50%",
+      viewerRepeat: vshot.vis ? vshot.vis.backgroundRepeat : "no-repeat",
+      viewerCaption: vshot.cap || "",
+      viewerCounter: viewerSet.length
+        ? (String(clamp1(st.viewer, 0, viewerSet.length - 1) + 1).padStart(2, "0") + " / " + String(viewerSet.length).padStart(2, "0"))
+        : "00 / 00",
+      viewerPrevLabel: fa ? "قبلی" : "Prev", viewerNextLabel: fa ? "بعدی" : "Next", viewerCloseLabel: fa ? "بستن" : "Close",
+      closeViewer: () => this.setState({ viewer:-1 }),
+      viewerPrev: () => this.setState(s => (viewerSet.length ? { viewer:(s.viewer + viewerSet.length - 1) % viewerSet.length } : null)),
+      viewerNext: () => this.setState(s => (viewerSet.length ? { viewer:(s.viewer + 1) % viewerSet.length } : null))
     };
   }
 }
