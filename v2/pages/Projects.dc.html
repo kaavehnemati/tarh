@@ -352,9 +352,9 @@
     </sc-if>
 
     <sc-if value="{{ d.hasRelated }}" hint-placeholder-val="{{ false }}">
-      <section data-sec="related" data-screen-label="D8 Related" data-ambient-zone="soft" style="padding:var(--space-section) var(--grid-margin)">
+      <section data-sec="related" data-screen-label="D8 Related" data-ambient-zone="soft" style="padding:calc(var(--space-section) * 0.7) var(--grid-margin)">
         <div style="font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45);margin-bottom:var(--space-block)">{{ relatedLabel }}</div>
-        <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter);align-items:end">
+        <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);column-gap:var(--grid-gutter);row-gap:var(--space-5);align-items:end">
           <sc-for list="{{ d.related }}" as="r" hint-placeholder-count="2">
             <a href="{{ r.href }}" onClick="{{ r.open }}" data-v2-cursor="view" style="grid-column:{{ r.col }};display:block">
               <div data-reveal="media" style="position:relative;aspect-ratio:{{ r.ratio }};overflow:hidden;background:var(--surface-1);direction:ltr">
@@ -368,15 +368,20 @@
       </section>
     </sc-if>
 
-    <section data-screen-label="D9 Next" data-ambient-zone="full" style="position:relative;padding:var(--space-section-xl) var(--grid-margin) var(--space-element)">
+    <section data-screen-label="D9 Next" data-ambient-zone="full" style="position:relative;padding:calc(var(--space-section-xl) * 0.5) var(--grid-margin) var(--space-element)">
       <a href="{{ next.href }}" onClick="{{ next.open }}" data-v2-cursor="next" style="display:block">
         <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter);align-items:end">
           <div style="grid-column:var(--span-lead)">
             <div style="font-size:var(--t-eyebrow);letter-spacing:var(--t-eyebrow-ls);text-transform:{{ upper }};color:var(--ink-45)">{{ nextLabel }}</div>
             <div data-reveal="content" style="margin-top:var(--space-3);font-size:var(--t-dm);line-height:var(--t-dm-lh);letter-spacing:var(--t-dm-ls);font-weight:var(--t-dm-w)">{{ next.title }}</div>
           </div>
-          <div data-pr2-next="1" style="grid-column:var(--span-support);position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--surface-1);direction:ltr">
-            <div data-pr2-nextimg="1" data-reveal="media" style="position:absolute;inset:-3% -1%;background-image:{{ next.bg }};background-size:{{ next.size }};background-position:{{ next.pos }};background-repeat:{{ next.repeat }}"></div>
+          <div style="grid-column:var(--span-support);position:relative;display:flex;align-items:center;justify-content:center">
+            <svg aria-hidden="true" viewBox="0 0 340 340" style="width:100%;max-width:280px;height:auto;transform:scaleX({{ motifFlip }})" fill="none">
+              <rect x="10" y="10" width="90" height="90" stroke="var(--turq)" stroke-width="1" /><rect x="120" y="10" width="90" height="90" stroke="var(--turq)" stroke-width="1" /><rect x="230" y="10" width="90" height="90" stroke="var(--turq)" stroke-width="1" />
+              <rect x="10" y="120" width="90" height="90" stroke="var(--turq)" stroke-width="1" /><rect x="120" y="120" width="90" height="90" stroke="var(--turq)" stroke-width="1" /><rect x="230" y="120" width="90" height="90" stroke="var(--turq)" stroke-width="1" />
+              <rect x="10" y="230" width="90" height="90" stroke="var(--turq)" stroke-width="1" /><rect x="120" y="230" width="90" height="90" stroke="var(--turq)" stroke-width="1" /><rect x="230" y="230" width="90" height="90" stroke="var(--turq)" stroke-width="1" />
+              <line x1="0" y1="340" x2="340" y2="0" stroke="var(--turq)" stroke-width="1" /><line x1="60" y1="340" x2="340" y2="60" stroke="var(--turq)" stroke-width="1" />
+            </svg>
           </div>
         </div>
       </a>

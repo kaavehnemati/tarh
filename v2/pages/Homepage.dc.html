@@ -23,6 +23,7 @@
 <script src="../../expertise-data.js"></script>
 <script src="../../about-data.js"></script>
 <script src="../../awards-data.js"></script>
+<script src="../../contact-data.js"></script>
 <style>
 :root{
   --ink:#121B1B; --turq:#56B1AC; --canvas:#FAF9F7; --turq-dk:#3E9692; --turq-pale:#D9EFED; --grey:#E8E8E4;
@@ -220,15 +221,9 @@ a:hover{color:#3E9692}
 
   <section id="expertise" data-sc="expertise" data-screen-label="04 Expertise" style="height:310vh;position:relative;background:var(--canvas);z-index:2">
     <div style="position:sticky;top:0;height:100vh;display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap);padding:calc(var(--marg) + 88px) var(--marg) 56px;align-content:space-between;overflow:hidden">
-      <div data-exp-head="1" style="grid-column:1 / span 4;display:flex;align-items:flex-start;justify-content:space-between;gap:20px">
-        <div>
-          <div style="font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45);font-variant-numeric:tabular-nums;direction:ltr">04 / 06</div>
-          <h2 style="margin:10px 0 0;font-size:clamp(34px,3.4vw,58px);line-height:1;letter-spacing:-.03em;font-weight:500"><span data-en="1">What we do</span><span data-fa="1" style="font-family:var(--fa);line-height:1.4;display:none">چه می‌کنیم</span></h2>
-        </div>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:4px;width:52px;height:52px;position:relative;flex:none;direction:ltr">
-          <i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i>
-          <i data-exp-sq="1" style="position:absolute;left:0;top:0;width:16px;height:16px;background:var(--turq);transition:transform var(--m-base) var(--e-page)"></i>
-        </div>
+      <div data-exp-head="1" style="grid-column:1 / span 4">
+        <div style="font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45);font-variant-numeric:tabular-nums;direction:ltr">04 / 06</div>
+        <h2 style="margin:10px 0 0;font-size:clamp(34px,3.4vw,58px);line-height:1;letter-spacing:-.03em;font-weight:500"><span data-en="1">What we do</span><span data-fa="1" style="font-family:var(--fa);line-height:1.4;display:none">چه می‌کنیم</span></h2>
       </div>
       <div data-exp-list="1" style="grid-column:1 / span 5;grid-row:2;align-self:center">
         <sc-for list="{{ expertise }}" as="ex" hint-placeholder-count="5">
@@ -238,10 +233,23 @@ a:hover{color:#3E9692}
           </a>
         </sc-for>
       </div>
-      <div data-exp-stage="1" style="grid-column:6 / span 6;grid-row:1 / span 3;position:relative;overflow:hidden;background:var(--grey);margin:0 calc(-1 * var(--marg)) 0 0;direction:ltr">
-        <sc-for list="{{ expStages }}" as="x" hint-placeholder-count="5">
-          <div data-exp-img="1" data-clip0="{{ x.clip }}" style="position:absolute;inset:0;overflow:hidden"><div style="position:absolute;inset:-3% 0;background:{{ x.plate }};display:grid;place-items:center"><span style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:{{ x.ink }}">{{ x.label }}</span></div></div>
-        </sc-for>
+      <div data-exp-stagecol="1" style="grid-column:6 / span 6;grid-row:1 / span 3;align-self:center;direction:ltr">
+        <div data-exp-stage="1" style="position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--grey)">
+          <sc-for list="{{ expStages }}" as="x" hint-placeholder-count="5">
+            <div data-exp-img="1" data-clip0="{{ x.clip }}" style="position:absolute;inset:0;overflow:hidden"><div style="position:absolute;inset:-3% 0;background:{{ x.plate }};display:grid;place-items:center"><span style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:{{ x.ink }}">{{ x.label }}</span></div></div>
+          </sc-for>
+        </div>
+        <div style="margin-top:18px;display:flex;justify-content:space-between;gap:16px;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-45)">
+          <span data-exp-caption="1"></span>
+          <span data-exp-count="1" style="font-variant-numeric:tabular-nums"></span>
+        </div>
+        <div style="margin-top:24px;display:flex;align-items:center;gap:18px">
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:5px;width:64px;height:64px;position:relative;flex:none">
+            <i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i>
+            <i data-exp-sq="1" style="position:absolute;left:0;top:0;width:18px;height:18px;background:var(--turq);transition:transform var(--m-base) var(--e-page)"></i>
+          </div>
+          <div style="font-size:12.5px;line-height:1.5;color:var(--ink-45);max-width:26ch"><span data-en="1">{{ coordCaption }}</span><span data-fa="1" style="font-family:var(--fa);font-size:14px;display:none">{{ coordCaptionFa }}</span></div>
+        </div>
       </div>
     </div>
   </section>
@@ -278,8 +286,8 @@ a:hover{color:#3E9692}
     <div style="margin-top:18vh;display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap);border-top:1px solid var(--rule);padding-top:26px">
       <div style="grid-column:1 / span 3;font-size:14.5px;line-height:1.9;color:var(--ink-60)">
         <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-45);margin-bottom:12px"><span data-en="1">Studio</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:13px;display:none">استودیو</span></div>
-        <span data-en="1" style="direction:ltr;display:block">[EMAIL]</span><span data-fa="1" style="font-family:var(--fa);display:none">[ایمیل]</span><span data-en="1" style="direction:ltr;display:block">[PHONE]</span><span data-fa="1" style="font-family:var(--fa);display:none">[تلفن]</span>
-        <span data-en="1" style="display:block">[CITY] · [OFFICE]</span><span data-fa="1" style="font-family:var(--fa);display:none">[شهر] · [دفتر]</span>
+        <a href="mailto:{{ studioEmail }}" style="direction:ltr;display:block">{{ studioEmail }}</a><a href="tel:{{ studioPhoneHref }}" style="direction:ltr;display:block">{{ studioPhone }}</a>
+        <span data-en="1" style="display:block">{{ studioCityEn }}</span><span data-fa="1" style="font-family:var(--fa);display:none">{{ studioCityFa }}</span>
       </div>
       <div style="grid-column:5 / span 2;font-size:14.5px;line-height:1.9;color:var(--ink-60)">
         <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-45);margin-bottom:12px"><span data-en="1">Index</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:13px;display:none">فهرست</span></div>
@@ -291,17 +299,10 @@ a:hover{color:#3E9692}
       </div>
       <div style="grid-column:8 / span 2;font-size:14.5px;line-height:1.9;color:var(--ink-60)">
         <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-45);margin-bottom:12px"><span data-en="1">Social</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:13px;display:none">شبکه‌ها</span></div>
-        <a href="#contact" style="display:block;direction:ltr">Instagram</a><a href="#contact" style="display:block;direction:ltr">LinkedIn</a>
+        <a href="{{ instagramHref }}" target="_blank" rel="noopener" style="display:block;direction:ltr">Instagram</a><a href="{{ linkedinHref }}" target="_blank" rel="noopener" style="display:block;direction:ltr">LinkedIn</a>
       </div>
-      <div style="grid-column:11 / span 2;display:flex;flex-direction:column;align-items:flex-start;gap:16px">
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:3px;width:46px;height:46px;direction:ltr">
-          <i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="background:var(--turq)"></i><i style="border:1px solid var(--rule)"></i><i style="background:var(--turq-pale)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i>
-        </div>
-        <div style="display:flex;gap:10px;font-size:12px;letter-spacing:.08em;direction:ltr">
-          <button type="button" onClick="{{ setEn }}" style="appearance:none;background:none;border:none;padding:0;cursor:pointer;font:inherit;color:inherit;opacity:{{ enOpacity }}">EN</button>
-          <span style="width:1px;height:11px;background:var(--rule)"></span>
-          <button type="button" onClick="{{ setFa }}" style="appearance:none;background:none;border:none;padding:0;cursor:pointer;font-family:var(--fa);font-size:13px;color:inherit;opacity:{{ faOpacity }}">فا</button>
-        </div>
+      <div style="grid-column:11 / span 2;display:flex;flex-direction:column;align-items:center">
+        <img src="../../assets/logo/tarh-afarinesh-logo-light-header.svg" alt="Tarh &amp; Afarinesh" width="120" height="120" style="display:block;max-width:100%;height:auto" />
       </div>
       <div style="grid-column:1 / span 12;margin-top:64px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-45)">
         <span>Tarh &amp; Afarinesh — طرح و آفرینش</span><span style="direction:ltr">© 2026 — Placeholder legal</span>
@@ -536,10 +537,13 @@ class Component extends DCLogic {
       expertise: r.querySelector('[data-sc="expertise"]'),
       expHead: r.querySelector("[data-exp-head]"),
       expList: r.querySelector("[data-exp-list]"),
+      expStageCol: r.querySelector("[data-exp-stagecol]"),
       expStage: r.querySelector("[data-exp-stage]"),
       expItems: all("[data-exp]"),
       expImgs: all("[data-exp-img]"),
       expSq: r.querySelector("[data-exp-sq]"),
+      expCaption: r.querySelector("[data-exp-caption]"),
+      expCount: r.querySelector("[data-exp-count]"),
       philo: r.querySelector('[data-sc="philo"]'),
       phStage: r.querySelector("[data-ph-stage]"),
       phImg: r.querySelector("[data-ph-img]"),
@@ -579,7 +583,7 @@ class Component extends DCLogic {
     const put = (el, key) => { if(el) el.style.gridColumn = LAYOUT[key][k]; };
     put(n.stLabel, "stLabel"); put(n.stHead, "stHead"); put(n.stBody, "stBody");
     put(n.pjTop, "pjCols"); put(n.pjTextCol, "pjCols"); put(n.pjFoot, "pjCols");
-    put(n.expHead, "expHead"); put(n.expList, "expList"); put(n.expStage, "expStage");
+    put(n.expHead, "expHead"); put(n.expList, "expList"); put(n.expStageCol, "expStage");
     put(n.resCol, "resCol"); put(n.resStageCol, "resStage");
     put(n.awHead, "awHead"); put(n.awList, "awList");
 
@@ -591,9 +595,6 @@ class Component extends DCLogic {
     if(n.heroImg){
       n.heroImg.style.right = fa ? "auto" : "0";
       n.heroImg.style.left = fa ? "0" : "auto";
-    }
-    if(n.expStage){
-      n.expStage.style.margin = fa ? "0 0 0 calc(-1 * var(--marg))" : "0 calc(-1 * var(--marg)) 0 0";
     }
     if(n.heroRail){
       n.heroRail.style.right = fa ? "auto" : "var(--marg)";
@@ -1065,6 +1066,9 @@ class Component extends DCLogic {
         const c = EXP_COORD_OF(EX_SLUG_AT(idx));
         n.expSq.style.transform = "translate(" + (c[0] * 18) + "px," + (c[1] * 18) + "px)";
       }
+      const active = n.expItems[idx];
+      if(n.expCaption) n.expCaption.textContent = active ? active.children[1].textContent : "";
+      if(n.expCount) n.expCount.textContent = String(idx + 1).padStart(2, "0") + " / " + String(expCount).padStart(2, "0");
     }
 
     /* ---- 05 philosophy, wiping diagonally into 06 research ---- */
@@ -1269,6 +1273,8 @@ class Component extends DCLogic {
         label: c.isReal ? "" : ("Project " + String(i + 1).padStart(2, "0") + " — image"),
         clip: STAGE_CLIPS[i % STAGE_CLIPS.length]
       })),
+      coordCaption: ((window.TA_EXPERTISE ? window.TA_EXPERTISE.all().length : 0)) + " disciplines, one coordinate system.",
+      coordCaptionFa: faNum(window.TA_EXPERTISE ? window.TA_EXPERTISE.all().length : 0) + " تخصص، یک دستگاه مختصات.",
       expertise: (window.TA_EXPERTISE ? window.TA_EXPERTISE.all() : []).map((e, i, arr) => ({
         num: e.num,
         title: fa ? e.title.fa : e.title.en,
@@ -1301,6 +1307,14 @@ class Component extends DCLogic {
       journalHref: "Journal.dc.html" + (fa ? "#lang=fa" : ""),
       contactHref: "Contact.dc.html" + (fa ? "#lang=fa" : ""),
       contactFromHome: "Contact.dc.html#from=home" + (fa ? "&lang=fa" : ""),
+      /* footer studio block reads the shared contact model — never hard-coded here */
+      studioEmail: (window.TA_CONTACT && window.TA_CONTACT.studio.email) || "info@tarh-afarinesh.com",
+      studioPhone: (window.TA_CONTACT && window.TA_CONTACT.studio.phone) || "+98 21 88370781",
+      studioPhoneHref: ((window.TA_CONTACT && window.TA_CONTACT.studio.phone) || "+98 21 88370781").replace(/[^\d+]/g, ""),
+      studioCityEn: (window.TA_CONTACT && window.TA_CONTACT.studio.offices[0] && window.TA_CONTACT.studio.offices[0].city) || "Tehran, Iran",
+      studioCityFa: (window.TA_CONTACT && window.TA_CONTACT.studio.offices[0] && window.TA_CONTACT.studio.offices[0].cityFa) || "تهران، ایران",
+      instagramHref: (window.TA_CONTACT && window.TA_CONTACT.studio.socials.filter(s => s.id === "instagram")[0] || {}).href || "https://www.instagram.com/tarh_afarinesh/",
+      linkedinHref: (window.TA_CONTACT && window.TA_CONTACT.studio.socials.filter(s => s.id === "linkedin")[0] || {}).href || "https://ir.linkedin.com/company/tarhafarinesh",
       /* departure state: the CTA module settles onto a coordinate, then the page hands over */
       toContact: (e) => {
         const href = "Contact.dc.html#from=home" + (fa ? "&lang=fa" : "");
