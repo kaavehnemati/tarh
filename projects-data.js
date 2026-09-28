@@ -902,62 +902,62 @@
       presentation: { ratio: "16/9", previewSize: [100, 56], plate: 3, heroTheme: "dark",
                       density: "rich", homepageRatio: "16/9" },
       media: [
-        media({ id: "p004-main-axis-night", src: "assets/projects/project-004/04_main_axis_night.jpg",
+        media({ id: "p004-main-axis-night", src: "assets/projects/project-004/04_main_axis_night.webp",
                 roles: ["hero", "homepage", "viewer"], ratio: "16/9", sourceType: "user-supplied-project-reference",
                 objectPosition: "50% 48%", heroPosition: "50% 48%", homepagePosition: "50% 48%",
                 tabletPosition: "50% 48%", mobilePosition: "50% 46%", theme: "dark",
                 alt: { en: "Night view along the ceremonial main axis of Dariush Hotel Kish, with reflecting pools leading to the illuminated monumental entrance.",
                        fa: "نمای شبانه محور تشریفاتی اصلی هتل داریوش کیش با آب‌نماهای بازتابی رو به ورودی یادمانی روشن." },
                 sourceFile: "04_original_main_axis_night.jpg" }),
-        media({ id: "p004-aerial-resort-context", src: "assets/projects/project-004/03_aerial_resort_context.jpg",
+        media({ id: "p004-aerial-resort-context", src: "assets/projects/project-004/03_aerial_resort_context.webp",
                 roles: ["archive", "story", "viewer"], ratio: "3/2", sourceType: "user-supplied-project-reference",
                 objectPosition: "50% 52%", archivePosition: "50% 52%", mobilePosition: "50% 50%",
                 alt: { en: "Aerial view of Dariush Hotel Kish showing the symmetrical resort plan, formal gardens and the Persian Gulf beyond.",
                        fa: "نمای هوایی هتل داریوش کیش با پلان متقارن مجموعه، باغ‌های رسمی و خلیج فارس در پس‌زمینه." },
                 sourceFile: "03_original_aerial_resort_context.jpg" }),
-        media({ id: "p004-garden-edge-day", src: "assets/projects/project-004/02_garden_edge_day.jpg",
+        media({ id: "p004-garden-edge-day", src: "assets/projects/project-004/02_garden_edge_day.webp",
                 roles: ["story", "landscape", "viewer"], ratio: "3/2", sourceType: "user-supplied-project-reference",
                 alt: { en: "Daylight view of the garden edge at Dariush Hotel Kish, with colonnades, gilded capitals and flowering planting.",
                        fa: "نمای روز از لبه باغ هتل داریوش کیش با ستون‌بندی، سرستون‌های زراندود و پوشش گیاهی گل‌دار." },
                 sourceFile: "02_original_garden_edge_day.jpg" }),
-        media({ id: "p004-entry-twilight", src: "assets/projects/project-004/01_entry_twilight.jpg",
+        media({ id: "p004-entry-twilight", src: "assets/projects/project-004/01_entry_twilight.webp",
                 roles: ["story", "detail", "viewer"], ratio: "3/2", sourceType: "user-supplied-project-reference",
                 caption: { en: "Carved reliefs and sculpted guardians at the entrance threshold.",
                            fa: "نقش‌برجسته‌ها و نگهبانان حجاری‌شده در آستانه ورودی." },
                 alt: { en: "Twilight view of the carved Achaemenid-inspired reliefs and sculpted figures flanking the hotel entrance.",
                        fa: "نمای غروب از نقش‌برجسته‌های الهام‌گرفته از هخامنشی و پیکره‌های حجاری‌شده در دو سوی ورودی هتل." },
                 sourceFile: "01_original_entry_twilight.jpg" }),
-        media({ id: "p004-blue-hour-front", src: "assets/projects/project-004/05_blue_hour_front.jpg",
+        media({ id: "p004-blue-hour-front", src: "assets/projects/project-004/05_blue_hour_front.webp",
                 roles: ["story", "exterior", "viewer"], ratio: "4/3", sourceType: "editorial-visualisation", theme: "dark",
                 credit: { en: "Editorial visualisation based on project references", fa: "تصویرسازی تحریریه‌ای بر اساس منابع پروژه" },
                 alt: { en: "Editorial blue-hour visualisation of the hotel frontage, colonnade and reflecting water axis.",
                        fa: "تصویرسازی غروب از نمای اصلی هتل، ستون‌بندی و محور آب بازتابی." },
                 sourceFile: "05_generated_blue_hour_front.jpg" }),
-        media({ id: "p004-seaside-palace-context", src: "assets/projects/project-004/06_seaside_palace_context.jpg",
+        media({ id: "p004-seaside-palace-context", src: "assets/projects/project-004/06_seaside_palace_context.webp",
                 roles: ["story", "context", "viewer"], ratio: "4/3", sourceType: "editorial-visualisation",
                 credit: { en: "Editorial visualisation based on project references", fa: "تصویرسازی تحریریه‌ای بر اساس منابع پروژه" },
                 alt: { en: "Editorial visualisation of the resort's garden court with fountains, columns and the sea beyond.",
                        fa: "تصویرسازی حیاط باغ مجموعه با فواره‌ها، ستون‌ها و دریا در پس‌زمینه." },
                 sourceFile: "06_generated_seaside_palace_context.jpg" }),
-        media({ id: "p004-resort-gardens-aerial", src: "assets/projects/project-004/07_resort_gardens_aerial.jpg",
+        media({ id: "p004-resort-gardens-aerial", src: "assets/projects/project-004/07_resort_gardens_aerial.webp",
                 roles: ["story", "landscape", "viewer"], ratio: "4/3", sourceType: "editorial-visualisation",
                 credit: { en: "Editorial visualisation based on project references", fa: "تصویرسازی تحریریه‌ای بر اساس منابع پروژه" },
                 alt: { en: "Editorial aerial visualisation of the formal resort gardens, water axis and symmetrical arrival court.",
                        fa: "تصویرسازی هوایی از باغ‌های رسمی مجموعه، محور آب و پیش‌فضای متقارن ورود." },
                 sourceFile: "07_generated_resort_gardens_aerial.jpg" }),
-        media({ id: "p004-arrival-golden-hour", src: "assets/projects/project-004/08_arrival_golden_hour.jpg",
+        media({ id: "p004-arrival-golden-hour", src: "assets/projects/project-004/08_arrival_golden_hour.webp",
                 roles: ["story", "arrival", "viewer"], ratio: "4/3", sourceType: "editorial-visualisation",
                 credit: { en: "Editorial visualisation based on project references", fa: "تصویرسازی تحریریه‌ای بر اساس منابع پروژه" },
                 alt: { en: "Editorial golden-hour visualisation of guests arriving beneath the monumental entrance portal.",
                        fa: "تصویرسازی ورود مهمانان در نور طلایی عصر، زیر دروازه یادمانی ورودی." },
                 sourceFile: "08_generated_arrival_golden_hour.jpg" }),
-        media({ id: "p004-grand-lobby", src: "assets/projects/project-004/09_grand_lobby.jpg",
+        media({ id: "p004-grand-lobby", src: "assets/projects/project-004/09_grand_lobby.webp",
                 roles: ["story", "interior", "viewer"], ratio: "4/3", sourceType: "editorial-visualisation",
                 credit: { en: "Editorial visualisation based on project references", fa: "تصویرسازی تحریریه‌ای بر اساس منابع پروژه" },
                 alt: { en: "Editorial visualisation of the grand lobby with colossal columns, carved reliefs and a view through to the sea.",
                        fa: "تصویرسازی لابی بزرگ با ستون‌های عظیم، نقش‌برجسته‌های حجاری‌شده و دید امتدادیافته تا دریا." },
                 sourceFile: "09_generated_grand_lobby.jpg" }),
-        media({ id: "p004-twilight-seaside", src: "assets/projects/project-004/10_twilight_seaside_view.jpg",
+        media({ id: "p004-twilight-seaside", src: "assets/projects/project-004/10_twilight_seaside_view.webp",
                 roles: ["story", "twilight", "viewer"], ratio: "4/3", sourceType: "editorial-visualisation", theme: "dark",
                 credit: { en: "Editorial visualisation based on project references", fa: "تصویرسازی تحریریه‌ای بر اساس منابع پروژه" },
                 caption: { en: "As night falls, the illuminated axis reads across the whole estate.",
@@ -965,13 +965,13 @@
                 alt: { en: "Editorial twilight visualisation of the illuminated resort, gardens and shoreline.",
                        fa: "تصویرسازی غروب از مجموعه روشن، باغ‌ها و خط ساحلی." },
                 sourceFile: "10_generated_twilight_seaside_view.jpg" }),
-        media({ id: "p004-resortscape-gulf", src: "assets/projects/project-004/11_resortscape_persian_gulf.jpg",
+        media({ id: "p004-resortscape-gulf", src: "assets/projects/project-004/11_resortscape_persian_gulf.webp",
                 roles: ["story", "coastal", "viewer"], ratio: "4/3", sourceType: "editorial-visualisation",
                 credit: { en: "Editorial visualisation based on project references", fa: "تصویرسازی تحریریه‌ای بر اساس منابع پروژه" },
                 alt: { en: "Editorial visualisation of the resort's pool terraces and palm landscape opening toward the Persian Gulf.",
                        fa: "تصویرسازی تراس‌های استخر و نخلستان مجموعه که به سوی خلیج فارس گشوده می‌شوند." },
                 sourceFile: "11_generated_resortscape_persian_gulf.jpg" }),
-        media({ id: "p004-luxury-suite", src: "assets/projects/project-004/12_luxury_suite.jpg",
+        media({ id: "p004-luxury-suite", src: "assets/projects/project-004/12_luxury_suite.webp",
                 roles: ["story", "interior", "viewer"], ratio: "4/3", sourceType: "editorial-visualisation",
                 credit: { en: "Editorial visualisation based on project references", fa: "تصویرسازی تحریریه‌ای بر اساس منابع پروژه" },
                 alt: { en: "Editorial visualisation of a guest suite with carved relief headboard, Persian textiles and a sea-facing balcony.",
@@ -998,7 +998,7 @@
       ]
     }),
     project({
-      id: "project-005", slug: "brick-datum", sortOrder: 5,
+      id: "project-005", slug: "brick-datum", sortOrder: 6,
       title: { en: "Brick Datum", fa: "تراز آجر" },
       proposition: { en: "One material, read three ways.", fa: "یک مصالح، سه خوانش" },
       location: { en: "Tehran", fa: "تهران" }, year: "2024", years: "2022–2024",
@@ -1007,7 +1007,7 @@
       media: [media({ id: "p005-hero", plate: 0, roles: ["hero", "archive"], ratio: "4/3" })]
     }),
     project({
-      id: "project-006", slug: "shade-market", sortOrder: 6,
+      id: "project-006", slug: "shade-market", sortOrder: 7,
       title: { en: "Shade Market", fa: "بازار سایه" },
       proposition: { en: "Trade under a borrowed roof.", fa: "داد‌وستد زیر سقفی عاریتی" },
       location: { en: "Yazd", fa: "یزد" }, year: "2023", years: "2023",
@@ -1017,7 +1017,7 @@
       media: [media({ id: "p006-hero", plate: 2, roles: ["hero", "archive"], ratio: "16/10" })]
     }),
     project({
-      id: "project-007", slug: "quiet-renovation", sortOrder: 7,
+      id: "project-007", slug: "quiet-renovation", sortOrder: 8,
       title: { en: "Quiet Renovation", fa: "بازآفرینی آرام" },
       proposition: { en: "Subtraction as the main gesture.", fa: "کاستن، به‌جای افزودن" },
       location: { en: "Tehran", fa: "تهران" }, year: "2023", years: "2022–2023",
@@ -1026,7 +1026,7 @@
       media: [media({ id: "p007-hero", plate: 1, roles: ["hero", "archive"], ratio: "3/4" })]
     }),
     project({
-      id: "project-008", slug: "northern-terraces", sortOrder: 8,
+      id: "project-008", slug: "northern-terraces", sortOrder: 9,
       title: { en: "Northern Terraces", fa: "مجموعه مسکونی تراس‌های شمالی و باغ‌های پیوسته" },
       proposition: { en: "Terraces that keep the garden.", fa: "تراس‌هایی که باغ را نگه می‌دارند" },
       location: { en: "Karaj", fa: "کرج" }, year: "2022", years: "2019–2022",
@@ -1035,6 +1035,182 @@
       media: [media({ id: "p008-hero", plate: 3, roles: ["hero", "archive"], ratio: "2/1" })]
     })
   ];
+
+  /* ---------------------------------------------------------------------
+     PROJECT 09 — KANDOVAN INTERNATIONAL CAVE HOTEL (curated presentation content)
+     Media 01–05 are user-supplied project references; the remaining entries
+     reuse the same five source files across additional narrative slots.
+     Id/slug stay "project-009", but the record sits 5th in list order —
+     spliced into P right after Dariush Hotel Kish (project-004).
+     --------------------------------------------------------------------- */
+  var kandovanCaveHotel = project({
+      id: "project-009", slug: "kandovan-cave-hotel", sortOrder: 5,
+      contentState: "real", published: true, featured: true,
+      homepageFeatured: true, homepageOrder: 5,
+      contentSource: "curated-project-presentation",
+      metadataStatus: "working-presentation-data",
+      title: { en: "Kandovan International Cave Hotel", fa: "هتل صخره‌ای بین‌المللی کندوان" },
+      shortTitle: { en: "Kandovan Cave Hotel", fa: "هتل صخره‌ای کندوان" },
+      proposition: { en: "Hospitality carved into a living rock village.",
+                     fa: "مهمان‌نوازی حجاری‌شده در دل روستایی صخره‌ای زنده." },
+      homepageProposition: { en: "Hospitality carved<br />into a living rock village.",
+                             fa: "مهمان‌نوازی حجاری‌شده<br />در دل روستایی صخره‌ای." },
+      secondaryStatement: {
+        en: "A rare integration of architecture, engineering and construction within the volcanic cones of one of the world's few inhabited troglodyte villages.",
+        fa: "پیوندی نادر از معماری، مهندسی و اجرا در دل مخروط‌های آتشفشانی یکی از معدود روستاهای صخره‌ای مسکونی جهان."
+      },
+      location: { en: "Kandovan Village, Osku, East Azerbaijan, Iran",
+                  fa: "روستای کندوان، اسکو، آذربایجان شرقی، ایران" },
+      locationShort: { en: "Kandovan, Iran", fa: "کندوان، ایران" },
+      country: "Iran",
+      year: "2006", startYear: "2004", completionYear: "2006", years: "2004–2006",
+      status: "Completed",
+      statusLabel: { en: "Completed", fa: "تکمیل‌شده" },
+      typology: "Hospitality",
+      typologyLabel: { en: "Rock-Cut / Troglodyte Hotel", fa: "هتل صخره‌کند / غارنشین" },
+      expertise: ["architecture", "interior-architecture", "engineering"],
+      services: ["architecture", "interior-architecture", "engineering"],
+      serviceList: [
+        { en: "Architectural Design", fa: "طراحی معماری" },
+        { en: "Interior Architecture", fa: "معماری داخلی" },
+        { en: "Structural Engineering", fa: "مهندسی سازه" },
+        { en: "Rock-Cut Construction Coordination", fa: "هماهنگی اجرای صخره‌کنی" },
+        { en: "Vernacular Conservation Advisory", fa: "مشاوره حفاظت از بافت بومی" }
+      ],
+      client: { en: "Private Hospitality Client", fa: "کارفرمای خصوصی حوزه هتلداری" },
+      clientGroup: { en: "Private Development", fa: "توسعه خصوصی" },
+      programme: {
+        en: "Guest rooms and suites carved from existing volcanic cones, reception and lobby, restaurant and lounge, terraced circulation and stairs, viewing platforms overlooking the village, and service and back-of-house spaces integrated within the rock mass.",
+        fa: "اتاق‌ها و سوئیت‌های حجاری‌شده در دل مخروط‌های آتشفشانی موجود، پذیرش و لابی، رستوران و لانج، پلکان‌ها و مسیرهای حرکتی تراس‌مانند، سکوهای دید رو به روستا و فضاهای خدماتی و پشتیبانی ادغام‌شده در دل صخره." },
+      scaleNote: { en: "Boutique hotel within a protected troglodyte village", fa: "هتل بوتیک در دل روستایی صخره‌ای حفاظت‌شده" },
+      photographyCredit: null,
+      team: [
+        { role: { en: "Architecture", fa: "معماری" }, name: { en: "Tarh & Afarinesh", fa: "مهندسین مشاور طرح و آفرینش" } },
+        { role: { en: "Design", fa: "طراحی" }, name: { en: "Tarh & Afarinesh Design Team", fa: "تیم طراحی طرح و آفرینش" } },
+        { role: { en: "Interior Architecture", fa: "معماری داخلی" }, name: { en: "Tarh & Afarinesh", fa: "طرح و آفرینش" } },
+        { role: { en: "Structural Engineering", fa: "مهندسی سازه" }, name: { en: "Integrated Design Team", fa: "تیم طراحی یکپارچه" } },
+        { role: { en: "Construction / Rock-Cut Execution", fa: "اجرا / صخره‌کنی" }, name: { en: "Integrated Design Team", fa: "تیم طراحی یکپارچه" } }
+      ],
+      editorial: {
+        homepageDescription: {
+          en: "A boutique hotel carved directly into the volcanic cones of Kandovan, adapting one of Iran's oldest inhabited rock villages into a contemporary hospitality experience.",
+          fa: "هتلی بوتیک که مستقیماً در دل مخروط‌های آتشفشانی کندوان حجاری شده و یکی از قدیمی‌ترین روستاهای صخره‌ای مسکون ایران را به تجربه‌ای معاصر از مهمان‌نوازی تبدیل می‌کند."
+        },
+        archiveDescription: {
+          en: "Kandovan International Cave Hotel is conceived within the cone-shaped volcanic dwellings of Kandovan village, on the slopes of Mount Sahand. The project demonstrates the integration of architecture, engineering and construction within a highly specific cultural and natural context, converting existing rock-cut forms into guest accommodation without erasing their vernacular character.",
+          fa: "هتل صخره‌ای بین‌المللی کندوان در دل خانه‌های مخروطی‌شکل آتشفشانی روستای کندوان، در دامنه کوه سهند شکل گرفته است. این پروژه نمونه‌ای از پیوند معماری، مهندسی و اجرا در بستری ویژه از نظر فرهنگی و طبیعی است و فضاهای صخره‌کند موجود را بدون از میان بردن هویت بومی‌شان به فضای اقامتی مهمانان تبدیل می‌کند."
+        },
+        lead: {
+          en: "Set within cone-shaped dwellings carved by centuries of erosion and habitation, the project reframes hospitality as an act of careful adaptation rather than new construction.",
+          fa: "این پروژه در دل خانه‌های مخروطی‌شکلی که حاصل قرن‌ها فرسایش و سکونت‌اند شکل گرفته و مهمان‌نوازی را نه به‌عنوان ساخت‌وساز نو، بلکه به‌عنوان کنشی دقیق از تطبیق بازتعریف می‌کند."
+        },
+        chapters: [
+          { en: "Kandovan is one of the few villages in the world where volcanic tuff cones, shaped over centuries by erosion, still serve as inhabited dwellings. The hotel project works within this existing fabric, converting a cluster of cones into guest rooms and shared spaces while preserving the irregular geometry, thick rock walls and small carved openings that define the village's character.",
+            fa: "کندوان یکی از معدود روستاهای جهان است که مخروط‌های توفی آتشفشانی آن، شکل‌گرفته طی قرن‌ها فرسایش، همچنان محل سکونت‌اند. پروژه هتل در دل همین بافت موجود عمل می‌کند و خوشه‌ای از مخروط‌ها را به اتاق‌های مهمان و فضاهای مشترک تبدیل می‌کند، در حالی که هندسه نامنظم، دیوارهای ضخیم صخره‌ای و بازشوهای کوچک حجاری‌شده که هویت روستا را می‌سازند حفظ می‌شوند." },
+          { en: "Working with rock rather than against it required a different design discipline: openings were enlarged only where the structure allowed, new circulation followed the natural terracing of the slope, and every intervention was tested against the stability of the surrounding cones. Engineering and construction coordination were as central to the project as the architectural design itself.",
+            fa: "کار کردن با صخره به‌جای غلبه بر آن، نظمی متفاوت در طراحی می‌طلبید: بازشوها تنها در جاهایی که سازه اجازه می‌داد بزرگ شدند، مسیرهای حرکتی جدید از تراس‌بندی طبیعی شیب پیروی کردند و هر مداخله در برابر پایداری مخروط‌های اطراف سنجیده شد. هماهنگی مهندسی و اجرا به همان اندازه طراحی معماری در مرکز پروژه قرار داشت." },
+          { en: "Interiors bring warmth and comfort into the compressed, irregular volumes of the cones through soft lighting, textiles and carefully placed furniture, without smoothing away the rough rock surfaces that give each room its identity. In winter, snow settles across the terraced roofscape; the hotel's illuminated openings read as small points of warmth within the wider stone silhouette of the village.",
+            fa: "فضاهای داخلی با نورپردازی ملایم، منسوجات و چیدمان دقیق مبلمان، گرما و آسایش را به حجم‌های فشرده و نامنظم مخروط‌ها می‌آورند، بدون آنکه سطوح خشن صخره که هویت هر اتاق را می‌سازند صاف و یکدست شوند. در زمستان، برف بر بام‌های تراس‌مانند روستا می‌نشیند و بازشوهای روشن هتل همچون نقاطی کوچک از گرما در سیلوئت سنگی گسترده‌تر روستا خوانده می‌شوند." },
+          { en: "Kandovan International Cave Hotel stands as evidence that hospitality architecture can operate as conservation: the project's value lies not in what was added, but in how little needed to be, and how carefully the additions were judged against a landscape shaped over centuries rather than years.",
+            fa: "هتل صخره‌ای بین‌المللی کندوان گواهی است بر این‌که معماری اقامتی می‌تواند در نقش حفاظت نیز عمل کند: ارزش این پروژه نه در آنچه افزوده شده، بلکه در اندک بودن این افزوده‌ها و دقتی است که در برابر منظری شکل‌گرفته طی قرن‌ها، نه سال‌ها، به کار رفته است." }
+        ],
+        seoTitle: { en: "Kandovan International Cave Hotel | Tarh & Afarinesh",
+                    fa: "هتل صخره‌ای بین‌المللی کندوان | طرح و آفرینش" },
+        seoDescription: {
+          en: "Kandovan International Cave Hotel adapts the volcanic cone dwellings of Kandovan village into a boutique hotel, combining architecture, engineering and construction within a protected troglodyte landscape.",
+          fa: "هتل صخره‌ای بین‌المللی کندوان، خانه‌های مخروطی آتشفشانی روستای کندوان را به هتلی بوتیک تبدیل می‌کند و معماری، مهندسی و اجرا را در دل منظری صخره‌ای حفاظت‌شده گرد هم می‌آورد."
+        },
+        socialDescription: {
+          en: "A boutique hotel carved into the living volcanic cones of Kandovan, one of the world's few inhabited troglodyte villages.",
+          fa: "هتلی بوتیک، حجاری‌شده در دل مخروط‌های آتشفشانی زنده کندوان، یکی از معدود روستاهای صخره‌ای مسکون جهان."
+        }
+      },
+      quote: { en: "The project's value lies not in what was added, but in how little needed to be.",
+               fa: "ارزش پروژه نه در آنچه افزوده شده، بلکه در اندک بودن این افزوده‌هاست.", by: null },
+      facts: [
+        { value: "2006", note: { en: "Completed", fa: "سال تکمیل" } },
+        { value: "Kandovan", note: { en: "Rock Village", fa: "روستای صخره‌ای" } },
+        { value: "Troglodyte", note: { en: "Dwelling Typology", fa: "گونه سکونت" } },
+        { value: "Volcanic Tuff", note: { en: "Carved Material", fa: "متریال حجاری‌شده" } },
+        { value: "Sahand", note: { en: "Mountain Foothills", fa: "دامنه کوه" } },
+        { value: "Conservation", note: { en: "Design Approach", fa: "رویکرد طراحی" } }
+      ],
+      drawings: [],
+      presentation: { ratio: "16/9", previewSize: [100, 56], plate: 1, heroTheme: "dark",
+                      density: "rich", homepageRatio: "16/9" },
+      media: [
+        media({ id: "p009-aerial-village", src: "assets/projects/project-009/01_aerial_village.webp",
+                roles: ["hero", "homepage", "archive", "viewer"], ratio: "16/9", sourceType: "user-supplied-project-reference",
+                objectPosition: "50% 46%", heroPosition: "50% 46%", homepagePosition: "50% 46%",
+                archivePosition: "50% 48%", tabletPosition: "50% 46%", mobilePosition: "50% 44%",
+                alt: { en: "Aerial view of Kandovan village showing the cluster of cone-shaped volcanic dwellings carved into the hillside.",
+                       fa: "نمای هوایی روستای کندوان با خوشه‌ای از خانه‌های مخروطی‌شکل آتشفشانی حجاری‌شده در دل تپه." },
+                sourceFile: "01_aerial_village.webp" }),
+        media({ id: "p009-terrace-facade-day", src: "assets/projects/project-009/02_terrace_facade_day.webp",
+                roles: ["story", "exterior", "viewer"], ratio: "3/2", sourceType: "user-supplied-project-reference",
+                alt: { en: "Daylight view of the terraced rock-cut facades of Kandovan, with small carved window openings stacked along the slope.",
+                       fa: "نمای روز از نمای تراس‌مانند صخره‌کند کندوان با بازشوهای کوچک حجاری‌شده در امتداد شیب." },
+                sourceFile: "02_terrace_facade_day.webp" }),
+        media({ id: "p009-entrance-night", src: "assets/projects/project-009/03_entrance_night.webp",
+                roles: ["story", "arrival", "viewer"], ratio: "3/2", sourceType: "user-supplied-project-reference", theme: "dark",
+                caption: { en: "The illuminated hotel entrance reads as a warm threshold within the rock mass.",
+                           fa: "ورودی روشن هتل همچون آستانه‌ای گرم در دل توده صخره خوانده می‌شود." },
+                alt: { en: "Night view of the illuminated cave hotel entrance carved into the volcanic rock of Kandovan.",
+                       fa: "نمای شبانه ورودی روشن هتل صخره‌ای حجاری‌شده در دل سنگ آتشفشانی کندوان." },
+                sourceFile: "03_entrance_night.webp" }),
+        media({ id: "p009-entrance-snow", src: "assets/projects/project-009/04_entrance_snow.webp",
+                roles: ["story", "context", "viewer"], ratio: "3/2", sourceType: "user-supplied-project-reference",
+                alt: { en: "Winter view of the snow-covered cone dwellings and entrance path at Kandovan cave hotel.",
+                       fa: "نمای زمستانی از خانه‌های مخروطی برف‌گرفته و مسیر ورودی هتل صخره‌ای کندوان." },
+                sourceFile: "04_entrance_snow.webp" }),
+        media({ id: "p009-suite-interior", src: "assets/projects/project-009/05_suite_interior.webp",
+                roles: ["story", "interior", "viewer"], ratio: "4/3", sourceType: "user-supplied-project-reference",
+                alt: { en: "Interior view of a guest suite carved from the volcanic rock, with soft lighting and textiles against the rough stone surface.",
+                       fa: "نمای داخلی سوئیت مهمان حجاری‌شده در دل سنگ آتشفشانی، با نورپردازی ملایم و منسوجات در برابر سطح خشن صخره." },
+                sourceFile: "05_suite_interior.webp" }),
+        media({ id: "p009-aerial-village-context", src: "assets/projects/project-009/01_aerial_village.webp",
+                roles: ["story", "landscape", "viewer"], ratio: "16/9", sourceType: "user-supplied-project-reference",
+                caption: { en: "The village's cone dwellings step down the slope toward the valley floor.",
+                           fa: "خانه‌های مخروطی روستا در امتداد شیب تا کف دره پایین می‌آیند." },
+                alt: { en: "Wider aerial view of the Kandovan valley and the volcanic cone village within its mountain setting.",
+                       fa: "نمای هوایی گسترده‌تر از دره کندوان و روستای صخره‌ای در دل چشم‌انداز کوهستانی." },
+                sourceFile: "01_aerial_village.webp" }),
+        media({ id: "p009-terrace-facade-detail", src: "assets/projects/project-009/02_terrace_facade_day.webp",
+                roles: ["story", "detail", "viewer"], ratio: "3/2", sourceType: "user-supplied-project-reference",
+                alt: { en: "Detail view of the carved stone texture and window openings along the terraced facade of Kandovan.",
+                       fa: "نمای نزدیک بافت سنگ حجاری‌شده و بازشوهای پنجره در امتداد نمای تراس‌مانند کندوان." },
+                sourceFile: "02_terrace_facade_day.webp" }),
+        media({ id: "p009-entrance-twilight", src: "assets/projects/project-009/03_entrance_night.webp",
+                roles: ["story", "twilight", "viewer"], ratio: "3/2", sourceType: "user-supplied-project-reference", theme: "dark",
+                alt: { en: "Dusk view of the cave hotel entrance and surrounding rock cones as lights begin to glow.",
+                       fa: "نمای غروب ورودی هتل صخره‌ای و مخروط‌های سنگی پیرامون در آغاز روشن شدن چراغ‌ها." },
+                sourceFile: "03_entrance_night.webp" }),
+        media({ id: "p009-suite-interior-detail", src: "assets/projects/project-009/05_suite_interior.webp",
+                roles: ["story", "detail", "viewer"], ratio: "4/3", sourceType: "user-supplied-project-reference",
+                alt: { en: "Close view of interior furnishings and lighting within a rock-cut guest suite at Kandovan.",
+                       fa: "نمای نزدیک مبلمان و نورپردازی داخلی در سوئیت صخره‌کند کندوان." },
+                sourceFile: "05_suite_interior.webp" })
+      ],
+      story: [
+        { type: "full-image", mediaId: "p009-aerial-village",
+          title: { en: "Overview", fa: "معرفی پروژه" },
+          body: { en: "Kandovan International Cave Hotel is set within one of the world's few inhabited troglodyte villages, on the slopes of Mount Sahand in East Azerbaijan. The project converts existing volcanic tuff cones, shaped over centuries of erosion, into guest accommodation, demonstrating the integration of architecture, engineering and construction within a highly specific cultural and natural context.",
+                  fa: "هتل صخره‌ای بین‌المللی کندوان در دل یکی از معدود روستاهای صخره‌ای مسکون جهان، در دامنه کوه سهند در آذربایجان شرقی شکل گرفته است. این پروژه مخروط‌های توفی آتشفشانی موجود را که طی قرن‌ها فرسایش شکل گرفته‌اند به فضای اقامتی مهمانان تبدیل می‌کند و نمونه‌ای از پیوند معماری، مهندسی و اجرا در بستری ویژه از نظر فرهنگی و طبیعی است." } },
+        { type: "image-text", mediaId: "p009-terrace-facade-day", role: "context",
+          title: { en: "A Living Village, Not a Backdrop", fa: "روستایی زنده، نه یک پس‌زمینه" },
+          body: { en: "Kandovan is still inhabited; the hotel operates within a working village rather than a preserved ruin. Design decisions were tested against the daily life of residents as much as against the requirements of hospitality, and the terraced facades, narrow paths and stacked rooflines of the settlement were treated as fixed conditions to be respected rather than obstacles to be cleared.",
+                  fa: "کندوان همچنان روستایی مسکون است؛ هتل در دل روستایی فعال عمل می‌کند، نه در بنایی صرفاً حفاظت‌شده. تصمیمات طراحی به همان اندازه در برابر زندگی روزمره ساکنان سنجیده شدند که در برابر الزامات مهمان‌نوازی، و نماهای تراس‌مانند، مسیرهای باریک و بام‌های پلکانی روستا به‌عنوان شرایطی ثابت و قابل احترام در نظر گرفته شدند، نه مانعی که باید کنار زده شود." },
+          caption: { en: "Terraced facades and carved openings along the village slope.", fa: "نماهای تراس‌مانند و بازشوهای حجاری‌شده در امتداد شیب روستا." } },
+        { type: "sticky-narrative", role: "strategy",
+          mediaIds: ["p009-entrance-night", "p009-entrance-snow", "p009-suite-interior",
+                     "p009-aerial-village-context", "p009-terrace-facade-detail",
+                     "p009-entrance-twilight", "p009-suite-interior-detail"],
+          title: { en: "Building With Rock, Not Against It", fa: "ساختن با صخره، نه در برابر آن" },
+          body: { en: "Every intervention in the project was measured against the stability and character of the existing cones rather than against a conventional architectural brief: openings enlarged only where the rock allowed, circulation following the natural terracing of the slope, and interiors bringing warmth and comfort into compressed, irregular volumes without smoothing away the rough stone surfaces that give each room its identity. In winter, snow settles across the roofscape and the hotel's illuminated openings read as small points of warmth within the wider stone silhouette of the village — a seasonal reminder that the architecture was always secondary to the landscape that hosts it.",
+                  fa: "هر مداخله در این پروژه نه در برابر یک برنامه معماری متعارف، بلکه در برابر پایداری و هویت مخروط‌های موجود سنجیده شد: بازشوها تنها در جاهایی که سنگ اجازه می‌داد بزرگ شدند، مسیرهای حرکتی از تراس‌بندی طبیعی شیب پیروی کردند و فضاهای داخلی گرما و آسایش را به حجم‌های فشرده و نامنظم آوردند بدون آنکه سطوح خشن سنگ که هویت هر اتاق را می‌سازند صاف شوند. در زمستان، برف بر بام‌های روستا می‌نشیند و بازشوهای روشن هتل همچون نقاطی کوچک از گرما در سیلوئت سنگی گسترده‌تر روستا خوانده می‌شوند؛ یادآوری فصلی از اینکه معماری همواره در مرتبه دوم نسبت به منظری قرار داشت که میزبانش بود." } }
+      ]
+    });
+  P.splice(4, 0, kandovanCaveHotel); // insert as the 5th project (index 4), after project-004
 
   /* ---------- prototype detail defaults -------------------------------------
      The editorial copy the prototype detail template used to author inline.

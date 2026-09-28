@@ -1261,7 +1261,7 @@
       "projectId": "project-004",
       "projectSlug": "dariush-hotel-kish",
       "mediaId": "p004-main-axis-night",
-      "path": "assets/projects/project-004/04_main_axis_night.jpg",
+      "path": "assets/projects/project-004/04_main_axis_night.webp",
       "role": [
         "hero",
         "homepage",
@@ -1293,7 +1293,7 @@
       "projectId": "project-004",
       "projectSlug": "dariush-hotel-kish",
       "mediaId": "p004-aerial-resort-context",
-      "path": "assets/projects/project-004/03_aerial_resort_context.jpg",
+      "path": "assets/projects/project-004/03_aerial_resort_context.webp",
       "role": [
         "archive",
         "story",
@@ -1328,7 +1328,7 @@
       "projectId": "project-004",
       "projectSlug": "dariush-hotel-kish",
       "mediaId": "p004-garden-edge-day",
-      "path": "assets/projects/project-004/02_garden_edge_day.jpg",
+      "path": "assets/projects/project-004/02_garden_edge_day.webp",
       "role": [
         "story",
         "landscape",
@@ -1358,7 +1358,7 @@
       "projectId": "project-004",
       "projectSlug": "dariush-hotel-kish",
       "mediaId": "p004-entry-twilight",
-      "path": "assets/projects/project-004/01_entry_twilight.jpg",
+      "path": "assets/projects/project-004/01_entry_twilight.webp",
       "role": [
         "story",
         "detail",
@@ -1388,7 +1388,7 @@
       "projectId": "project-004",
       "projectSlug": "dariush-hotel-kish",
       "mediaId": "p004-blue-hour-front",
-      "path": "assets/projects/project-004/05_blue_hour_front.jpg",
+      "path": "assets/projects/project-004/05_blue_hour_front.webp",
       "role": [
         "story",
         "exterior",
@@ -1418,7 +1418,7 @@
       "projectId": "project-004",
       "projectSlug": "dariush-hotel-kish",
       "mediaId": "p004-seaside-palace-context",
-      "path": "assets/projects/project-004/06_seaside_palace_context.jpg",
+      "path": "assets/projects/project-004/06_seaside_palace_context.webp",
       "role": [
         "story",
         "context",
@@ -1448,7 +1448,7 @@
       "projectId": "project-004",
       "projectSlug": "dariush-hotel-kish",
       "mediaId": "p004-resort-gardens-aerial",
-      "path": "assets/projects/project-004/07_resort_gardens_aerial.jpg",
+      "path": "assets/projects/project-004/07_resort_gardens_aerial.webp",
       "role": [
         "story",
         "landscape",
@@ -1478,7 +1478,7 @@
       "projectId": "project-004",
       "projectSlug": "dariush-hotel-kish",
       "mediaId": "p004-arrival-golden-hour",
-      "path": "assets/projects/project-004/08_arrival_golden_hour.jpg",
+      "path": "assets/projects/project-004/08_arrival_golden_hour.webp",
       "role": [
         "story",
         "arrival",
@@ -1508,7 +1508,7 @@
       "projectId": "project-004",
       "projectSlug": "dariush-hotel-kish",
       "mediaId": "p004-grand-lobby",
-      "path": "assets/projects/project-004/09_grand_lobby.jpg",
+      "path": "assets/projects/project-004/09_grand_lobby.webp",
       "role": [
         "story",
         "interior",
@@ -1538,7 +1538,7 @@
       "projectId": "project-004",
       "projectSlug": "dariush-hotel-kish",
       "mediaId": "p004-twilight-seaside",
-      "path": "assets/projects/project-004/10_twilight_seaside_view.jpg",
+      "path": "assets/projects/project-004/10_twilight_seaside_view.webp",
       "role": [
         "story",
         "twilight",
@@ -1568,7 +1568,7 @@
       "projectId": "project-004",
       "projectSlug": "dariush-hotel-kish",
       "mediaId": "p004-resortscape-gulf",
-      "path": "assets/projects/project-004/11_resortscape_persian_gulf.jpg",
+      "path": "assets/projects/project-004/11_resortscape_persian_gulf.webp",
       "role": [
         "story",
         "coastal",
@@ -1598,7 +1598,7 @@
       "projectId": "project-004",
       "projectSlug": "dariush-hotel-kish",
       "mediaId": "p004-luxury-suite",
-      "path": "assets/projects/project-004/12_luxury_suite.jpg",
+      "path": "assets/projects/project-004/12_luxury_suite.webp",
       "role": [
         "story",
         "interior",
