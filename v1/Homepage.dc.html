@@ -51,7 +51,10 @@
   --plate-dark:repeating-linear-gradient(-45deg,#1B2524 0 18px,#161F1E 18px 36px);
 }
 *{box-sizing:border-box}
-body{margin:0;background:#FAF9F7;color:#121B1B;font-family:var(--en);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+html{scrollbar-width:none;-ms-overflow-style:none}
+html::-webkit-scrollbar{display:none}
+body{margin:0;background:#FAF9F7;color:#121B1B;font-family:var(--en);-webkit-font-smoothing:antialiased;text-wrap:pretty;scrollbar-width:none;-ms-overflow-style:none}
+body::-webkit-scrollbar{display:none}
 a{color:inherit;text-decoration:none}
 a:hover{color:#3E9692}
 ::selection{background:#D9EFED;color:#121B1B}
@@ -127,6 +130,15 @@ a:hover{color:#3E9692}
       <div data-pj-img="1" data-clip0="{{ L.clip }}" style="position:absolute;inset:0;overflow:hidden"><div data-pj-inner="1" style="position:absolute;inset:-4% -2%;background:{{ L.bg }};display:grid;place-items:center"><span style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:{{ L.ink }}">{{ L.label }}</span></div></div>
     </sc-for>
     <div data-pj-badge="1" style="position:absolute;left:24px;bottom:22px;z-index:6;display:flex;align-items:center;gap:12px;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;pointer-events:none"><i style="width:9px;height:9px;background:var(--turq)"></i><span>{{ badgeLabel }}</span></div>
+    <div data-pj-scrim="1" style="position:absolute;inset:0;z-index:3;background:var(--ink);opacity:0;pointer-events:none"></div>
+    <div data-pj-herotype="1" style="position:absolute;inset:0;z-index:4;display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap);align-content:center;padding:0 var(--marg);pointer-events:none;opacity:0">
+      <div data-en="1" style="grid-column:1 / span 8;font-size:9.6vw;line-height:.9;letter-spacing:-.04em;font-weight:500;color:var(--canvas)">We design</div>
+      <div data-en="1" style="grid-column:3 / span 8;font-size:9.6vw;line-height:.9;letter-spacing:-.04em;font-weight:500;color:var(--canvas)">beyond</div>
+      <div data-en="1" style="grid-column:5 / span 8;font-size:9.6vw;line-height:.9;letter-spacing:-.04em;font-weight:500;color:var(--canvas)">the expected</div>
+      <div data-fa="1" style="grid-column:1 / span 7;font-family:var(--fa);font-size:8vw;line-height:1.3;font-weight:500;color:var(--canvas);display:none">فراتر از</div>
+      <div data-fa="1" style="grid-column:2 / span 9;font-family:var(--fa);font-size:8vw;line-height:1.3;font-weight:500;color:var(--canvas);display:none">آنچه انتظار</div>
+      <div data-fa="1" style="grid-column:4 / span 8;font-family:var(--fa);font-size:8vw;line-height:1.3;font-weight:500;color:var(--canvas);display:none">می‌رود</div>
+    </div>
   </div>
 
   <section id="top" data-sc="hero" data-screen-label="01 Hero" style="height:250vh;position:relative;z-index:2">
@@ -141,11 +153,8 @@ a:hover{color:#3E9692}
         <div data-hlw="2" style="grid-column:5 / span 8;overflow:hidden;animation:hp-lineup var(--m-base) var(--e-page) 1660ms both"><div data-hl="2" data-en="1" style="font-size:9.6vw;line-height:.9;letter-spacing:-.04em;font-weight:500">the expected</div><div data-hl="2" data-fa="1" style="font-family:var(--fa);font-size:8vw;line-height:1.3;font-weight:500;display:none">می‌رود</div></div>
       </div>
 
-      <div data-hero-label="1" style="position:absolute;left:var(--marg);right:var(--marg);bottom:130px;z-index:4;display:flex;align-items:flex-end;justify-content:space-between;gap:26px;opacity:0;animation:hp-in var(--m-base) var(--e-standard) 1760ms forwards">
-        <div style="font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-45);max-width:24ch;line-height:1.7">
-          <span data-en="1">Architecture, urban design and interiors — [CITY]</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:13.5px;line-height:2;display:none">معماری، طراحی شهری و داخلی — [شهر]</span>
-        </div>
-        <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45);font-variant-numeric:tabular-nums;direction:ltr">01 / 08</div>
+      <div data-hero-label="1" style="position:absolute;left:var(--marg);right:var(--marg);bottom:130px;z-index:4;display:flex;align-items:flex-end;justify-content:flex-end;gap:26px;opacity:0;animation:hp-in var(--m-base) var(--e-standard) 1760ms forwards">
+        <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45);font-variant-numeric:tabular-nums;direction:ltr">01 / 06</div>
       </div>
 
       <div data-hero-rail="1" style="position:absolute;right:var(--marg);top:50%;transform:translateY(-50%);z-index:4;display:flex;align-items:center;gap:14px;opacity:0;animation:hp-in var(--m-base) var(--e-standard) 1820ms forwards">
@@ -160,7 +169,7 @@ a:hover{color:#3E9692}
     <div style="position:sticky;top:0;height:100vh;display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap);align-content:center">
       <div data-st-label="1" style="grid-column:1 / span 3;align-self:start;padding-top:18vh;display:flex;align-items:center;gap:10px;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45);font-variant-numeric:tabular-nums">
         <span style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:2px;width:16px;height:16px;direction:ltr;flex:none"><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="background:var(--turq)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i></span>
-        <span style="direction:ltr">02 / 08</span><span data-en="1">Studio</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:13px;display:none">استودیو</span>
+        <span style="direction:ltr">02 / 06</span><span data-en="1">Studio</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:13px;display:none">استودیو</span>
       </div>
       <div data-st-head="1" style="grid-column:1 / span 7">
         <div data-en="1" data-words="1" style="font-size:clamp(50px,5.4vw,92px);line-height:1.02;letter-spacing:-.035em;font-weight:500"><span data-w="1">Architecture </span><span data-w="1">begins </span><span data-w="1">with </span><span data-w="1">seeing </span><span data-w="1">what </span><span data-w="1">others </span><span data-w="1">overlook.</span></div>
@@ -234,7 +243,7 @@ a:hover{color:#3E9692}
     <div style="position:sticky;top:0;height:100vh;display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap);padding:calc(var(--marg) + 88px) var(--marg) 56px;align-content:space-between;overflow:hidden">
       <div data-exp-head="1" style="grid-column:1 / span 4;display:flex;align-items:flex-start;justify-content:space-between;gap:20px">
         <div>
-          <div style="font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45);font-variant-numeric:tabular-nums;direction:ltr">04 / 08</div>
+          <div style="font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45);font-variant-numeric:tabular-nums;direction:ltr">04 / 06</div>
           <h2 style="margin:10px 0 0;font-size:clamp(34px,3.4vw,58px);line-height:1;letter-spacing:-.03em;font-weight:500"><span data-en="1">What we do</span><span data-fa="1" style="font-family:var(--fa);line-height:1.4;display:none">چه می‌کنیم</span></h2>
         </div>
         <div style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:4px;width:52px;height:52px;position:relative;flex:none;direction:ltr">
@@ -242,7 +251,7 @@ a:hover{color:#3E9692}
           <i data-exp-sq="1" style="position:absolute;left:0;top:0;width:16px;height:16px;background:var(--turq);transition:transform var(--m-base) var(--e-page)"></i>
         </div>
       </div>
-      <div data-exp-list="1" style="grid-column:1 / span 6;grid-row:2;align-self:center">
+      <div data-exp-list="1" style="grid-column:1 / span 5;grid-row:2;align-self:center">
         <sc-for list="{{ expertise }}" as="ex" hint-placeholder-count="5">
           <a href="{{ ex.href }}" data-exp="1" data-cursor="Explore" data-cursor-fa="کاوش" style="display:flex;align-items:baseline;gap:22px;border-top:1px solid var(--rule);border-bottom:{{ ex.rule }};padding:18px 0;transition:opacity var(--m-standard) var(--e-standard),color var(--m-standard) var(--e-standard),padding var(--m-standard) var(--e-standard)">
             <span style="font-size:12px;letter-spacing:.12em;color:var(--ink-45);font-variant-numeric:tabular-nums;flex:none;direction:ltr">{{ ex.num }}</span>
@@ -250,7 +259,7 @@ a:hover{color:#3E9692}
           </a>
         </sc-for>
       </div>
-      <div data-exp-stage="1" style="grid-column:8 / span 5;grid-row:1 / span 3;position:relative;overflow:hidden;background:var(--grey);margin:0 calc(-1 * var(--marg)) 0 0;direction:ltr">
+      <div data-exp-stage="1" style="grid-column:6 / span 6;grid-row:1 / span 3;position:relative;overflow:hidden;background:var(--grey);margin:0 calc(-1 * var(--marg)) 0 0;direction:ltr">
         <sc-for list="{{ expStages }}" as="x" hint-placeholder-count="5">
           <div data-exp-img="1" data-clip0="{{ x.clip }}" style="position:absolute;inset:0;overflow:hidden"><div style="position:absolute;inset:-3% 0;background:{{ x.plate }};display:grid;place-items:center"><span style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:{{ x.ink }}">{{ x.label }}</span></div></div>
         </sc-for>
@@ -258,83 +267,23 @@ a:hover{color:#3E9692}
     </div>
   </section>
 
-  <section data-sc="philo" data-dark="1" data-screen-label="05 Philosophy" style="height:300vh;position:relative;z-index:3">
+  <section data-sc="philo" data-dark="1" data-screen-label="05 Philosophy" style="height:210vh;position:relative;z-index:3">
     <div data-ph-stage="1" style="position:sticky;top:0;height:100vh;overflow:hidden;display:grid;place-items:center;background:var(--ink)">
       <div data-ph-img="1" style="position:relative;width:78vw;height:76vh;overflow:hidden;background:#1B2524;direction:ltr">
-        <div data-ph-inner="1" style="position:absolute;inset:-4% -2%;background:var(--plate-dark);display:grid;place-items:center"><span style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--canvas-40)">Full-bleed photography</span></div>
+        <div data-ph-inner="1" style="position:absolute;inset:-4% -2%;background-image:url(../assets/philosophy-01.webp);background-size:cover;background-position:center"></div>
       </div>
       <div data-ph-text="1" style="position:absolute;left:var(--marg);right:var(--marg);bottom:12vh;z-index:3;color:var(--canvas)">
         <div data-en="1" style="font-size:clamp(42px,5vw,92px);line-height:1;letter-spacing:-.035em;font-weight:500;max-width:60vw">Space is not the result.<br />It is the experience.</div>
         <div data-fa="1" style="font-family:var(--fa);font-size:clamp(36px,4.2vw,76px);line-height:1.46;font-weight:500;display:none;max-width:62vw">فضا نتیجه نیست.<br />فضا تجربه است.</div>
       </div>
-      <div style="position:absolute;right:var(--marg);top:calc(var(--marg) + 80px);z-index:3;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--canvas-40);font-variant-numeric:tabular-nums;direction:ltr">05 / 08</div>
+      <div style="position:absolute;right:var(--marg);top:calc(var(--marg) + 80px);z-index:3;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--canvas-40);font-variant-numeric:tabular-nums;direction:ltr">05 / 06</div>
     </div>
   </section>
 
-  <section data-sc="research" data-screen-label="06 Research" style="min-height:190vh;padding:18vh var(--marg) 16vh;position:relative;background:var(--canvas);margin-top:-100vh;z-index:2">
-    <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap)">
-      <div data-res-col="1" style="grid-column:1 / span 4">
-        <div data-res-seq="0" style="font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45);font-variant-numeric:tabular-nums;direction:ltr">06 / 08</div>
-        <h2 data-res-seq="0" style="margin:12px 0 0"><span data-en="1" style="display:block;font-size:clamp(40px,4.4vw,78px);line-height:1;letter-spacing:-.035em;font-weight:500">Thinking<br />before form</span><span data-fa="1" style="display:none;font-family:var(--fa);font-size:clamp(32px,3.6vw,62px);line-height:1.46;font-weight:500">اندیشیدن<br />پیش از فرم</span></h2>
-        <div data-res-seq="2" style="margin-top:38px">
-          <a href="#projects" data-res="0" style="display:flex;justify-content:space-between;gap:16px;border-top:1px solid var(--rule);padding:14px 0;font-size:16px;transition:color var(--m-fast) var(--e-standard),padding var(--m-standard) var(--e-standard)"><span data-en="1">Density studies</span><span data-fa="1" style="font-family:var(--fa);display:none">مطالعات تراکم</span><span style="font-size:11.5px;letter-spacing:.1em;color:var(--ink-45);direction:ltr">01</span></a>
-          <a href="#projects" data-res="1" style="display:flex;justify-content:space-between;gap:16px;border-top:1px solid var(--rule);padding:14px 0;font-size:16px;transition:color var(--m-fast) var(--e-standard),padding var(--m-standard) var(--e-standard)"><span data-en="1">Shade and thermal comfort</span><span data-fa="1" style="font-family:var(--fa);display:none">سایه و آسایش حرارتی</span><span style="font-size:11.5px;letter-spacing:.1em;color:var(--ink-45);direction:ltr">02</span></a>
-          <a href="#projects" data-res="2" style="display:flex;justify-content:space-between;gap:16px;border-top:1px solid var(--rule);padding:14px 0;font-size:16px;transition:color var(--m-fast) var(--e-standard),padding var(--m-standard) var(--e-standard)"><span data-en="1">Brick, tile and reuse</span><span data-fa="1" style="font-family:var(--fa);display:none">آجر، کاشی و بازاستفاده</span><span style="font-size:11.5px;letter-spacing:.1em;color:var(--ink-45);direction:ltr">03</span></a>
-          <a href="#projects" data-res="3" style="display:flex;justify-content:space-between;gap:16px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:14px 0;font-size:16px;transition:color var(--m-fast) var(--e-standard),padding var(--m-standard) var(--e-standard)"><span data-en="1">Modular assembly</span><span data-fa="1" style="font-family:var(--fa);display:none">سیستم‌های ماژولار</span><span style="font-size:11.5px;letter-spacing:.1em;color:var(--ink-45);direction:ltr">04</span></a>
-        </div>
-      </div>
-      <div data-res-stagecol="1" style="grid-column:6 / span 7;direction:ltr">
-        <div style="position:relative;aspect-ratio:16/10;background:#fff;border:1px solid var(--rule);overflow:hidden">
-          <div style="position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(18,27,27,.07) 0 1px,transparent 1px 34px),repeating-linear-gradient(90deg,rgba(18,27,27,.07) 0 1px,transparent 1px 34px)"></div>
-          <div data-res-img="1" style="position:absolute;inset:0;background:var(--plate-3);clip-path:inset(0 0 100% 0)"></div>
-          <div data-res-img="2" style="position:absolute;inset:0;background:var(--plate-2);clip-path:inset(0 0 100% 0)"></div>
-          <div data-res-img="3" style="position:absolute;inset:0;background:var(--plate-4);clip-path:inset(0 0 100% 0)"></div>
-          <div data-res-plan="1" style="position:absolute;inset:12% 14%;border:1.5px solid var(--ink);z-index:2;clip-path:inset(0 100% 0 0)">
-            <i style="position:absolute;left:0;top:34%;width:56%;height:1.5px;background:var(--ink)"></i>
-            <i style="position:absolute;left:56%;top:34%;bottom:0;width:1.5px;background:var(--ink)"></i>
-            <i style="position:absolute;left:18%;top:34%;width:10px;height:10px;background:var(--turq);transform:translate(-50%,-50%)"></i>
-            <i style="position:absolute;left:-10%;bottom:-12%;width:64%;height:2px;background:var(--ink);transform:rotate(-45deg);transform-origin:0 50%"></i>
-          </div>
-          <div data-res-note="0" style="position:absolute;left:8%;top:10%;z-index:4;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-45);opacity:0;transform:translateY(8px);transition:opacity var(--m-base) var(--e-standard),transform var(--m-base) var(--e-enter)">A — Courtyard module 9 × 9 m</div>
-          <div data-res-note="1" style="position:absolute;right:8%;top:42%;z-index:4;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-45);opacity:0;transform:translateY(8px);transition:opacity var(--m-base) var(--e-standard),transform var(--m-base) var(--e-enter)">B — Shaded circulation spine</div>
-          <div data-res-note="2" style="position:absolute;left:14%;bottom:9%;z-index:4;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--turq-dk);opacity:0;transform:translateY(8px);transition:opacity var(--m-base) var(--e-standard),transform var(--m-base) var(--e-enter)">C — Diagonal escape</div>
-        </div>
-        <div data-res-seq="1" style="display:flex;justify-content:space-between;gap:24px;margin-top:14px;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-45)">
-          <span data-en="1">Working drawing — placeholder</span><span data-fa="1" style="font-family:var(--fa);letter-spacing:0;text-transform:none;font-size:13px;display:none">نقشه کاری — جایگزین</span>
-          <span style="direction:ltr;font-variant-numeric:tabular-nums">Rev. 03 / 1:200</span>
-        </div>
-        <div data-res-seq="2" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gap);margin-top:34px">
-          <div style="position:relative;aspect-ratio:1/1;overflow:hidden;background:var(--grey)"><div style="position:absolute;inset:0;background:var(--plate);display:grid;place-items:center"><span style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45)">Material</span></div></div>
-          <div style="position:relative;aspect-ratio:1/1;overflow:hidden;background:var(--grey)"><div style="position:absolute;inset:0;background:var(--plate-2);display:grid;place-items:center"><span style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45)">Model</span></div></div>
-          <div style="position:relative;aspect-ratio:1/1;overflow:hidden;background:var(--grey)"><div style="position:absolute;inset:0;background:var(--plate-3);display:grid;place-items:center"><span style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45)">Detail</span></div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="awards" data-sc="awards" data-screen-label="07 Recognition" style="padding:14vh var(--marg) 16vh;border-top:1px solid var(--rule);position:relative;background:var(--canvas);z-index:2">
-    <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap)">
-      <div data-aw-head="1" style="grid-column:1 / span 3">
-        <div style="font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45);font-variant-numeric:tabular-nums;direction:ltr">07 / 08</div>
-        <h2 style="margin:12px 0 0;font-size:clamp(28px,2.6vw,42px);line-height:1.04;letter-spacing:-.025em;font-weight:500"><span data-en="1">Selected<br />recognition</span><span data-fa="1" style="font-family:var(--fa);line-height:1.5;display:none">افتخارات<br />منتخب</span></h2>
-      </div>
-      <div data-aw-list="1" style="grid-column:5 / span 8;position:relative">
-        <sc-for list="{{ homeAwards }}" as="aw" hint-placeholder-count="5">
-          <a href="{{ aw.href }}" data-aw="1" style="display:grid;grid-template-columns:90px minmax(0,1fr) minmax(0,1fr) 18px;gap:24px;align-items:center;border-top:1px solid var(--rule);border-bottom:{{ aw.rule }};padding:22px 0;transition:padding var(--m-standard) var(--e-standard),color var(--m-fast) var(--e-standard)">
-            <span style="font-size:12.5px;letter-spacing:.1em;color:var(--ink-45);font-variant-numeric:tabular-nums;direction:ltr">{{ aw.year }}</span>
-            <span style="font-size:clamp(18px,1.6vw,24px);letter-spacing:-.01em;direction:{{ aw.nameDir }}">{{ aw.name }}</span>
-            <span style="font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-60)">{{ aw.subject }}</span>
-            <i data-aw-sq="1" style="width:10px;height:10px;background:var(--turq);opacity:0;transform:scale(.4);transition:opacity var(--m-fast) var(--e-standard),transform var(--m-fast) var(--e-standard)"></i>
-          </a>
-        </sc-for>
-      </div>
-    </div>
-  </section>
-
-  <section id="contact" data-sc="contact" data-screen-label="08 Contact" style="padding:20vh var(--marg) var(--marg);position:relative;background:var(--canvas);z-index:2">
+  <section id="contact" data-sc="contact" data-screen-label="06 Contact" style="margin-top:-85vh;padding:20vh var(--marg) var(--marg);border-top:1px solid var(--rule);position:relative;background:var(--canvas);z-index:2">
     <div data-cta="1" style="position:relative;display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap)">
       <div style="grid-column:1 / span 10;position:relative;z-index:2">
-        <div style="font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45);font-variant-numeric:tabular-nums;direction:ltr;margin-bottom:26px">08 / 08</div>
+        <div style="font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45);font-variant-numeric:tabular-nums;direction:ltr;margin-bottom:26px">06 / 06</div>
         <div data-en="1" style="font-size:clamp(64px,8.2vw,152px);line-height:.94;letter-spacing:-.045em;font-weight:500">Let's create<br />what doesn't<br />exist yet.</div>
         <div data-fa="1" style="font-family:var(--fa);font-size:clamp(50px,6.4vw,118px);line-height:1.34;font-weight:500;display:none">آنچه هنوز نیست<br />را بسازیم</div>
       </div>
@@ -423,7 +372,6 @@ a:hover{color:#3E9692}
     <span data-prog-num="1" style="font-size:10.5px;letter-spacing:.1em;color:var(--ink-45);font-variant-numeric:tabular-nums">000</span>
     <span style="position:relative;display:block;width:9px;height:120px"><i style="position:absolute;left:4px;top:0;bottom:0;width:1px;background:var(--rule)"></i><i data-prog-sq="1" style="position:absolute;left:0;top:0;width:9px;height:9px;background:var(--turq)"></i></span>
   </div>
-  <button type="button" onClick="{{ toggleReduced }}" style="position:fixed;left:var(--marg);bottom:var(--marg);z-index:90;appearance:none;background:{{ rmBg }};color:{{ rmColor }};border:1px solid var(--rule);padding:9px 13px;cursor:pointer;font:inherit;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;transition:background var(--m-fast) var(--e-standard),color var(--m-fast) var(--e-standard)">Reduced motion {{ rmState }}</button>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440},&quot;startLang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;en&quot;,&quot;options&quot;:[&quot;en&quot;,&quot;fa&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Bilingual&quot;},&quot;showIntro&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Motion&quot;},&quot;forceReducedMotion&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Motion&quot;},&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#56B1AC&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#56B1AC&quot;,&quot;#3E9692&quot;,&quot;#121B1B&quot;],&quot;section&quot;:&quot;Brand&quot;}}">
@@ -637,6 +585,8 @@ class Component extends DCLogic {
       pjDots: all("[data-pj-dot]"),
       pjBridge: r.querySelector("[data-pj-bridge]"),
       pjBadge: r.querySelector("[data-pj-badge]"),
+      pjHeroType: r.querySelector("[data-pj-herotype]"),
+      pjScrim: r.querySelector("[data-pj-scrim]"),
       expertise: r.querySelector('[data-sc="expertise"]'),
       expHead: r.querySelector("[data-exp-head]"),
       expList: r.querySelector("[data-exp-list]"),
@@ -940,6 +890,8 @@ class Component extends DCLogic {
     const n = this.n, red = this.state.reduced, vh = window.innerHeight;
     const y = window.scrollY || 0;
     const fa = this.state.lang === "fa";
+    /* smoothstep — eased 0→1 so each scroll beat accelerates and settles */
+    const smooth = t => { t = clamp(t, 0, 1); return t * t * (3 - 2 * t); };
 
     /* ---- 01 hero ---- */
     /* MOTION V2 — the hero runs exactly three coordinated channels:
@@ -954,14 +906,23 @@ class Component extends DCLogic {
       const p = heroP = prog(n.hero, vh);
       const L = window.TA_LAYOUT || {};
       const mScale = L.isMobile ? 0.42 : L.isTablet ? 0.7 : 1;
-      /* channel 1 — typography */
-      const typeBase = -(p * 120) - clamp((p - 0.62) / 0.3, 0, 1) * 140;
+      /* channel 1 — typography
+         BEAT 1 (p 0 → 0.15): the load headline sits at rest, alone on the canvas.
+         BEAT 2 (p 0.15 → 0.5): it lifts away and fades, clearing the frame before
+         the image (role 1 below) widens into it. */
+      const exit = smooth((p - 0.15) / 0.35);
+      const typeBase = -exit * 340;
+      const lineFade = 1 - smooth((p - 0.25) / 0.25);
       n.heroLines.forEach(el => {
         const i = parseInt(el.getAttribute("data-hl"), 10);
         const depth = [1, 0.82, 1.18][i];
         el.style.transform = "translate3d(0," + (typeBase * depth * mScale).toFixed(1) + "px,0)";
+        el.style.opacity = red ? "1" : lineFade.toFixed(2);
       });
-      if(n.heroLabel) n.heroLabel.style.transform = "translate3d(0," + (typeBase * 0.33 * mScale).toFixed(1) + "px,0)";
+      if(n.heroLabel){
+        n.heroLabel.style.transform = "translate3d(0," + (typeBase * 0.33 * mScale).toFixed(1) + "px,0)";
+        n.heroLabel.style.opacity = red ? "1" : lineFade.toFixed(2);
+      }
       /* channel 3 — one indicator, two expressions of the same progress */
       if(n.heroSq || n.heroNum){
         const ind = clamp(p, 0, 1);
@@ -1012,7 +973,7 @@ class Component extends DCLogic {
       if(live){
         const L = window.TA_LAYOUT || { isMobile:false, isTablet:false };
         const M = L.isMobile || L.compactInteraction, T = L.isTablet && !L.compactInteraction;
-        let w = M ? 100 : 26, h = 100, reveal = 1, inner = null;
+        let w = M ? 100 : 26, h = 100, reveal = 1, inner = null, titleOp = 0, scrimOp = 0;
         this.heroRole = false;
         if(pjRect.top <= 0){
           /* role 3 — Selected Projects stage. On mobile it is a full-width band
@@ -1024,18 +985,36 @@ class Component extends DCLogic {
           if(M){ w = 100; h = 44; }
           else w = 26 + clamp((studioP - 0.4) / 0.6, 0, 1) * (T ? 48 : 40);
         } else {
-          /* role 1 — hero editorial visual, continuing into the studio geometry */
-          reveal = clamp((heroP - 0.18) / 0.34, 0, 1);
-          const grow = clamp((heroP - 0.55) / 0.3, 0, 1);
-          const morph = clamp((heroP - 0.85) / 0.15, 0, 1);
+          /* role 1 — the hero image, one clean three-beat scroll sequence:
+               BEAT 1 (heroP < 0.15)      image absent — only the load headline reads
+               BEAT 2 (heroP 0.15 → 0.78) image wipes in, then widens to full frame
+               SETTLE (heroP 0.78 → 1.0)  image rests full; a soft dark scrim fades up,
+                                          then the title reads over it
+               BEAT 3 (morph 0 → 1)       image closes back to the studio side-rail and
+                                          the scrim + title clear as section 02 arrives
+             heroP maxes at 1 exactly when the studio top is one viewport away
+             (studioTop = vh, morph = 0), so beats 2/settle own heroP and beat 3 owns
+             morph — two separate scroll stretches that never fight for the same pixels. */
+          reveal = smooth((heroP - 0.15) / 0.2);            /* beat 2a — vertical wipe-in */
+          const grow = smooth((heroP - 0.28) / 0.5);        /* beat 2b — widen to full   */
+          const morph = smooth(1 - studioTop / vh);         /* beat 3  — close to rail    */
+          /* scrim leads (right after full width), title follows onto it; both retreat
+             the instant the image starts closing */
+          const settle = smooth((heroP - 0.8) / 0.15);
+          const titleIn = smooth((heroP - 0.87) / 0.13);
+          const clear = 1 - smooth(morph / 0.3);
+          scrimOp = settle * clear * 0.15;                  /* ~15% darker at most        */
+          titleOp = titleIn * clear;
           if(M){
-            h = 46 + grow * 14;
+            const hMax = 46 + grow * 16;
+            h = hMax - morph * (hMax - 44);
             w = 100;
-            inner = 1.04 - reveal * 0.04;
+            inner = 1.05 - reveal * 0.05;
           } else {
-            h = 76 + grow * 24;
-            const start = T ? 70 : 58, span = T ? 30 : 42, end = T ? 30 : 26;
-            w = (start + grow * span) - morph * ((start + grow * span) - end);
+            h = 100;
+            const startW = T ? 42 : 34, railW = T ? 30 : 26;
+            const wide = startW + grow * (100 - startW);
+            w = wide - morph * (wide - railW);
             inner = 1.06 - reveal * 0.06;
           }
         }
@@ -1045,6 +1024,11 @@ class Component extends DCLogic {
         n.pjStage.style.width = w.toFixed(2) + "vw";
         n.pjStage.style.clipPath = red ? "inset(0 0 0 0)" : "inset(" + ((1 - reveal) * 100).toFixed(1) + "% 0 0 0)";
         if(n.pjBadge) n.pjBadge.style.opacity = (1 - clamp((heroP - 0.8) / 0.15, 0, 1)).toFixed(2);
+        if(n.pjScrim) n.pjScrim.style.opacity = red ? "0" : scrimOp.toFixed(3);
+        if(n.pjHeroType){
+          n.pjHeroType.style.opacity = red ? (titleOp > 0.5 ? "1" : "0") : titleOp.toFixed(2);
+          n.pjHeroType.style.transform = "translate3d(0," + ((1 - titleOp) * 22).toFixed(1) + "px,0)";
+        }
         if(inner != null && n.pjInners[0] && !red){
           n.pjInners[0].style.transition = "none";
           n.pjInners[0].style.transform = "scale(" + inner.toFixed(3) + ") translateY(" + ((heroP - 0.5) * 3).toFixed(2) + "%)";
@@ -1160,14 +1144,14 @@ class Component extends DCLogic {
     let wipe = 0;
     if(n.philo){
       const p = prog(n.philo, vh);
-      const o = clamp((p - 0.04) / 0.42, 0, 1);
+      const o = clamp((p - 0.04) / 0.6, 0, 1);
       if(n.phImg){
         n.phImg.style.width = (78 + o * 22).toFixed(2) + "vw";
         n.phImg.style.height = (76 + o * 24).toFixed(2) + "vh";
       }
       if(n.phInner && !red) n.phInner.style.transform = "translateY(" + ((p - 0.5) * 5).toFixed(2) + "%) scale(" + (1.04 - o * 0.04).toFixed(3) + ")";
       if(n.phText) n.phText.style.transform = red ? "none" : "translateY(" + (-(p - 0.3) * 80).toFixed(1) + "px)";
-      wipe = clamp((p - 0.7) / 0.3, 0, 1);
+      wipe = clamp((p - 0.75) / 0.25, 0, 1);
       if(n.phStage){
         if(red){
           n.phStage.style.clipPath = wipe > 0.5 ? "inset(0 0 100% 0)" : "inset(0 0 0 0)";
@@ -1353,9 +1337,10 @@ class Component extends DCLogic {
       expStages: (window.TA_EXPERTISE ? window.TA_EXPERTISE.all() : []).map((x, i) => {
         const pr = x.presentation || {};
         const pl = pr.plate != null ? pr.plate : 0;
+        const img = pr.registerImage;
         return {
-          label: fa ? x.title.fa : x.title.en,
-          plate: PLATES[pl % PLATES.length],
+          label: img ? "" : (fa ? x.title.fa : x.title.en),
+          plate: img ? ('url("' + (window.TA_ASSET_BASE || "") + img + '") 50% 50% / cover no-repeat') : PLATES[pl % PLATES.length],
           ink: pl === 3 ? "var(--turq-dk)" : "var(--ink-45)",
           clip: i === 0 ? "inset(0 0 0 0)" : "inset(100% 0 0 0)"
         };
@@ -1406,10 +1391,6 @@ class Component extends DCLogic {
         window.location.href = q;
       },
       closeExpand: () => this.closeExpand(),
-      toggleReduced: () => this.setState(s => ({ reduced: !s.reduced })),
-      rmState: this.state.reduced ? "on" : "off",
-      rmBg: this.state.reduced ? "#56B1AC" : "transparent",
-      rmColor: this.state.reduced ? "#121B1B" : "rgba(18,27,27,.45)",
       expertiseHref: "Expertise.dc.html" + (fa ? "#lang=fa" : ""),
       awardsHref: "Awards.dc.html" + (fa ? "#lang=fa" : ""),
       aboutHref: "About.dc.html" + (fa ? "#lang=fa" : ""),

@@ -118,6 +118,26 @@
     targets.forEach(function (el) { observed.add(el); pending.push(el); });
     ensureSubscribed();
     tick(); // evaluate immediately — don't wait for the next scroll to check already-in-view content
+    /* one follow-up pass after paint: --grid-cols and other layout-affecting custom
+       properties can still be settling on this first synchronous tick, which mis-measures
+       getBoundingClientRect for content that is actually already in view. Terminates on its
+       own (tick() no-ops once nothing is pending) — not a self-rescheduling loop. */
+    requestAnimationFrame(function () { requestAnimationFrame(tick); });
+  }
+
+  /* the DC runtime hydrates a mounted skeleton in place — a bound background-image can land
+     on an existing [data-reveal-img] node as a plain attribute write well after the section
+     itself was inserted (past the point collectFresh saw it as a childList addition). Without
+     watching for that, prepare() can cache "no image yet" against the node forever and the
+     mask opens over a background that never actually arrives. Re-running prepare() here is
+     safe even for a genuinely image-less (decorative) node — it just re-confirms none. */
+  function recheckMedia(host) {
+    if (!observed.has(host)) return;
+    prepared.delete(host); readySet.delete(host);
+    host.removeAttribute("data-reveal-ready");
+    prepare(host);
+    if (host.getAttribute("data-reveal-inview") === "1") tryReveal(host);
+    if (!revealed.has(host) && pending.indexOf(host) < 0) { pending.push(host); ensureSubscribed(); }
   }
 
   function init() {
@@ -143,12 +163,19 @@
     mo = new MutationObserver(function (mutations) {
       var fresh = [];
       for (var m = 0; m < mutations.length; m++) {
-        var added = mutations[m].addedNodes;
+        var mut = mutations[m];
+        if (mut.type === "attributes") {
+          var host = mut.target.hasAttribute("data-reveal-img") ? mut.target.closest("[data-reveal]") : mut.target;
+          if (host) recheckMedia(host);
+          continue;
+        }
+        var added = mut.addedNodes;
         for (var n = 0; n < added.length; n++) collectFresh(added[n], fresh);
       }
       if (fresh.length) observeAll(fresh);
     });
-    mo.observe(document.body || document.documentElement, { childList: true, subtree: true });
+    mo.observe(document.body || document.documentElement,
+      { childList: true, subtree: true, attributes: true, attributeFilter: ["style"] });
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);

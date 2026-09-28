@@ -66,9 +66,15 @@
   <section data-screen-label="02 Register" data-ambient-zone="minimal" style="position:relative;padding:var(--space-section) var(--grid-margin) var(--space-section-lg)">
     <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--space-4) var(--space-6);border-bottom:1px solid var(--ink);padding-bottom:var(--space-4)">
       <h2 data-motif-wake="1" style="margin:0;display:flex;align-items:center;gap:var(--space-3);font-size:var(--t-hl);line-height:var(--t-hl-lh);letter-spacing:var(--t-hl-ls);font-weight:var(--t-hl-w);outline-offset:6px"><span data-grid-motif="interactive" data-motif-active="{{ registerMotifCell }}" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>{{ registerLabel }}<span class="text-number" style="font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);color:var(--ink-45);font-weight:400">{{ countLabel }}</span></h2>
-      <button type="button" onClick="{{ toggleFilter }}" aria-expanded="{{ filterExpanded }}" aria-controls="pr2-filter-panel" style="appearance:none;background:none;border:1px solid currentColor;cursor:pointer;min-height:var(--c-control-h);padding:0 var(--space-3);display:inline-flex;align-items:center;gap:var(--space-tight);font:inherit;letter-spacing:inherit;text-transform:inherit;color:inherit">
-        {{ filterLabel }}<span class="text-number" style="opacity:{{ filterCountOp }}">{{ filterCount }}</span>
-      </button>
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-5) var(--space-6)">
+        <div style="display:flex;align-items:center;gap:var(--space-5);font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }}">
+          <button type="button" onClick="{{ setIndexView }}" aria-pressed="{{ indexPressed }}" style="appearance:none;background:none;border:none;cursor:pointer;min-height:var(--c-control-h);padding:0;display:inline-flex;align-items:center;gap:var(--space-tight);font:inherit;letter-spacing:inherit;text-transform:inherit;color:inherit;opacity:{{ indexOpacity }};transition:opacity var(--m-fast) var(--e-smooth)"><i style="width:var(--c-indicator-sm);height:var(--c-indicator-sm);background:var(--turq);opacity:{{ indexSq }};transition:opacity var(--m-fast) var(--e-smooth)"></i>{{ indexLabel }}</button>
+          <button type="button" onClick="{{ setVisualView }}" aria-pressed="{{ visualPressed }}" style="appearance:none;background:none;border:none;cursor:pointer;min-height:var(--c-control-h);padding:0;display:inline-flex;align-items:center;gap:var(--space-tight);font:inherit;letter-spacing:inherit;text-transform:inherit;color:inherit;opacity:{{ visualOpacity }};transition:opacity var(--m-fast) var(--e-smooth)"><i style="width:var(--c-indicator-sm);height:var(--c-indicator-sm);background:var(--turq);opacity:{{ visualSq }};transition:opacity var(--m-fast) var(--e-smooth)"></i>{{ visualLabel }}</button>
+        </div>
+        <button type="button" onClick="{{ toggleFilter }}" aria-expanded="{{ filterExpanded }}" aria-controls="pr2-filter-panel" style="appearance:none;background:none;border:1px solid currentColor;cursor:pointer;min-height:var(--c-control-h);padding:0 var(--space-3);display:inline-flex;align-items:center;gap:var(--space-tight);font:inherit;letter-spacing:inherit;text-transform:inherit;color:inherit">
+          {{ filterLabel }}<span class="text-number" style="opacity:{{ filterCountOp }}">{{ filterCount }}</span>
+        </button>
+      </div>
     </div>
 
     <div id="pr2-filter-panel" ref="{{ setFilterRef }}" style="display:grid;grid-template-rows:{{ filterRows }};transition:grid-template-rows var(--m-standard) var(--e-editorial)"><div style="overflow:hidden">
@@ -84,6 +90,7 @@
       </div>
     </div></div>
 
+    <sc-if value="{{ isIndex }}" hint-placeholder-val="{{ false }}">
     <div style="position:relative;margin-top:var(--space-5);display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter);align-items:start">
       <div style="grid-column:var(--span-index)">
         <sc-for list="{{ rows }}" as="row" hint-placeholder-count="6">
@@ -104,9 +111,38 @@
 
       <div data-pr2-preview="1" style="grid-column:var(--span-preview);display:{{ previewDisplay }}">
         <div data-pr2-mhstage="1" style="position:relative;aspect-ratio:{{ pv.ratio }};overflow:hidden;background:var(--surface-1)"></div>
-        <div style="margin-top:var(--rel-image-caption);font-size:var(--t-caption);line-height:var(--t-caption-lh);color:var(--ink-45);min-height:2em">{{ pv.caption }}</div>
+        <div style="margin-top:var(--rel-image-caption);display:flex;justify-content:space-between;font-size:var(--t-caption);line-height:var(--t-caption-lh);color:var(--ink-45);min-height:2em"><span>{{ pv.caption }}</span><span class="text-number">{{ pv.count }}</span></div>
+        <div style="margin-top:var(--space-5);display:flex;align-items:center;gap:var(--space-4)">
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:5px;width:64px;height:64px;position:relative;direction:ltr;flex:none">
+            <i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i><i style="border:1px solid var(--rule)"></i>
+            <i style="position:absolute;left:0;top:0;width:18px;height:18px;background:var(--turq);transform:{{ pv.coordTransform }};transition:transform var(--m-base) var(--e-page)"></i>
+          </div>
+          <div style="font-size:var(--t-caption);line-height:var(--t-caption-lh);color:var(--ink-45);max-width:26ch">{{ coordCaption }}</div>
+        </div>
       </div>
     </div>
+    </sc-if>
+
+    <sc-if value="{{ isVisual }}" hint-placeholder-val="{{ true }}">
+    <div style="margin-top:var(--space-5);display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter) var(--grid-gutter)">
+      <sc-for list="{{ cards }}" as="card" hint-placeholder-count="6">
+        <a href="{{ card.href }}" onClick="{{ card.open }}" data-v2-cursor="view" style="grid-column:{{ card.col }};margin-top:{{ card.mt }};display:block">
+          <div data-reveal="media" style="position:relative;aspect-ratio:{{ card.ratio }};overflow:hidden;background:var(--surface-1);direction:ltr">
+            <div data-reveal-img="1" style="position:absolute;inset:0;background-image:{{ card.bg }};background-size:{{ card.size }};background-position:{{ card.pos }};background-repeat:{{ card.repeat }}"></div>
+            <div data-reveal-mask="1"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:var(--space-4);margin-top:var(--rel-image-caption)">
+            <span style="min-width:0;font-size:var(--t-hs);line-height:var(--t-hs-lh);letter-spacing:-.015em;font-weight:var(--t-hs-w)" class="text-mixed"><sc-for list="{{ card.titleParts }}" as="p" hint-placeholder-count="1"><span class="{{ p.cls }}">{{ p.t }}</span></sc-for></span>
+            <span class="text-number" style="font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);color:var(--ink-45);flex:none">{{ card.year }}</span>
+          </div>
+          <div style="font-size:var(--t-meta);letter-spacing:var(--t-meta-ls);text-transform:{{ upper }};color:var(--ink-45);margin-top:var(--space-micro)">{{ card.locYear }}</div>
+        </a>
+      </sc-for>
+    </div>
+    <sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
+      <div style="border-top:1px solid var(--rule);margin-top:var(--space-5);padding:var(--space-block) 0;font-size:var(--t-bm);line-height:var(--t-bm-lh);color:var(--ink-60)">{{ emptyLabel }}</div>
+    </sc-if>
+    </sc-if>
   </section>
 
   <section data-screen-label="03 Closing" data-ambient-zone="full" style="position:relative;padding:var(--space-section-xl) var(--grid-margin) var(--space-block);overflow:hidden">
@@ -175,8 +211,8 @@
 
     <sc-for list="{{ d.blocks }}" as="b" hint-placeholder-count="2">
       <sc-if value="{{ b.isFull }}" hint-placeholder-val="{{ false }}">
-        <section data-sec="{{ b.sec }}" data-ambient-zone="off" style="padding:0 var(--grid-margin) var(--space-section)">
-          <div data-pr2-expand="{{ b.expand }}" data-reveal="media" style="position:relative;aspect-ratio:{{ b.ratio }};overflow:hidden;background:var(--surface-1);direction:ltr;width:{{ b.width }};margin:0 auto">
+        <section data-sec="{{ b.sec }}" data-ambient-zone="off" style="padding:0 var(--grid-margin) {{ b.padBottom }}">
+          <div data-pr2-expand="{{ b.expand }}" data-reveal="media" style="position:relative;aspect-ratio:{{ b.ratio }};max-height:84vh;overflow:hidden;background:var(--surface-1);direction:ltr;width:{{ b.width }};margin:0 auto">
             <div data-reveal-img="1" style="position:absolute;inset:0;background-image:{{ b.bg }};background-size:{{ b.size }};background-position:{{ b.pos }};background-repeat:{{ b.repeat }}"></div>
             <div data-reveal-mask="1"></div>
             <a href="#" onClick="{{ b.open }}" data-v2-cursor="open" aria-label="{{ b.openLabel }}" style="position:absolute;inset:0;z-index:2"></a>
@@ -190,7 +226,7 @@
         </section>
       </sc-if>
       <sc-if value="{{ b.isSplit }}" hint-placeholder-val="{{ false }}">
-        <section data-sec="{{ b.sec }}" data-ambient-zone="soft" style="padding:var(--space-section) var(--grid-margin)">
+        <section data-sec="{{ b.sec }}" data-ambient-zone="soft" style="padding:{{ b.padTop }} var(--grid-margin) var(--space-section)">
           <div style="display:grid;grid-template-columns:repeat(var(--grid-cols),1fr);gap:var(--grid-gutter);align-items:end">
             <div style="grid-column:{{ b.textCol }}">
               <h2 style="margin:0;font-size:var(--t-hm);line-height:var(--t-hm-lh);letter-spacing:var(--t-hm-ls);font-weight:var(--t-hm-w);max-width:24ch">{{ b.title }}</h2>
@@ -390,9 +426,15 @@ const CHAPTER_LBL = {
 };
 const clamp1 = (v, a, b) => v < a ? a : v > b ? b : v;
 const reducedQ = () => window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const VIS_LAYOUT = [
+  { col:"1 / span 7", mt:"0px", ratio:"16/10" }, { col:"9 / span 4", mt:"120px", ratio:"3/4" },
+  { col:"1 / span 5", mt:"96px", ratio:"4/3" }, { col:"7 / span 6", mt:"180px", ratio:"16/9" },
+  { col:"2 / span 6", mt:"96px", ratio:"4/3" }, { col:"9 / span 4", mt:"40px", ratio:"3/4" },
+  { col:"1 / span 4", mt:"120px", ratio:"3/4" }, { col:"6 / span 7", mt:"56px", ratio:"16/10" }
+];
 
 class Component extends DCLogic {
-  state = { lang:"en", index:null, filters:[], hover:null, chapterKey:"", chapterIdx:0, chapterN:0, chapterVisible:false, viewer:-1 };
+  state = { lang:"en", mode:"visual", index:null, filters:[], hover:null, chapterKey:"", chapterIdx:0, chapterN:0, chapterVisible:false, viewer:-1 };
 
   parseHash(){
     const out = {};
@@ -700,16 +742,39 @@ class Component extends DCLogic {
       };
     });
 
+    const cards = vis.map((p, n) => {
+      const idx = P.indexOf(p.id), lay = VIS_LAYOUT[n % VIS_LAYOUT.length], title = pick(p.title);
+      const cv = P.visual(p.id, "archive", "archive", { lang: st.lang });
+      const cHas = !!(cv && cv.isRealMedia);
+      return {
+        href: hrefOf(idx), open: (ev) => this.go(idx, ev),
+        title, titleParts: parts(title, st.lang),
+        locYear: [pick(p.location), p.years || p.year].filter(Boolean).join(" · "),
+        year: p.years || p.year || "",
+        col: lay.col, mt: lay.mt, ratio: (p.presentation && p.presentation.ratio) || lay.ratio,
+        bg: cHas ? cv.backgroundImage : "none", size: cv ? cv.backgroundSize : "cover",
+        pos: cv ? cv.backgroundPosition : "50% 50%", repeat: cv ? cv.backgroundRepeat : "no-repeat"
+      };
+    });
+
     const activeP = st.hover ? all.find(p => p.id === st.hover) : (vis[0] || null);
     const av = activeP && P ? P.visual(activeP.id, "archive", "archive", { lang: st.lang }) : null;
     const hasImage = !!(av && av.isRealMedia);
+    const activeVisIdx = activeP ? vis.indexOf(activeP) : -1;
+    /* each row gets its own cell in the 3x3 (by position in the currently displayed list),
+       so the dot actually moves from item to item like Expertise's — a shared discipline
+       coord would leave the dot static across every project tagged "architecture" */
+    const activeCoord = activeVisIdx >= 0 ? [activeVisIdx % 3, Math.floor(activeVisIdx / 3) % 3] : [0, 0];
     const pv = {
       ratio: (activeP && activeP.presentation && activeP.presentation.ratio) || "4/3",
       bg: hasImage ? av.backgroundImage : "none", size: av ? av.backgroundSize : "cover",
       pos: av ? av.backgroundPosition : "50% 50%", repeat: av ? av.backgroundRepeat : "no-repeat",
       op: hasImage ? "1" : "0", scale: hasImage ? "1" : "1.04",
-      caption: activeP ? pick(activeP.title) : ""
+      caption: activeP ? pick(activeP.title) : "",
+      count: activeVisIdx >= 0 ? (String(activeVisIdx + 1).padStart(2, "0") + " / " + String(vis.length).padStart(2, "0")) : "",
+      coordTransform: "translate(" + (activeCoord[0] * 23) + "px," + (activeCoord[1] * 23) + "px)"
     };
+    const coordCaption = fa ? (vis.length + " پروژه، یک دستگاه مختصات.") : (vis.length + " projects, one coordinate system.");
 
     const nav = [["Projects","پروژه‌ها",""],["Expertise","تخصص‌ها","Expertise.dc.html"],
       ["Awards","جوایز","Awards.dc.html"],["About","درباره ما","About.dc.html"],["Journal","مجله","Journal.dc.html"],
@@ -759,21 +824,30 @@ class Component extends DCLogic {
       const blocks = STORY.map((b, i) => {
         const m0 = b.media[0] || {};
         const sec = (b.role && ROLE_OK.indexOf(b.role) >= 0) ? b.role : (i === 0 ? "strategy" : "experience");
+        /* mergeDown/mergeUp — a full-image block (section context) directly followed by
+           an image-text block (section strategy) reads as one continuous "arrival" moment,
+           so the two stacked var(--space-section) paddings between them are collapsed to a
+           single var(--space-block) connector instead of leaving a dead double gap. */
+        const nextB = STORY[i + 1], prevB = STORY[i - 1];
         if(b.type === "full-image"){
           const canExpand = expandUsed < 1; if(canExpand) expandUsed++;
+          const mergeDown = !!(nextB && nextB.type === "image-text");
           return {
             isFull:true, sec, bg: m0.isRealMedia ? m0.backgroundImage : "none", size: m0.backgroundSize || "cover",
             pos: m0.backgroundPosition || "50% 50%", repeat: m0.backgroundRepeat || "no-repeat",
             ratio: (m0.ratio || "16/9"), hasCaption: !!(b.title), title: pick(b.title), body: pick(b.body),
             expand: canExpand ? "1" : "0", width: canExpand ? "92vw" : "100%",
+            padBottom: mergeDown ? "var(--space-block)" : "var(--space-section)",
             open: openViewerAt(storyKeys[i][0]), openLabel
           };
         }
         if(b.type === "image-text") { const flip = i % 2 === 1;
+          const mergeUp = !!(prevB && prevB.type === "full-image");
           return { isSplit:true, sec, textCol: flip ? "9 / span 4" : "1 / span 7", mediaCol: flip ? "1 / span 7" : "9 / span 4",
           bg: m0.isRealMedia ? m0.backgroundImage : "none", size: m0.backgroundSize || "cover",
           pos: m0.backgroundPosition || "50% 50%", repeat: m0.backgroundRepeat || "no-repeat",
           title: pick(b.title), body: pick(b.body), hasCaption: !!b.caption, caption: pick(b.caption),
+          padTop: mergeUp ? "0px" : "var(--space-section)",
           open: openViewerAt(storyKeys[i][0]), openLabel };
         }
         if(b.type === "sticky-narrative") return {
@@ -889,8 +963,16 @@ class Component extends DCLogic {
       filterCount: st.filters.length ? String(st.filters.length) : "",
       filterCountOp: st.filters.length ? "1" : "0",
       resetLabel: fa ? "پاک کردن" : "Reset", resetFilters: () => this.setState({ filters:[] }),
-      rows, empty: rows.length === 0, emptyLabel: fa ? "پروژه‌ای با این فیلترها یافت نشد." : "No projects match these filters.",
-      pv: (this._lastPv = pv), previewDisplay: rows.length ? "block" : "none",
+      rows, cards, empty: rows.length === 0, emptyLabel: fa ? "پروژه‌ای با این فیلترها یافت نشد." : "No projects match these filters.",
+      pv: (this._lastPv = pv), previewDisplay: rows.length ? "block" : "none", coordCaption,
+
+      isIndex: st.mode !== "visual", isVisual: st.mode === "visual",
+      setIndexView: () => this.setState({ mode:"index" }),
+      setVisualView: () => this.setState({ mode:"visual" }),
+      indexLabel: fa ? "فهرست" : "Index", visualLabel: fa ? "تصویری" : "Visual",
+      indexPressed: st.mode !== "visual" ? "true" : "false", visualPressed: st.mode === "visual" ? "true" : "false",
+      indexOpacity: st.mode !== "visual" ? "1" : "0.45", visualOpacity: st.mode === "visual" ? "1" : "0.45",
+      indexSq: st.mode !== "visual" ? "1" : "0", visualSq: st.mode === "visual" ? "1" : "0",
 
       motifFlip: fa ? "-1" : "1",
       closingLines: fa ? ["هر پروژه فصلی است","از همان جست‌وجوی معمارانه،","که با بستر شکل می‌گیرد و با دقت ساخته می‌شود."]
