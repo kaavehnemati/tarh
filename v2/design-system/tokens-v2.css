@@ -423,8 +423,8 @@ html{font-family:var(--en);-webkit-font-smoothing:antialiased;text-wrap:pretty}
   --ambient-base:4.7%;
   --ambient-base-radius:61vmax;
   /* layer 2 — interactive field, fine pointer only (≈1.5–2% perceived) */
-  --ambient-strength:9.9%;
-  --ambient-strength-faint:6.5%;
+  --ambient-strength:13%;
+  --ambient-strength-faint:8.5%;
   --ambient-radius:34vmax;
   --ambient-lag:0.08;
   /* the field rests in the open side of the composition, away from the text column:

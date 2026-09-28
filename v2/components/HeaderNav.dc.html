@@ -9,9 +9,7 @@
 <x-dc>
 <header data-header-theme="{{ theme }}" style="position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;gap:var(--space-5);padding:calc(var(--space-4) + env(safe-area-inset-top)) calc(var(--grid-margin) + env(safe-area-inset-right)) var(--space-4) calc(var(--grid-margin) + env(safe-area-inset-left));background:{{ hdrBg }};border-bottom:1px solid {{ hdrBorder }};color:{{ hdrColor }};transition:background var(--m-standard) var(--e-smooth),color var(--m-standard) var(--e-smooth),border-color var(--m-standard) var(--e-smooth)">
   <a href="{{ hrefHome }}" style="display:flex;align-items:center;gap:var(--space-3);flex:none">
-    <span style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;width:20px;height:20px;border:1.5px solid currentColor">
-      <i style="background:var(--turq)"></i><i style="background:var(--turq)"></i><i style="background:var(--turq)"></i><i style="background:var(--turq)"></i><i style="background:var(--turq)"></i><i style="background:var(--turq)"></i><i style="background:var(--turq)"></i><i style="background:var(--turq)"></i><i style="background:var(--turq)"></i>
-    </span>
+    <img src="{{ logoSrc }}" alt="" width="20" height="20" style="display:block;flex:none" />
     <span style="font-size:var(--t-nav);letter-spacing:var(--t-nav-ls);font-weight:600;text-transform:{{ upper }};white-space:nowrap">{{ brand }}</span>
   </a>
   <nav data-v2-nav="1" style="display:flex;align-items:center;gap:var(--space-4);flex:1 1 auto;min-width:0;justify-content:safe center;overflow-x:auto;scrollbar-width:none;font-size:var(--t-nav);letter-spacing:var(--t-nav-ls);text-transform:{{ upper }}">
@@ -35,7 +33,10 @@
 
 <div id="{{ menuId }}" data-v2-menu-drawer="1" data-open="{{ menuOpen }}" role="dialog" aria-modal="true" aria-hidden="{{ menuHidden }}" ref="{{ setDrawerRef }}">
   <div style="display:flex;justify-content:space-between;align-items:center;gap:var(--space-5)">
-    <span style="font-size:var(--t-nav);font-weight:600;text-transform:{{ upper }}">{{ brand }}</span>
+    <span style="display:flex;align-items:center;gap:var(--space-3)">
+      <img src="../../assets/logo/tarh-afarinesh-logo-dark-header.svg" alt="" width="20" height="20" style="display:block;flex:none" />
+      <span style="font-size:var(--t-nav);font-weight:600;text-transform:{{ upper }}">{{ brand }}</span>
+    </span>
     <button type="button" onClick="{{ toggleMenu }}" style="appearance:none;background:none;border:1px solid rgba(250,249,247,.3);color:inherit;cursor:pointer;min-height:var(--c-control-h);padding:0 var(--space-3);font:inherit">{{ closeLabel }}</button>
   </div>
   <nav style="display:grid;gap:var(--space-1)">
@@ -120,6 +121,7 @@ class Component extends DCLogic {
          themes only: "canvas" (default \u2014 solid surface, ink text) and "transparent-dark"
          (transparent, light text, no border \u2014 for sitting over a dark/media hero). */
       theme: p.theme || "canvas",
+      logoSrc: p.theme === "transparent-dark" ? "../../assets/logo/tarh-afarinesh-logo-dark-header.svg" : "../../assets/logo/tarh-afarinesh-logo-light-header.svg",
       hdrBg: p.theme === "transparent-dark" ? "transparent" : "var(--surface-0)",
       hdrBorder: p.theme === "transparent-dark" ? "transparent" : "var(--rule-soft)",
       hdrColor: p.theme === "transparent-dark" ? "var(--canvas)" : "var(--ink)"

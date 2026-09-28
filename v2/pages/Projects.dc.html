@@ -32,6 +32,7 @@
 <script src="../runtime/media-handoff.js"></script>
 <style>
 [data-pr2-preview]{position:sticky;top:96px;align-self:start}
+@media (max-width:479px){ [data-pr2-facts]{grid-template-columns:1fr} }
 @media (max-width:1023px){ [data-pr2-preview]{display:none !important} }
 @media (max-width:1023px){ [data-pr2-narrcol]{position:static} }
 @media (max-width:767px){
@@ -294,10 +295,10 @@
             </div>
           </sc-for>
           <sc-if value="{{ d.hasFacts }}" hint-placeholder-val="{{ false }}">
-            <div style="margin-top:var(--space-block);display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:var(--space-block)">
+            <div data-pr2-facts="1" style="margin-top:var(--space-block);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-block) var(--grid-gutter)">
               <sc-for list="{{ d.facts }}" as="f" hint-placeholder-count="4">
-                <div>
-                  <div class="text-number" style="font-size:var(--t-fact);line-height:var(--t-fact-lh);letter-spacing:var(--t-fact-ls);font-weight:var(--t-fact-w)">{{ f.value }}</div>
+                <div style="min-width:0">
+                  <div class="text-number" style="font-size:var(--t-fact);line-height:var(--t-fact-lh);letter-spacing:var(--t-fact-ls);font-weight:var(--t-fact-w);white-space:normal;word-break:keep-all;overflow-wrap:normal">{{ f.value }}</div>
                   <div style="margin-top:var(--space-micro);font-size:var(--t-bs);line-height:var(--t-bs-lh);color:var(--ink-60)">{{ f.note }}</div>
                 </div>
               </sc-for>
